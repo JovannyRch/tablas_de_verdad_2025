@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
+import 'package:tablas_de_verdad_2025/main.dart';
 
 class AppDrawer extends StatelessWidget {
   final bool isPro;
@@ -18,19 +19,16 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = Theme.of(context).primaryColor;
-
     final t = AppLocalizations.of(context)!;
 
     Widget buildTile(IconData icon, String title, String routeName) {
       return ListTile(
-        leading: Icon(icon, color: primary),
+        leading: Icon(icon),
         title: Text(title),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, routeName);
         },
-        hoverColor: primary.withOpacity(0.1),
       );
     }
 
@@ -40,13 +38,12 @@ class AppDrawer extends StatelessWidget {
       Function(BuildContext context) onTap,
     ) {
       return ListTile(
-        leading: Icon(icon, color: primary),
+        leading: Icon(icon),
         title: Text(title),
         onTap: () {
           Navigator.pop(context);
           onTap(context);
         },
-        hoverColor: primary.withOpacity(0.1),
       );
     }
 
@@ -55,13 +52,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           // -- HEADER --
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [primary, primary.withOpacity(0.7)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
+            decoration: BoxDecoration(color: kSeedColor),
             accountName: Text(
               t.appName,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
