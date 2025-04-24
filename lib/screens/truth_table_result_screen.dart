@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
+import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 
 /// Model that represents a single step in the truth‑table resolution
 /// (e.g. conjunction, negation, implication, etc.).
@@ -56,12 +57,19 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
       appBar: AppBar(
         title: Text(_localization.result),
         actions: [
-          if (widget.onRestart != null)
-            IconButton(
-              tooltip: 'Nuevo cálculo',
-              onPressed: widget.onRestart,
-              icon: const Icon(Icons.refresh_rounded),
-            ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) =>
+                          PdfViewerScreen(truthTable: widget.truthTable),
+                ),
+              );
+            },
+            icon: Icon(Icons.picture_as_pdf),
+          ),
         ],
       ),
       body: Column(

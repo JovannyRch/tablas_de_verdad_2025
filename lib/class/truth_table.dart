@@ -125,7 +125,6 @@ class TruthTable {
     if (convertInfixToPostix()) {
       if (checkIfIsCorrectlyFormed()) {
         calculate();
-        generateFinalTable();
       }
     }
   }
@@ -178,7 +177,8 @@ class TruthTable {
       tipo = TruthTableType.contingency;
       evaluationId = TruthTable.contingencyId;
     }
-    /*   _printColumns(); */
+
+    generateFinalTable();
   }
 
   String formatCombination(String combination, int lenght) {

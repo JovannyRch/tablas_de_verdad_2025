@@ -19,12 +19,46 @@ dependencies:
   in_app_purchase: ^3.2.1
   sqflite: ^2.4.2
   path_provider: ^2.1.5
+  pdf: ^3.11.3
+  easy_pdf_viewer: ^1.0.8
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
+  share_plus: ^11.0.0
+  open_file: ^3.5.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/icon.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/splash.png
+  color_dark: "#121212"
+  image_dark: assets/splash.png
+
+  android_12:
+    image: assets/splash.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/splash.png
+    icon_background_color_dark: "#121212"
+
+  web: false
+
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - assets/icon.png
+    - assets/splash.png
+
+  fonts:
+    - family: DejaVuSans
+      fonts:
+        - asset: assets/fonts/DejaVuSans.ttf
