@@ -9,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.watch<Settings>();
-    final t = AppLocalizations.of(context)!; // tu sistema de i18n
+    final t = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(title: Text(t.settingsTitle)),

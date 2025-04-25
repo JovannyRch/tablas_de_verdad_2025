@@ -11,8 +11,9 @@ import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/widget/pro_icon.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  final _controller = TextEditingController(text: "~(p∧q)⇒r");
+  final _controller = TextEditingController(text: "(p∧q)⇒p");
   final _focusNode = FocusNode();
   Case _case = Case.lower;
   late AppLocalizations _localization;

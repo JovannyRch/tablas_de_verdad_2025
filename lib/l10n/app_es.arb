@@ -23,6 +23,10 @@
   "contradiction": "Contradicción ❌",
   "tautology": "Tautología ✅",
   "contingency": "Contingencia ⚠️",
+  "videoScreenTitle": "Explicación en video",
+  "videoScreenDescription": "Este video explica paso a paso la resolución de esta expresión lógica.",
+  "videoFABLabel": "Ver video",
+  "videoFABTooltip": "Explicación en video",
   "contingency_description": "Una contingencia se refiere a una proposición o fórmula que no es ni una tautología ni una contradicción. En otras palabras, es una expresión que puede ser verdadera o falsa, dependiendo de las circunstancias o de los valores de verdad de sus componentes.",
   "tautology_description": "Una tautología es una proposición o fórmula lógica que siempre es verdadera, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que se cumple bajo cualquier interpretación o asignación de valores de verdad a sus variables.",
   "contradiction_description": "Una contradicción es una proposición o fórmula lógica que siempre es falsa, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que no se cumple bajo ninguna interpretación o asignación de valores de verdad a sus variables."

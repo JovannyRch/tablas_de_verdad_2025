@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
+import 'package:tablas_de_verdad_2025/model/post_expression_response.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
+import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:provider/provider.dart';
 
@@ -52,11 +55,48 @@ class TruthTableResultScreen extends StatefulWidget {
 
 class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   late AppLocalizations _localization;
+  PostExpressionResponse? response;
+
+  @override
+  void initState() {
+    try {
+      Api.postExpression(widget.truthTable.infix, widget.truthTable.tipo).then((
+        value,
+      ) {
+        print(value);
+        setState(() {
+          response = value;
+        });
+      });
+    } finally {}
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     _localization = AppLocalizations.of(context)!;
     return Scaffold(
+      floatingActionButton:
+          (response != null &&
+                  response!.video_link != null &&
+                  response!.video_link!.isNotEmpty)
+              ? FloatingActionButton.extended(
+                onPressed: () {
+                  // Navegar a otra pantalla o mostrar el video
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => VideoScreen(videoUrl: response!.video_link!),
+                    ),
+                  );
+                },
+                label: Text('Ver video'),
+                icon: Icon(Icons.play_circle_fill),
+                tooltip: _localization.videoFABTooltip,
+                backgroundColor: Colors.orange,
+              )
+              : null,
       appBar: AppBar(
         title: Text(_localization.result),
         actions: [
@@ -75,7 +115,8 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 12),
         children: [
           if (widget.expression != null)
             Padding(
@@ -110,15 +151,35 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
               },
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: widget.steps.length,
-              itemBuilder: (context, index) {
-                final step = widget.steps[index];
-                return _StepTile(step: step, index: index + 1);
-              },
+          /* Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Card(
+              color: Colors.orange.shade50,
+              child: ListTile(
+                leading: Icon(Icons.play_circle_fill, color: Colors.orange),
+                title: Text('¿Quieres ver una explicación en video?'),
+                trailing: TextButton.icon(
+                  onPressed: () {
+                    // Navegar a pantalla de video o abrir modal
+                    /*  Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => VideoScreen(videoUrl: videoUrl),
             ),
-          ),
+          ); */
+                  },
+                  icon: Icon(Icons.play_arrow),
+                  label: Text('Ver video'),
+                ),
+              ),
+            ),
+          ), */
+          // Aquí agregamos cada paso como widget
+          ...widget.steps.asMap().entries.map((entry) {
+            int index = entry.key;
+            var step = entry.value;
+            return _StepTile(step: step, index: index + 1);
+          }),
         ],
       ),
     );
