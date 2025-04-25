@@ -4,6 +4,7 @@ import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
@@ -12,6 +13,7 @@ import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/widget/pro_icon.dart';
+import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -25,10 +27,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   final _focusNode = FocusNode();
   Case _case = Case.lower;
   late AppLocalizations _localization;
+  late Settings _settings;
 
   @override
   Widget build(BuildContext context) {
     _localization = AppLocalizations.of(context)!;
+    _settings = context.watch<Settings>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_localization.appName),
@@ -143,7 +148,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       await saveExpression(expression);
     }
 
-    TruthTable truthTable = TruthTable(expression, _localization.localeName);
+    TruthTable truthTable = TruthTable(
+      expression,
+      _localization.localeName,
+      _settings.truthFormat,
+    );
+
     bool isValid = truthTable.convertInfixToPostix();
 
     if (!isValid) {

@@ -15,7 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settings = Settings();
   await settings.load();
-  await InAppPurchase.instance.restorePurchases();
+  await InAppPurchase.instance
+      .restorePurchases(); // TODO: Check if this is needed
 
   runApp(
     ChangeNotifierProvider.value(value: settings, child: const TruthTableApp()),

@@ -34,6 +34,7 @@ class TruthKeypad extends StatelessWidget {
         settings.keypadMode == KeypadMode.simple
             ? kLettersSimple
             : kLettersAdvanced;
+
     final operators =
         settings.keypadMode == KeypadMode.simple
             ? kOperatorsSimple

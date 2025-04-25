@@ -1,5 +1,8 @@
 {
   "appName": "Truth Tables",
+  "t_f": "T/F",
+  "simple_mode": "Simple mode",
+  "advanced_mode": "Advanced mode",
   "settingsTitle": "Settings",
   "language": "Language",
   "darkMode": "Dark mode",

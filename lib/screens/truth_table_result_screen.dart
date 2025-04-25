@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
+import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
+import 'package:provider/provider.dart';
 
 /// Model that represents a single step in the truth‑table resolution
 /// (e.g. conjunction, negation, implication, etc.).
@@ -231,6 +234,8 @@ class _StepTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations _localization = AppLocalizations.of(context)!;
+    final isEn = _localization.localeName == 'en';
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -239,7 +244,14 @@ class _StepTile extends StatelessWidget {
         tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         title: Column(
-          children: [Text(step.stepProcess.operator.esName), _title()],
+          children: [
+            Text(
+              isEn
+                  ? step.stepProcess.operator.enName
+                  : step.stepProcess.operator.esName,
+            ),
+            _title(),
+          ],
         ),
         leading: CircleAvatar(
           radius: 14,
@@ -262,11 +274,15 @@ class _TruthTableWidget extends StatelessWidget {
   final List<String> headers;
   final List<List<String>> rows;
 
-  const _TruthTableWidget({required this.headers, required this.rows});
+  _TruthTableWidget({required this.headers, required this.rows});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final settings = context.watch<Settings>();
+    AppLocalizations _localization = AppLocalizations.of(context)!;
+    /*   final isDescOrder = settings.mintermOrder == MintermOrder.desc; */
+
     return DataTable(
       headingRowHeight: 40,
       dataRowHeight: 34,
@@ -290,7 +306,11 @@ class _TruthTableWidget extends StatelessWidget {
               for (final cell in row)
                 DataCell(
                   Text(
-                    cell,
+                    getCellValue(
+                      _localization.localeName,
+                      settings.truthFormat,
+                      cell,
+                    ),
                     style: const TextStyle(fontSize: 12),
                     textAlign: TextAlign.center,
                   ),

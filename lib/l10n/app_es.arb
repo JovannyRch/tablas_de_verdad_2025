@@ -1,6 +1,9 @@
 {
   "appName": "Tablas de Verdad",
+  "t_f": "V/F",
   "settingsTitle": "Configuraciones",
+  "simple_mode": "Modo simple",
+  "advanced_mode": "Modo avanzado",
   "language": "Idioma",
   "darkMode": "Modo oscuro",
   "truthValues": "Valores de verdad",

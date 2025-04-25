@@ -4,6 +4,7 @@ import 'package:tablas_de_verdad_2025/class/operator.dart';
 import 'package:tablas_de_verdad_2025/class/row_table.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/const/translations.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 
 enum TruthTableType { tautology, contradiction, contingency }
 
@@ -17,6 +18,7 @@ class TruthTable {
   static const int contingencyId = 2;
 
   final String language;
+  final TruthFormat format;
 
   int counter1s = 0;
   int counters0s = 0;
@@ -69,7 +71,7 @@ class TruthTable {
   String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01";
   TruthTableType tipo = TruthTableType.contingency;
 
-  TruthTable(this.infix, this.language) {
+  TruthTable(this.infix, this.language, this.format) {
     initialInfix = infix;
     formatInput();
   }

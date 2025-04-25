@@ -42,13 +42,13 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Text(t.settings_mode, style: Theme.of(context).textTheme.titleMedium),
           RadioListTile(
-            title: Text('Modo simple'),
+            title: Text(t.simple_mode),
             value: KeypadMode.simple,
             groupValue: s.keypadMode,
             onChanged: (v) => context.read<Settings>().update(keypadMode: v),
           ),
           RadioListTile(
-            title: Text('Modo avanzado'),
+            title: Text(t.advanced_mode),
             value: KeypadMode.advanced,
             groupValue: s.keypadMode,
             onChanged: (v) => context.read<Settings>().update(keypadMode: v),
@@ -60,7 +60,7 @@ class SettingsScreen extends StatelessWidget {
           // ─── Formato V/F  vs  1/0 ──────────────────────
           Text(t.truthValues, style: Theme.of(context).textTheme.titleMedium),
           RadioListTile(
-            title: const Text('V / F'),
+            title: Text(t.t_f),
             value: TruthFormat.vf,
             groupValue: s.truthFormat,
             onChanged:
@@ -70,13 +70,15 @@ class SettingsScreen extends StatelessWidget {
             title: const Text('1 / 0'),
             value: TruthFormat.binary,
             groupValue: s.truthFormat,
-            onChanged:
-                (val) => context.read<Settings>().update(truthFormat: val),
+            onChanged: (val) {
+              context.read<Settings>().update(truthFormat: val);
+              print(val);
+            },
           ),
           const SizedBox(height: 12),
 
           // ─── Orden de minitérminos ─────────────────────
-          Text(t.mintermOrder, style: Theme.of(context).textTheme.titleMedium),
+          /*  Text(t.mintermOrder, style: Theme.of(context).textTheme.titleMedium),
           RadioListTile(
             title: Text(t.ascending), // p.ej. 000 → 001 → 010…
             value: MintermOrder.asc,
@@ -91,7 +93,7 @@ class SettingsScreen extends StatelessWidget {
             onChanged:
                 (val) => context.read<Settings>().update(mintermOrder: val),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 24), */
 
           // ─── Reset ─────────────────────────────────────
           /*  OutlinedButton.icon(

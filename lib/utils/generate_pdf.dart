@@ -9,16 +9,40 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:tablas_de_verdad/shared/UserPreferences.dart'; */
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/const/translations.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 
 Future<Uint8List> loadFont() async {
   final data = await rootBundle.load('assets/fonts/DejaVuSans.ttf');
   return data.buffer.asUint8List();
 }
 
+String getType(String locale, TruthTableType type) {
+  switch (type) {
+    case TruthTableType.contingency:
+      return locale == 'es' ? 'Contingencia' : 'Contingency';
+    case TruthTableType.tautology:
+      return locale == 'es' ? 'Tautología' : 'Tautology';
+    case TruthTableType.contradiction:
+      return locale == 'es' ? 'Contradicción' : 'Contradiction';
+  }
+}
+
+List<List<String>> getTable(TruthTable t, String language) {
+  List<List<String>> table = [];
+  for (int i = 0; i < t.finalTable.length; i++) {
+    List<String> row = [];
+    for (int j = 0; j < t.finalTable[i].length; j++) {
+      row.add(getCellValue(language, t.format, t.finalTable[i][j]));
+    }
+    table.add(row);
+  }
+
+  return table;
+}
+
 Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
   final pdf = pw.Document();
-
-  String type = "Contingencia";
 
   final fontData = await loadFont();
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
@@ -28,30 +52,9 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
   final Uint8List bytes = data.buffer.asUint8List();
 
   final String language = t.language;
+  final type = getType(language, t.tipo);
 
-  /* UserPreferences prefs = UserPreferences(); */
-
-  if ( /* !prefs.isShow01s */ true) {
-    t.finalTable =
-        t.finalTable.map((e) {
-          return e.map((e) {
-            if (language == 'es') {
-              if (e == '1') {
-                return 'V';
-              } else if (e == '0') {
-                return 'F';
-              }
-            } else {
-              if (e == '1') {
-                return 'T';
-              } else if (e == '0') {
-                return 'F';
-              }
-            }
-            return e;
-          }).toList();
-        }).toList();
-  }
+  final finalTable = getTable(t, language);
 
   pdf.addPage(
     pw.MultiPage(
@@ -97,7 +100,7 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
             pw.SizedBox(height: 10),
             pw.TableHelper.fromTextArray(
               context: context,
-              data: t.finalTable,
+              data: finalTable,
               headerStyle: pw.TextStyle(
                 font: ttf,
                 color: PdfColors.blueGrey800,
