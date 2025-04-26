@@ -7,6 +7,7 @@ import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/calculator_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
 
 const Color kSeedColor = Colors.deepOrange;
@@ -45,6 +46,7 @@ class TruthTableApp extends StatelessWidget {
       routes: {
         Routes.calculator: (context) => const CalculatorScreen(),
         Routes.settings: (context) => const SettingsScreen(),
+        Routes.library: (context) => const ExpressionLibraryScreen(),
       },
     );
   }

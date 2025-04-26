@@ -35,7 +35,7 @@ class Api {
   static Future<ListResponse> getListExpressions(int page, String type) async {
     String url = "$API_URL/expressions?page=$page";
     if (type.isNotEmpty) {
-      url = "$API_URL/expressions?type=${type.toUpperCase()}&page=$page";
+      url = "$API_URL/expressions?type=${type}&page=$page";
     }
     print(url);
     try {

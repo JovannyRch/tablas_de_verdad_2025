@@ -65,6 +65,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 keyboardType: TextInputType.none,
                 showCursor: true,
                 readOnly: true,
+                autocorrect: true,
                 decoration: const InputDecoration(border: OutlineInputBorder()),
                 style: const TextStyle(fontSize: 20),
               ),
@@ -107,7 +108,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void _backspace() {
+    if (!_focusNode.hasFocus) _focusNode.requestFocus();
+    if (_controller.text.isEmpty) return;
+
     final sel = _controller.selection;
+    if (sel.end < 0 || sel.start < 0) {
+      return;
+    }
     if (sel.start == sel.end && sel.start > 0) {
       // sin selección
       final newStart = sel.start - 1;
@@ -141,6 +148,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     final expression = _controller.text;
 
     if (expression.isEmpty) {
+      showSnackBarMessage(context, _localization.emptyExpression);
       return;
     }
     List<String> history = await getHistory();
@@ -158,14 +166,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     bool isValid = truthTable.convertInfixToPostix();
 
     if (!isValid) {
-      showSnackBarMessage(context, _localization.appName);
+      showSnackBarMessage(context, truthTable.errorMessage);
       return;
     }
 
     isValid = truthTable.checkIfIsCorrectlyFormed();
 
     if (!isValid) {
-      showSnackBarMessage(context, _localization.appName);
+      showSnackBarMessage(context, truthTable.errorMessage);
       return;
     }
 

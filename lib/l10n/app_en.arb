@@ -1,6 +1,7 @@
 {
   "appName": "Truth Tables",
   "t_f": "T/F",
+  "emptyExpression": "Please enter a logical expression",
   "simple_mode": "Simple mode",
   "advanced_mode": "Advanced mode",
   "settingsTitle": "Settings",
@@ -24,6 +25,7 @@
   "tautology": "Tautology ✅",
   "contingency": "Contingency ⚠️",
   "videoScreenTitle": "Video Explanation",
+  "type": "Type",
   "videoScreenDescription": "This video explains the step-by-step resolution of this logical expression.",
   "videoFABLabel": "Watch video",
   "videoFABTooltip": "Video explanation",

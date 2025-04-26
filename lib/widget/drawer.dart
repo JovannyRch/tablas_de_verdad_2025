@@ -55,7 +55,11 @@ class AppDrawer extends StatelessWidget {
             decoration: BoxDecoration(color: kSeedColor),
             accountName: Text(
               t.appName,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             accountEmail: Text(""),
 
