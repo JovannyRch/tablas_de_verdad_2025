@@ -28,6 +28,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   bool _isLoading = false;
   bool _hasMore = true;
   TruthTableType? _selectedType;
+  bool _onlyVideos = false;
   late AppLocalizations t;
 
   @override
@@ -58,6 +59,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
     final ListResponse response = await Api.getListExpressions(
       _currentPage,
       type,
+      videos: _onlyVideos,
     );
 
     setState(() {
@@ -88,6 +90,13 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
     _fetchExpressions(reset: true);
   }
 
+  void _onVideosToggled() {
+    setState(() {
+      _onlyVideos = !_onlyVideos;
+    });
+    _fetchExpressions(reset: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     t = AppLocalizations.of(context)!;
@@ -99,7 +108,20 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
             scrollDirection: Axis.horizontal,
             child: Row(children: [_buildFilters()]),
           ),
+          _buildVideoToggle(),
           Expanded(child: _buildExpressionList()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoToggle() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Checkbox(value: _onlyVideos, onChanged: (_) => _onVideosToggled()),
+          Text(t.only_tutorials),
         ],
       ),
     );

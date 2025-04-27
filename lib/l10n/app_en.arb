@@ -26,6 +26,7 @@
   "contingency": "Contingency ⚠️",
   "videoScreenTitle": "Video Explanation",
   "type": "Type",
+  "only_tutorials": "Show only tutorials",
   "videoScreenDescription": "This video explains the step-by-step resolution of this logical expression.",
   "videoFABLabel": "Watch video",
   "videoFABTooltip": "Video explanation",

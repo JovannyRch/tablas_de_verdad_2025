@@ -32,15 +32,28 @@ class Api {
     }
   }
 
-  static Future<ListResponse> getListExpressions(int page, String type) async {
-    String url = "$API_URL/expressions?page=$page";
+  static Future<ListResponse> getListExpressions(
+    int page,
+    String type, {
+    bool videos = false,
+  }) async {
+    String url = "$API_URL/expressions";
+
+    Map<String, String> queryParams = {'page': page.toString()};
+
     if (type.isNotEmpty) {
-      url = "$API_URL/expressions?type=${type}&page=$page";
+      queryParams['type'] = type;
     }
+
+    if (videos) {
+      queryParams['videos'] = 'true';
+    }
+
+    url += '?${Uri(queryParameters: queryParams).query}';
     print(url);
     try {
       var response = await http.get(Uri.parse(url));
-      print(response.body);
+
       var json = jsonDecode(response.body);
 
       return ListResponse.fromJson(json);

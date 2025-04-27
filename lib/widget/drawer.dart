@@ -100,11 +100,11 @@ class AppDrawer extends StatelessWidget {
                   t.expressionLibrary,
                   Routes.library,
                 ),
-                buildTile(
+                /*  buildTile(
                   Icons.school_outlined,
                   'Tutoriales',
                   Routes.tutorials,
-                ),
+                ), */
                 buildTile(Icons.settings, t.settings, Routes.settings),
               ],
             ),
