@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
+import 'package:tablas_de_verdad_2025/main.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,6 @@ class TruthKeypad extends StatelessWidget {
     required this.onEvaluate,
     required this.calculatorCase,
   });
-
-  void _openHistory() {
-    // Implementar la lógica para abrir el historial
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +124,9 @@ class _Key extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    Settings settings = context.watch<Settings>();
+
+    bool isDark = settings.themeMode == ThemeMode.dark;
 
     Color bg;
     Color fg;
@@ -137,12 +137,12 @@ class _Key extends StatelessWidget {
     } else {
       switch (kind) {
         case KeyKind.operand:
-          bg = scheme.secondaryContainer;
-          fg = scheme.onSecondaryContainer;
+          bg = isDark ? Colors.grey.shade800 : Colors.white;
+          fg = isDark ? Colors.white : Colors.grey.shade800;
           break;
         case KeyKind.operator:
-          bg = scheme.primaryContainer;
-          fg = scheme.onPrimaryContainer;
+          bg = isDark ? scheme.inversePrimary : Colors.white;
+          fg = isDark ? Colors.white : kSeedColor;
           break;
         case KeyKind.action:
           bg = scheme.surfaceVariant;
@@ -157,7 +157,12 @@ class _Key extends StatelessWidget {
         padding: EdgeInsets.zero,
       ),
       onPressed: onTap,
-      child: Center(child: Text(label, style: const TextStyle(fontSize: 18))),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }

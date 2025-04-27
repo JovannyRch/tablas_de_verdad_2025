@@ -67,7 +67,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 showCursor: true,
                 readOnly: true,
                 autocorrect: true,
-                decoration: const InputDecoration(border: OutlineInputBorder()),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  fillColor:
+                      _settings.isDarkMode ? Colors.grey[800] : Colors.white10,
+                  filled: true,
+                ),
                 style: const TextStyle(fontSize: 20),
               ),
             ),

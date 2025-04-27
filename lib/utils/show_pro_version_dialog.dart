@@ -59,13 +59,7 @@ Future<void> showProVersionDialog(BuildContext context) {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 12),
-                // Descripción
-                const Text(
-                  'Esta es la versión de prueba. Descubre todas las ventajas de Pro:',
-                  style: TextStyle(fontSize: 14, color: Colors.black87),
-                  textAlign: TextAlign.center,
-                ),
+
                 const SizedBox(height: 16),
                 // Lista de beneficios
                 Column(

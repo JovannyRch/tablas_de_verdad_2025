@@ -6,14 +6,14 @@ enum TruthFormat { vf, binary } // V/F  o  1/0
 
 enum MintermOrder { asc, desc }
 
-enum KeypadMode { simple, advanced }
+enum KeypadMode { advanced, simple }
 
 class Settings extends ChangeNotifier {
   Locale locale = const Locale('es');
   ThemeMode themeMode = ThemeMode.system;
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
-  KeypadMode keypadMode = KeypadMode.simple;
+  KeypadMode keypadMode = KeypadMode.advanced;
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -61,4 +61,6 @@ class Settings extends ChangeNotifier {
     await prefs.clear();
     await load(); // recarga valores por defecto
   }
+
+  get isDarkMode => themeMode == ThemeMode.dark;
 }
