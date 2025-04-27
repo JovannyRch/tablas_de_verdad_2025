@@ -151,29 +151,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
               },
             ),
           ),
-          /* Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Card(
-              color: Colors.orange.shade50,
-              child: ListTile(
-                leading: Icon(Icons.play_circle_fill, color: Colors.orange),
-                title: Text('¿Quieres ver una explicación en video?'),
-                trailing: TextButton.icon(
-                  onPressed: () {
-                    // Navegar a pantalla de video o abrir modal
-                    /*  Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => VideoScreen(videoUrl: videoUrl),
-            ),
-          ); */
-                  },
-                  icon: Icon(Icons.play_arrow),
-                  label: Text('Ver video'),
-                ),
-              ),
-            ),
-          ), */
+
           // Aquí agregamos cada paso como widget
           ...widget.steps.asMap().entries.map((entry) {
             int index = entry.key;

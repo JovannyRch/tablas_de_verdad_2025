@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
-import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
-import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
+import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 
@@ -53,6 +51,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           await showProVersionDialog(context);
         },
         onLogout: () {},
+        onExpressionSelected: (String expr) {
+          _controller.text = expr;
+        },
       ),
       body: SafeArea(
         child: Column(
@@ -85,6 +86,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         ),
       ),
     );
+  }
+
+  void setExpression(String expression) {
+    _controller.text = expression;
+    _controller.selection = TextSelection.collapsed(offset: expression.length);
   }
 
   void _insert(String txt) {
@@ -157,72 +163,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       await saveExpression(expression);
     }
 
-    TruthTable truthTable = TruthTable(
-      expression,
-      _localization.localeName,
-      _settings.truthFormat,
-    );
-
-    bool isValid = truthTable.convertInfixToPostix();
-
-    if (!isValid) {
-      showSnackBarMessage(context, truthTable.errorMessage);
-      return;
-    }
-
-    isValid = truthTable.checkIfIsCorrectlyFormed();
-
-    if (!isValid) {
-      showSnackBarMessage(context, truthTable.errorMessage);
-      return;
-    }
-
-    truthTable.calculate();
-
-    List<TruthTableStep> steps =
-        truthTable.steps.map((step) {
-          final columnKeys = getColumnsKeys(step);
-          final rows = getRows(truthTable, columnKeys, step);
-          return TruthTableStep(
-            title:
-                step.isSingleVariable
-                    ? "${step.variable1} ${step.variable1}"
-                    : " ${step.variable1} ${step.operator.value} ${step.variable2}",
-            headers: [...columnKeys, _localization.result],
-            rows: rows,
-            stepProcess: step,
-          );
-        }).toList();
-
-    final screen = TruthTableResultScreen(
-      steps: steps,
-      expression: truthTable.initialInfix,
-      truthTable: truthTable,
-    );
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
-  }
-
-  List<String> getColumnsKeys(StepProcess step) {
-    if (step.isSingleVariable) {
-      return [step.variable1];
-    }
-    return [step.variable1, step.variable2];
-  }
-
-  List<List<String>> getRows(
-    TruthTable table,
-    List<String> columsKeys,
-    StepProcess step,
-  ) {
-    List<List<String>> rows = [];
-    for (int i = 0; i < table.totalRows; i++) {
-      String combination = "";
-      for (int j = 0; j < columsKeys.length; j++) {
-        combination += table.columns[columsKeys[j]]![i];
-      }
-      String result = table.columns[step.toString()]![i];
-      rows.add([...combination.split(""), result]);
-    }
-    return rows;
+    goToResult(context, expression, _localization, _settings.truthFormat);
   }
 }

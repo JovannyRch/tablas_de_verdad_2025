@@ -8,6 +8,7 @@ class AppDrawer extends StatelessWidget {
   final bool isPro;
   final VoidCallback onUpgrade;
   final VoidCallback onLogout;
+  final void Function(String) onExpressionSelected;
 
   const AppDrawer({
     Key? key,
@@ -15,6 +16,7 @@ class AppDrawer extends StatelessWidget {
     this.isPro = false,
     required this.onUpgrade,
     required this.onLogout,
+    required this.onExpressionSelected,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class AppDrawer extends StatelessWidget {
       );
     }
 
-    Widget buildTapableTile(
+    Widget buildHistoryDialog(
       IconData icon,
       String title,
       Function(BuildContext context) onTap,
@@ -88,11 +90,18 @@ class AppDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                buildTapableTile(
+                buildHistoryDialog(
                   Icons.calculate_outlined,
                   t.calculationHistory,
-                  (BuildContext context) {
-                    showHistoryDialog(context);
+                  (BuildContext context) async {
+                    final selectedExpr = await showDialog<String>(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (_) => const HistoryDialog(),
+                    );
+                    if (selectedExpr != null) {
+                      onExpressionSelected(selectedExpr);
+                    }
                   },
                 ),
                 buildTile(

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-class _HistoryDialog extends StatefulWidget {
-  const _HistoryDialog({Key? key}) : super(key: key);
+class HistoryDialog extends StatefulWidget {
+  const HistoryDialog({Key? key}) : super(key: key);
 
   @override
-  State<_HistoryDialog> createState() => _HistoryDialogState();
+  State<HistoryDialog> createState() => _HistoryDialogState();
 }
 
-class _HistoryDialogState extends State<_HistoryDialog> {
+class _HistoryDialogState extends State<HistoryDialog> {
   late Future<List<String>> _future;
 
   @override
@@ -76,15 +80,4 @@ class _HistoryDialogState extends State<_HistoryDialog> {
       ],
     );
   }
-}
-
-Future<void> showHistoryDialog(BuildContext ctx) async {
-  final selectedExpr = await showDialog<String>(
-    context: ctx,
-    barrierDismissible: true,
-    builder: (_) => const _HistoryDialog(),
-  );
-
-  // -- Si el usuario tocó una expresión la reenviamos al input principal
-  if (selectedExpr != null) {}
 }
