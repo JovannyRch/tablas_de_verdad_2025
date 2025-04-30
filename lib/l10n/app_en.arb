@@ -2,6 +2,7 @@
   "appName": "Truth Tables",
   "t_f": "T/F",
   "emptyExpression": "Please enter a logical expression",
+  "privacyPolicy": "Privacy Policy",
   "simple_mode": "Simple mode",
   "advanced_mode": "Advanced mode",
   "settingsTitle": "Settings",

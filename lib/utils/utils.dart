@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 
@@ -23,4 +25,45 @@ List<List<String>> getRows(
     rows.add([...combination.split(""), result]);
   }
   return rows;
+}
+
+String getRandomExpression() {
+  List<String> expressions = [
+    "(p∧q)⇒p",
+    "p∧q",
+    "p⇒q",
+    "p∨q",
+    "p⇒(p∨q)",
+    "(¬p∨q)⇔(p⇒q)",
+    "p⇔q",
+    "(p⇒q)",
+    "(p∧q)",
+    "p∧~q",
+    "(p∧q)⇒r",
+    "~p∨q",
+    "~((p∧~q)⇒p)",
+    "p∨¬p",
+    "~(p∧q)",
+    "(p∧q)∧~q",
+    "(p⇔q)∨(q⇒p)",
+    "q∨~q",
+    "¬(p∧q)",
+    "(p⇒q)∧(q⇒p)",
+    "p∧¬q",
+    "¬p∧q",
+    "p∨~q",
+    "p⇔¬p",
+    "~p",
+    "~((p∧q)∧(r∨q))",
+    "¬p∧¬q",
+    "(p∧~q)⇔~(~p∨q)",
+    "¬(p∧p",
+    "((p∧q)⇒p)",
+    "~p∧q",
+    "p∨~p",
+  ];
+
+  int randomIndex = (expressions.length * Random().nextDouble()).floor();
+
+  return expressions[randomIndex];
 }

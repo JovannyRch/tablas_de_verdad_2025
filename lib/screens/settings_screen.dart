@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
               t.darkMode,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            value: s.themeMode == ThemeMode.dark,
+            value: s.isDarkMode(context),
             onChanged:
                 (val) => context.read<Settings>().update(
                   themeMode: val ? ThemeMode.dark : ThemeMode.light,
@@ -72,10 +73,21 @@ class SettingsScreen extends StatelessWidget {
             groupValue: s.truthFormat,
             onChanged: (val) {
               context.read<Settings>().update(truthFormat: val);
-              print(val);
             },
           ),
           const SizedBox(height: 12),
+          /* privacyPolicy */
+          ListTile(
+            title: Text(
+              t.privacyPolicy,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, Routes.privacy);
+            },
+            contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+          ),
 
           // ─── Orden de minitérminos ─────────────────────
           /*  Text(t.mintermOrder, style: Theme.of(context).textTheme.titleMedium),

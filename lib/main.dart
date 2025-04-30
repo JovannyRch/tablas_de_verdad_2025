@@ -8,6 +8,7 @@ import 'package:tablas_de_verdad_2025/screens/calculator_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
+import 'package:tablas_de_verdad_2025/screens/privacy_policy_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
 
 const Color kSeedColor = Colors.deepOrange;
@@ -16,8 +17,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settings = Settings();
   await settings.load();
-  await InAppPurchase.instance
-      .restorePurchases(); // TODO: Check if this is needed
+  /*  await InAppPurchase.instance
+      .restorePurchases(); // TODO: Check if this is needed */
 
   runApp(
     ChangeNotifierProvider.value(value: settings, child: const TruthTableApp()),
@@ -47,6 +48,7 @@ class TruthTableApp extends StatelessWidget {
         Routes.calculator: (context) => const CalculatorScreen(),
         Routes.settings: (context) => const SettingsScreen(),
         Routes.library: (context) => const ExpressionLibraryScreen(),
+        Routes.privacy: (context) => PrivacyPolicyScreen(),
       },
     );
   }

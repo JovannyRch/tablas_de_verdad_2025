@@ -6,6 +6,7 @@ import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
+import 'package:tablas_de_verdad_2025/utils/utils.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
@@ -22,11 +23,25 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  final _controller = TextEditingController(text: "(p∧q)⇒p");
+  final _controller = TextEditingController(text: "");
   final _focusNode = FocusNode();
   Case _case = Case.lower;
   late AppLocalizations _localization;
   late Settings _settings;
+
+  @override
+  void initState() {
+    setRandomExpression();
+    super.initState();
+  }
+
+  void setRandomExpression() {
+    final randomExpression = getRandomExpression();
+    _controller.text = randomExpression;
+    _controller.selection = TextSelection.collapsed(
+      offset: randomExpression.length,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +85,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   fillColor:
-                      _settings.isDarkMode ? Colors.grey[800] : Colors.white10,
+                      _settings.isDarkMode(context)
+                          ? Colors.grey[800]
+                          : Colors.white10,
                   filled: true,
                 ),
                 style: const TextStyle(fontSize: 20),

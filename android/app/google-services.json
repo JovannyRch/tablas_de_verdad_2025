@@ -1,0 +1,156 @@
+{
+  "project_info": {
+    "project_number": "504704532099",
+    "firebase_url": "https://tablas-de-verdad-ed88b.firebaseio.com",
+    "project_id": "tablas-de-verdad-ed88b",
+    "storage_bucket": "tablas-de-verdad-ed88b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504704532099:android:074b7c5064f1f2cd12a5b6",
+        "android_client_info": {
+          "package_name": "com.example.tablas_de_verdad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDG2mlrE2QvoRPBFkb2m_tHDMxkntzRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "504704532099-aqni3lfeuvdllvchskr0uh3im28vcaqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jovannyrch.tablasdeverdad.en"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504704532099:android:9068c9c977151d4512a5b6",
+        "android_client_info": {
+          "package_name": "com.jovannyrch.tablasdeverdad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDG2mlrE2QvoRPBFkb2m_tHDMxkntzRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "504704532099-aqni3lfeuvdllvchskr0uh3im28vcaqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jovannyrch.tablasdeverdad.en"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504704532099:android:a3d509b014ffd0c112a5b6",
+        "android_client_info": {
+          "package_name": "com.jovannyrch.tablasdeverdad.en"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDG2mlrE2QvoRPBFkb2m_tHDMxkntzRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "504704532099-aqni3lfeuvdllvchskr0uh3im28vcaqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jovannyrch.tablasdeverdad.en"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-4665787383933447~1652617896"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504704532099:android:74dd45b9ce732f2512a5b6",
+        "android_client_info": {
+          "package_name": "com.jovannyrch.tablasdeverdad.es.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDG2mlrE2QvoRPBFkb2m_tHDMxkntzRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504704532099-rf61h0d1q8rf9uqh8ead55drk6kot97i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "504704532099-aqni3lfeuvdllvchskr0uh3im28vcaqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jovannyrch.tablasdeverdad.en"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -59,8 +59,11 @@ class Settings extends ChangeNotifier {
   Future<void> reset() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
-    await load(); // recarga valores por defecto
+    await load();
   }
 
-  get isDarkMode => themeMode == ThemeMode.dark;
+  bool isDarkMode(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    return brightness == Brightness.dark;
+  }
 }
