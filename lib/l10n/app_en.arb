@@ -1,6 +1,10 @@
 {
   "appName": "Truth Tables",
+  "becomePro": "Become Pro!",
+  "fullFeatureAccess": "Full access to all features",
+  "later": "Later",
   "t_f": "T/F",
+  "buyPro": "Buy Pro",
   "emptyExpression": "Please enter a logical expression",
   "privacyPolicy": "Privacy Policy",
   "simple_mode": "Simple mode",

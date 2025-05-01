@@ -1,6 +1,10 @@
 {
   "appName": "Tablas de Verdad",
+  "becomePro": "¡Conviértete en Pro!",
+  "fullFeatureAccess": "Acceso completo a todas las funciones",
+  "later": "Más tarde",
   "t_f": "V/F",
+  "buyPro": "Comprar Pro",
   "settingsTitle": "Configuraciones",
   "emptyExpression": "Por favor, ingresa una expresión lógica",
   "privacyPolicy": "Política de privacidad",

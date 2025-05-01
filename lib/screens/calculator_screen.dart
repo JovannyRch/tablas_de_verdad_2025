@@ -55,9 +55,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           if (!_settings.isProVersion)
             ProIconButton(
               onPressed: () {
-                showProVersionDialog(context, () {
-                  _settings.buyPro();
-                });
+                showProVersionDialog(context, _settings, _localization);
               },
             ),
         ],
@@ -65,9 +63,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       drawer: AppDrawer(
         isPro: _settings.isProVersion,
         onUpgrade: () async {
-          await showProVersionDialog(context, () {
-            _settings.buyPro();
-          });
+          await showProVersionDialog(context, _settings, _localization);
         },
         onLogout: () {},
         onExpressionSelected: (String expr) {

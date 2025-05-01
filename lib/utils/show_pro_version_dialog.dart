@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/widget/benefit_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
+Future<void> showProVersionDialog(
+  BuildContext context,
+  Settings settings,
+  AppLocalizations localizations,
+) {
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
@@ -54,8 +60,8 @@ Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
                 ),
                 const SizedBox(height: 16),
                 // Título
-                const Text(
-                  '¡Conviértete en Pro!',
+                Text(
+                  localizations.becomePro,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -64,10 +70,10 @@ Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
                 // Lista de beneficios
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     BenefitItem(
                       icon: Icons.lock_open,
-                      text: 'Acceso completo a funciones',
+                      text: localizations.fullFeatureAccess,
                     ),
                     /*     BenefitItem(
                       icon: Icons.show_chart,
@@ -97,7 +103,7 @@ Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text('Más tarde'),
+                        child: Text(localizations.later),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -105,7 +111,7 @@ Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(dialogContext).pop();
-                          onBuyPro();
+                          settings.buyPro();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber[800],
@@ -113,8 +119,8 @@ Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text(
-                          'Adquirir Pro',
+                        child: Text(
+                          localizations.buyPro,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
