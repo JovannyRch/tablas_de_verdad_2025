@@ -57,7 +57,7 @@ String getRandomExpression() {
     "~((p∧q)∧(r∨q))",
     "¬p∧¬q",
     "(p∧~q)⇔~(~p∨q)",
-    "¬(p∧p",
+    "¬(p∧p)",
     "((p∧q)⇒p)",
     "~p∧q",
     "p∨~p",

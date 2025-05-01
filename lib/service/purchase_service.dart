@@ -44,7 +44,6 @@ class PurchaseService {
     await sub.cancel();
   }
 
-  /// Realiza la compra de la versión Pro
   Future<void> buyProVersion() async {
     final response = await _iap.queryProductDetails({_proProductId});
     if (response.notFoundIDs.isNotEmpty || response.productDetails.isEmpty) {
@@ -64,41 +63,4 @@ class PurchaseService {
       }
     }
   }
-}
-
-Future<bool> restoreAndCheckProPurchase() async {
-  final iap = InAppPurchase.instance;
-  final bool available = await iap.isAvailable();
-  if (!available) return false;
-
-  final Completer<bool> hasPro = Completer<bool>();
-
-  final Stream<List<PurchaseDetails>> subscription = iap.purchaseStream;
-
-  late final StreamSubscription<List<PurchaseDetails>> sub;
-
-  sub = subscription.listen(
-    (purchases) {
-      for (final purchase in purchases) {
-        if (purchase.productID == 'pro_version' &&
-            purchase.status == PurchaseStatus.purchased) {
-          hasPro.complete(true);
-          sub.cancel();
-          return;
-        }
-      }
-      // Si no encontró nada
-      if (!hasPro.isCompleted) {
-        hasPro.complete(false);
-      }
-    },
-    onError: (error) {
-      if (!hasPro.isCompleted) {
-        hasPro.complete(false);
-      }
-    },
-  );
-
-  await iap.restorePurchases();
-  return await hasPro.future;
 }

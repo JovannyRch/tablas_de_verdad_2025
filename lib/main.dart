@@ -19,8 +19,6 @@ void main() async {
   final settings = Settings();
   await settings.load();
   MobileAds.instance.initialize();
-  /*  await InAppPurchase.instance
-      .restorePurchases(); // TODO: Check if this is needed */
 
   runApp(
     ChangeNotifierProvider.value(value: settings, child: const TruthTableApp()),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
-import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
