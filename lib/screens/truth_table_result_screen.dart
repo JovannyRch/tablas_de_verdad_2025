@@ -3,12 +3,15 @@ import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
+import 'package:tablas_de_verdad_2025/const/colors.dart';
+import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/model/post_expression_response.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 /// Model that represents a single step in the truth‑table resolution
 /// (e.g. conjunction, negation, implication, etc.).
@@ -56,6 +59,7 @@ class TruthTableResultScreen extends StatefulWidget {
 class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   late AppLocalizations _localization;
   PostExpressionResponse? response;
+  late Settings _settings;
 
   @override
   void initState() {
@@ -75,6 +79,8 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   @override
   Widget build(BuildContext context) {
     _localization = AppLocalizations.of(context)!;
+    _settings = context.watch<Settings>();
+
     return Scaffold(
       floatingActionButton:
           (response != null &&
@@ -152,7 +158,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
             ),
           ),
 
-          // Aquí agregamos cada paso como widget
+          _settings.isProVersion ? SizedBox.shrink() : BannerAdWidget(),
           ...widget.steps.asMap().entries.map((entry) {
             int index = entry.key;
             var step = entry.value;
@@ -236,7 +242,7 @@ class _StepTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.w800,
-              color: ThemeData().primaryColor,
+              color: kSeedColor,
             ),
           ),
           Text(
@@ -260,7 +266,7 @@ class _StepTile extends StatelessWidget {
           style: TextStyle(
             fontSize: 30.0,
             fontWeight: FontWeight.w800,
-            color: ThemeData().primaryColor,
+            color: kSeedColor,
           ),
         ),
         Text(

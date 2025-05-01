@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+/* import 'package:in_app_purchase/in_app_purchase.dart'; */
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
@@ -17,6 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settings = Settings();
   await settings.load();
+  MobileAds.instance.initialize();
   /*  await InAppPurchase.instance
       .restorePurchases(); // TODO: Check if this is needed */
 

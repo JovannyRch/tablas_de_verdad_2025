@@ -1,6 +1,7 @@
 // settings_model.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tablas_de_verdad_2025/service/purchase_service.dart';
 
 enum TruthFormat { vf, binary } // V/F  o  1/0
 
@@ -14,6 +15,9 @@ class Settings extends ChangeNotifier {
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
   KeypadMode keypadMode = KeypadMode.advanced;
+  bool isProVersion = false;
+
+  final PurchaseService _purchaseService = PurchaseService();
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -21,6 +25,24 @@ class Settings extends ChangeNotifier {
     themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? 0];
     truthFormat = TruthFormat.values[prefs.getInt('truthFormat') ?? 0];
     mintermOrder = MintermOrder.values[prefs.getInt('mintermOrder') ?? 0];
+
+    // Escuchar cambios del estado Pro
+    _purchaseService.isProVersion.addListener(() {
+      isProVersion = _purchaseService.isProVersion.value;
+      notifyListeners();
+    });
+
+    // Inicializar listener y restaurar compras
+    _purchaseService.initPurchaseListener();
+    await _purchaseService.restorePurchases();
+
+    // Leer local por si ya se activó previamente (fallback)
+    final localFlag = prefs.getBool('isProVersion') ?? false;
+    if (!isProVersion && localFlag) {
+      isProVersion = true;
+      notifyListeners();
+    }
+
     notifyListeners();
   }
 
@@ -65,5 +87,16 @@ class Settings extends ChangeNotifier {
   bool isDarkMode(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     return brightness == Brightness.dark;
+  }
+
+  Future<void> activateProLocally() async {
+    final prefs = await SharedPreferences.getInstance();
+    isProVersion = true;
+    await prefs.setBool('isProVersion', true);
+    notifyListeners();
+  }
+
+  Future<void> buyPro() async {
+    await _purchaseService.buyProVersion();
   }
 }

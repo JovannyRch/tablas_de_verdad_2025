@@ -34,12 +34,11 @@
 		android:value="ca-app-pub-4665787383933447~1652617896" />
 		-->
         <!-- ES Version -->
-        <!--
-		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="ca-app-pub-4665787383933447~4689744776" />
-		-->
         <!-- TEST -->
-        <!-- <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" /> -->
+        <!--   <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
+       -->
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

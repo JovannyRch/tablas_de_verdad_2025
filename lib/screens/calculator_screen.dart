@@ -7,6 +7,7 @@ import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
+import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
@@ -52,18 +53,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text(_localization.appName),
         actions: [
-          if (!IS_PRO_VERSION)
+          if (!_settings.isProVersion)
             ProIconButton(
               onPressed: () {
-                showProVersionDialog(context);
+                showProVersionDialog(context, () {
+                  _settings.buyPro();
+                });
               },
             ),
         ],
       ),
       drawer: AppDrawer(
-        isPro: IS_PRO_VERSION,
+        isPro: _settings.isProVersion,
         onUpgrade: () async {
-          await showProVersionDialog(context);
+          await showProVersionDialog(context, () {
+            _settings.buyPro();
+          });
         },
         onLogout: () {},
         onExpressionSelected: (String expr) {
@@ -104,6 +109,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 calculatorCase: _case,
               ),
             ),
+            _settings.isProVersion ? const SizedBox() : BannerAdWidget(),
           ],
         ),
       ),

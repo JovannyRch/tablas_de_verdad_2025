@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/widget/benefit_item.dart';
 
-Future<void> showProVersionDialog(BuildContext context) {
+Future<void> showProVersionDialog(BuildContext context, Function onBuyPro) {
   return showDialog<void>(
     context: context,
     barrierDismissible: true,
@@ -69,7 +69,7 @@ Future<void> showProVersionDialog(BuildContext context) {
                       icon: Icons.lock_open,
                       text: 'Acceso completo a funciones',
                     ),
-                    BenefitItem(
+                    /*     BenefitItem(
                       icon: Icons.show_chart,
                       text: 'Gráficas avanzadas',
                     ),
@@ -80,7 +80,7 @@ Future<void> showProVersionDialog(BuildContext context) {
                     BenefitItem(
                       icon: Icons.support,
                       text: 'Soporte prioritario',
-                    ),
+                    ), */
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -105,7 +105,7 @@ Future<void> showProVersionDialog(BuildContext context) {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(dialogContext).pop();
-                          // TODO: Lógica para adquirir Pro
+                          onBuyPro();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber[800],
