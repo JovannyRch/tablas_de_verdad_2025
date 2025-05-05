@@ -19,7 +19,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
-  const CalculatorScreen({super.key});
+  final String? initialExpression;
+  const CalculatorScreen({Key? key, this.initialExpression}) : super(key: key);
 
   @override
   State<CalculatorScreen> createState() => _CalculatorScreenState();
@@ -37,6 +38,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void initState() {
     setRandomExpression();
     ads = Ads(AdmobService.getVideoId()!);
+
+    if (widget.initialExpression != null &&
+        widget.initialExpression!.isNotEmpty) {
+      setExpression(widget.initialExpression!);
+    }
+
     super.initState();
   }
 

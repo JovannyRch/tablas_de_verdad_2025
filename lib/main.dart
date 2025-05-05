@@ -45,7 +45,10 @@ class TruthTableApp extends StatelessWidget {
 
       initialRoute: Routes.calculator,
       routes: {
-        Routes.calculator: (context) => const CalculatorScreen(),
+        Routes.calculator: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as String?;
+          return CalculatorScreen(initialExpression: args);
+        },
         Routes.settings: (context) => const SettingsScreen(),
         Routes.library: (context) => const ExpressionLibraryScreen(),
         Routes.privacy: (context) => PrivacyPolicyScreen(),
