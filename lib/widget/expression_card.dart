@@ -6,13 +6,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
+import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 class ExpressionCard extends StatelessWidget {
   final Expression expression;
   late AppLocalizations t;
   late Settings _settings;
+  final bool showAds;
 
-  ExpressionCard({Key? key, required this.expression}) : super(key: key);
+  ExpressionCard({Key? key, required this.expression, required this.showAds})
+    : super(key: key);
 
   void _handleTap(BuildContext context) {
     goToResult(context, expression.expression!, t, _settings.truthFormat);
@@ -22,7 +25,7 @@ class ExpressionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     t = AppLocalizations.of(context)!;
     _settings = context.watch<Settings>();
-    return Card(
+    var card = Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 4,
       child: Padding(
@@ -98,6 +101,14 @@ class ExpressionCard extends StatelessWidget {
         ),
       ),
     );
+
+    if (showAds && !_settings.isProVersion) {
+      return Column(
+        children: [card, const SizedBox(height: 8), BannerAdWidget()],
+      );
+    } else {
+      return card;
+    }
   }
 
   String getTranslatedType(String? type) {

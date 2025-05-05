@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/screens/ad_mob_service.dart';
+import 'package:tablas_de_verdad_2025/utils/ads.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
@@ -28,11 +31,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Case _case = Case.lower;
   late AppLocalizations _localization;
   late Settings _settings;
+  late Ads ads;
 
   @override
   void initState() {
     setRandomExpression();
+    ads = Ads(AdmobService.getVideoId()!);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    ads.interstitialAd!.dispose();
+    super.dispose();
   }
 
   void setRandomExpression() {
@@ -184,6 +195,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     if (!history.contains(expression)) {
       await saveExpression(expression);
+    }
+
+    _settings.incrementOperationsCount();
+
+    if (_settings.operationsCount % 3 == 0 && !_settings.isProVersion) {
+      ads.showInterstitialAd();
     }
 
     goToResult(context, expression, _localization, _settings.truthFormat);

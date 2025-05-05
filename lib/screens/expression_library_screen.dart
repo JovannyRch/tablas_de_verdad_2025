@@ -3,7 +3,6 @@ import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/model/list_response.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/widget/expression_card.dart';
 
 class ExpressionLibraryScreen extends StatefulWidget {
@@ -178,13 +177,16 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
           );
         }
         final expression = _expressions[index];
-        return _buildExpressionTile(expression);
+        return _buildExpressionTile(expression, index);
       },
     );
   }
 
-  Widget _buildExpressionTile(Expression expression) {
-    return ExpressionCard(expression: expression);
+  Widget _buildExpressionTile(Expression expression, int index) {
+    return ExpressionCard(
+      expression: expression,
+      showAds: (index % 4 == 0 && index != 0),
+    );
   }
 
   String get type {

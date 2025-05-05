@@ -1,6 +1,7 @@
 // settings_model.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tablas_de_verdad_2025/const/translations.dart';
 import 'package:tablas_de_verdad_2025/service/purchase_service.dart';
 
 enum TruthFormat { vf, binary } // V/F  o  1/0
@@ -10,18 +11,22 @@ enum MintermOrder { asc, desc }
 enum KeypadMode { advanced, simple }
 
 class Settings extends ChangeNotifier {
-  Locale locale = const Locale('es');
+  Locale locale =
+      APP_ID == "com.jovannyrch.tablasdeverdad"
+          ? const Locale('es')
+          : const Locale('en');
   ThemeMode themeMode = ThemeMode.system;
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
   KeypadMode keypadMode = KeypadMode.advanced;
   bool isProVersion = false;
+  int operationsCount = 0;
 
   final PurchaseService _purchaseService = PurchaseService();
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
-    locale = Locale(prefs.getString('locale') ?? 'es');
+    locale = Locale(prefs.getString('locale') ?? defaultLocale());
     themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? 0];
     truthFormat = TruthFormat.values[prefs.getInt('truthFormat') ?? 0];
     mintermOrder = MintermOrder.values[prefs.getInt('mintermOrder') ?? 0];
@@ -78,6 +83,11 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
+  void incrementOperationsCount() {
+    operationsCount++;
+    notifyListeners();
+  }
+
   Future<void> reset() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -98,5 +108,13 @@ class Settings extends ChangeNotifier {
 
   Future<void> buyPro() async {
     await _purchaseService.buyProVersion();
+  }
+
+  String defaultLocale() {
+    if (APP_ID == "com.jovannyrch.tablasdeverdad") {
+      return 'es';
+    } else {
+      return 'en';
+    }
   }
 }

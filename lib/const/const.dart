@@ -1,4 +1,4 @@
-final IS_TESTING = false;
+final IS_TESTING = true;
 
 const Map<String, String> esSettings = {
   "id": "com.jovannyrch.tablasdeverdad",
@@ -32,7 +32,7 @@ const Map<String, String> proSettings = {
   "BANNER_1": "ca-app-pub-4665787383933447/9637438366",
 };
 
-final settings = esSettings;
+final settings = enSettings;
 
 String? APP_ID = settings["id"];
 String? APP_NAME = settings["title"];

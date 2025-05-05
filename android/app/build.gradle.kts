@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.jovannyrch.tablasdeverdad"
+        applicationId = "com.jovannyrch.tablasdeverdad.en"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
