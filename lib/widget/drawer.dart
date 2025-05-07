@@ -3,6 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
 import 'package:tablas_de_verdad_2025/main.dart';
+import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/utils/open_support_chat.dart';
+import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 
 class AppDrawer extends StatelessWidget {
   final bool isPro;
@@ -22,6 +26,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
+    final settings = context.watch<Settings>();
 
     Widget buildTile(IconData icon, String title, String routeName) {
       return ListTile(
@@ -115,6 +120,18 @@ class AppDrawer extends StatelessWidget {
                   Routes.tutorials,
                 ), */
                 buildTile(Icons.settings, t.settings, Routes.settings),
+                if (settings.isProVersion)
+                  ListTile(
+                    leading: const Icon(Icons.support_agent),
+                    title: Text(t.premiumSupport),
+                    onTap: openSupportChat,
+                  )
+                else
+                  ListTile(
+                    leading: const Icon(Icons.lock),
+                    title: Text(t.premiumSupport),
+                    onTap: () => showProVersionDialog(context, settings, t),
+                  ),
               ],
             ),
           ),

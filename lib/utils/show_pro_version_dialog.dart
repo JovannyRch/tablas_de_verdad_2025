@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/widget/benefit_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -83,10 +84,11 @@ Future<void> showProVersionDialog(
                       icon: Icons.download,
                       text: 'Exporta a Excel y PDF',
                     ),
+                     */
                     BenefitItem(
-                      icon: Icons.support,
-                      text: 'Soporte prioritario',
-                    ), */
+                      icon: Icons.support_agent,
+                      text: localizations.premiumSupport,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -111,7 +113,11 @@ Future<void> showProVersionDialog(
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(dialogContext).pop();
-                          settings.buyPro();
+                          if (IS_TESTING) {
+                            settings.activateProLocally();
+                          } else {
+                            settings.buyPro();
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber[800],

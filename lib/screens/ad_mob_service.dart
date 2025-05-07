@@ -31,15 +31,16 @@ class AdmobService {
     return '';
   }
 
-  static String? getVideoId() {
+  static String getVideoId() {
     if (Platform.isIOS) {
       return "";
     } else if (Platform.isAndroid) {
       if (IS_TESTING) {
         return "ca-app-pub-3940256099942544/1033173712";
       }
-      return VIDEO_ID;
+      return VIDEO_ID ?? "ca-app-pub-3940256099942544/1033173712";
     }
+    return VIDEO_ID ?? "ca-app-pub-3940256099942544/1033173712";
   }
 
   static String? getShareAndSaveId() {
@@ -65,22 +66,16 @@ class AdmobService {
     return '';
   }
 
-  /* static InterstitialAd createInterstitialAd() {
-    return InterstitialAd(
-      targetingInfo: targetingInfo,
-      adUnitId: AdmobService.videoId(),
-      listener: (MobileAdEvent event) {},
-    );
+  static String getRewardPdfId() {
+    if (Platform.isIOS) {
+      return "";
+    }
+    if (Platform.isAndroid) {
+      if (IS_TESTING) {
+        return 'ca-app-pub-3940256099942544/5224354917';
+      }
+      return "ca-app-pub-4665787383933447/1174950441";
+    }
+    return '';
   }
-
-  static BannerAd createBannerAdd() {
-    return BannerAd(
-      targetingInfo: targetingInfo,
-      adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.smartBanner,
-      listener: (MobileAdEvent event) {
-        print('Bnner Event: $event');
-      },
-    );
-  } */
 }

@@ -106,6 +106,13 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> desactivateProLocally() async {
+    final prefs = await SharedPreferences.getInstance();
+    isProVersion = false;
+    await prefs.setBool('isProVersion', false);
+    notifyListeners();
+  }
+
   Future<void> buyPro() async {
     await _purchaseService.buyProVersion();
   }
