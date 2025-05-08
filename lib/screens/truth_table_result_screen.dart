@@ -88,7 +88,6 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
                   response!.video_link!.isNotEmpty)
               ? FloatingActionButton.extended(
                 onPressed: () {
-                  // Navegar a otra pantalla o mostrar el video
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -106,6 +105,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
       appBar: AppBar(
         title: Text(_localization.result),
         actions: [
+          /*   IconButton(onPressed: () {}, icon: Icon(Icons.help)), */
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -401,7 +401,7 @@ class _FinalResultBanner extends StatelessWidget {
           right: 0.0,
           bottom: 0.0,
           child: IconButton(
-            icon: Icon(Icons.help, color: scheme.onPrimaryContainer),
+            icon: Icon(Icons.info, color: scheme.onPrimaryContainer),
             onPressed: () {
               onTap?.call();
             },

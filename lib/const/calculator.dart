@@ -30,10 +30,19 @@ const kLettersAdvanced = [
 
 const kOperatorsAdvanced = [
   ...kOperatorsSimple,
+  '!',
+  '|',
+  '&',
   '⇏',
+  '⊻',
+  '￩',
+  '⇎',
   '⊕',
   '⊼',
-  '↓' /*, otros… */,
+  '⇍',
+  '↓',
+  '┹',
+  '┲',
 ];
 
 enum Case { lower, upper }

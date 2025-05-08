@@ -185,7 +185,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   Widget _buildExpressionTile(Expression expression, int index) {
     return ExpressionCard(
       expression: expression,
-      showAds: (index % 4 == 0 && index != 0),
+      showAds: (index % 7 == 0 && index != 0),
     );
   }
 
