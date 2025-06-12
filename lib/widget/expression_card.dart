@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
+import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 class ExpressionCard extends StatelessWidget {
@@ -15,8 +16,7 @@ class ExpressionCard extends StatelessWidget {
   late Settings _settings;
   final bool showAds;
 
-  ExpressionCard({Key? key, required this.expression, required this.showAds})
-    : super(key: key);
+  ExpressionCard({super.key, required this.expression, required this.showAds});
 
   void _handleTap(BuildContext context) {
     Navigator.pushReplacementNamed(
@@ -61,7 +61,7 @@ class ExpressionCard extends StatelessWidget {
                       const SizedBox(height: 12),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          /*  Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder:
@@ -69,7 +69,8 @@ class ExpressionCard extends StatelessWidget {
                                     videoUrl: expression.youtubeUrl!,
                                   ),
                             ),
-                          );
+                          ); */
+                          visit(expression.youtubeUrl!);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

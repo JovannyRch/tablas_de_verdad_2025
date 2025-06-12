@@ -30,6 +30,10 @@ const kLettersAdvanced = [
 
 const kOperatorsAdvanced = [
   ...kOperatorsSimple,
+  '{',
+  '}',
+  '[',
+  ']',
   '!',
   '|',
   '&',

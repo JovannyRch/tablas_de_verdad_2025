@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,6 +12,7 @@ import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 /// Model that represents a single step in the truth‑table resolution
@@ -67,7 +69,6 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
       Api.postExpression(widget.truthTable.infix, widget.truthTable.tipo).then((
         value,
       ) {
-        print(value);
         setState(() {
           response = value;
         });
@@ -88,24 +89,23 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
                   response!.video_link!.isNotEmpty)
               ? FloatingActionButton.extended(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (_) => VideoScreen(videoUrl: response!.video_link!),
-                    ),
-                  );
+                  visit(response!.video_link!);
                 },
-                label: Text('Ver video'),
-                icon: Icon(Icons.play_circle_fill),
+                label: Text(_localization.videoFABTooltip),
+                icon: FaIcon(FontAwesomeIcons.youtube, color: Colors.white),
                 tooltip: _localization.videoFABTooltip,
-                backgroundColor: Colors.orange,
+                backgroundColor: Colors.red,
               )
               : null,
       appBar: AppBar(
         title: Text(_localization.result),
         actions: [
-          /*   IconButton(onPressed: () {}, icon: Icon(Icons.help)), */
+          IconButton(
+            onPressed: () {
+              visit(YOUTUBE_URL);
+            },
+            icon: const FaIcon(FontAwesomeIcons.youtube, color: Colors.red),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -262,7 +262,7 @@ class _StepTile extends StatelessWidget {
           style: TextStyle(fontSize: 16.0),
         ),
         Text(
-          "${step.stepProcess.operator.value}",
+          step.stepProcess.operator.value,
           style: TextStyle(
             fontSize: 30.0,
             fontWeight: FontWeight.w800,
@@ -279,8 +279,8 @@ class _StepTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppLocalizations _localization = AppLocalizations.of(context)!;
-    final isEn = _localization.localeName == 'en';
+    AppLocalizations localization = AppLocalizations.of(context)!;
+    final isEn = localization.localeName == 'en';
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -319,20 +319,20 @@ class _TruthTableWidget extends StatelessWidget {
   final List<String> headers;
   final List<List<String>> rows;
 
-  _TruthTableWidget({required this.headers, required this.rows});
+  const _TruthTableWidget({required this.headers, required this.rows});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final settings = context.watch<Settings>();
-    AppLocalizations _localization = AppLocalizations.of(context)!;
+    AppLocalizations localization = AppLocalizations.of(context)!;
     /*   final isDescOrder = settings.mintermOrder == MintermOrder.desc; */
 
     return DataTable(
       headingRowHeight: 40,
       dataRowHeight: 34,
-      headingRowColor: MaterialStateProperty.all(
-        theme.colorScheme.surfaceVariant,
+      headingRowColor: WidgetStateProperty.all(
+        theme.colorScheme.surfaceContainerHighest,
       ),
       border: TableBorder.all(color: theme.dividerColor.withOpacity(.4)),
       columns: [
@@ -352,7 +352,7 @@ class _TruthTableWidget extends StatelessWidget {
                 DataCell(
                   Text(
                     getCellValue(
-                      _localization.localeName,
+                      localization.localeName,
                       settings.truthFormat,
                       cell,
                     ),

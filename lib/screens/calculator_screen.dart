@@ -20,7 +20,7 @@ import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
   final String? initialExpression;
-  const CalculatorScreen({Key? key, this.initialExpression}) : super(key: key);
+  const CalculatorScreen({super.key, this.initialExpression});
 
   @override
   State<CalculatorScreen> createState() => _CalculatorScreenState();
@@ -37,7 +37,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   void initState() {
     setRandomExpression();
-    ads = Ads(AdmobService.getVideoId()!);
+    ads = Ads(AdmobService.getVideoId());
 
     if (widget.initialExpression != null &&
         widget.initialExpression!.isNotEmpty) {
@@ -206,7 +206,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     _settings.incrementOperationsCount();
 
-    if (_settings.operationsCount % 3 == 0 && !_settings.isProVersion) {
+    //&& _settings.operationsCount % 2 == 0
+    if (!_settings.isProVersion) {
       ads.showInterstitialAd();
     }
 

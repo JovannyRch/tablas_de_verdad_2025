@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 List<String> getColumnsKeys(StepProcess step) {
   if (step.isSingleVariable) {
@@ -66,4 +67,11 @@ String getRandomExpression() {
   int randomIndex = (expressions.length * Random().nextDouble()).floor();
 
   return expressions[randomIndex];
+}
+
+Future<void> visit(String link) async {
+  final url = Uri.parse(link);
+  if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+    throw Exception('Could not launch $url');
+  }
 }

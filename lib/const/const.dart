@@ -1,4 +1,5 @@
 final IS_TESTING = false;
+const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
 
 const Map<String, String> esSettings = {
   "id": "com.jovannyrch.tablasdeverdad",
@@ -24,7 +25,6 @@ const Map<String, String> enSettings = {
 const Map<String, String> proSettings = {
   "id": "com.jovannyrch.tablasdeverdad.es.pro",
   "title": "Tablas de Verdad | Pro",
-
   "ADMOB_ID": "ca-app-pub-4665787383933447~4689744776",
   "VIDEO_ID": "ca-app-pub-4665787383933447/1003394249",
   "STEP_BY_STEP": "ca-app-pub-4665787383933447/9789289099",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
 import 'package:tablas_de_verdad_2025/main.dart';
@@ -7,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/open_support_chat.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tablas_de_verdad_2025/utils/utils.dart';
 
 class AppDrawer extends StatelessWidget {
   final bool isPro;
@@ -15,13 +18,13 @@ class AppDrawer extends StatelessWidget {
   final void Function(String) onExpressionSelected;
 
   const AppDrawer({
-    Key? key,
+    super.key,
 
     this.isPro = false,
     required this.onUpgrade,
     required this.onLogout,
     required this.onExpressionSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +117,18 @@ class AppDrawer extends StatelessWidget {
                   t.expressionLibrary,
                   Routes.library,
                 ),
-                /*  buildTile(
-                  Icons.school_outlined,
-                  'Tutoriales',
-                  Routes.tutorials,
-                ), */
+
                 buildTile(Icons.settings, t.settings, Routes.settings),
+                ListTile(
+                  leading: const FaIcon(
+                    FontAwesomeIcons.youtube,
+                    color: Colors.red,
+                  ),
+                  title: Text(t.youtubeChannel),
+                  onTap: () {
+                    visit(YOUTUBE_URL);
+                  },
+                ),
                 if (settings.isProVersion)
                   ListTile(
                     leading: const Icon(Icons.support_agent),
