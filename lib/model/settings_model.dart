@@ -10,6 +10,8 @@ enum MintermOrder { asc, desc }
 
 enum KeypadMode { advanced, simple }
 
+enum OperatorType { none, logic, boolean, minterms }
+
 class Settings extends ChangeNotifier {
   Locale locale =
       APP_ID == "com.jovannyrch.tablasdeverdad"
@@ -19,6 +21,7 @@ class Settings extends ChangeNotifier {
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
   KeypadMode keypadMode = KeypadMode.advanced;
+  OperatorType operatorType = OperatorType.logic;
   bool isProVersion = false;
   int operationsCount = 0;
 
@@ -57,6 +60,7 @@ class Settings extends ChangeNotifier {
     TruthFormat? truthFormat,
     MintermOrder? mintermOrder,
     KeypadMode? keypadMode,
+    OperatorType? operatorsType,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     if (locale != null) {
@@ -80,6 +84,12 @@ class Settings extends ChangeNotifier {
       this.keypadMode = keypadMode;
       prefs.setInt('keypadMode', keypadMode.index);
     }
+
+    if (operatorsType != null) {
+      operatorType = operatorsType;
+      prefs.setInt('operatorsType', operatorsType.index);
+    }
+
     notifyListeners();
   }
 

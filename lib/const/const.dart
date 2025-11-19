@@ -1,4 +1,3 @@
-final IS_TESTING = false;
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
 
 const Map<String, String> esSettings = {
@@ -32,6 +31,7 @@ const Map<String, String> proSettings = {
   "BANNER_1": "ca-app-pub-4665787383933447/9637438366",
 };
 
+final IS_TESTING = true;
 final settings = esSettings;
 
 String? APP_ID = settings["id"];

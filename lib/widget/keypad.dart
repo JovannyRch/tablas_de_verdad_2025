@@ -27,10 +27,7 @@ class TruthKeypad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    final letters =
-        settings.keypadMode == KeypadMode.simple
-            ? kLettersSimple
-            : kLettersAdvanced;
+    final letters = kLettersSimple;
 
     final operators =
         settings.keypadMode == KeypadMode.simple
@@ -145,7 +142,7 @@ class _Key extends StatelessWidget {
           fg = isDark ? Colors.white : kSeedColor;
           break;
         case KeyKind.action:
-          bg = scheme.surfaceVariant;
+          bg = scheme.surfaceContainerHighest;
           fg = scheme.onSurfaceVariant;
           break;
       }

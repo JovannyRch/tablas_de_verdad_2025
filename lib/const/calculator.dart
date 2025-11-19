@@ -1,35 +1,29 @@
-const kLettersSimple = ['p', 'q', 'r', 's', 'a', 'b', '0', '1'];
-const kOperatorsSimple = ['∧', '∨', '⇒', '¬', '~', '⇔', '(', ')'];
-
-const kLettersAdvanced = [
-  'p',
-  'q',
-  'r',
-  's',
+const kLettersSimple = [
   'a',
   'b',
   'c',
   'd',
   'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'w',
   'x',
   'y',
   'z',
   '0',
   '1',
 ];
+const kOperatorsSimple = ['∧', '∨', '⇒', '¬', '~', '⇔'];
+
+const kLogicOperators = ['∧', '∨', '⇒', '¬', '~', '⇒', '⇔'];
 
 const kOperatorsAdvanced = [
   ...kOperatorsSimple,
+  '(',
+  ')',
   '{',
   '}',
   '[',

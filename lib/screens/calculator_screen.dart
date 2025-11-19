@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
@@ -13,6 +12,7 @@ import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
+import 'package:tablas_de_verdad_2025/widget/operators_type_selector.dart';
 import 'package:tablas_de_verdad_2025/widget/pro_icon.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -96,6 +96,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               child: TextField(
                 controller: _controller,
                 focusNode: _focusNode,
+                textAlign: TextAlign.center,
                 keyboardType: TextInputType.none,
                 showCursor: true,
                 readOnly: true,
@@ -111,6 +112,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 style: const TextStyle(fontSize: 20),
               ),
             ),
+            OperatorTypeSelector(),
             // Keypad
             Expanded(
               child: TruthKeypad(
