@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class HistoryDialog extends StatefulWidget {
-  const HistoryDialog({Key? key}) : super(key: key);
+  const HistoryDialog({super.key});
 
   @override
   State<HistoryDialog> createState() => _HistoryDialogState();

@@ -49,4 +49,18 @@ const kOperatorsAdvanced = [
   '┲',
 ];
 
+// Operadores premium que requieren ver un rewarded ad (usuarios no Pro)
+const kPremiumOperators = [
+  '⇏',  // NOT Condicional
+  '⊻',  // XOR
+  '￩',  // Anticondicional
+  '⇎',  // NOT Bicondicional
+  '⊕',  // XOR2
+  '⊼',  // NAND
+  '⇍',  // NOT Condicional Inverso
+  '↓',  // NOR
+  '┹',  // Operador especial 1
+  '┲',  // Operador especial 2
+];
+
 enum Case { lower, upper }

@@ -14,8 +14,9 @@ import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
 import 'package:tablas_de_verdad_2025/widget/keypad.dart';
 import 'package:tablas_de_verdad_2025/widget/pro_icon.dart';
+import 'package:tablas_de_verdad_2025/utils/rewarded_ad_helper.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
@@ -33,11 +34,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   late AppLocalizations _localization;
   late Settings _settings;
   late Ads ads;
+  late RewardedAdHelper rewardedAdHelper;
 
   @override
   void initState() {
     setRandomExpression();
     ads = Ads(AdmobService.getVideoId());
+    rewardedAdHelper = RewardedAdHelper(); // Inicializar rewarded ads
 
     if (widget.initialExpression != null &&
         widget.initialExpression!.isNotEmpty) {
@@ -49,6 +52,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   void dispose() {
+    rewardedAdHelper.dispose(); // Liberar recursos del rewarded ad
     ads.interstitialAd!.dispose();
     super.dispose();
   }
@@ -70,6 +74,23 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text(_localization.appName),
         actions: [
+          IconButton(
+            icon: Icon(
+              _settings.keypadMode == KeypadMode.simple
+                  ? Icons.keyboard
+                  : Icons.grid_view,
+            ),
+            tooltip: _settings.keypadMode == KeypadMode.simple
+                ? _localization.advanced_mode
+                : _localization.simple_mode,
+            onPressed: () {
+              _settings.update(
+                keypadMode: _settings.keypadMode == KeypadMode.simple
+                    ? KeypadMode.advanced
+                    : KeypadMode.simple,
+              );
+            },
+          ),
           if (!_settings.isProVersion)
             ProIconButton(
               onPressed: () {
@@ -198,19 +219,75 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       showSnackBarMessage(context, _localization.emptyExpression);
       return;
     }
-    List<String> history = await getHistory();
 
+    // Verificar si usa operadores premium (para usuarios no Pro)
+    if (!_settings.isProVersion && _containsPremiumOperators(expression)) {
+      // TODO: Implementar rewarded ad aquí
+      // Por ahora, mostrar diálogo informativo
+      final shouldContinue = await _showPremiumOperatorDialog();
+      if (!shouldContinue) return;
+    }
+
+    List<String> history = await getHistory();
     if (!history.contains(expression)) {
       await saveExpression(expression);
     }
 
     _settings.incrementOperationsCount();
 
-    //&& _settings.operationsCount % 2 == 0
-    if (!_settings.isProVersion) {
+    // Mostrar ad intersticial solo cada N operaciones (menos invasivo)
+    if (_settings.shouldShowInterstitialAd()) {
       ads.showInterstitialAd();
     }
 
     goToResult(context, expression, _localization, _settings.truthFormat);
+  }
+
+  bool _containsPremiumOperators(String expression) {
+    // Importar kPremiumOperators desde calculator.dart
+    const premiumOps = ['⇏', '⊻', '￩', '⇎', '⊕', '⊼', '⇍', '↓', '┹', '┲'];
+    return premiumOps.any((op) => expression.contains(op));
+  }
+
+  Future<bool> _showPremiumOperatorDialog() async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('🎯 ${_localization.premiumOperator}'),
+            content: Text(_localization.premiumOperatorMessage),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(_localization.cancel),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context, true);
+                  
+                  // Mostrar rewarded ad
+                  final success = await rewardedAdHelper.showRewardedAd();
+                  if (!success) {
+                    // Si falla el ad, permitir continuar de todos modos (buena UX)
+                    if (mounted) {
+                      showSnackBarMessage(
+                        context,
+                        'Video no disponible. Puedes continuar esta vez.',
+                      );
+                    }
+                  }
+                },
+                child: Text(_localization.watchVideoFree),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                  showProVersionDialog(context, _settings, _localization);
+                },
+                child: Text(_localization.upgradePro),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }

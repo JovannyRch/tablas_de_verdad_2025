@@ -30,10 +30,17 @@ String getType(String locale, TruthTableType type) {
 
 List<List<String>> getTable(TruthTable t, String language) {
   List<List<String>> table = [];
+  
   for (int i = 0; i < t.finalTable.length; i++) {
     List<String> row = [];
+ 
     for (int j = 0; j < t.finalTable[i].length; j++) {
-      row.add(getCellValue(language, t.format, t.finalTable[i][j]));
+      String cellValue = i == 0 ?  t.finalTable[i][j] : getCellValue(
+        language,
+        t.format,
+        t.finalTable[i][j],
+      );
+      row.add(cellValue);
     }
     table.add(row);
   }
@@ -55,6 +62,7 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
   final type = getType(language, t.tipo);
 
   final finalTable = getTable(t, language);
+ 
 
   pdf.addPage(
     pw.MultiPage(
@@ -128,8 +136,7 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
                 mainAxisAlignment: pw.MainAxisAlignment.end,
                 children: [
                   pw.Text(
-                    (TITLE_APP ?? ' Tablas de Verdad') +
-                        ' App', //TODO: Change to t.appName
+                    '${TITLE_APP ?? ' Tablas de Verdad'} App', //TODO: Change to t.appName
                     style: pw.TextStyle(font: ttf, fontSize: 10),
                   ),
                 ],
@@ -159,9 +166,9 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
   final output = await pdf.save();
   final filename =
       language == 'es'
-          ? ('tabla_de_verdad_' + t.infix)
-          : ('truth_table_' + t.infix);
-  final String path = (await getTemporaryDirectory()).path + '/$filename.pdf';
+          ? ('tabla_de_verdad_${t.infix}')
+          : ('truth_table_${t.infix}');
+  final String path = '${(await getTemporaryDirectory()).path}/$filename.pdf';
   final File file = File(path);
   await file.writeAsBytes(output);
 

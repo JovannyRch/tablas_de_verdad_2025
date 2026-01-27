@@ -39,5 +39,9 @@
   "videoFABTooltip": "Video explanation",
   "videoScreenDescription": "This video explains the step-by-step resolution of this logical expression.",
   "videoScreenTitle": "Video Explanation",
-  "youtubeChannel": "YouTube Channel"
+  "youtubeChannel": "YouTube Channel",
+  "premiumOperator": "Premium Operator",
+  "premiumOperatorMessage": "This advanced operator requires watching a video or upgrading to Pro for unlimited access.",
+  "watchVideoFree": "Watch Video (Free)",
+  "cancel": "Cancel"
 }

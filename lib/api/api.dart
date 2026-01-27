@@ -4,9 +4,13 @@ import 'package:tablas_de_verdad_2025/model/list_response.dart';
 import 'dart:convert';
 
 import 'package:tablas_de_verdad_2025/model/post_expression_response.dart';
+import 'package:tablas_de_verdad_2025/const/backend_config.dart';
 
-final String WEB_URL = 'https://jovannyrch-1dfc553c9cbb.herokuapp.com';
-final String API_URL = "$WEB_URL/api";
+// NOTA: Backend temporalmente desactivado
+// Para reactivar: Cambiar BACKEND_ENABLED = true en lib/const/backend_config.dart
+
+final String WEB_URL = BACKEND_URL;
+final String API_URL = API_BASE_URL;
 
 class Api {
   static Future<PostExpressionResponse> postExpression(

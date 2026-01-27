@@ -39,5 +39,9 @@
   "videoFABTooltip": "Explicación en video",
   "videoScreenDescription": "Este video explica paso a paso la resolución de esta expresión lógica.",
   "videoScreenTitle": "Explicación en video",
-  "youtubeChannel": "Canal de YouTube"
+  "youtubeChannel": "Canal de YouTube",
+  "premiumOperator": "Operador Premium",
+  "premiumOperatorMessage": "Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.",
+  "watchVideoFree": "Ver Video (Gratis)",
+  "cancel": "Cancelar"
 }

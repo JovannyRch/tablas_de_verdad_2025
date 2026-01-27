@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
@@ -112,11 +112,11 @@ class AppDrawer extends StatelessWidget {
                     }
                   },
                 ),
-                buildTile(
+              /*   buildTile(
                   Icons.folder_outlined,
                   t.expressionLibrary,
                   Routes.library,
-                ),
+                ), */
 
                 buildTile(Icons.settings, t.settings, Routes.settings),
                 ListTile(

@@ -5,7 +5,7 @@ import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 
 void goToResult(
   BuildContext context,

@@ -7,7 +7,7 @@ import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/calculator_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/privacy_policy_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
@@ -32,6 +32,8 @@ class TruthTableApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
     final t = AppLocalizations.of(context);
+
+    //settings.desactivateProLocally(); // Forzar desactivación de Pro
 
     return MaterialApp(
       locale: settings.locale,

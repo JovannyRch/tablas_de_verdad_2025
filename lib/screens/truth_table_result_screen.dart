@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tablas_de_verdad_2025/api/api.dart';
+// import 'package:tablas_de_verdad_2025/api/api.dart'; // TODO: Reactivar cuando backend esté disponible
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
-import 'package:tablas_de_verdad_2025/model/post_expression_response.dart';
+// import 'package:tablas_de_verdad_2025/model/post_expression_response.dart'; // TODO: Reactivar cuando backend esté disponible
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
@@ -60,11 +60,13 @@ class TruthTableResultScreen extends StatefulWidget {
 
 class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   late AppLocalizations _localization;
-  PostExpressionResponse? response;
+  // PostExpressionResponse? response; // TODO: Reactivar cuando backend esté disponible
   late Settings _settings;
 
   @override
   void initState() {
+    // TODO: Backend API temporalmente desactivada - Reactivar cuando esté disponible
+    /* 
     try {
       Api.postExpression(widget.truthTable.infix, widget.truthTable.tipo).then((
         value,
@@ -74,6 +76,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
         });
       });
     } finally {}
+    */
     super.initState();
   }
 
@@ -83,7 +86,8 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
     _settings = context.watch<Settings>();
 
     return Scaffold(
-      floatingActionButton:
+      // TODO: Reactivar FloatingActionButton cuando backend esté disponible
+      /* floatingActionButton:
           (response != null &&
                   response!.video_link != null &&
                   response!.video_link!.isNotEmpty)
@@ -97,6 +101,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
                 backgroundColor: Colors.red,
               )
               : null,
+      */
       appBar: AppBar(
         title: Text(_localization.result),
         actions: [

@@ -1,9 +1,7 @@
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 
 String getCellValue(String localName, TruthFormat format, String cell) {
-  print(cell);
-  print(format);
-  print(localName);
+ 
   if (cell == '0') {
     if (format == TruthFormat.vf) {
       return 'F';

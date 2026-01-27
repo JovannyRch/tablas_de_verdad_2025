@@ -1,4 +1,4 @@
-final IS_TESTING = false;
+final IS_TESTING = true;
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
 
 const Map<String, String> esSettings = {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class VideoScreen extends StatefulWidget {
   final String videoUrl;
 
-  const VideoScreen({Key? key, required this.videoUrl}) : super(key: key);
+  const VideoScreen({super.key, required this.videoUrl});
 
   @override
   State<VideoScreen> createState() => _VideoScreenState();

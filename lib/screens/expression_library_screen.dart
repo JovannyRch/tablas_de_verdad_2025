@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tablas_de_verdad_2025/api/api.dart';
+// import 'package:tablas_de_verdad_2025/api/api.dart'; // TODO: Reactivar cuando backend esté disponible
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/model/list_response.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/widget/expression_card.dart';
 
 class ExpressionLibraryScreen extends StatefulWidget {
-  const ExpressionLibraryScreen({Key? key}) : super(key: key);
+  const ExpressionLibraryScreen({super.key});
 
   @override
   State<ExpressionLibraryScreen> createState() =>
@@ -22,7 +22,7 @@ class Filter {
 
 class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   final ScrollController _scrollController = ScrollController();
-  List<Expression> _expressions = [];
+  final List<Expression> _expressions = [];
   int _currentPage = 1;
   bool _isLoading = false;
   bool _hasMore = true;
@@ -55,6 +55,8 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
       }
     });
 
+    // TODO: Backend API temporalmente desactivada - Reactivar cuando esté disponible
+    /* 
     final ListResponse response = await Api.getListExpressions(
       _currentPage,
       type,
@@ -64,6 +66,13 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
     setState(() {
       _expressions.addAll(response.data ?? []);
       _hasMore = response.nextPageUrl != null;
+      _isLoading = false;
+    });
+    */
+    
+    // Mientras tanto, finalizar el loading sin datos
+    setState(() {
+      _hasMore = false;
       _isLoading = false;
     });
   }

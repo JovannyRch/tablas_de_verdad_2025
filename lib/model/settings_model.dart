@@ -21,6 +21,7 @@ class Settings extends ChangeNotifier {
   KeypadMode keypadMode = KeypadMode.advanced;
   bool isProVersion = false;
   int operationsCount = 0;
+  int adFrequency = 3; // Mostrar ad cada N operaciones (menos invasivo)
 
   final PurchaseService _purchaseService = PurchaseService();
 
@@ -86,6 +87,10 @@ class Settings extends ChangeNotifier {
   void incrementOperationsCount() {
     operationsCount++;
     notifyListeners();
+  }
+
+  bool shouldShowInterstitialAd() {
+    return !isProVersion && operationsCount % adFrequency == 0;
   }
 
   Future<void> reset() async {
