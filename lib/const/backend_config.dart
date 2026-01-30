@@ -1,12 +1,16 @@
 // Configuración de Backend API
-// Cambiar estos valores según el estado del servidor
+// Usando modelo backendless con JSON estático
 
 /// Flag para habilitar/deshabilitar el backend completamente
-const bool BACKEND_ENABLED = false; // TODO: Cambiar a true cuando el backend esté disponible
+const bool BACKEND_ENABLED = true; // Usando JSON estático backendless
 
-/// URLs del backend
+/// URLs del backend (legacy - mantener para compatibilidad)
 const String BACKEND_URL = 'https://jovannyrch-1dfc553c9cbb.herokuapp.com';
 const String API_BASE_URL = '$BACKEND_URL/api';
+
+/// URL del JSON estático backendless
+const String STATIC_JSON_URL =
+    'https://static-json-backend.vercel.app/projects/truth-tables/expressions';
 
 /// Endpoints específicos
 class ApiEndpoints {
@@ -29,10 +33,10 @@ class ApiErrorMessages {
 /// Clase para verificar disponibilidad del backend
 class BackendStatus {
   static bool get isAvailable => BACKEND_ENABLED;
-  
+
   static String get statusMessage {
     if (BACKEND_ENABLED) {
-      return 'Backend: Activo ✅';
+      return 'Backend: Activo ✅ (Modo backendless - JSON estático)';
     } else {
       return 'Backend: Desactivado ⚠️ (Modo offline)';
     }

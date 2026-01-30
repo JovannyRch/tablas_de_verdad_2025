@@ -11,7 +11,7 @@ class Ads {
   AdRequest request = const AdRequest();
 
   Ads(String id) {
-    this.adId =
+    adId =
         IS_TESTING
             ? Platform.isAndroid
                 ? 'ca-app-pub-7319269804560504/8512599311'

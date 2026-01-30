@@ -31,15 +31,15 @@ class PostExpressionResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['expression'] = this.expression;
-    data['type'] = this.type;
-    data['video_link'] = this.video_link;
-    data['origin'] = this.origin;
-    data['count'] = this.count;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['expression'] = expression;
+    data['type'] = type;
+    data['video_link'] = video_link;
+    data['origin'] = origin;
+    data['count'] = count;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
+    data['id'] = id;
     return data;
   }
 

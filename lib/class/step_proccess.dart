@@ -21,7 +21,7 @@ class StepProcess {
 
   @override
   String toString() {
-    if (this.isSingleVariable) {
+    if (isSingleVariable) {
       return "${operator.value}$variable1";
     }
     return "$variable1${operator.value}$variable2";

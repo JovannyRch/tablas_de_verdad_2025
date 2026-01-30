@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-// import 'package:tablas_de_verdad_2025/api/api.dart'; // TODO: Reactivar cuando backend esté disponible
+import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/model/list_response.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/utils/rewarded_ad_helper.dart';
+import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
+import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/widget/expression_card.dart';
 
 class ExpressionLibraryScreen extends StatefulWidget {
@@ -22,69 +27,83 @@ class Filter {
 
 class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   final ScrollController _scrollController = ScrollController();
-  final List<Expression> _expressions = [];
-  int _currentPage = 1;
+  final List<Expression> _allExpressions = []; // Todas las expresiones del JSON
+  final List<Expression> _filteredExpressions = []; // Expresiones filtradas
   bool _isLoading = false;
-  bool _hasMore = true;
   TruthTableType? _selectedType;
   bool _onlyVideos = false;
+  bool _hasUnlockedFullList = false; // Si el usuario desbloqueó viendo un ad
   late AppLocalizations t;
+  late Settings _settings;
+  late RewardedAdHelper _rewardedAdHelper;
+
+  static const int FREE_EXPRESSIONS_LIMIT =
+      10; // Límite para usuarios gratuitos
 
   @override
   void initState() {
     super.initState();
+    _rewardedAdHelper = RewardedAdHelper();
     _fetchExpressions();
-    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _rewardedAdHelper.dispose();
     super.dispose();
   }
 
-  Future<void> _fetchExpressions({bool reset = false}) async {
+  Future<void> _fetchExpressions() async {
     if (_isLoading) return;
 
     setState(() {
       _isLoading = true;
-      if (reset) {
-        _currentPage = 1;
-        _expressions.clear();
-        _hasMore = true;
-      }
     });
 
-    // TODO: Backend API temporalmente desactivada - Reactivar cuando esté disponible
-    /* 
-    final ListResponse response = await Api.getListExpressions(
-      _currentPage,
-      type,
-      videos: _onlyVideos,
-    );
+    try {
+      // Obtener todas las expresiones del JSON estático
+      final ListResponse response = await Api.getListExpressions(1, '');
 
-    setState(() {
-      _expressions.addAll(response.data ?? []);
-      _hasMore = response.nextPageUrl != null;
-      _isLoading = false;
-    });
-    */
-    
-    // Mientras tanto, finalizar el loading sin datos
-    setState(() {
-      _hasMore = false;
-      _isLoading = false;
-    });
+      setState(() {
+        if (response.data != null) {
+          _allExpressions.clear();
+          _allExpressions.addAll(response.data!);
+          _applyFilters();
+        }
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching expressions: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 300 &&
-        _hasMore &&
-        !_isLoading) {
-      _currentPage++;
-      _fetchExpressions();
+  void _applyFilters() {
+    _filteredExpressions.clear();
+
+    List<Expression> filtered = List.from(_allExpressions);
+
+    // Filtrar por tipo si está seleccionado
+    if (_selectedType != null) {
+      String typeStr = type;
+      filtered = filtered.where((expr) => expr.type == typeStr).toList();
     }
+
+    // Filtrar por videos si está activado
+    if (_onlyVideos) {
+      filtered =
+          filtered
+              .where(
+                (expr) =>
+                    expr.youtubeUrl != null && expr.youtubeUrl!.isNotEmpty,
+              )
+              .toList();
+    }
+
+    _filteredExpressions.addAll(filtered);
   }
 
   void _onFilterSelected(TruthTableType selectedType) {
@@ -94,20 +113,21 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
       } else {
         _selectedType = selectedType;
       }
+      _applyFilters();
     });
-    _fetchExpressions(reset: true);
   }
 
   void _onVideosToggled() {
     setState(() {
       _onlyVideos = !_onlyVideos;
+      _applyFilters();
     });
-    _fetchExpressions(reset: true);
   }
 
   @override
   Widget build(BuildContext context) {
     t = AppLocalizations.of(context)!;
+    _settings = context.watch<Settings>();
     return Scaffold(
       appBar: AppBar(title: Text(t.expressionLibrary)),
       body: Column(
@@ -167,25 +187,36 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   }
 
   Widget _buildExpressionList() {
-    if (_isLoading && _expressions.isEmpty) {
+    if (_isLoading && _filteredExpressions.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_expressions.isEmpty) {
+    if (_filteredExpressions.isEmpty) {
       return const Center(child: Text('No se encontraron expresiones.'));
     }
 
+    // Determinar cuántas expresiones mostrar
+    final bool shouldLimit = !_settings.isProVersion && !_hasUnlockedFullList;
+    final int itemCount =
+        shouldLimit
+            ? FREE_EXPRESSIONS_LIMIT.clamp(0, _filteredExpressions.length)
+            : _filteredExpressions.length;
+
+    // Si hay más expresiones disponibles, mostrar botón de desbloqueo
+    final bool hasMoreExpressions =
+        _filteredExpressions.length > FREE_EXPRESSIONS_LIMIT;
+    final bool showUnlockButton = shouldLimit && hasMoreExpressions;
+
     return ListView.builder(
       controller: _scrollController,
-      itemCount: _expressions.length + (_hasMore ? 1 : 0),
+      itemCount: itemCount + (showUnlockButton ? 1 : 0),
       itemBuilder: (context, index) {
-        if (index == _expressions.length) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Center(child: CircularProgressIndicator()),
-          );
+        // Si es el último item y debemos mostrar el botón de desbloqueo
+        if (showUnlockButton && index == itemCount) {
+          return _buildUnlockCard();
         }
-        final expression = _expressions[index];
+
+        final expression = _filteredExpressions[index];
         return _buildExpressionTile(expression, index);
       },
     );
@@ -196,6 +227,105 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
       expression: expression,
       showAds: (index % 5 == 0 && index != 0),
     );
+  }
+
+  Widget _buildUnlockCard() {
+    final remainingCount = _filteredExpressions.length - FREE_EXPRESSIONS_LIMIT;
+
+    return Card(
+      margin: const EdgeInsets.all(16),
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepPurple.shade400, Colors.blue.shade600],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            Icon(Icons.lock, size: 48, color: Colors.white),
+            const SizedBox(height: 16),
+            Text(
+              t.unlockLibraryTitle,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              t.expressionsRemaining(remainingCount),
+              style: const TextStyle(fontSize: 16, color: Colors.white70),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            // Botón para ver video
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _unlockWithAd,
+                icon: const Icon(Icons.play_circle_filled),
+                label: Text(t.watchVideoFree),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Botón para actualizar a Pro
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: _showProDialog,
+                icon: const Icon(Icons.diamond),
+                label: Text(t.upgradePro),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.white, width: 2),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _unlockWithAd() async {
+    final success = await _rewardedAdHelper.showRewardedAd();
+
+    if (success) {
+      setState(() {
+        _hasUnlockedFullList = true;
+      });
+      if (mounted) {
+        showSnackBarMessage(context, t.libraryUnlocked);
+      }
+    } else {
+      if (mounted) {
+        showSnackBarMessage(context, t.adNotAvailable);
+      }
+    }
+  }
+
+  Future<void> _showProDialog() async {
+    await showProVersionDialog(context, _settings, t);
   }
 
   String get type {

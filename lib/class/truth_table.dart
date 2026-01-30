@@ -84,10 +84,7 @@ class TruthTable {
   }
 
   bool convertInfixToPostix() {
-    this.postfix = this.infixToPostfix(this.infix);
-    if (this.postfix == null) {
-      return false;
-    }
+    postfix = infixToPostfix(infix);
     return true;
   }
 
@@ -160,7 +157,7 @@ class TruthTable {
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
       table.add(
-        new RowTable(index: i, combination: combination, result: "$result"),
+        RowTable(index: i, combination: combination, result: "$result"),
       );
 
       if (result == 1) {
@@ -219,13 +216,13 @@ class TruthTable {
         int resultado = 0;
         int a, b;
         a = int.parse(stack.removeLast());
-        if (this.notOpers.contains(c)) {
+        if (notOpers.contains(c)) {
           resultado = not(a);
         } else {
           b = int.parse(stack.removeLast());
-          if (this.orOpers.contains(c)) {
+          if (orOpers.contains(c)) {
             resultado = or(b, a);
-          } else if (this.andOpers.contains(c)) {
+          } else if (andOpers.contains(c)) {
             resultado = and(b, a);
           } else if (c == Operators.CODICIONAL.value) {
             resultado = condicional(b, a);
@@ -235,7 +232,7 @@ class TruthTable {
             resultado = nor(b, a);
           } else if (c == Operators.NAND.value) {
             resultado = nand(b, a);
-          } else if (this.xorOpers.contains(c)) {
+          } else if (xorOpers.contains(c)) {
             resultado = xor(b, a);
           } else if (c == Operators.ANTICODICIONAL.value) {
             resultado = replicador(b, a);
@@ -296,15 +293,15 @@ class TruthTable {
   }
 
   int nand(int a, int b) {
-    return this.not(this.and(a, b));
+    return not(and(a, b));
   }
 
   int xnor(int a, int b) {
-    return this.not(this.xor(a, b));
+    return not(xor(a, b));
   }
 
   int nor(int a, int b) {
-    return this.not(this.or(a, b));
+    return not(or(a, b));
   }
 
   int condicional(int a, int b) {
@@ -332,10 +329,10 @@ class TruthTable {
     List<String> postfixList = [];
 
     for (String token in infix.split("")) {
-      if (this.alphabet.contains(token)) {
+      if (alphabet.contains(token)) {
         postfixList.add(token);
-        if (!this.variables.contains(token)) {
-          this.variables.add(token);
+        if (!variables.contains(token)) {
+          variables.add(token);
         }
       } else if (token == "(") {
         opStack.add(token);
@@ -379,13 +376,13 @@ class TruthTable {
   bool checkIfIsCorrectlyFormed() {
     List<String> pila = [];
     /* print("Postfija: $postfix"); */
-    for (String c in this.postfix.split("")) {
+    for (String c in postfix.split("")) {
       if (isOperator(c)) {
         if (pila.isEmpty) {
           if (required2Operators(c)) {
-            this.errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
+            errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
           } else {
-            this.errorMessage = "$c: ${REQUIRED_1_OPERATORS[language]}";
+            errorMessage = "$c: ${REQUIRED_1_OPERATORS[language]}";
           }
           return false;
         }
@@ -393,7 +390,7 @@ class TruthTable {
         String resultado = '';
         if (required2Operators(c)) {
           if (pila.isEmpty) {
-            this.errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
+            errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
             return false;
           }
           pila.removeLast();
@@ -409,13 +406,13 @@ class TruthTable {
     if (pila.length == 1) {
       return true;
     } else {
-      this.errorMessage = SINTAXIS_ERROR[language]!;
+      errorMessage = SINTAXIS_ERROR[language]!;
       return false;
     }
   }
 
   bool required2Operators(String operator) {
-    if (this.notOpers.contains(operator)) return false;
+    if (notOpers.contains(operator)) return false;
     return true;
   }
 
@@ -471,9 +468,9 @@ class TruthTable {
         String a, b;
         a = stack.removeLast();
         StepProcess s;
-        if (this.notOpers.contains(c)) {
+        if (notOpers.contains(c)) {
           currentOper = getCurrentOperFromString(c)!;
-          s = new StepProcess(
+          s = StepProcess(
             operator: currentOper,
             variable1: a,
             isSingleVariable: true,
@@ -481,9 +478,9 @@ class TruthTable {
           );
         } else {
           b = stack.removeLast();
-          if (this.orOpers.contains(c)) {
+          if (orOpers.contains(c)) {
             currentOper = getCurrentOperFromString(c)!;
-          } else if (this.andOpers.contains(c)) {
+          } else if (andOpers.contains(c)) {
             currentOper = getCurrentOperFromString(c)!;
           } else if (c == Operators.CODICIONAL.value) {
             currentOper = Operators.CODICIONAL;
@@ -493,7 +490,7 @@ class TruthTable {
             currentOper = Operators.NOR;
           } else if (c == Operators.NAND.value) {
             currentOper = Operators.NAND;
-          } else if (this.xorOpers.contains(c)) {
+          } else if (xorOpers.contains(c)) {
             currentOper = getCurrentOperFromString(c)!;
           } else if (c == Operators.ANTICODICIONAL.value) {
             currentOper = Operators.ANTICODICIONAL;
@@ -510,11 +507,7 @@ class TruthTable {
           }
           // ignore: unnecessary_new
 
-          s = new StepProcess(
-            operator: currentOper,
-            variable1: b,
-            variable2: a,
-          );
+          s = StepProcess(operator: currentOper, variable1: b, variable2: a);
         }
         _addStep(s);
         stack.add(s.toString());

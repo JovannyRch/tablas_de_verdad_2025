@@ -52,6 +52,7 @@ class AdmobService {
       }
       return SHARE_AND_SAVE_ID;
     }
+    return null;
   }
 
   static String getBannerId() {

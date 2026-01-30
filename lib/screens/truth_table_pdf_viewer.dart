@@ -4,11 +4,12 @@ import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/dialogs/show_file_options_dialog.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/generate_pdf.dart';
 
 class PdfViewerScreen extends StatefulWidget {
   final TruthTable truthTable;
-  PdfViewerScreen({required this.truthTable});
+  const PdfViewerScreen({super.key, required this.truthTable});
 
   @override
   State<PdfViewerScreen> createState() => _PdfViewerScreenState();
@@ -16,20 +17,25 @@ class PdfViewerScreen extends StatefulWidget {
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
   bool _isLoading = false;
+  bool _initialized = false;
   // Load from assets
   PDFDocument? doc;
 
   @override
-  void initState() {
-    super.initState();
-    init();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _initialized = true;
+      init();
+    }
   }
 
   init() async {
     setState(() {
       _isLoading = true;
     });
-    doc = await generatePdfWithTable(widget.truthTable);
+    final t = AppLocalizations.of(context)!;
+    doc = await generatePdfWithTable(widget.truthTable, t);
 
     setState(() {
       _isLoading = false;
@@ -63,7 +69,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                   child: Column(
                     children: [
                       /*  MyBannerAdWidget(), */
-                      Container(
+                      SizedBox(
                         height: MediaQuery.of(context).size.height * 0.8,
                         child: PDFViewer(document: doc!),
                       ),

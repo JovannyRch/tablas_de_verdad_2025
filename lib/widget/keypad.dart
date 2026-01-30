@@ -145,7 +145,7 @@ class _Key extends StatelessWidget {
           fg = isDark ? Colors.white : kSeedColor;
           break;
         case KeyKind.action:
-          bg = scheme.surfaceVariant;
+          bg = scheme.surfaceContainerHighest;
           fg = scheme.onSurfaceVariant;
           break;
       }

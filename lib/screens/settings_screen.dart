@@ -37,6 +37,7 @@ class SettingsScreen extends StatelessWidget {
             dropdownMenuEntries: const [
               DropdownMenuEntry(value: Locale('es'), label: 'Español'),
               DropdownMenuEntry(value: Locale('en'), label: 'English'),
+              DropdownMenuEntry(value: Locale('pt'), label: 'Português'),
             ],
             onSelected: (loc) => context.read<Settings>().update(locale: loc),
           ),

@@ -6,11 +6,11 @@ import 'dart:convert';
 import 'package:tablas_de_verdad_2025/model/post_expression_response.dart';
 import 'package:tablas_de_verdad_2025/const/backend_config.dart';
 
-// NOTA: Backend temporalmente desactivado
-// Para reactivar: Cambiar BACKEND_ENABLED = true en lib/const/backend_config.dart
-
+// NOTA: Usando modelo backendless con JSON estático
 final String WEB_URL = BACKEND_URL;
 final String API_URL = API_BASE_URL;
+final String STATIC_JSON_URL =
+    'https://static-json-backend.vercel.app/projects/truth-tables/expressions';
 
 class Api {
   static Future<PostExpressionResponse> postExpression(
@@ -41,40 +41,41 @@ class Api {
     String type, {
     bool videos = false,
   }) async {
-    String url = "$API_URL/expressions";
-
-    Map<String, String> queryParams = {'page': page.toString()};
-
-    if (type.isNotEmpty) {
-      queryParams['type'] = type;
-    }
-
-    if (videos) {
-      queryParams['videos'] = 'true';
-    }
-
-    url += '?${Uri(queryParameters: queryParams).query}';
-    print(url);
     try {
-      var response = await http.get(Uri.parse(url));
+      // Obtener todas las expresiones del JSON estático
+      var response = await http.get(Uri.parse(STATIC_JSON_URL));
+
+      if (response.statusCode != 200) {
+        print('Error: ${response.statusCode}');
+        return ListResponse();
+      }
 
       var json = jsonDecode(response.body);
-
-      return ListResponse.fromJson(json);
+      var data = ListResponse.fromJson(json);
+      print('Fetched ${data.data?.length ?? 0} expressions');
+      return data;
     } catch (e) {
-      print(e);
+      print('Error fetching expressions: $e');
       return ListResponse();
     }
   }
 
   //Get videos list
   static Future<ListResponse> getVideosList(int page) async {
-    String url = "$API_URL/expressions/videos?page=$page";
+    try {
+      // Obtener todas las expresiones y filtrar las que tienen video
+      var response = await http.get(Uri.parse(STATIC_JSON_URL));
 
-    var response = await http.get(Uri.parse(url));
+      if (response.statusCode != 200) {
+        print('Error: ${response.statusCode}');
+        return ListResponse();
+      }
 
-    var json = jsonDecode(response.body);
-
-    return ListResponse.fromJson(json);
+      var json = jsonDecode(response.body);
+      return ListResponse.fromJson(json);
+    } catch (e) {
+      print('Error fetching videos: $e');
+      return ListResponse();
+    }
   }
 }

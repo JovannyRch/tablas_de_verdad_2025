@@ -76,15 +76,15 @@ Future<void> showProVersionDialog(
                       icon: Icons.lock_open,
                       text: localizations.fullFeatureAccess,
                     ),
-                    /*     BenefitItem(
-                      icon: Icons.show_chart,
-                      text: 'Gráficas avanzadas',
+                    BenefitItem(
+                      icon: Icons.functions,
+                      text: localizations.premiumOperatorsAccess,
                     ),
                     BenefitItem(
-                      icon: Icons.download,
-                      text: 'Exporta a Excel y PDF',
+                      icon: Icons.library_books,
+                      text: localizations.fullLibraryAccess,
                     ),
-                     */
+                    BenefitItem(icon: Icons.block, text: localizations.noAds),
                     BenefitItem(
                       icon: Icons.support_agent,
                       text: localizations.premiumSupport,

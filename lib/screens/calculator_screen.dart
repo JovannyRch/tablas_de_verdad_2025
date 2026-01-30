@@ -9,6 +9,8 @@ import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
+import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
+import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
@@ -80,14 +82,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   ? Icons.keyboard
                   : Icons.grid_view,
             ),
-            tooltip: _settings.keypadMode == KeypadMode.simple
-                ? _localization.advanced_mode
-                : _localization.simple_mode,
+            tooltip:
+                _settings.keypadMode == KeypadMode.simple
+                    ? _localization.advanced_mode
+                    : _localization.simple_mode,
             onPressed: () {
               _settings.update(
-                keypadMode: _settings.keypadMode == KeypadMode.simple
-                    ? KeypadMode.advanced
-                    : KeypadMode.simple,
+                keypadMode:
+                    _settings.keypadMode == KeypadMode.simple
+                        ? KeypadMode.advanced
+                        : KeypadMode.simple,
               );
             },
           ),
@@ -235,12 +239,26 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     _settings.incrementOperationsCount();
 
+    // Incrementar contador para el sistema de rating
+    await RatingHelper.incrementCalculationCount();
+
     // Mostrar ad intersticial solo cada N operaciones (menos invasivo)
     if (_settings.shouldShowInterstitialAd()) {
       ads.showInterstitialAd();
     }
 
     goToResult(context, expression, _localization, _settings.truthFormat);
+
+    // Verificar si debemos mostrar el diálogo de calificación
+    // Lo hacemos después de navegar para no interrumpir el flujo
+    Future.delayed(const Duration(milliseconds: 500), () async {
+      if (context.mounted) {
+        final shouldShow = await RatingHelper.shouldShowRatingDialog();
+        if (shouldShow && context.mounted) {
+          showRatingDialog(context);
+        }
+      }
+    });
   }
 
   bool _containsPremiumOperators(String expression) {
@@ -252,41 +270,42 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Future<bool> _showPremiumOperatorDialog() async {
     return await showDialog<bool>(
           context: context,
-          builder: (context) => AlertDialog(
-            title: Text('🎯 ${_localization.premiumOperator}'),
-            content: Text(_localization.premiumOperatorMessage),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: Text(_localization.cancel),
+          builder:
+              (context) => AlertDialog(
+                title: Text('🎯 ${_localization.premiumOperator}'),
+                content: Text(_localization.premiumOperatorMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: Text(_localization.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.pop(context, true);
+
+                      // Mostrar rewarded ad
+                      final success = await rewardedAdHelper.showRewardedAd();
+                      if (!success) {
+                        // Si falla el ad, permitir continuar de todos modos (buena UX)
+                        if (mounted) {
+                          showSnackBarMessage(
+                            context,
+                            'Video no disponible. Puedes continuar esta vez.',
+                          );
+                        }
+                      }
+                    },
+                    child: Text(_localization.watchVideoFree),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                      showProVersionDialog(context, _settings, _localization);
+                    },
+                    child: Text(_localization.upgradePro),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () async {
-                  Navigator.pop(context, true);
-                  
-                  // Mostrar rewarded ad
-                  final success = await rewardedAdHelper.showRewardedAd();
-                  if (!success) {
-                    // Si falla el ad, permitir continuar de todos modos (buena UX)
-                    if (mounted) {
-                      showSnackBarMessage(
-                        context,
-                        'Video no disponible. Puedes continuar esta vez.',
-                      );
-                    }
-                  }
-                },
-                child: Text(_localization.watchVideoFree),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                  showProVersionDialog(context, _settings, _localization);
-                },
-                child: Text(_localization.upgradePro),
-              ),
-            ],
-          ),
         ) ??
         false;
   }

@@ -30,11 +30,11 @@ class ListResponse {
   });
 
   ListResponse.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
+    currentPage = json['current_page'] ?? 1;
     if (json['data'] != null) {
       data = <Expression>[];
       json['data'].forEach((v) {
-        data!.add(new Expression.fromJson(v));
+        data!.add(Expression.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -44,7 +44,7 @@ class ListResponse {
     if (json['links'] != null) {
       links = <Links>[];
       json['links'].forEach((v) {
-        links!.add(new Links.fromJson(v));
+        links!.add(Links.fromJson(v));
       });
     }
     nextPageUrl = json['next_page_url'];
@@ -52,28 +52,28 @@ class ListResponse {
     perPage = json['per_page'];
     prevPageUrl = json['prev_page_url'];
     to = json['to'];
-    total = json['total'];
+    total = json['total'] ?? data?.length ?? 0;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['current_page'] = this.currentPage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['current_page'] = currentPage;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['first_page_url'] = this.firstPageUrl;
-    data['from'] = this.from;
-    data['last_page'] = this.lastPage;
-    data['last_page_url'] = this.lastPageUrl;
-    if (this.links != null) {
-      data['links'] = this.links!.map((v) => v.toJson()).toList();
+    data['first_page_url'] = firstPageUrl;
+    data['from'] = from;
+    data['last_page'] = lastPage;
+    data['last_page_url'] = lastPageUrl;
+    if (links != null) {
+      data['links'] = links!.map((v) => v.toJson()).toList();
     }
-    data['next_page_url'] = this.nextPageUrl;
-    data['path'] = this.path;
-    data['per_page'] = this.perPage;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['to'] = this.to;
-    data['total'] = this.total;
+    data['next_page_url'] = nextPageUrl;
+    data['path'] = path;
+    data['per_page'] = perPage;
+    data['prev_page_url'] = prevPageUrl;
+    data['to'] = to;
+    data['total'] = total;
     return data;
   }
 }
@@ -85,8 +85,6 @@ class Expression {
   String? youtubeUrl;
   int? count;
   String? origin;
-  String? createdAt;
-  String? updatedAt;
 
   Expression({
     this.id,
@@ -95,31 +93,35 @@ class Expression {
     this.youtubeUrl,
     this.count,
     this.origin,
-    this.createdAt,
-    this.updatedAt,
   });
 
   Expression.fromJson(Map<String, dynamic> json) {
+    // El nuevo formato no tiene id, así que lo generamos si es necesario
     id = json['id'];
-    expression = json['expression'];
-    type = json['type'];
-    youtubeUrl = json['video_link'];
-    count = json['counter'];
-
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    expression = json['expression']?.toString();
+    type = json['type']?.toString();
+    // video_link puede ser string vacío o URL válida
+    var videoLink = json['video_link'];
+    youtubeUrl =
+        (videoLink != null && videoLink.toString().isNotEmpty)
+            ? videoLink.toString()
+            : null;
+    // counter viene como int en el JSON
+    count =
+        json['counter'] is int
+            ? json['counter']
+            : int.tryParse(json['counter']?.toString() ?? '0');
+    origin = json['origin']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['expression'] = this.expression;
-    data['type'] = this.type;
-    data['video_link'] = this.youtubeUrl;
-    data['counter'] = this.count;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['expression'] = expression;
+    data['type'] = type;
+    data['video_link'] = youtubeUrl;
+    data['counter'] = count;
 
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
@@ -138,10 +140,10 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['label'] = this.label;
-    data['active'] = this.active;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = url;
+    data['label'] = label;
+    data['active'] = active;
     return data;
   }
 }

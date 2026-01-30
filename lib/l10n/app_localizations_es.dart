@@ -9,6 +9,9 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
+  String get adNotAvailable => 'Video no disponible. Intenta más tarde o actualiza a Pro.';
+
+  @override
   String get advanced_mode => 'Modo avanzado';
 
   @override
@@ -27,18 +30,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get calculationHistory => 'Historial de cálculos';
 
   @override
+  String get cancel => 'Cancelar';
+
+  @override
   String get contingency => 'Contingencia ⚠️';
 
   @override
-  String get contingency_description =>
-      'Una contingencia se refiere a una proposición o fórmula que no es ni una tautología ni una contradicción. En otras palabras, es una expresión que puede ser verdadera o falsa, dependiendo de las circunstancias o de los valores de verdad de sus componentes.';
+  String get contingency_description => 'Una contingencia se refiere a una proposición o fórmula que no es ni una tautología ni una contradicción. En otras palabras, es una expresión que puede ser verdadera o falsa, dependiendo de las circunstancias o de los valores de verdad de sus componentes.';
 
   @override
   String get contradiction => 'Contradicción ❌';
 
   @override
-  String get contradiction_description =>
-      'Una contradicción es una proposición o fórmula lógica que siempre es falsa, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que no se cumple bajo ninguna interpretación o asignación de valores de verdad a sus variables.';
+  String get contradiction_description => 'Una contradicción es una proposición o fórmula lógica que siempre es falsa, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que no se cumple bajo ninguna interpretación o asignación de valores de verdad a sus variables.';
 
   @override
   String get darkMode => 'Modo oscuro';
@@ -56,7 +60,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get expressionLibrary => 'Biblioteca de expresiones';
 
   @override
+  String expressionsRemaining(int count) {
+    return 'Quedan $count expresiones más';
+  }
+
+  @override
   String get fullFeatureAccess => 'Acceso completo a todas las funciones';
+
+  @override
+  String get fullLibraryAccess => 'Acceso completo a la biblioteca de expresiones';
 
   @override
   String get history => 'Historial';
@@ -68,19 +80,70 @@ class AppLocalizationsEs extends AppLocalizations {
   String get later => 'Más tarde';
 
   @override
+  String get libraryUnlocked => '🎉 ¡Biblioteca completa desbloqueada!';
+
+  @override
   String get mintermOrder => 'Orden de minterms';
+
+  @override
+  String get moreExpressions => 'expresiones más';
+
+  @override
+  String get noAds => 'Sin anuncios';
 
   @override
   String get no_history => 'No hay historial';
 
   @override
+  String get numberOfPropositions => 'Cantidad de proposiciones';
+
+  @override
+  String get numberOfRows => 'Cantidad de filas';
+
+  @override
   String get only_tutorials => 'Solo mostrar tutoriales';
+
+  @override
+  String get pdfFilename => 'tabla_de_verdad';
+
+  @override
+  String get premiumOperator => 'Operador Premium';
+
+  @override
+  String get premiumOperatorMessage => 'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.';
+
+  @override
+  String get premiumOperatorsAccess => 'Acceso a todos los operadores premium';
 
   @override
   String get premiumSupport => 'Soporte Premium';
 
   @override
   String get privacyPolicy => 'Política de privacidad';
+
+  @override
+  String get propositions => 'Proposiciones';
+
+  @override
+  String get rateTheApp => 'Calificar la app';
+
+  @override
+  String get ratingDialogMessage => '¡Tu opinión es muy importante para nosotros! Si te ha gustado Tablas de Verdad, nos encantaría que nos dejaras una calificación de 5 estrellas ⭐';
+
+  @override
+  String get ratingDialogTitle => '¿Te gusta la app?';
+
+  @override
+  String get ratingLater => 'Más tarde';
+
+  @override
+  String get ratingNoThanks => 'No, gracias';
+
+  @override
+  String get ratingRateNow => '¡Calificar ahora!';
+
+  @override
+  String get remainingExpressions => 'Quedan';
 
   @override
   String get result => 'Resultado';
@@ -104,8 +167,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get tautology => 'Tautología ✅';
 
   @override
-  String get tautology_description =>
-      'Una tautología es una proposición o fórmula lógica que siempre es verdadera, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que se cumple bajo cualquier interpretación o asignación de valores de verdad a sus variables.';
+  String get tautology_description => 'Una tautología es una proposición o fórmula lógica que siempre es verdadera, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que se cumple bajo cualquier interpretación o asignación de valores de verdad a sus variables.';
 
   @override
   String get truthValues => 'Valores de verdad';
@@ -117,6 +179,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get type => 'Tipo';
 
   @override
+  String get unlockFullLibrary => '¡Desbloquea la biblioteca completa!';
+
+  @override
+  String get unlockLibraryTitle => '🎯 ¡Desbloquea la biblioteca completa!';
+
+  @override
   String get upgradePro => 'Actualizar a Pro';
 
   @override
@@ -126,25 +194,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get videoFABTooltip => 'Explicación en video';
 
   @override
-  String get videoScreenDescription =>
-      'Este video explica paso a paso la resolución de esta expresión lógica.';
+  String get videoScreenDescription => 'Este video explica paso a paso la resolución de esta expresión lógica.';
 
   @override
   String get videoScreenTitle => 'Explicación en video';
 
   @override
-  String get youtubeChannel => 'Canal de YouTube';
-
-  @override
-  String get premiumOperator => 'Operador Premium';
-
-  @override
-  String get premiumOperatorMessage =>
-      'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.';
-
-  @override
   String get watchVideoFree => 'Ver Video (Gratis)';
 
   @override
-  String get cancel => 'Cancelar';
+  String get youtubeChannel => 'Canal de YouTube';
 }

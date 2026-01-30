@@ -5,7 +5,7 @@ import 'dart:io';
 
 Future<Database> initDatabase() async {
   Directory documentsDirectory = await getApplicationDocumentsDirectory();
-  String path = documentsDirectory.path + '/math_expressions.db';
+  String path = '${documentsDirectory.path}/math_expressions.db';
   Database database = await openDatabase(
     path,
     version: 1,

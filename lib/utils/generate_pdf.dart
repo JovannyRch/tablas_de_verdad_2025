@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,8 +7,7 @@ import 'package:pdf/widgets.dart' as pw;
 /* import 'package:tablas_de_verdad/const/const.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart'; */
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/const/translations.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 
 Future<Uint8List> loadFont() async {
@@ -20,26 +18,31 @@ Future<Uint8List> loadFont() async {
 String getType(String locale, TruthTableType type) {
   switch (type) {
     case TruthTableType.contingency:
-      return locale == 'es' ? 'Contingencia' : 'Contingency';
+      if (locale == 'es') return 'Contingencia';
+      if (locale == 'pt') return 'Contingência';
+      return 'Contingency';
     case TruthTableType.tautology:
-      return locale == 'es' ? 'Tautología' : 'Tautology';
+      if (locale == 'es') return 'Tautología';
+      if (locale == 'pt') return 'Tautologia';
+      return 'Tautology';
     case TruthTableType.contradiction:
-      return locale == 'es' ? 'Contradicción' : 'Contradiction';
+      if (locale == 'es') return 'Contradicción';
+      if (locale == 'pt') return 'Contradição';
+      return 'Contradiction';
   }
 }
 
 List<List<String>> getTable(TruthTable t, String language) {
   List<List<String>> table = [];
-  
+
   for (int i = 0; i < t.finalTable.length; i++) {
     List<String> row = [];
- 
+
     for (int j = 0; j < t.finalTable[i].length; j++) {
-      String cellValue = i == 0 ?  t.finalTable[i][j] : getCellValue(
-        language,
-        t.format,
-        t.finalTable[i][j],
-      );
+      String cellValue =
+          i == 0
+              ? t.finalTable[i][j]
+              : getCellValue(language, t.format, t.finalTable[i][j]);
       row.add(cellValue);
     }
     table.add(row);
@@ -48,7 +51,10 @@ List<List<String>> getTable(TruthTable t, String language) {
   return table;
 }
 
-Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
+Future<PDFDocument> generatePdfWithTable(
+  TruthTable t,
+  AppLocalizations translations,
+) async {
   final pdf = pw.Document();
 
   final fontData = await loadFont();
@@ -62,7 +68,6 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
   final type = getType(language, t.tipo);
 
   final finalTable = getTable(t, language);
- 
 
   pdf.addPage(
     pw.MultiPage(
@@ -77,32 +82,26 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
             ),
             //Add Proposiciones: A, B, C
             pw.Text(
-              language == 'es'
-                  ? 'Proposiciones: ${t.variables.join(', ')}'
-                  : 'Propositions: ${t.variables.join(', ')}',
+              '${translations.propositions}: ${t.variables.join(', ')}',
               style: pw.TextStyle(font: ttf),
             ),
             //Add space
             pw.SizedBox(height: 10),
             //Add Cantidad de proposiciones: 3
             pw.Text(
-              language == 'es'
-                  ? 'Cantidad de proposiciones: ${t.variables.length}'
-                  : 'Number of propositions: ${t.variables.length}',
+              '${translations.numberOfPropositions}: ${t.variables.length}',
               style: pw.TextStyle(font: ttf),
             ),
             pw.SizedBox(height: 10),
 
             pw.Text(
               //Cantidad de filas: 8
-              language == 'es'
-                  ? 'Cantidad de filas: ${t.totalRows}'
-                  : 'Number of rows: ${t.totalRows}',
+              '${translations.numberOfRows}: ${t.totalRows}',
               style: pw.TextStyle(font: ttf),
             ),
             pw.SizedBox(height: 10),
             pw.Text(
-              language == 'es' ? 'Tipo: $type' : 'Type: $type',
+              '${translations.type}: $type',
               style: pw.TextStyle(font: ttf),
             ),
             pw.SizedBox(height: 10),
@@ -136,7 +135,7 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
                 mainAxisAlignment: pw.MainAxisAlignment.end,
                 children: [
                   pw.Text(
-                    '${TITLE_APP ?? ' Tablas de Verdad'} App', //TODO: Change to t.appName
+                    '${translations.appName} App',
                     style: pw.TextStyle(font: ttf, fontSize: 10),
                   ),
                 ],
@@ -164,10 +163,7 @@ Future<PDFDocument> generatePdfWithTable(TruthTable t) async {
     ),
   );
   final output = await pdf.save();
-  final filename =
-      language == 'es'
-          ? ('tabla_de_verdad_${t.infix}')
-          : ('truth_table_${t.infix}');
+  final filename = '${translations.pdfFilename}_${t.infix}';
   final String path = '${(await getTemporaryDirectory()).path}/$filename.pdf';
   final File file = File(path);
   await file.writeAsBytes(output);

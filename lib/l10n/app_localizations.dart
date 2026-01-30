@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
+import 'app_localizations_pt.dart';
 
 // ignore_for_file: type=lint
 
@@ -62,8 +63,7 @@ import 'app_localizations_es.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +71,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,19 +83,25 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('pt')
   ];
+
+  /// No description provided for @adNotAvailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Video no disponible. Intenta más tarde o actualiza a Pro.'**
+  String get adNotAvailable;
 
   /// No description provided for @advanced_mode.
   ///
@@ -133,6 +138,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Historial de cálculos'**
   String get calculationHistory;
+
+  /// No description provided for @cancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get cancel;
 
   /// No description provided for @contingency.
   ///
@@ -188,11 +199,23 @@ abstract class AppLocalizations {
   /// **'Biblioteca de expresiones'**
   String get expressionLibrary;
 
+  /// No description provided for @expressionsRemaining.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan {count} expresiones más'**
+  String expressionsRemaining(int count);
+
   /// No description provided for @fullFeatureAccess.
   ///
   /// In es, this message translates to:
   /// **'Acceso completo a todas las funciones'**
   String get fullFeatureAccess;
+
+  /// No description provided for @fullLibraryAccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Acceso completo a la biblioteca de expresiones'**
+  String get fullLibraryAccess;
 
   /// No description provided for @history.
   ///
@@ -212,11 +235,29 @@ abstract class AppLocalizations {
   /// **'Más tarde'**
   String get later;
 
+  /// No description provided for @libraryUnlocked.
+  ///
+  /// In es, this message translates to:
+  /// **'🎉 ¡Biblioteca completa desbloqueada!'**
+  String get libraryUnlocked;
+
   /// No description provided for @mintermOrder.
   ///
   /// In es, this message translates to:
   /// **'Orden de minterms'**
   String get mintermOrder;
+
+  /// No description provided for @moreExpressions.
+  ///
+  /// In es, this message translates to:
+  /// **'expresiones más'**
+  String get moreExpressions;
+
+  /// No description provided for @noAds.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin anuncios'**
+  String get noAds;
 
   /// No description provided for @no_history.
   ///
@@ -224,11 +265,47 @@ abstract class AppLocalizations {
   /// **'No hay historial'**
   String get no_history;
 
+  /// No description provided for @numberOfPropositions.
+  ///
+  /// In es, this message translates to:
+  /// **'Cantidad de proposiciones'**
+  String get numberOfPropositions;
+
+  /// No description provided for @numberOfRows.
+  ///
+  /// In es, this message translates to:
+  /// **'Cantidad de filas'**
+  String get numberOfRows;
+
   /// No description provided for @only_tutorials.
   ///
   /// In es, this message translates to:
   /// **'Solo mostrar tutoriales'**
   String get only_tutorials;
+
+  /// No description provided for @pdfFilename.
+  ///
+  /// In es, this message translates to:
+  /// **'tabla_de_verdad'**
+  String get pdfFilename;
+
+  /// No description provided for @premiumOperator.
+  ///
+  /// In es, this message translates to:
+  /// **'Operador Premium'**
+  String get premiumOperator;
+
+  /// No description provided for @premiumOperatorMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.'**
+  String get premiumOperatorMessage;
+
+  /// No description provided for @premiumOperatorsAccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Acceso a todos los operadores premium'**
+  String get premiumOperatorsAccess;
 
   /// No description provided for @premiumSupport.
   ///
@@ -241,6 +318,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Política de privacidad'**
   String get privacyPolicy;
+
+  /// No description provided for @propositions.
+  ///
+  /// In es, this message translates to:
+  /// **'Proposiciones'**
+  String get propositions;
+
+  /// No description provided for @rateTheApp.
+  ///
+  /// In es, this message translates to:
+  /// **'Calificar la app'**
+  String get rateTheApp;
+
+  /// No description provided for @ratingDialogMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Tu opinión es muy importante para nosotros! Si te ha gustado Tablas de Verdad, nos encantaría que nos dejaras una calificación de 5 estrellas ⭐'**
+  String get ratingDialogMessage;
+
+  /// No description provided for @ratingDialogTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Te gusta la app?'**
+  String get ratingDialogTitle;
+
+  /// No description provided for @ratingLater.
+  ///
+  /// In es, this message translates to:
+  /// **'Más tarde'**
+  String get ratingLater;
+
+  /// No description provided for @ratingNoThanks.
+  ///
+  /// In es, this message translates to:
+  /// **'No, gracias'**
+  String get ratingNoThanks;
+
+  /// No description provided for @ratingRateNow.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Calificar ahora!'**
+  String get ratingRateNow;
+
+  /// No description provided for @remainingExpressions.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan'**
+  String get remainingExpressions;
 
   /// No description provided for @result.
   ///
@@ -308,6 +433,18 @@ abstract class AppLocalizations {
   /// **'Tipo'**
   String get type;
 
+  /// No description provided for @unlockFullLibrary.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Desbloquea la biblioteca completa!'**
+  String get unlockFullLibrary;
+
+  /// No description provided for @unlockLibraryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'🎯 ¡Desbloquea la biblioteca completa!'**
+  String get unlockLibraryTitle;
+
   /// No description provided for @upgradePro.
   ///
   /// In es, this message translates to:
@@ -338,39 +475,20 @@ abstract class AppLocalizations {
   /// **'Explicación en video'**
   String get videoScreenTitle;
 
-  /// No description provided for @youtubeChannel.
-  ///
-  /// In es, this message translates to:
-  /// **'Canal de YouTube'**
-  String get youtubeChannel;
-
-  /// No description provided for @premiumOperator.
-  ///
-  /// In es, this message translates to:
-  /// **'Operador Premium'**
-  String get premiumOperator;
-
-  /// No description provided for @premiumOperatorMessage.
-  ///
-  /// In es, this message translates to:
-  /// **'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.'**
-  String get premiumOperatorMessage;
-
   /// No description provided for @watchVideoFree.
   ///
   /// In es, this message translates to:
   /// **'Ver Video (Gratis)'**
   String get watchVideoFree;
 
-  /// No description provided for @cancel.
+  /// No description provided for @youtubeChannel.
   ///
   /// In es, this message translates to:
-  /// **'Cancelar'**
-  String get cancel;
+  /// **'Canal de YouTube'**
+  String get youtubeChannel;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -379,26 +497,26 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'es':
-      return AppLocalizationsEs();
+    case 'en': return AppLocalizationsEn();
+    case 'es': return AppLocalizationsEs();
+    case 'pt': return AppLocalizationsPt();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }
