@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/api/api.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
@@ -308,16 +309,48 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   }
 
   Future<void> _unlockWithAd() async {
+    if (kDebugMode) {
+      print('🔓 Iniciando proceso de desbloqueo con ad...');
+    }
+
     final success = await _rewardedAdHelper.showRewardedAd();
 
+    if (kDebugMode) {
+      print('🎯 Resultado del rewarded ad: $success');
+    }
+
     if (success) {
-      setState(() {
-        _hasUnlockedFullList = true;
-      });
+      // Dar un pequeño delay para asegurar que el ad se cerró completamente
+      await Future.delayed(const Duration(milliseconds: 300));
+
       if (mounted) {
+        setState(() {
+          _hasUnlockedFullList = true;
+        });
+
+        if (kDebugMode) {
+          print(
+            '✅ Lista desbloqueada. Total expresiones: ${_filteredExpressions.length}',
+          );
+        }
+
         showSnackBarMessage(context, t.libraryUnlocked);
+
+        // Scroll hacia abajo para mostrar las nuevas expresiones
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (_scrollController.hasClients) {
+            _scrollController.animateTo(
+              _scrollController.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 800),
+              curve: Curves.easeInOut,
+            );
+          }
+        });
       }
     } else {
+      if (kDebugMode) {
+        print('❌ No se pudo mostrar el rewarded ad');
+      }
       if (mounted) {
         showSnackBarMessage(context, t.adNotAvailable);
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
@@ -92,17 +93,61 @@ Future<void> showRatingDialog(BuildContext context) async {
                 // Intentar mostrar el diálogo nativo de calificación
                 final InAppReview inAppReview = InAppReview.instance;
 
-                // Verificar si está disponible el review in-app
-                if (await inAppReview.isAvailable()) {
-                  // Mostrar el diálogo nativo (dentro de la app)
-                  await inAppReview.requestReview();
-                } else {
-                  // Si no está disponible, abrir la tienda
+                try {
+                  // Verificar si está disponible el review in-app
+                  final isAvailable = await inAppReview.isAvailable();
+
+                  if (kDebugMode) {
+                    print('📱 In-app review disponible: $isAvailable');
+                  }
+
+                  if (isAvailable) {
+                    // Mostrar el diálogo nativo (dentro de la app)
+                    await inAppReview.requestReview();
+
+                    // Nota: El diálogo puede no aparecer debido a limitaciones de la plataforma
+                    // (máx 1 vez cada 3 meses en Android, 3 veces al año en iOS)
+
+                    // Esperar un poco y mostrar opción de ir a la tienda
+                    await Future.delayed(const Duration(seconds: 2));
+
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text(
+                            '¿No apareció el diálogo? Puedes calificarnos en la tienda',
+                          ),
+                          duration: const Duration(seconds: 5),
+                          action: SnackBarAction(
+                            label: 'Ir a la tienda',
+                            onPressed: () {
+                              final String storeUrl =
+                                  Platform.isAndroid
+                                      ? 'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad'
+                                      : 'https://apps.apple.com/app/id1234567890';
+                              visit(storeUrl);
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                  } else {
+                    // Si no está disponible, abrir la tienda directamente
+                    final String storeUrl =
+                        Platform.isAndroid
+                            ? 'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad'
+                            : 'https://apps.apple.com/app/id1234567890';
+                    visit(storeUrl);
+                  }
+                } catch (e) {
+                  if (kDebugMode) {
+                    print('❌ Error en in-app review: $e');
+                  }
+                  // Si hay error, abrir la tienda como fallback
                   final String storeUrl =
                       Platform.isAndroid
                           ? 'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad'
-                          : 'https://apps.apple.com/app/id1234567890'; // Reemplazar con tu ID de iOS
-
+                          : 'https://apps.apple.com/app/id1234567890';
                   visit(storeUrl);
                 }
               },

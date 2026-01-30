@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 
@@ -12,11 +14,12 @@ class RewardedAdHelper {
   bool _isAdReady = false;
 
   // ID del rewarded interstitial ad (más rentable que rewarded normal)
-  final String adUnitId = IS_TESTING
-      ? Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/5354046379' // Test ID Android
-          : 'ca-app-pub-3940256099942544/6978759866' // Test ID iOS
-      : "ca-app-pub-4665787383933447/5065343899"; // Tu ID de producción (Rewarded Interstitial)
+  final String adUnitId =
+      IS_TESTING
+          ? Platform.isAndroid
+              ? 'ca-app-pub-3940256099942544/5354046379' // Test ID Android
+              : 'ca-app-pub-3940256099942544/6978759866' // Test ID iOS
+          : "ca-app-pub-4665787383933447/5065343899"; // Tu ID de producción (Rewarded Interstitial)
 
   RewardedAdHelper() {
     loadRewardedAd();
@@ -24,21 +27,31 @@ class RewardedAdHelper {
 
   /// Carga el rewarded interstitial ad
   void loadRewardedAd() {
+    if (kDebugMode) {
+      print('🎬 Cargando rewarded interstitial ad...');
+    }
+
     RewardedInterstitialAd.load(
       adUnitId: adUnitId,
       request: const AdRequest(),
       rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
         onAdLoaded: (RewardedInterstitialAd ad) {
+          if (kDebugMode) {
+            print('✅ Rewarded interstitial ad cargado exitosamente');
+          }
           _rewardedInterstitialAd = ad;
           _numRewardedLoadAttempts = 0;
           _isAdReady = true;
           _setFullScreenContentCallback();
         },
         onAdFailedToLoad: (LoadAdError error) {
+          if (kDebugMode) {
+            print('❌ Error al cargar rewarded ad: ${error.message}');
+          }
           _rewardedInterstitialAd = null;
           _isAdReady = false;
           _numRewardedLoadAttempts += 1;
-          
+
           if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
             // Reintentar cargar el ad
             Future.delayed(const Duration(seconds: 2), loadRewardedAd);
@@ -50,7 +63,8 @@ class RewardedAdHelper {
 
   /// Configura los callbacks de pantalla completa
   void _setFullScreenContentCallback() {
-    _rewardedInterstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedInterstitialAd
+        ?.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (Ad ad) {
         // Ad mostrado
       },
@@ -70,21 +84,65 @@ class RewardedAdHelper {
 
   /// Muestra el rewarded interstitial ad y retorna true si el usuario completó el video
   Future<bool> showRewardedAd() async {
+    if (kDebugMode) {
+      print('🎯 Intentando mostrar rewarded ad. isReady: $_isAdReady');
+    }
+
     if (!_isAdReady || _rewardedInterstitialAd == null) {
-      // Si el ad no está listo, retornar false o intentar cargarlo
+      if (kDebugMode) {
+        print('⚠️ Rewarded ad no está listo');
+      }
+      // Si el ad no está listo, intentar cargarlo de nuevo
+      loadRewardedAd();
       return false;
     }
 
+    final Completer<bool> completer = Completer<bool>();
     bool userEarnedReward = false;
+
+    _rewardedInterstitialAd!
+        .fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (Ad ad) {
+        if (kDebugMode) {
+          print('📺 Rewarded ad mostrado en pantalla completa');
+        }
+      },
+      onAdDismissedFullScreenContent: (Ad ad) {
+        if (kDebugMode) {
+          print('🚪 Rewarded ad cerrado. Reward earned: $userEarnedReward');
+        }
+        ad.dispose();
+        _isAdReady = false;
+        loadRewardedAd(); // Precargar el siguiente ad
+
+        if (!completer.isCompleted) {
+          completer.complete(userEarnedReward);
+        }
+      },
+      onAdFailedToShowFullScreenContent: (Ad ad, AdError error) {
+        if (kDebugMode) {
+          print('❌ Error al mostrar rewarded ad: ${error.message}');
+        }
+        ad.dispose();
+        _isAdReady = false;
+        loadRewardedAd();
+
+        if (!completer.isCompleted) {
+          completer.complete(false);
+        }
+      },
+    );
 
     await _rewardedInterstitialAd!.show(
       onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-        // Usuario completó el video y obtuvo la recompensa
+        if (kDebugMode) {
+          print('🎁 Usuario ganó recompensa: ${reward.amount} ${reward.type}');
+        }
         userEarnedReward = true;
       },
     );
 
-    return userEarnedReward;
+    return completer.future;
   }
 
   /// Verifica si el ad está listo para mostrarse

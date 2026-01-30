@@ -11,7 +11,22 @@ import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 
 Future<Uint8List> loadFont() async {
+  // Usar DejaVuSans que tiene mejor soporte para símbolos lógicos
   final data = await rootBundle.load('assets/fonts/DejaVuSans.ttf');
+  return data.buffer.asUint8List();
+}
+
+Future<Uint8List> loadDevanagariFont() async {
+  // Usar NotoSans Devanagari específico que tiene soporte para hindi
+  final data = await rootBundle.load(
+    'assets/fonts/NotoSansDevanagari-Regular.ttf',
+  );
+  return data.buffer.asUint8List();
+}
+
+Future<Uint8List> loadHindiFont() async {
+  // Usar NotoSans que tiene soporte completo para Devanagari (hindi)
+  final data = await rootBundle.load('assets/fonts/NotoSans-Regular.ttf');
   return data.buffer.asUint8List();
 }
 
@@ -66,6 +81,9 @@ Future<PDFDocument> generatePdfWithTable(
 ) async {
   final pdf = pw.Document();
 
+  final String language = t.language;
+
+  // Siempre usar DejaVuSans que tiene los mejores símbolos lógicos
   final fontData = await loadFont();
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
@@ -73,7 +91,6 @@ Future<PDFDocument> generatePdfWithTable(
   final ByteData data = await rootBundle.load('assets/icon.png');
   final Uint8List bytes = data.buffer.asUint8List();
 
-  final String language = t.language;
   final type = getType(language, t.tipo);
 
   final finalTable = getTable(t, language);

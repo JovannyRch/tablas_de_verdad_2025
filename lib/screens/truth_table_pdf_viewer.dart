@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/dialogs/show_file_options_dialog.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/generate_pdf.dart';
+import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 class PdfViewerScreen extends StatefulWidget {
   final TruthTable truthTable;
@@ -31,11 +33,16 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   }
 
   init() async {
+    if (!mounted) return;
+
     setState(() {
       _isLoading = true;
     });
+
     final t = AppLocalizations.of(context)!;
     doc = await generatePdfWithTable(widget.truthTable, t);
+
+    if (!mounted) return;
 
     setState(() {
       _isLoading = false;
@@ -48,6 +55,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<Settings>();
+
     return Scaffold(
       appBar: AppBar(
         /* backgroundColor: kMainColor, */
@@ -65,16 +74,15 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         child:
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      /*  MyBannerAdWidget(), */
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: PDFViewer(document: doc!),
-                      ),
-                    ],
-                  ),
+                : Column(
+                  children: [
+                    // Banner ad para usuarios no Pro
+                    settings.isProVersion
+                        ? const SizedBox.shrink()
+                        : BannerAdWidget(),
+                    // PDF viewer
+                    Expanded(child: PDFViewer(document: doc!)),
+                  ],
                 ),
       ),
     );
