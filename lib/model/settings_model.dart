@@ -1,4 +1,5 @@
 // settings_model.dart
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tablas_de_verdad_2025/const/translations.dart';
@@ -27,7 +28,7 @@ class Settings extends ChangeNotifier {
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
-    locale = Locale(prefs.getString('locale') ?? defaultLocale());
+    locale = Locale(prefs.getString('locale') ?? _detectSystemLocale());
     themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? 0];
     truthFormat = TruthFormat.values[prefs.getInt('truthFormat') ?? 0];
     mintermOrder = MintermOrder.values[prefs.getInt('mintermOrder') ?? 0];
@@ -120,6 +121,35 @@ class Settings extends ChangeNotifier {
 
   Future<void> buyPro() async {
     await _purchaseService.buyProVersion();
+  }
+
+  /// Detecta el idioma del sistema y retorna el código de idioma soportado más cercano
+  String _detectSystemLocale() {
+    // Obtener el idioma del sistema
+    final systemLocale = ui.PlatformDispatcher.instance.locale;
+    final languageCode = systemLocale.languageCode;
+
+    // Lista de idiomas soportados
+    const supportedLanguages = [
+      'es',
+      'en',
+      'pt',
+      'fr',
+      'de',
+      'hi',
+      'ru',
+      'it',
+      'zh',
+      'ja',
+    ];
+
+    // Si el idioma del sistema está soportado, usarlo
+    if (supportedLanguages.contains(languageCode)) {
+      return languageCode;
+    }
+
+    // Fallback: usar el valor por defecto según APP_ID
+    return defaultLocale();
   }
 
   String defaultLocale() {

@@ -234,6 +234,21 @@ Antes de considerar completa la implementación de un nuevo idioma:
 5. **Deutsch (de)** - Alemán
 6. **हिन्दी (hi)** - Hindi
 7. **Русский (ru)** - Ruso
+8. **Italiano (it)** - Italiano
+9. **中文 (zh)** - Chino Simplificado
+10. **日本語 (ja)** - Japonés
+
+## 🔄 Detección Automática de Idioma
+
+La aplicación detecta automáticamente el idioma del dispositivo al iniciar por primera vez:
+
+- Lee el idioma del sistema operativo usando `PlatformDispatcher.instance.locale`
+- Si el idioma está en la lista de soportados, lo usa automáticamente
+- Si no está soportado, usa el idioma por defecto (español o inglés según APP_ID)
+- El usuario puede cambiar manualmente el idioma en cualquier momento desde Settings
+- La preferencia manual se guarda en SharedPreferences y tiene prioridad sobre la detección automática
+
+Esta detección solo ocurre la primera vez. Una vez que el usuario abre la app, si no ha seleccionado manualmente un idioma, usará el del sistema.
 
 ## 💡 Recomendaciones de Prioridad
 
