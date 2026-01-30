@@ -20,6 +20,12 @@ class Operator {
         return _getHindiName();
       case 'ru':
         return _getRussianName();
+      case 'it':
+        return _getItalianName();
+      case 'zh':
+        return _getChineseName();
+      case 'ja':
+        return _getJapaneseName();
       default:
         return enName;
     }
@@ -182,6 +188,102 @@ class Operator {
     if (value == '┹') return 'विरोधाभास';
     // Tautología
     if (value == '┲') return 'टॉटोलॉजी';
+    return enName;
+  }
+
+  String _getItalianName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'Negazione';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'Congiunzione';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'Disgiunzione';
+    // Condicional
+    if (value == '⇒') return 'Condizionale/Implicazione';
+    // Bicondicional
+    if (value == '⇔') return 'Bicondizionale/Doppia implicazione';
+    // Anticondicional
+    if (value == '￩') return 'Condizionale inverso/Replicatore';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/Disgiunzione esclusiva';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'Negazione del condizionale inverso';
+    // NOT Condicional
+    if (value == '⇏') return 'Negazione dell\'implicazione';
+    // NOT Bicondicional
+    if (value == '⇎') return 'Negazione del bicondizionale';
+    // Contradicción
+    if (value == '┹') return 'Contraddizione';
+    // Tautología
+    if (value == '┲') return 'Tautologia';
+    return enName;
+  }
+
+  String _getChineseName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return '否定';
+    // Conjunción
+    if (value == '∧' || value == '&') return '合取';
+    // Disyunción
+    if (value == '∨' || value == '|') return '析取';
+    // Condicional
+    if (value == '⇒') return '条件/蕴含';
+    // Bicondicional
+    if (value == '⇔') return '双条件/双重蕴含';
+    // Anticondicional
+    if (value == '￩') return '逆条件/复制器';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/异或';
+    // NOR
+    if (value == '↓') return 'NOR/或非';
+    // NAND
+    if (value == '⊼') return 'NAND/与非';
+    // NOT Condicional Inverso
+    if (value == '⇍') return '逆条件否定';
+    // NOT Condicional
+    if (value == '⇏') return '蕴含否定';
+    // NOT Bicondicional
+    if (value == '⇎') return '双条件否定';
+    // Contradicción
+    if (value == '┹') return '矛盾式';
+    // Tautología
+    if (value == '┲') return '重言式';
+    return enName;
+  }
+
+  String _getJapaneseName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return '否定';
+    // Conjunción
+    if (value == '∧' || value == '&') return '連言';
+    // Disyunción
+    if (value == '∨' || value == '|') return '選言';
+    // Condicional
+    if (value == '⇒') return '条件/含意';
+    // Bicondicional
+    if (value == '⇔') return '双条件/双方向含意';
+    // Anticondicional
+    if (value == '￩') return '逆条件/複製器';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/排他的論理和';
+    // NOR
+    if (value == '↓') return 'NOR/否定論理和';
+    // NAND
+    if (value == '⊼') return 'NAND/否定論理積';
+    // NOT Condicional Inverso
+    if (value == '⇍') return '逆条件の否定';
+    // NOT Condicional
+    if (value == '⇏') return '含意の否定';
+    // NOT Bicondicional
+    if (value == '⇎') return '双条件の否定';
+    // Contradicción
+    if (value == '┹') return '矛盾';
+    // Tautología
+    if (value == '┲') return '恒真式';
     return enName;
   }
 }
