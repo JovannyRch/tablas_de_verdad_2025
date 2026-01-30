@@ -2,7 +2,7 @@ name: tablas_de_verdad_2025
 description: "A new Flutter project."
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 4.0.9+40009
+version: 4.0.11+40011
 
 environment:
   sdk: ^3.7.0

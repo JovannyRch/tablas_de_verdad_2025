@@ -1,4 +1,4 @@
-final IS_TESTING = true;
+final IS_TESTING = false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
 
 const Map<String, String> esSettings = {

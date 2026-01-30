@@ -179,7 +179,7 @@ const CONTRADICTION_DESCRIPTION = {
       "A contradiction is a proposition or logical formula that is always false, regardless of the truth values of its components. In other words, it is an expression that does not hold under any interpretation or assignment of truth values to its variables.",
 };
 
-const IS_TESTING = true;
+const IS_TESTING = false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
 const SHOW_ADS = true;
 
 Map<String, String> settings = esSettings;
