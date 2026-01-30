@@ -41,6 +41,7 @@ class SettingsScreen extends StatelessWidget {
               DropdownMenuEntry(value: Locale('fr'), label: 'Français'),
               DropdownMenuEntry(value: Locale('de'), label: 'Deutsch'),
               DropdownMenuEntry(value: Locale('hi'), label: 'हिन्दी'),
+              DropdownMenuEntry(value: Locale('ru'), label: 'Русский'),
             ],
             onSelected: (loc) => context.read<Settings>().update(locale: loc),
           ),

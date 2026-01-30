@@ -38,6 +38,7 @@ String getType(String locale, TruthTableType type) {
       if (locale == 'fr') return 'Contingence';
       if (locale == 'de') return 'Kontingenz';
       if (locale == 'hi') return 'आकस्मिकता';
+      if (locale == 'ru') return 'Случайность';
       return 'Contingency';
     case TruthTableType.tautology:
       if (locale == 'es') return 'Tautología';
@@ -45,6 +46,7 @@ String getType(String locale, TruthTableType type) {
       if (locale == 'fr') return 'Tautologie';
       if (locale == 'de') return 'Tautologie';
       if (locale == 'hi') return 'टॉटोलॉजी';
+      if (locale == 'ru') return 'Тавтология';
       return 'Tautology';
     case TruthTableType.contradiction:
       if (locale == 'es') return 'Contradicción';
@@ -52,6 +54,7 @@ String getType(String locale, TruthTableType type) {
       if (locale == 'fr') return 'Contradiction';
       if (locale == 'de') return 'Widerspruch';
       if (locale == 'hi') return 'विरोधाभास';
+      if (locale == 'ru') return 'Противоречие';
       return 'Contradiction';
   }
 }

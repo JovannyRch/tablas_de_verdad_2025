@@ -44,6 +44,7 @@ class TruthTableApp extends StatelessWidget {
         Locale('fr'),
         Locale('de'),
         Locale('hi'),
+        Locale('ru'),
       ],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: lightTheme,

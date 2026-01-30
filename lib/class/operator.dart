@@ -18,6 +18,8 @@ class Operator {
         return _getGermanName();
       case 'hi':
         return _getHindiName();
+      case 'ru':
+        return _getRussianName();
       default:
         return enName;
     }
@@ -116,6 +118,38 @@ class Operator {
     if (value == '┹') return 'Widerspruch';
     // Tautología
     if (value == '┲') return 'Tautologie';
+    return enName;
+  }
+
+  String _getRussianName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'Отрицание';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'Конъюнкция';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'Дизъюнкция';
+    // Condicional
+    if (value == '⇒') return 'Условное/Импликация';
+    // Bicondicional
+    if (value == '⇔') return 'Двуусловное/Двойная импликация';
+    // Anticondicional
+    if (value == '￩') return 'Обратное условное/Репликатор';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/Исключающая дизъюнкция';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'Отрицание обратного условного';
+    // NOT Condicional
+    if (value == '⇏') return 'Отрицание импликации';
+    // NOT Bicondicional
+    if (value == '⇎') return 'Отрицание двуусловного';
+    // Contradicción
+    if (value == '┹') return 'Противоречие';
+    // Tautología
+    if (value == '┲') return 'Тавтология';
     return enName;
   }
 
