@@ -4,6 +4,152 @@ class Operator {
   String enName;
 
   Operator({required this.enName, required this.esName, required this.value});
+
+  /// Devuelve el nombre localizado del operador según el locale
+  String getLocalizedName(String locale) {
+    switch (locale) {
+      case 'es':
+        return esName;
+      case 'pt':
+        return _getPortugueseName();
+      case 'fr':
+        return _getFrenchName();
+      case 'de':
+        return _getGermanName();
+      case 'hi':
+        return _getHindiName();
+      default:
+        return enName;
+    }
+  }
+
+  String _getPortugueseName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'Negação';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'Conjunção';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'Disjunção';
+    // Condicional
+    if (value == '⇒') return 'Condicional/Implicação';
+    // Bicondicional
+    if (value == '⇔') return 'Bicondicional/Dupla implicação';
+    // Anticondicional
+    if (value == '￩') return 'Condicional inverso/Replicador';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/Disjunção exclusiva';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'Negação do condicional inverso';
+    // NOT Condicional
+    if (value == '⇏') return 'Negação do condicional';
+    // NOT Bicondicional
+    if (value == '⇎') return 'Negação do bicondicional';
+    // Contradicción
+    if (value == '┹') return 'Contradição';
+    // Tautología
+    if (value == '┲') return 'Tautologia';
+    return enName;
+  }
+
+  String _getFrenchName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'Négation';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'Conjonction';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'Disjonction';
+    // Condicional
+    if (value == '⇒') return 'Conditionnel/Implication';
+    // Bicondicional
+    if (value == '⇔') return 'Biconditionnel/Double implication';
+    // Anticondicional
+    if (value == '￩') return 'Conditionnel inverse/Réplicateur';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/Disjonction exclusive';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'Négation du conditionnel inverse';
+    // NOT Condicional
+    if (value == '⇏') return 'Négation du conditionnel';
+    // NOT Bicondicional
+    if (value == '⇎') return 'Négation du biconditionnel';
+    // Contradicción
+    if (value == '┹') return 'Contradiction';
+    // Tautología
+    if (value == '┲') return 'Tautologie';
+    return enName;
+  }
+
+  String _getGermanName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'Negation';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'Konjunktion';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'Disjunktion';
+    // Condicional
+    if (value == '⇒') return 'Konditional/Implikation';
+    // Bicondicional
+    if (value == '⇔') return 'Bikonditional/Doppelte Implikation';
+    // Anticondicional
+    if (value == '￩') return 'Umgekehrtes Konditional/Replikator';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/Exklusive Disjunktion';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'Negation des umgekehrten Konditionals';
+    // NOT Condicional
+    if (value == '⇏') return 'Negation der Implikation';
+    // NOT Bicondicional
+    if (value == '⇎') return 'Negation des Bikonditionals';
+    // Contradicción
+    if (value == '┹') return 'Widerspruch';
+    // Tautología
+    if (value == '┲') return 'Tautologie';
+    return enName;
+  }
+
+  String _getHindiName() {
+    // Negación
+    if (value == '~' || value == '¬' || value == '!') return 'निषेध';
+    // Conjunción
+    if (value == '∧' || value == '&') return 'संयोजन';
+    // Disyunción
+    if (value == '∨' || value == '|') return 'वियोजन';
+    // Condicional
+    if (value == '⇒') return 'सशर्त/निहितार्थ';
+    // Bicondicional
+    if (value == '⇔') return 'द्विसशर्त/दोहरा निहितार्थ';
+    // Anticondicional
+    if (value == '￩') return 'उल्टा सशर्त/प्रतिकृतिकर्ता';
+    // XOR
+    if (value == '⊕' || value == '⊻') return 'XOR/विशेष वियोजन';
+    // NOR
+    if (value == '↓') return 'NOR';
+    // NAND
+    if (value == '⊼') return 'NAND';
+    // NOT Condicional Inverso
+    if (value == '⇍') return 'उल्टे सशर्त का निषेध';
+    // NOT Condicional
+    if (value == '⇏') return 'निहितार्थ का निषेध';
+    // NOT Bicondicional
+    if (value == '⇎') return 'द्विसशर्त का निषेध';
+    // Contradicción
+    if (value == '┹') return 'विरोधाभास';
+    // Tautología
+    if (value == '┲') return 'टॉटोलॉजी';
+    return enName;
+  }
 }
 
 class Operators {

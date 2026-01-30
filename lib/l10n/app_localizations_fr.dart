@@ -1,0 +1,207 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for French (`fr`).
+class AppLocalizationsFr extends AppLocalizations {
+  AppLocalizationsFr([String locale = 'fr']) : super(locale);
+
+  @override
+  String get adNotAvailable => 'Vidéo non disponible. Réessayez plus tard ou passez à Pro.';
+
+  @override
+  String get advanced_mode => 'Mode avancé';
+
+  @override
+  String get appName => 'Tables de Vérité';
+
+  @override
+  String get ascending => 'Ascendant';
+
+  @override
+  String get becomePro => 'Devenez Pro !';
+
+  @override
+  String get buyPro => 'Acheter';
+
+  @override
+  String get calculationHistory => 'Historique des calculs';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get contingency => 'Contingence ⚠️';
+
+  @override
+  String get contingency_description => 'Une contingence fait référence à une proposition ou formule qui n\'est ni une tautologie ni une contradiction. En d\'autres termes, c\'est une expression qui peut être vraie ou fausse, selon les circonstances ou les valeurs de vérité de ses composants.';
+
+  @override
+  String get contradiction => 'Contradiction ❌';
+
+  @override
+  String get contradiction_description => 'Une contradiction est une proposition ou formule logique qui est toujours fausse, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui ne tient sous aucune interprétation ou attribution de valeurs de vérité à ses variables.';
+
+  @override
+  String get darkMode => 'Mode sombre';
+
+  @override
+  String get descending => 'Descendant';
+
+  @override
+  String get emptyExpression => 'Veuillez saisir une expression logique';
+
+  @override
+  String get expression => 'Expression';
+
+  @override
+  String get expressionLibrary => 'Bibliothèque d\'expressions';
+
+  @override
+  String expressionsRemaining(int count) {
+    return '$count expressions supplémentaires restantes';
+  }
+
+  @override
+  String get fullFeatureAccess => 'Accès complet à toutes les fonctionnalités';
+
+  @override
+  String get fullLibraryAccess => 'Accès complet à la bibliothèque d\'expressions';
+
+  @override
+  String get history => 'Historique';
+
+  @override
+  String get language => 'Langue';
+
+  @override
+  String get later => 'Plus tard';
+
+  @override
+  String get libraryUnlocked => '🎉 Bibliothèque complète débloquée !';
+
+  @override
+  String get mintermOrder => 'Ordre des mintermes';
+
+  @override
+  String get moreExpressions => 'expressions supplémentaires';
+
+  @override
+  String get noAds => 'Sans publicités';
+
+  @override
+  String get no_history => 'Aucun historique';
+
+  @override
+  String get numberOfPropositions => 'Nombre de propositions';
+
+  @override
+  String get numberOfRows => 'Nombre de lignes';
+
+  @override
+  String get only_tutorials => 'Afficher uniquement les tutoriels';
+
+  @override
+  String get pdfFilename => 'table_verite';
+
+  @override
+  String get premiumOperator => 'Opérateur Premium';
+
+  @override
+  String get premiumOperatorMessage => 'Cet opérateur avancé nécessite de regarder une vidéo ou de passer à Pro pour un accès illimité.';
+
+  @override
+  String get premiumOperatorsAccess => 'Accès à tous les opérateurs premium';
+
+  @override
+  String get premiumSupport => 'Support Premium';
+
+  @override
+  String get privacyPolicy => 'Politique de confidentialité';
+
+  @override
+  String get propositions => 'Propositions';
+
+  @override
+  String get rateTheApp => 'Noter l\'application';
+
+  @override
+  String get ratingDialogMessage => 'Votre avis est très important pour nous ! Si vous avez aimé Tables de Vérité, nous aimerions que vous nous laissiez une note de 5 étoiles ⭐';
+
+  @override
+  String get ratingDialogTitle => 'Vous aimez l\'application ?';
+
+  @override
+  String get ratingLater => 'Plus tard';
+
+  @override
+  String get ratingNoThanks => 'Non, merci';
+
+  @override
+  String get ratingRateNow => 'Noter maintenant !';
+
+  @override
+  String get remainingExpressions => 'Restant';
+
+  @override
+  String get result => 'Résultat';
+
+  @override
+  String get settings => 'Paramètres';
+
+  @override
+  String get settingsTitle => 'Paramètres';
+
+  @override
+  String get settings_mode => 'Mode';
+
+  @override
+  String get simple_mode => 'Mode simple';
+
+  @override
+  String get t_f => 'V/F';
+
+  @override
+  String get tautology => 'Tautologie ✅';
+
+  @override
+  String get tautology_description => 'Une tautologie est une proposition ou formule logique qui est toujours vraie, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui tient sous toute interprétation ou attribution de valeurs de vérité à ses variables.';
+
+  @override
+  String get truthValues => 'Valeurs de vérité';
+
+  @override
+  String get tutorials => 'Tutoriels';
+
+  @override
+  String get type => 'Type';
+
+  @override
+  String get unlockFullLibrary => 'Débloquez la bibliothèque complète !';
+
+  @override
+  String get unlockLibraryTitle => '🎯 Débloquez la bibliothèque complète !';
+
+  @override
+  String get upgradePro => 'Passer à Pro';
+
+  @override
+  String get videoFABLabel => 'Voir la vidéo';
+
+  @override
+  String get videoFABTooltip => 'Explication vidéo';
+
+  @override
+  String get videoScreenDescription => 'Cette vidéo explique étape par étape la résolution de cette expression logique.';
+
+  @override
+  String get videoScreenTitle => 'Explication vidéo';
+
+  @override
+  String get watchVideoFree => 'Voir la vidéo (Gratuit)';
+
+  @override
+  String get youtubeChannel => 'Chaîne YouTube';
+}

@@ -20,14 +20,23 @@ String getType(String locale, TruthTableType type) {
     case TruthTableType.contingency:
       if (locale == 'es') return 'Contingencia';
       if (locale == 'pt') return 'Contingência';
+      if (locale == 'fr') return 'Contingence';
+      if (locale == 'de') return 'Kontingenz';
+      if (locale == 'hi') return 'आकस्मिकता';
       return 'Contingency';
     case TruthTableType.tautology:
       if (locale == 'es') return 'Tautología';
       if (locale == 'pt') return 'Tautologia';
+      if (locale == 'fr') return 'Tautologie';
+      if (locale == 'de') return 'Tautologie';
+      if (locale == 'hi') return 'टॉटोलॉजी';
       return 'Tautology';
     case TruthTableType.contradiction:
       if (locale == 'es') return 'Contradicción';
       if (locale == 'pt') return 'Contradição';
+      if (locale == 'fr') return 'Contradiction';
+      if (locale == 'de') return 'Widerspruch';
+      if (locale == 'hi') return 'विरोधाभास';
       return 'Contradiction';
   }
 }

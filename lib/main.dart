@@ -37,7 +37,14 @@ class TruthTableApp extends StatelessWidget {
     return MaterialApp(
       locale: settings.locale,
       debugShowCheckedModeBanner: false,
-      supportedLocales: const [Locale('es'), Locale('en'), Locale('pt')],
+      supportedLocales: const [
+        Locale('es'),
+        Locale('en'),
+        Locale('pt'),
+        Locale('fr'),
+        Locale('de'),
+        Locale('hi'),
+      ],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: lightTheme,
       darkTheme: darkTheme,

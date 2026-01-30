@@ -285,7 +285,6 @@ class _StepTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localization = AppLocalizations.of(context)!;
-    final isEn = localization.localeName == 'en';
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -296,9 +295,9 @@ class _StepTile extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              isEn
-                  ? step.stepProcess.operator.enName
-                  : step.stepProcess.operator.esName,
+              step.stepProcess.operator.getLocalizedName(
+                localization.localeName,
+              ),
             ),
             _title(),
           ],
