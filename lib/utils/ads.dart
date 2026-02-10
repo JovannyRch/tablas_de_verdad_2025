@@ -14,7 +14,7 @@ class Ads {
     adId =
         IS_TESTING
             ? Platform.isAndroid
-                ? 'ca-app-pub-7319269804560504/8512599311'
+                ? 'ca-app-pub-3940256099942544/1033173712' // Google official test ID
                 : 'ca-app-pub-3940256099942544/4411468910'
             : id;
     createInterstitialAd();

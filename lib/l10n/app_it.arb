@@ -27,6 +27,10 @@
   "descending": "Decrescente",
   "emptyExpression": "Inserisci un'espressione logica",
   "expression": "Espressione",
+  "fileOptions": "Opzioni file",
+  "openFile": "Apri file",
+  "shareFile": "Condividi file",
+  "shareFileMessage": "Ti sto inviando questo file.",
   "expressionLibrary": "Libreria Espressioni",
   "expressionsRemaining": "{count} espressioni rimanenti",
   "fullFeatureAccess": "Accesso completo a tutte le funzionalità",
@@ -82,5 +86,6 @@
   "confirmReset": "Conferma ripristino",
   "confirmResetDesc": "Sei sicuro di voler ripristinare tutte le impostazioni ai valori predefiniti?",
   "ok": "OK",
-  "preferences": "Preferenze"
+  "preferences": "Preferenze",
+  "fullTable": "Tabella completa"
 }

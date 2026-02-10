@@ -20,6 +20,10 @@
   "descending": "अवरोही",
   "emptyExpression": "कृपया एक तार्किक अभिव्यक्ति दर्ज करें",
   "expression": "अभिव्यक्ति",
+  "fileOptions": "फ़ाइल विकल्प",
+  "openFile": "फ़ाइल खोलें",
+  "shareFile": "फ़ाइल साझा करें",
+  "shareFileMessage": "मैं आपके साथ यह फ़ाइल साझा कर रहा हूँ।",
   "expressionLibrary": "अभिव्यक्ति पुस्तकालय",
   "fullFeatureAccess": "सभी सुविधाओं तक पूर्ण पहुंच",
   "fullLibraryAccess": "अभिव्यक्ति पुस्तकालय तक पूर्ण पहुंच",
@@ -82,5 +86,6 @@
   "resetDefaults": "डिफ़ॉल्ट पर रीसेट करें",
   "confirmReset": "रीसेट की पुष्टि करें",
   "confirmResetDesc": "क्या आप वाकई सभी सेटिंग्स को उनके डिफ़ॉल्ट पर रीसेट करना चाहते हैं?",
-  "ok": "ठीक है"
+  "ok": "ठीक है",
+  "fullTable": "पूर्ण तालिका"
 }

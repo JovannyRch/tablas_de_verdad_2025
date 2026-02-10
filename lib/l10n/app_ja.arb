@@ -27,6 +27,10 @@
   "descending": "降順",
   "emptyExpression": "論理式を入力してください",
   "expression": "式",
+  "fileOptions": "ファイルオプション",
+  "openFile": "ファイルを開く",
+  "shareFile": "ファイルを共有",
+  "shareFileMessage": "このファイルを共有します。",
   "expressionLibrary": "式ライブラリ",
   "expressionsRemaining": "残り{count}個の式",
   "fullFeatureAccess": "すべての機能への完全アクセス",
@@ -82,5 +86,6 @@
   "resetDefaults": "デフォルトにリセット",
   "confirmReset": "リセットの確認",
   "confirmResetDesc": "すべての設定をデフォルトに戻してもよろしいですか？",
-  "ok": "OK"
+  "ok": "OK",
+  "fullTable": "完全な表"
 }

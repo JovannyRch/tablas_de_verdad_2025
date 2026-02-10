@@ -231,6 +231,30 @@ abstract class AppLocalizations {
   /// **'Expresión'**
   String get expression;
 
+  /// No description provided for @fileOptions.
+  ///
+  /// In es, this message translates to:
+  /// **'Opciones de archivo'**
+  String get fileOptions;
+
+  /// No description provided for @openFile.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir archivo'**
+  String get openFile;
+
+  /// No description provided for @shareFile.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir archivo'**
+  String get shareFile;
+
+  /// No description provided for @shareFileMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Te comparto este archivo.'**
+  String get shareFileMessage;
+
   /// No description provided for @expressionLibrary.
   ///
   /// In es, this message translates to:
@@ -566,6 +590,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Canal de YouTube'**
   String get youtubeChannel;
+
+  /// No description provided for @fullTable.
+  ///
+  /// In es, this message translates to:
+  /// **'Tabla completa'**
+  String get fullTable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

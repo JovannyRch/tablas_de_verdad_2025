@@ -27,6 +27,10 @@
   "descending": "Descendente",
   "emptyExpression": "Por favor, ingresa una expresión lógica",
   "expression": "Expresión",
+  "fileOptions": "Opciones de archivo",
+  "openFile": "Abrir archivo",
+  "shareFile": "Compartir archivo",
+  "shareFileMessage": "Te comparto este archivo.",
   "expressionLibrary": "Biblioteca de expresiones",
   "expressionsRemaining": "Quedan {count} expresiones más",
   "fullFeatureAccess": "Acceso completo a todas las funciones",
@@ -82,5 +86,6 @@
   "videoScreenDescription": "Este video explica paso a paso la resolución de esta expresión lógica.",
   "videoScreenTitle": "Explicación en video",
   "watchVideoFree": "Ver Video (Gratis)",
-  "youtubeChannel": "Canal de YouTube"
+  "youtubeChannel": "Canal de YouTube",
+  "fullTable": "Tabla completa"
 }

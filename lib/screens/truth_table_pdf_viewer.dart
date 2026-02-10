@@ -50,7 +50,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   }
 
   _share() async {
-    showFileOptionsDialog(context, doc!.filePath!);
+    final t = AppLocalizations.of(context)!;
+    showFileOptionsDialog(context, doc!.filePath!, t);
   }
 
   @override

@@ -69,6 +69,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get expression => '表达式';
 
   @override
+  String get fileOptions => '文件选项';
+
+  @override
+  String get openFile => '打开文件';
+
+  @override
+  String get shareFile => '分享文件';
+
+  @override
+  String get shareFileMessage => '我正在向您分享此文件。';
+
+  @override
   String get expressionLibrary => '表达式库';
 
   @override
@@ -237,4 +249,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'YouTube 频道';
+
+  @override
+  String get fullTable => '完整表';
 }

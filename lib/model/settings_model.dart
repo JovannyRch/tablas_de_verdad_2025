@@ -22,7 +22,17 @@ class Settings extends ChangeNotifier {
   KeypadMode keypadMode = KeypadMode.advanced;
   bool isProVersion = false;
   int operationsCount = 0;
-  int adFrequency = 3; // Mostrar ad cada N operaciones (menos invasivo)
+  int adFrequency =
+      5; // Mostrar ad cada N operaciones (equilibrio retención/monetización)
+
+  // Anti-stacking: cooldown entre anuncios de pantalla completa (60s)
+  DateTime? _lastFullscreenAdTime;
+  static const int _fullscreenCooldownSeconds = 60;
+
+  // Usos gratuitos diarios de operadores premium
+  int _dailyPremiumUsesCount = 0;
+  String _lastPremiumUsesDate = '';
+  static const int maxDailyPremiumUses = 3;
 
   final PurchaseService _purchaseService = PurchaseService();
 
@@ -32,6 +42,14 @@ class Settings extends ChangeNotifier {
     themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? 0];
     truthFormat = TruthFormat.values[prefs.getInt('truthFormat') ?? 0];
     mintermOrder = MintermOrder.values[prefs.getInt('mintermOrder') ?? 0];
+
+    // Restaurar operationsCount persistido
+    operationsCount = prefs.getInt('operationsCount') ?? 0;
+
+    // Restaurar usos premium diarios
+    _lastPremiumUsesDate = prefs.getString('lastPremiumUsesDate') ?? '';
+    _dailyPremiumUsesCount = prefs.getInt('dailyPremiumUsesCount') ?? 0;
+    _resetDailyUsesIfNewDay();
 
     // Escuchar cambios del estado Pro
     _purchaseService.isProVersion.addListener(() {
@@ -85,13 +103,67 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
-  void incrementOperationsCount() {
+  Future<void> incrementOperationsCount() async {
     operationsCount++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('operationsCount', operationsCount);
     notifyListeners();
   }
 
   bool shouldShowInterstitialAd() {
-    return !isProVersion && operationsCount % adFrequency == 0;
+    return !isProVersion &&
+        operationsCount % adFrequency == 0 &&
+        canShowFullscreenAd();
+  }
+
+  /// Anti-stacking: verifica si ha pasado suficiente tiempo desde el último ad fullscreen
+  bool canShowFullscreenAd() {
+    if (isProVersion) return false;
+    if (_lastFullscreenAdTime == null) return true;
+    return DateTime.now().difference(_lastFullscreenAdTime!).inSeconds >=
+        _fullscreenCooldownSeconds;
+  }
+
+  /// Marca que se acaba de mostrar un anuncio de pantalla completa
+  void markFullscreenAdShown() {
+    _lastFullscreenAdTime = DateTime.now();
+  }
+
+  /// Verifica si el usuario puede usar operadores premium gratis hoy
+  bool hasFreePremmiumUsesRemaining() {
+    _resetDailyUsesIfNewDay();
+    return _dailyPremiumUsesCount < maxDailyPremiumUses;
+  }
+
+  /// Retorna la cantidad de usos gratuitos restantes hoy
+  int get remainingFreePremiumUses {
+    _resetDailyUsesIfNewDay();
+    return maxDailyPremiumUses - _dailyPremiumUsesCount;
+  }
+
+  /// Consume un uso gratuito diario de operador premium
+  Future<void> consumeFreePremiumUse() async {
+    _resetDailyUsesIfNewDay();
+    _dailyPremiumUsesCount++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('dailyPremiumUsesCount', _dailyPremiumUsesCount);
+    notifyListeners();
+  }
+
+  /// Reinicia el contador diario si cambió el día
+  void _resetDailyUsesIfNewDay() {
+    final today = DateTime.now().toIso8601String().substring(
+      0,
+      10,
+    ); // YYYY-MM-DD
+    if (_lastPremiumUsesDate != today) {
+      _dailyPremiumUsesCount = 0;
+      _lastPremiumUsesDate = today;
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('lastPremiumUsesDate', today);
+        prefs.setInt('dailyPremiumUsesCount', 0);
+      });
+    }
   }
 
   Future<void> reset() async {

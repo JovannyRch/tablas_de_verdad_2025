@@ -20,6 +20,10 @@
   "descending": "Descendant",
   "emptyExpression": "Veuillez saisir une expression logique",
   "expression": "Expression",
+  "fileOptions": "Options de fichier",
+  "openFile": "Ouvrir le fichier",
+  "shareFile": "Partager le fichier",
+  "shareFileMessage": "Je partage ce fichier avec vous.",
   "expressionLibrary": "Bibliothèque d'expressions",
   "fullFeatureAccess": "Accès complet à toutes les fonctionnalités",
   "fullLibraryAccess": "Accès complet à la bibliothèque d'expressions",
@@ -82,5 +86,6 @@
   "resetDefaults": "Réinitialiser aux paramètres par défaut",
   "confirmReset": "Confirmer la réinitialisation",
   "confirmResetDesc": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut ?",
-  "ok": "OK"
+  "ok": "OK",
+  "fullTable": "Table complète"
 }

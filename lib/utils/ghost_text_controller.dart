@@ -14,21 +14,27 @@ class GhostTextEditingController extends TextEditingController {
     // Add existing text
     children.add(TextSpan(text: text, style: style));
 
-    // Calculate ghost parentheses
-    int openCount = 0;
+    // Calculate ghost closing marks using a stack for correct nesting
+    final List<String> stack = [];
 
     for (int i = 0; i < text.length; i++) {
-      if (text[i] == '(') {
-        openCount++;
-      } else if (text[i] == ')') {
-        if (openCount > 0) {
-          openCount--;
+      final char = text[i];
+      if (char == '(') {
+        stack.add(')');
+      } else if (char == '[') {
+        stack.add(']');
+      } else if (char == '{') {
+        stack.add('}');
+      } else if (char == ')' || char == ']' || char == '}') {
+        if (stack.isNotEmpty && stack.last == char) {
+          stack.removeLast();
         }
       }
     }
 
-    if (openCount > 0) {
-      final ghostText = ')' * openCount;
+    if (stack.isNotEmpty) {
+      // The ghost text is the reverse of the stack to close in order
+      final ghostText = stack.reversed.join();
       children.add(
         TextSpan(
           text: ghostText,

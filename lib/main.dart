@@ -11,7 +11,7 @@ import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/privacy_policy_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
 
-const Color kSeedColor = Colors.deepOrange;
+// kSeedColor se define en colors.dart — no redefinir aquí
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

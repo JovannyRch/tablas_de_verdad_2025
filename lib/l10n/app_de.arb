@@ -25,6 +25,10 @@
   "descending": "Absteigend",
   "emptyExpression": "Bitte geben Sie einen logischen Ausdruck ein",
   "expression": "Ausdruck",
+  "fileOptions": "Dateioptionen",
+  "openFile": "Datei öffnen",
+  "shareFile": "Datei teilen",
+  "shareFileMessage": "Ich teile diese Datei mit dir.",
   "expressionLibrary": "Ausdrucksbibliothek",
   "expressionsRemaining": "{count} weitere Ausdrücke verbleibend",
   "fullFeatureAccess": "Vollzugriff auf alle Funktionen",
@@ -82,5 +86,6 @@
   "resetDefaults": "Auf Standardeinstellungen zurücksetzen",
   "confirmReset": "Zurücksetzen bestätigen",
   "confirmResetDesc": "Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen möchten?",
-  "ok": "OK"
+  "ok": "OK",
+  "fullTable": "Vollständige Tabelle"
 }

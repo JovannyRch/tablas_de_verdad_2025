@@ -69,6 +69,18 @@ class AppLocalizationsIt extends AppLocalizations {
   String get expression => 'Espressione';
 
   @override
+  String get fileOptions => 'Opzioni file';
+
+  @override
+  String get openFile => 'Apri file';
+
+  @override
+  String get shareFile => 'Condividi file';
+
+  @override
+  String get shareFileMessage => 'Ti sto inviando questo file.';
+
+  @override
   String get expressionLibrary => 'Libreria Espressioni';
 
   @override
@@ -237,4 +249,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'Canale YouTube';
+
+  @override
+  String get fullTable => 'Tabella completa';
 }

@@ -69,6 +69,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get expression => '式';
 
   @override
+  String get fileOptions => 'ファイルオプション';
+
+  @override
+  String get openFile => 'ファイルを開く';
+
+  @override
+  String get shareFile => 'ファイルを共有';
+
+  @override
+  String get shareFileMessage => 'このファイルを共有します。';
+
+  @override
   String get expressionLibrary => '式ライブラリ';
 
   @override
@@ -237,4 +249,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'YouTubeチャンネル';
+
+  @override
+  String get fullTable => '完全な表';
 }

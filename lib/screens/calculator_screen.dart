@@ -246,9 +246,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       return;
     }
 
+    // Verificar operadores premium: 3 usos gratis/día, luego rewarded o Pro
     if (!_settings.isProVersion && _containsPremiumOperators(expression)) {
-      final shouldContinue = await _showPremiumOperatorDialog();
-      if (!shouldContinue) return;
+      if (_settings.hasFreePremmiumUsesRemaining()) {
+        // Tiene usos gratuitos: consumir uno y continuar
+        await _settings.consumeFreePremiumUse();
+      } else {
+        // Sin usos gratuitos: mostrar diálogo de rewarded/Pro
+        final shouldContinue = await _showPremiumOperatorDialog();
+        if (!shouldContinue) return;
+      }
     }
 
     List<String> history = await getHistory();
@@ -256,28 +263,27 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       await saveExpression(expression);
     }
 
-    _settings.incrementOperationsCount();
+    await _settings.incrementOperationsCount();
 
     // Incrementar contador para el sistema de rating
     await RatingHelper.incrementCalculationCount();
 
-    // Mostrar ad intersticial solo cada N operaciones (menos invasivo)
+    // Navegar a resultados y esperar a que el usuario regrese
+    await goToResult(context, expression, _localization, _settings.truthFormat);
+
+    // Mostrar ad intersticial al regresar (pausa natural, menos invasivo)
     if (_settings.shouldShowInterstitialAd()) {
       ads.showInterstitialAd();
+      _settings.markFullscreenAdShown();
     }
 
-    goToResult(context, expression, _localization, _settings.truthFormat);
-
     // Verificar si debemos mostrar el diálogo de calificación
-    // Lo hacemos después de navegar para no interrumpir el flujo
-    Future.delayed(const Duration(milliseconds: 500), () async {
-      if (context.mounted) {
-        final shouldShow = await RatingHelper.shouldShowRatingDialog();
-        if (shouldShow && context.mounted) {
-          showRatingDialog(context);
-        }
+    if (context.mounted) {
+      final shouldShow = await RatingHelper.shouldShowRatingDialog();
+      if (shouldShow && context.mounted) {
+        showRatingDialog(context);
       }
-    });
+    }
   }
 
   bool _containsPremiumOperators(String expression) {
@@ -300,14 +306,20 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      Navigator.pop(context, true);
+                      Navigator.pop(context, false);
 
                       final success = await rewardedAdHelper.showRewardedAd();
-                      if (!success) {
+                      if (success) {
+                        _settings.markFullscreenAdShown();
+                        if (mounted) {
+                          // Re-ejecutar la evaluación tras ver el video
+                          _evaluateAfterReward();
+                        }
+                      } else {
                         if (mounted) {
                           showSnackBarMessage(
                             context,
-                            'Video no disponible. Puedes continuar esta vez.',
+                            _localization.adNotAvailable,
                           );
                         }
                       }
@@ -325,5 +337,34 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
         ) ??
         false;
+  }
+
+  /// Evalúa la expresión directamente (tras ver rewarded ad, sin pedir de nuevo)
+  void _evaluateAfterReward() async {
+    final expression = _controller.text;
+    if (expression.isEmpty) return;
+
+    List<String> history = await getHistory();
+    if (!history.contains(expression)) {
+      await saveExpression(expression);
+    }
+
+    await _settings.incrementOperationsCount();
+    await RatingHelper.incrementCalculationCount();
+
+    await goToResult(context, expression, _localization, _settings.truthFormat);
+
+    // Intersticial al regresar, respetando cooldown
+    if (_settings.shouldShowInterstitialAd()) {
+      ads.showInterstitialAd();
+      _settings.markFullscreenAdShown();
+    }
+
+    if (context.mounted) {
+      final shouldShow = await RatingHelper.shouldShowRatingDialog();
+      if (shouldShow && context.mounted) {
+        showRatingDialog(context);
+      }
+    }
   }
 }

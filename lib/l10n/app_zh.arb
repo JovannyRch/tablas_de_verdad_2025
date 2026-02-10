@@ -27,6 +27,10 @@
   "descending": "降序",
   "emptyExpression": "请输入逻辑表达式",
   "expression": "表达式",
+  "fileOptions": "文件选项",
+  "openFile": "打开文件",
+  "shareFile": "分享文件",
+  "shareFileMessage": "我正在向您分享此文件。",
   "expressionLibrary": "表达式库",
   "expressionsRemaining": "还剩 {count} 个表达式",
   "fullFeatureAccess": "完全访问所有功能",
@@ -82,5 +86,6 @@
   "resetDefaults": "恢复默认设置",
   "confirmReset": "确认重置",
   "confirmResetDesc": "您确定要将所有设置恢复为默认值吗？",
-  "ok": "确定"
+  "ok": "确定",
+  "fullTable": "完整表"
 }

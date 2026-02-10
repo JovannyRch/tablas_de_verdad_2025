@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-/* import 'package:tablas_de_verdad/const/const.dart';
-import 'package:tablas_de_verdad/shared/UserPreferences.dart'; */
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
@@ -216,24 +214,7 @@ Future<PDFDocument> generatePdfWithTable(
               ),
             ),
             pw.SizedBox(height: 25),
-            pw.TableHelper.fromTextArray(
-              context: context,
-              data: finalTable,
-              headerStyle: pw.TextStyle(
-                font: ttf,
-                color: PdfColors.white,
-                fontWeight: pw.FontWeight.bold,
-                fontSize: 10,
-              ),
-              headerDecoration: const pw.BoxDecoration(
-                color: PdfColors.blueGrey900,
-              ),
-              cellStyle: pw.TextStyle(font: ttf, fontSize: 9),
-              cellHeight: 25.0,
-              cellAlignment: pw.Alignment.center,
-              oddRowDecoration: const pw.BoxDecoration(color: PdfColors.grey50),
-              border: pw.TableBorder.all(color: PdfColors.grey400, width: 0.5),
-            ),
+            _buildPdfTable(context, finalTable, ttf),
           ],
     ),
   );
@@ -275,5 +256,51 @@ pw.Widget _infoRow(
         ),
       ),
     ],
+  );
+}
+
+/// Builds the PDF truth table with the last column (final result) highlighted.
+pw.Widget _buildPdfTable(
+  pw.Context context,
+  List<List<String>> data,
+  pw.Font ttf,
+) {
+  if (data.isEmpty) return pw.SizedBox();
+
+  final headers = data[0];
+  final lastCol = headers.length - 1;
+
+  return pw.TableHelper.fromTextArray(
+    context: context,
+    data: data,
+    headerStyle: pw.TextStyle(
+      font: ttf,
+      color: PdfColors.white,
+      fontWeight: pw.FontWeight.bold,
+      fontSize: 10,
+    ),
+    headerDecoration: const pw.BoxDecoration(color: PdfColors.blueGrey900),
+    cellStyle: pw.TextStyle(font: ttf, fontSize: 9),
+    cellHeight: 25.0,
+    cellAlignment: pw.Alignment.center,
+    oddRowDecoration: const pw.BoxDecoration(color: PdfColors.grey50),
+    border: pw.TableBorder.all(color: PdfColors.grey400, width: 0.5),
+    columnWidths: {
+      for (int i = 0; i < headers.length; i++) i: const pw.FlexColumnWidth(),
+    },
+    cellDecoration: (index, data, rowNum) {
+      // rowNum 0 is the header (handled by headerDecoration)
+      if (rowNum == 0) return const pw.BoxDecoration();
+      // Highlight the last column with a subtle tint
+      if (index == lastCol) {
+        return pw.BoxDecoration(
+          color: rowNum.isOdd ? PdfColors.blue50 : PdfColors.blue100,
+        );
+      }
+      // Keep odd-row striping for other columns
+      return rowNum.isOdd
+          ? const pw.BoxDecoration(color: PdfColors.grey50)
+          : const pw.BoxDecoration();
+    },
   );
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
-import 'package:tablas_de_verdad_2025/main.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/open_support_chat.dart';

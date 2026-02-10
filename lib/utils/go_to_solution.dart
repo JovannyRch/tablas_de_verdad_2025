@@ -7,12 +7,12 @@ import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 
-void goToResult(
+Future<void> goToResult(
   BuildContext context,
   String expression,
   AppLocalizations t,
   TruthFormat format,
-) {
+) async {
   TruthTable truthTable = TruthTable(expression, t.localeName, format);
 
   bool isValid = truthTable.convertInfixToPostix();
@@ -51,5 +51,8 @@ void goToResult(
     expression: truthTable.initialInfix,
     truthTable: truthTable,
   );
-  Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+  await Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
+  );
 }
