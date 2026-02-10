@@ -1,4 +1,5 @@
-final IS_TESTING = false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
+final IS_TESTING =
+    false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
 
 const Map<String, String> esSettings = {
@@ -32,7 +33,8 @@ const Map<String, String> proSettings = {
   "BANNER_1": "ca-app-pub-4665787383933447/9637438366",
 };
 
-final settings = esSettings;
+const String flavor = String.fromEnvironment('FLAVOR');
+final settings = (flavor == 'en') ? enSettings : esSettings;
 
 String? APP_ID = settings["id"];
 String? APP_NAME = settings["title"];

@@ -4,6 +4,7 @@ import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'dart:io';
+import 'package:tablas_de_verdad_2025/const/const.dart';
 
 /// Muestra un diálogo pidiendo al usuario que califique la app
 Future<void> showRatingDialog(BuildContext context) async {
@@ -93,7 +94,7 @@ Future<void> showRatingDialog(BuildContext context) async {
                 try {
                   final String storeUrl =
                       Platform.isAndroid
-                          ? 'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad'
+                          ? 'https://play.google.com/store/apps/details?id=$APP_ID'
                           : 'https://apps.apple.com/app/id1234567890'; // Reemplaza con tu ID real de iOS
 
                   await visit(storeUrl);

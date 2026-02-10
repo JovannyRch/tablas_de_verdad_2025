@@ -6,6 +6,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 /* import 'package:tablas_de_verdad/const/const.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart'; */
+import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
@@ -188,11 +189,11 @@ Future<PDFDocument> generatePdfWithTable(
                 children: [
                   pw.UrlLink(
                     child: pw.Text(
-                      'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad',
+                      'https://play.google.com/store/apps/details?id=$APP_ID',
                       style: pw.TextStyle(font: ttf, fontSize: 10),
                     ),
                     destination:
-                        'https://play.google.com/store/apps/details?id=com.jovannyrch.tablasdeverdad',
+                        'https://play.google.com/store/apps/details?id=$APP_ID',
                   ),
                 ],
               ),

@@ -28,8 +28,25 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("es") {
+            dimension = "version"
+            applicationId = "com.jovannyrch.tablasdeverdad"
+            manifestPlaceholders["app_name"] = "Tablas de Verdad"
+            manifestPlaceholders["admob_app_id"] = "ca-app-pub-4665787383933447~4689744776"
+        }
+        create("en") {
+            dimension = "version"
+            applicationId = "com.jovannyrch.tablasdeverdad.en"
+            manifestPlaceholders["app_name"] = "Truth Tables"
+            manifestPlaceholders["admob_app_id"] = "ca-app-pub-4665787383933447~1652617896"
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.jovannyrch.tablasdeverdad"
+        // applicationId is now set in productFlavors
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
