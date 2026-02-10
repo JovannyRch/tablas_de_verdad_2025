@@ -10,6 +10,7 @@ import 'package:tablas_de_verdad_2025/utils/rewarded_ad_helper.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/widget/expression_card.dart';
+import 'package:tablas_de_verdad_2025/const/colors.dart';
 
 class ExpressionLibraryScreen extends StatefulWidget {
   const ExpressionLibraryScreen({super.key});
@@ -129,61 +130,115 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   Widget build(BuildContext context) {
     t = AppLocalizations.of(context)!;
     _settings = context.watch<Settings>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      appBar: AppBar(title: Text(t.expressionLibrary)),
+      backgroundColor: isDark ? Colors.black : Colors.grey[50],
+      appBar: AppBar(
+        title: Text(t.expressionLibrary),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+      ),
       body: Column(
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(children: [_buildFilters()]),
-          ),
-          _buildVideoToggle(),
+          _buildHeader(isDark),
           Expanded(child: _buildExpressionList()),
         ],
       ),
     );
   }
 
-  Widget _buildVideoToggle() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          Checkbox(value: _onlyVideos, onChanged: (_) => _onVideosToggled()),
-          Text(t.only_tutorials),
-        ],
+  Widget _buildHeader(bool isDark) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border(
+          bottom: BorderSide(
+            color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+          ),
+        ),
       ),
-    );
-  }
-
-  Widget _buildFilters() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          _buildFilterButton(Filter(t.contingency, TruthTableType.contingency)),
-          SizedBox(width: 4),
-          _buildFilterButton(Filter(t.tautology, TruthTableType.tautology)),
-          SizedBox(width: 4),
-
-          _buildFilterButton(
-            Filter(t.contradiction, TruthTableType.contradiction),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: [
+                _buildFilterChip(
+                  t.contingency,
+                  TruthTableType.contingency,
+                  Colors.amber,
+                ),
+                const SizedBox(width: 8),
+                _buildFilterChip(
+                  t.tautology,
+                  TruthTableType.tautology,
+                  Colors.green,
+                ),
+                const SizedBox(width: 8),
+                _buildFilterChip(
+                  t.contradiction,
+                  TruthTableType.contradiction,
+                  Colors.red,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Text(
+                  t.only_tutorials,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: isDark ? Colors.white70 : Colors.black87,
+                  ),
+                ),
+                const Spacer(),
+                Switch.adaptive(
+                  value: _onlyVideos,
+                  activeColor: kSeedColor,
+                  onChanged: (_) => _onVideosToggled(),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildFilterButton(Filter filter) {
-    final bool isSelected = _selectedType == filter.value;
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.blue : Colors.grey[300],
-        foregroundColor: isSelected ? Colors.white : Colors.black,
+  Widget _buildFilterChip(String label, TruthTableType value, Color color) {
+    final bool isSelected = _selectedType == value;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return ChoiceChip(
+      label: Text(label),
+      selected: isSelected,
+      onSelected: (_) => _onFilterSelected(value),
+      selectedColor: color.withOpacity(0.2),
+      checkmarkColor: color,
+      labelStyle: TextStyle(
+        color:
+            isSelected
+                ? color
+                : (isDark ? Colors.white60 : Colors.black.withOpacity(0.6)),
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        fontSize: 13,
       ),
-      onPressed: () => _onFilterSelected(filter.value),
-      child: Text(filter.label),
+      backgroundColor: isDark ? Colors.white.withOpacity(0.05) : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color:
+              isSelected ? color : (isDark ? Colors.white10 : Colors.black12),
+        ),
+      ),
     );
   }
 
@@ -193,117 +248,172 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
     }
 
     if (_filteredExpressions.isEmpty) {
-      return const Center(child: Text('No se encontraron expresiones.'));
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.search_off_outlined,
+              size: 64,
+              color: Colors.grey.withOpacity(0.5),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'No expressions found',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+      );
     }
 
-    // Determinar cuántas expresiones mostrar
     final bool shouldLimit = !_settings.isProVersion && !_hasUnlockedFullList;
     final int itemCount =
         shouldLimit
             ? FREE_EXPRESSIONS_LIMIT.clamp(0, _filteredExpressions.length)
             : _filteredExpressions.length;
 
-    // Si hay más expresiones disponibles, mostrar botón de desbloqueo
     final bool hasMoreExpressions =
         _filteredExpressions.length > FREE_EXPRESSIONS_LIMIT;
     final bool showUnlockButton = shouldLimit && hasMoreExpressions;
 
     return ListView.builder(
       controller: _scrollController,
+      padding: const EdgeInsets.symmetric(vertical: 8),
       itemCount: itemCount + (showUnlockButton ? 1 : 0),
       itemBuilder: (context, index) {
-        // Si es el último item y debemos mostrar el botón de desbloqueo
         if (showUnlockButton && index == itemCount) {
           return _buildUnlockCard();
         }
 
         final expression = _filteredExpressions[index];
-        return _buildExpressionTile(expression, index);
+        return ExpressionCard(
+          expression: expression,
+          showAds: (index != 0 && index % 4 == 0),
+        );
       },
-    );
-  }
-
-  Widget _buildExpressionTile(Expression expression, int index) {
-    return ExpressionCard(
-      expression: expression,
-      showAds: (index % 5 == 0 && index != 0),
     );
   }
 
   Widget _buildUnlockCard() {
     final remainingCount = _filteredExpressions.length - FREE_EXPRESSIONS_LIMIT;
 
-    return Card(
-      margin: const EdgeInsets.all(16),
-      elevation: 8,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.deepPurple.shade400, Colors.blue.shade600],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return Container(
+      margin: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF6366F1), Color(0xFF3B82F6)], // Indigo to Blue
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF3B82F6).withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Icon(Icons.lock, size: 48, color: Colors.white),
-            const SizedBox(height: 16),
-            Text(
-              t.unlockLibraryTitle,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
+        ],
+      ),
+      child: Stack(
+        children: [
+          // Decorative circles
+          Positioned(
+            right: -20,
+            top: -20,
+            child: CircleAvatar(
+              radius: 60,
+              backgroundColor: Colors.white.withOpacity(0.1),
             ),
-            const SizedBox(height: 8),
-            Text(
-              t.expressionsRemaining(remainingCount),
-              style: const TextStyle(fontSize: 16, color: Colors.white70),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 24),
-            // Botón para ver video
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _unlockWithAd,
-                icon: const Icon(Icons.play_circle_filled),
-                label: Text(t.watchVideoFree),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.rocket_launch,
+                    size: 40,
+                    color: Colors.white,
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            // Botón para actualizar a Pro
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: _showProDialog,
-                icon: const Icon(Icons.diamond),
-                label: Text(t.upgradePro),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.white, width: 2),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                const SizedBox(height: 24),
+                Text(
+                  t.unlockLibraryTitle,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    letterSpacing: -0.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  t.expressionsRemaining(remainingCount),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white.withOpacity(0.9),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: _unlockWithAd,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color(0xFF3B82F6),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 32,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.play_circle_fill),
+                      const SizedBox(width: 12),
+                      Text(
+                        t.watchVideoFree,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                TextButton.icon(
+                  onPressed: _showProDialog,
+                  icon: const Icon(Icons.diamond_outlined, color: Colors.white),
+                  label: Text(
+                    t.upgradePro,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

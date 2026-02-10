@@ -31,41 +31,20 @@ Future<Uint8List> loadHindiFont() async {
   return data.buffer.asUint8List();
 }
 
-String getType(String locale, TruthTableType type) {
+String getType(AppLocalizations t, TruthTableType type) {
   switch (type) {
     case TruthTableType.contingency:
-      if (locale == 'es') return 'Contingencia';
-      if (locale == 'pt') return 'Contingência';
-      if (locale == 'fr') return 'Contingence';
-      if (locale == 'de') return 'Kontingenz';
-      if (locale == 'hi') return 'आकस्मिकता';
-      if (locale == 'ru') return 'Случайность';
-      if (locale == 'it') return 'Contingenza';
-      if (locale == 'zh') return '偶然式';
-      if (locale == 'ja') return '偶発的';
-      return 'Contingency';
+      return t.contingency
+          .replaceAll(RegExp(r'[\u{1F300}-\u{1F9FF}]', unicode: true), '')
+          .trim();
     case TruthTableType.tautology:
-      if (locale == 'es') return 'Tautología';
-      if (locale == 'pt') return 'Tautologia';
-      if (locale == 'fr') return 'Tautologie';
-      if (locale == 'de') return 'Tautologie';
-      if (locale == 'hi') return 'टॉटोलॉजी';
-      if (locale == 'ru') return 'Тавтология';
-      if (locale == 'it') return 'Tautologia';
-      if (locale == 'zh') return '重言式';
-      if (locale == 'ja') return '恒真式';
-      return 'Tautology';
+      return t.tautology
+          .replaceAll(RegExp(r'[\u{1F300}-\u{1F9FF}]', unicode: true), '')
+          .trim();
     case TruthTableType.contradiction:
-      if (locale == 'es') return 'Contradicción';
-      if (locale == 'pt') return 'Contradição';
-      if (locale == 'fr') return 'Contradiction';
-      if (locale == 'de') return 'Widerspruch';
-      if (locale == 'hi') return 'विरोधाभास';
-      if (locale == 'ru') return 'Противоречие';
-      if (locale == 'it') return 'Contraddizione';
-      if (locale == 'zh') return '矛盾式';
-      if (locale == 'ja') return '矛盾';
-      return 'Contradiction';
+      return t.contradiction
+          .replaceAll(RegExp(r'[\u{1F300}-\u{1F9FF}]', unicode: true), '')
+          .trim();
   }
 }
 
@@ -93,120 +72,208 @@ Future<PDFDocument> generatePdfWithTable(
   AppLocalizations translations,
 ) async {
   final pdf = pw.Document();
-
   final String language = t.language;
-
-  // Siempre usar DejaVuSans que tiene los mejores símbolos lógicos
   final fontData = await loadFont();
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
-  //logo
   final ByteData data = await rootBundle.load('assets/icon.png');
-  final Uint8List bytes = data.buffer.asUint8List();
+  final Uint8List logoBytes = data.buffer.asUint8List();
 
-  final type = getType(language, t.tipo);
-
+  final type = getType(translations, t.tipo);
   final finalTable = getTable(t, language);
+
+  final now = DateTime.now();
+  final dateFormatted =
+      '${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}';
 
   pdf.addPage(
     pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      margin: const pw.EdgeInsets.all(32),
+      header:
+          (context) => pw.Container(
+            alignment: pw.Alignment.centerRight,
+            margin: const pw.EdgeInsets.only(bottom: 20),
+            child: pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: [
+                pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text(
+                      translations.appName,
+                      style: pw.TextStyle(
+                        font: ttf,
+                        fontSize: 24,
+                        fontWeight: pw.FontWeight.bold,
+                        color: PdfColors.blueGrey800,
+                      ),
+                    ),
+                    pw.Text(
+                      translations.truthValues,
+                      style: pw.TextStyle(
+                        font: ttf,
+                        fontSize: 12,
+                        color: PdfColors.grey700,
+                      ),
+                    ),
+                  ],
+                ),
+                pw.Image(pw.MemoryImage(logoBytes), width: 50, height: 50),
+              ],
+            ),
+          ),
+      footer:
+          (context) => pw.Container(
+            alignment: pw.Alignment.centerRight,
+            margin: const pw.EdgeInsets.only(top: 20),
+            child: pw.Column(
+              children: [
+                pw.Divider(thickness: 0.5, color: PdfColors.grey),
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text(
+                      dateFormatted,
+                      style: pw.TextStyle(
+                        font: ttf,
+                        fontSize: 8,
+                        color: PdfColors.grey700,
+                      ),
+                    ),
+                    pw.Text(
+                      'Page ${context.pageNumber} of ${context.pagesCount}',
+                      style: pw.TextStyle(
+                        font: ttf,
+                        fontSize: 8,
+                        color: PdfColors.grey700,
+                      ),
+                    ),
+                  ],
+                ),
+                pw.SizedBox(height: 5),
+                pw.UrlLink(
+                  child: pw.Text(
+                    'https://play.google.com/store/apps/details?id=$APP_ID',
+                    style: pw.TextStyle(
+                      font: ttf,
+                      fontSize: 8,
+                      color: PdfColors.blue800,
+                      decoration: pw.TextDecoration.underline,
+                    ),
+                  ),
+                  destination:
+                      'https://play.google.com/store/apps/details?id=$APP_ID',
+                ),
+              ],
+            ),
+          ),
       build:
           (context) => [
             pw.Header(
               level: 0,
               child: pw.Text(
                 t.infix,
-                style: pw.TextStyle(font: ttf, fontSize: 20),
+                style: pw.TextStyle(
+                  font: ttf,
+                  fontSize: 22,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.blueGrey900,
+                ),
               ),
             ),
-            //Add Proposiciones: A, B, C
-            pw.Text(
-              '${translations.propositions}: ${t.variables.join(', ')}',
-              style: pw.TextStyle(font: ttf),
+            pw.SizedBox(height: 15),
+            pw.Container(
+              padding: const pw.EdgeInsets.all(10),
+              decoration: pw.BoxDecoration(
+                color: PdfColors.grey100,
+                borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+                border: pw.Border.all(color: PdfColors.grey300),
+              ),
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  _infoRow(
+                    translations.propositions,
+                    t.variables.join(', '),
+                    ttf,
+                  ),
+                  pw.SizedBox(height: 5),
+                  _infoRow(
+                    translations.numberOfPropositions,
+                    t.variables.length.toString(),
+                    ttf,
+                  ),
+                  pw.SizedBox(height: 5),
+                  _infoRow(
+                    translations.numberOfRows,
+                    t.totalRows.toString(),
+                    ttf,
+                  ),
+                  pw.SizedBox(height: 5),
+                  _infoRow(translations.type, type, ttf, isResult: true),
+                ],
+              ),
             ),
-            //Add space
-            pw.SizedBox(height: 10),
-            //Add Cantidad de proposiciones: 3
-            pw.Text(
-              '${translations.numberOfPropositions}: ${t.variables.length}',
-              style: pw.TextStyle(font: ttf),
-            ),
-            pw.SizedBox(height: 10),
-
-            pw.Text(
-              //Cantidad de filas: 8
-              '${translations.numberOfRows}: ${t.totalRows}',
-              style: pw.TextStyle(font: ttf),
-            ),
-            pw.SizedBox(height: 10),
-            pw.Text(
-              '${translations.type}: $type',
-              style: pw.TextStyle(font: ttf),
-            ),
-            pw.SizedBox(height: 10),
+            pw.SizedBox(height: 25),
             pw.TableHelper.fromTextArray(
               context: context,
               data: finalTable,
               headerStyle: pw.TextStyle(
                 font: ttf,
-                color: PdfColors.blueGrey800,
+                color: PdfColors.white,
                 fontWeight: pw.FontWeight.bold,
+                fontSize: 10,
               ),
               headerDecoration: const pw.BoxDecoration(
-                color: PdfColors.grey300,
+                color: PdfColors.blueGrey900,
               ),
-              cellHeight: 30.0,
+              cellStyle: pw.TextStyle(font: ttf, fontSize: 9),
+              cellHeight: 25.0,
               cellAlignment: pw.Alignment.center,
-            ),
-            //Space
-            pw.SizedBox(height: 60),
-            //Add logo image
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              children: [
-                pw.Image(pw.MemoryImage(bytes), width: 40, height: 40),
-              ],
-            ),
-            pw.SizedBox(height: 10),
-
-            pw.Footer(
-              title: pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.end,
-                children: [
-                  pw.Text(
-                    '${translations.appName} App',
-                    style: pw.TextStyle(font: ttf, fontSize: 10),
-                  ),
-                ],
-              ),
-            ),
-            pw.SizedBox(height: 10),
-
-            //Add webpage
-            pw.Footer(
-              title: pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.end,
-                children: [
-                  pw.UrlLink(
-                    child: pw.Text(
-                      'https://play.google.com/store/apps/details?id=$APP_ID',
-                      style: pw.TextStyle(font: ttf, fontSize: 10),
-                    ),
-                    destination:
-                        'https://play.google.com/store/apps/details?id=$APP_ID',
-                  ),
-                ],
-              ),
+              oddRowDecoration: const pw.BoxDecoration(color: PdfColors.grey50),
+              border: pw.TableBorder.all(color: PdfColors.grey400, width: 0.5),
             ),
           ],
     ),
   );
+
   final output = await pdf.save();
-  final filename = '${translations.pdfFilename}_${t.infix}';
+  final filename =
+      '${translations.pdfFilename}_${t.infix.replaceAll(RegExp(r'[\\/:*?"<>|]'), '_')}';
   final String path = '${(await getTemporaryDirectory()).path}/$filename.pdf';
   final File file = File(path);
   await file.writeAsBytes(output);
 
-  PDFDocument doc = await PDFDocument.fromFile(file);
-  return doc;
+  return PDFDocument.fromFile(file);
+}
+
+pw.Widget _infoRow(
+  String label,
+  String value,
+  pw.Font font, {
+  bool isResult = false,
+}) {
+  return pw.Row(
+    children: [
+      pw.Text(
+        '$label: ',
+        style: pw.TextStyle(
+          font: font,
+          fontSize: 11,
+          fontWeight: pw.FontWeight.bold,
+          color: PdfColors.blueGrey700,
+        ),
+      ),
+      pw.Text(
+        value,
+        style: pw.TextStyle(
+          font: font,
+          fontSize: 11,
+          fontWeight: isResult ? pw.FontWeight.bold : pw.FontWeight.normal,
+          color: isResult ? PdfColors.blue900 : PdfColors.black,
+        ),
+      ),
+    ],
+  );
 }

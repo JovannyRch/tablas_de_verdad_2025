@@ -5,11 +5,14 @@ import 'package:flutter/foundation.dart';
 class PurchaseService {
   static const String _proProductId = 'pro_version';
   final InAppPurchase _iap = InAppPurchase.instance;
-  late final StreamSubscription<List<PurchaseDetails>> _subscription;
+  StreamSubscription<List<PurchaseDetails>>? _subscription;
 
   ValueNotifier<bool> isProVersion = ValueNotifier<bool>(false);
 
   void initPurchaseListener() {
+    // Solo inicializar si no está ya inicializado
+    if (_subscription != null) return;
+
     _subscription = _iap.purchaseStream.listen(
       _onPurchaseUpdated,
       onError: (error) {
@@ -19,7 +22,7 @@ class PurchaseService {
   }
 
   void dispose() {
-    _subscription.cancel();
+    _subscription?.cancel();
   }
 
   Future<void> restorePurchases() async {

@@ -21,7 +21,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ascending => '升序';
 
   @override
+  String get appearance => '外观';
+
+  @override
+  String get about => '关于';
+
+  @override
   String get becomePro => '成为专业版用户！';
+
+  @override
+  String get clear_all => '清除全部';
+
+  @override
+  String get close => '关闭';
 
   @override
   String get buyPro => '购买';
@@ -116,6 +128,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get premiumOperatorsAccess => '访问所有高级运算符';
 
   @override
+  String get preferences => '首选项';
+
+  @override
   String get premiumSupport => '高级支持';
 
   @override
@@ -146,6 +161,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get remainingExpressions => '剩余';
 
   @override
+  String get resetDefaults => '恢复默认设置';
+
+  @override
+  String get confirmReset => '确认重置';
+
+  @override
+  String get confirmResetDesc => '您确定要将所有设置恢复为默认值吗？';
+
+  @override
+  String get ok => '确定';
+
+  @override
   String get result => '结果';
 
   @override
@@ -159,6 +186,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get simple_mode => '简单模式';
+
+  @override
+  String get steps => '解决步骤';
+
+  @override
+  String get more_info => '更多信息';
 
   @override
   String get t_f => '真/假';

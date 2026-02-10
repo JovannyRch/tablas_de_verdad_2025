@@ -11,6 +11,7 @@ import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AppDrawer extends StatelessWidget {
   final bool isPro;
@@ -31,78 +32,25 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     final settings = context.watch<Settings>();
-
-    Widget buildTile(IconData icon, String title, String routeName) {
-      return ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-        onTap: () {
-          Navigator.pop(context);
-          Navigator.pushNamed(context, routeName);
-        },
-      );
-    }
-
-    Widget buildHistoryDialog(
-      IconData icon,
-      String title,
-      Function(BuildContext context) onTap,
-    ) {
-      return ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-        onTap: () {
-          Navigator.pop(context);
-          onTap(context);
-        },
-      );
-    }
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Drawer(
+      backgroundColor: isDark ? const Color(0xFF0F172A) : Colors.white,
       child: Column(
         children: [
-          // -- HEADER --
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: kSeedColor),
-            accountName: Text(
-              t.appName,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            accountEmail: Text(""),
-
-            otherAccountsPictures:
-                isPro
-                    ? [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: const Text(
-                          'PRO',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ]
-                    : null,
-          ),
+          // -- CUSTOM HEADER --
+          _buildHeader(context, t),
 
           // -- ITEMS --
           Expanded(
             child: ListView(
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 8),
               children: [
-                buildHistoryDialog(
-                  Icons.calculate_outlined,
-                  t.calculationHistory,
-                  (BuildContext context) async {
+                _DrawerTile(
+                  icon: Icons.history_rounded,
+                  title: t.calculationHistory,
+                  onTap: () async {
+                    Navigator.pop(context);
                     final selectedExpr = await showDialog<String>(
                       context: context,
                       barrierDismissible: true,
@@ -113,71 +61,276 @@ class AppDrawer extends StatelessWidget {
                     }
                   },
                 ),
-                buildTile(
-                  Icons.folder_outlined,
-                  t.expressionLibrary,
-                  Routes.library,
+                _DrawerTile(
+                  icon: Icons.auto_stories_outlined,
+                  title: t.expressionLibrary,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, Routes.library);
+                  },
                 ),
-                ListTile(
-                  leading: const FaIcon(
-                    FontAwesomeIcons.youtube,
-                    color: Colors.red,
-                  ),
-                  title: Text(t.youtubeChannel),
+                _DrawerTile(
+                  icon: FontAwesomeIcons.youtube,
+                  title: t.youtubeChannel,
+                  iconColor: Colors.redAccent,
                   onTap: () {
                     visit(YOUTUBE_URL);
                   },
                 ),
-
-                if (settings.isProVersion)
-                  ListTile(
-                    leading: const Icon(Icons.support_agent),
-                    title: Text(t.premiumSupport),
-                    onTap: openSupportChat,
-                  )
-                else
-                  ListTile(
-                    leading: const Icon(Icons.lock),
-                    title: Text(t.premiumSupport),
-                    onTap: () => showProVersionDialog(context, settings, t),
-                  ),
-                ListTile(
-                  leading: const Icon(Icons.star, color: Colors.amber),
-                  title: Text(t.rateTheApp),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                  child: Divider(thickness: 0.5),
+                ),
+                _DrawerTile(
+                  icon:
+                      settings.isProVersion
+                          ? Icons.support_agent_rounded
+                          : Icons.lock_outline_rounded,
+                  title: t.premiumSupport,
+                  onTap: () {
+                    if (settings.isProVersion) {
+                      openSupportChat();
+                    } else {
+                      showProVersionDialog(context, settings, t);
+                    }
+                  },
+                ),
+                _DrawerTile(
+                  icon: Icons.star_outline_rounded,
+                  title: t.rateTheApp,
+                  iconColor: Colors.amber,
                   onTap: () {
                     Navigator.pop(context);
                     showRatingDialog(context);
                   },
                 ),
-                buildTile(Icons.settings, t.settings, Routes.settings),
+                _DrawerTile(
+                  icon: Icons.settings_outlined,
+                  title: t.settings,
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, Routes.settings);
+                  },
+                ),
               ],
             ),
           ),
 
-          const Divider(height: 1),
+          // -- BOTTOM CTA SECTION --
+          if (!isPro) _buildUpgradeCard(context, t, settings),
 
-          // -- SECTION: UPGRADE or LOGOUT --
-          if (!isPro)
-            ListTile(
-              leading: Icon(Icons.diamond, color: Colors.amber),
-              title: Text(t.upgradePro),
-              onTap: () {
-                Navigator.pop(context);
-                onUpgrade();
-              },
-              tileColor: Colors.amber.withOpacity(0.1),
-            ),
-
-          /*   ListTile(
-            leading: const Icon(Icons.exit_to_app, color: Colors.redAccent),
-            title: const Text('Cerrar Sesión'),
-            onTap: () {
-              Navigator.pop(context);
-              onLogout();
-            },
-            hoverColor: Colors.redAccent,
-          ), */
+          const SizedBox(height: 16),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context, AppLocalizations t) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [kSeedColor, kSeedColor.withOpacity(0.8)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.functions,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              if (isPro)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    'PRO',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Text(
+            t.appName,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+          ),
+          FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              final version =
+                  snapshot.hasData ? "v${snapshot.data!.version}" : "...";
+              return Text(
+                version,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white.withOpacity(0.6),
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUpgradeCard(
+    BuildContext context,
+    AppLocalizations t,
+    Settings settings,
+  ) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFACC15), Color(0xFFEAB308)], // Yellow-400 to 600
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.amber.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+            onUpgrade();
+          },
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.diamond_rounded,
+                  color: Colors.white,
+                  size: 32,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t.upgradePro,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        t.fullFeatureAccess,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.white,
+                  size: 14,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DrawerTile extends StatelessWidget {
+  final dynamic icon;
+  final String title;
+  final VoidCallback onTap;
+  final Color? iconColor;
+
+  const _DrawerTile({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+    this.iconColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      child: ListTile(
+        leading:
+            icon is IconData
+                ? Icon(
+                  icon,
+                  color:
+                      iconColor ?? (isDark ? Colors.white70 : Colors.black54),
+                  size: 22,
+                )
+                : FaIcon(icon as IconData, color: iconColor, size: 20),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white.withOpacity(0.9) : Colors.black87,
+            letterSpacing: -0.2,
+          ),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        onTap: onTap,
+        dense: true,
+        visualDensity: const VisualDensity(vertical: -1),
       ),
     );
   }

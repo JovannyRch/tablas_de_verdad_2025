@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
@@ -18,6 +17,7 @@ import 'package:tablas_de_verdad_2025/widget/keypad.dart';
 import 'package:tablas_de_verdad_2025/widget/pro_icon.dart';
 import 'package:tablas_de_verdad_2025/utils/rewarded_ad_helper.dart';
 
+import 'package:tablas_de_verdad_2025/utils/ghost_text_controller.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +30,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  final _controller = TextEditingController(text: "");
+  final _controller = GhostTextEditingController(text: "");
   final _focusNode = FocusNode();
   Case _case = Case.lower;
   late AppLocalizations _localization;
@@ -56,6 +56,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void dispose() {
     rewardedAdHelper.dispose(); // Liberar recursos del rewarded ad
     ads.interstitialAd!.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -71,6 +72,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     _localization = AppLocalizations.of(context)!;
     _settings = context.watch<Settings>();
+    final isDark = _settings.isDarkMode(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -116,24 +118,44 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
+            Container(
+              margin: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.grey[900] : Colors.grey[100],
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
               child: TextField(
                 controller: _controller,
                 focusNode: _focusNode,
                 keyboardType: TextInputType.none,
                 showCursor: true,
                 readOnly: true,
-                autocorrect: true,
+                autocorrect: false,
+                textAlign: TextAlign.right,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  fillColor:
-                      _settings.isDarkMode(context)
-                          ? Colors.grey[800]
-                          : Colors.white10,
-                  filled: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 24,
+                  ),
+                  border: InputBorder.none,
+                  hintText: _localization.emptyExpression,
+                  hintStyle: TextStyle(
+                    color: isDark ? Colors.white30 : Colors.black26,
+                  ),
                 ),
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  color: isDark ? Colors.white : Colors.black87,
+                  fontFamily: 'Courier', // Better for logical expressions
+                ),
               ),
             ),
             // Keypad
@@ -224,10 +246,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       return;
     }
 
-    // Verificar si usa operadores premium (para usuarios no Pro)
     if (!_settings.isProVersion && _containsPremiumOperators(expression)) {
-      // TODO: Implementar rewarded ad aquí
-      // Por ahora, mostrar diálogo informativo
       final shouldContinue = await _showPremiumOperatorDialog();
       if (!shouldContinue) return;
     }
@@ -283,10 +302,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     onPressed: () async {
                       Navigator.pop(context, true);
 
-                      // Mostrar rewarded ad
                       final success = await rewardedAdHelper.showRewardedAd();
                       if (!success) {
-                        // Si falla el ad, permitir continuar de todos modos (buena UX)
                         if (mounted) {
                           showSnackBarMessage(
                             context,

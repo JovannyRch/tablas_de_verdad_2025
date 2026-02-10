@@ -1,3 +1,7 @@
+Run app
+flutter run --flavor es # Para versión española
+flutter run --flavor en # Para versión inglesa
+
 Versión en Español (com.jovannyrch.tablasdeverdad)
 
 flutter build appbundle --flavor es --dart-define=FLAVOR=es

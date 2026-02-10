@@ -21,7 +21,19 @@ class AppLocalizationsHi extends AppLocalizations {
   String get ascending => 'आरोही';
 
   @override
+  String get appearance => 'दिखावट';
+
+  @override
+  String get about => 'के बारे में';
+
+  @override
   String get becomePro => 'Pro बनें!';
+
+  @override
+  String get clear_all => 'सभी साफ़ करें';
+
+  @override
+  String get close => 'बंद करें';
 
   @override
   String get buyPro => 'खरीदें';
@@ -116,6 +128,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get premiumOperatorsAccess => 'सभी प्रीमियम ऑपरेटरों तक पहुंच';
 
   @override
+  String get preferences => 'पसंद';
+
+  @override
   String get premiumSupport => 'प्रीमियम सहायता';
 
   @override
@@ -146,6 +161,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get remainingExpressions => 'शेष';
 
   @override
+  String get resetDefaults => 'डिफ़ॉल्ट पर रीसेट करें';
+
+  @override
+  String get confirmReset => 'रीसेट की पुष्टि करें';
+
+  @override
+  String get confirmResetDesc => 'क्या आप वाकई सभी सेटिंग्स को उनके डिफ़ॉल्ट पर रीसेट करना चाहते हैं?';
+
+  @override
+  String get ok => 'ठीक है';
+
+  @override
   String get result => 'परिणाम';
 
   @override
@@ -159,6 +186,12 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get simple_mode => 'सरल मोड';
+
+  @override
+  String get steps => 'समाधान के कदम';
+
+  @override
+  String get more_info => 'अधिक जानकारी';
 
   @override
   String get t_f => 'S/A';

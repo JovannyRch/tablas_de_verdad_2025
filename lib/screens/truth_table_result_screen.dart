@@ -84,32 +84,19 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   Widget build(BuildContext context) {
     _localization = AppLocalizations.of(context)!;
     _settings = context.watch<Settings>();
+    final isDark = _settings.isDarkMode(context);
 
     return Scaffold(
-      // TODO: Reactivar FloatingActionButton cuando backend esté disponible
-      /* floatingActionButton:
-          (response != null &&
-                  response!.video_link != null &&
-                  response!.video_link!.isNotEmpty)
-              ? FloatingActionButton.extended(
-                onPressed: () {
-                  visit(response!.video_link!);
-                },
-                label: Text(_localization.videoFABTooltip),
-                icon: FaIcon(FontAwesomeIcons.youtube, color: Colors.white),
-                tooltip: _localization.videoFABTooltip,
-                backgroundColor: Colors.red,
-              )
-              : null,
-      */
       appBar: AppBar(
         title: Text(_localization.result),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
               visit(YOUTUBE_URL);
             },
             icon: const FaIcon(FontAwesomeIcons.youtube, color: Colors.red),
+            tooltip: 'YouTube',
           ),
           IconButton(
             onPressed: () {
@@ -122,48 +109,56 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
                 ),
               );
             },
-            icon: Icon(Icons.picture_as_pdf),
+            icon: const Icon(Icons.picture_as_pdf),
+            tooltip: 'PDF',
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
         children: [
-          if (widget.expression != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: _inputLabel(),
-            ),
+          if (widget.expression != null) ...[
+            _inputLabel(isDark),
+            const SizedBox(height: 16),
+          ],
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: _FinalResultBanner(
-              result: getType(widget.truthTable.tipo),
-              onTap: () {
-                String description = getDescription(widget.truthTable.tipo);
-
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(getType(widget.truthTable.tipo)),
-                      content: Text(description),
-                      actions: <Widget>[
-                        TextButton(
-                          child: const Text('Ok'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
+          _FinalResultBanner(
+            type: widget.truthTable.tipo,
+            label: getType(widget.truthTable.tipo),
+            onTap: () {
+              String description = getDescription(widget.truthTable.tipo);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(getType(widget.truthTable.tipo)),
+                    content: Text(description),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Ok'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           ),
 
-          _settings.isProVersion ? SizedBox.shrink() : BannerAdWidget(),
+          const SizedBox(height: 24),
+          Text(
+            _localization.steps,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          _settings.isProVersion ? const SizedBox.shrink() : BannerAdWidget(),
           ...widget.steps.asMap().entries.map((entry) {
             int index = entry.key;
             var step = entry.value;
@@ -196,31 +191,37 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
     }
   }
 
-  Widget _inputLabel() {
-    if (widget.expression == null) {
-      return const SizedBox.shrink();
-    }
+  Widget _inputLabel(bool isDark) {
     return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      decoration: BoxDecoration(
+        color: isDark ? Colors.grey[900] : Colors.grey[100],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+        ),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /* Add test button */
-          Text(_localization.expression, textAlign: TextAlign.left),
-          SizedBox(height: 8.0),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: ThemeData().primaryColor.withAlpha(30),
+          Text(
+            _localization.expression.toUpperCase(),
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: isDark ? Colors.white54 : Colors.black54,
+              letterSpacing: 1.2,
             ),
-            child: Center(
-              child: Text(
-                widget.expression!,
-                style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center,
-              ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            widget.expression!,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: isDark ? Colors.white : Colors.black87,
+              fontFamily: 'Courier',
             ),
           ),
         ],
@@ -229,85 +230,51 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen> {
   }
 }
 
-/// Collapsible tile that shows the title and the truth table of a single step.
 class _StepTile extends StatelessWidget {
   final TruthTableStep step;
-  final int index; // human‑friendly index starting at 1
+  final int index;
 
   const _StepTile({required this.step, required this.index});
-
-  Widget _title() {
-    if (step.stepProcess.isSingleVariable) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            step.stepProcess.operator.value,
-            style: TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.w800,
-              color: kSeedColor,
-            ),
-          ),
-          Text(
-            " ${step.stepProcess.variable1}",
-            style: TextStyle(fontSize: 16.0),
-          ),
-        ],
-      );
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          " ${step.stepProcess.variable1} ",
-          style: TextStyle(fontSize: 16.0),
-        ),
-        Text(
-          step.stepProcess.operator.value,
-          style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.w800,
-            color: kSeedColor,
-          ),
-        ),
-        Text(
-          " ${step.stepProcess.variable2}",
-          style: TextStyle(fontSize: 16.0),
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     AppLocalizations localization = AppLocalizations.of(context)!;
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 2,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: isDark ? Colors.grey[850]?.withOpacity(0.5) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+        ),
+      ),
       child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        title: Column(
-          children: [
-            Text(
-              step.stepProcess.operator.getLocalizedName(
-                localization.localeName,
-              ),
-            ),
-            _title(),
-          ],
-        ),
+        shape: const RoundedRectangleBorder(side: BorderSide.none),
+        collapsedShape: const RoundedRectangleBorder(side: BorderSide.none),
         leading: CircleAvatar(
-          radius: 14,
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          child: Text('$index', style: const TextStyle(fontSize: 12)),
+          radius: 12,
+          backgroundColor: kSeedColor.withOpacity(0.1),
+          child: Text(
+            '$index',
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: kSeedColor,
+            ),
+          ),
         ),
+        title: Text(
+          step.stepProcess.operator.getLocalizedName(localization.localeName),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subtitle: _buildSubTitle(),
         children: [
+          const Divider(height: 1, thickness: 0.5),
+          const SizedBox(height: 16),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: _TruthTableWidget(headers: step.headers, rows: step.rows),
@@ -316,9 +283,53 @@ class _StepTile extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildSubTitle() {
+    final op = step.stepProcess.operator.value;
+    final v1 = step.stepProcess.variable1;
+    final v2 = step.stepProcess.variable2;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Row(
+        children: [
+          if (step.stepProcess.isSingleVariable) ...[
+            Text(
+              op,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: kSeedColor,
+              ),
+            ),
+            Text(
+              " $v1",
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ] else ...[
+            Text(
+              "$v1 ",
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            Text(
+              op,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: kSeedColor,
+              ),
+            ),
+            Text(
+              " $v2",
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }
 
-/// Basic widget that renders a matrix of strings as a stylised truth table.
 class _TruthTableWidget extends StatelessWidget {
   final List<String> headers;
   final List<List<String>> rows;
@@ -328,23 +339,39 @@ class _TruthTableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final settings = context.watch<Settings>();
     AppLocalizations localization = AppLocalizations.of(context)!;
-    /*   final isDescOrder = settings.mintermOrder == MintermOrder.desc; */
 
     return DataTable(
-      headingRowHeight: 40,
-      dataRowHeight: 34,
+      headingRowHeight: 44,
+      dataRowMinHeight: 32,
+      dataRowMaxHeight: 40,
+      horizontalMargin: 12,
+      columnSpacing: 24,
       headingRowColor: WidgetStateProperty.all(
-        theme.colorScheme.surfaceContainerHighest,
+        isDark
+            ? Colors.white.withOpacity(0.05)
+            : Colors.black.withOpacity(0.02),
       ),
-      border: TableBorder.all(color: theme.dividerColor.withOpacity(.4)),
+      border: TableBorder.all(
+        color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+        width: 1,
+        borderRadius: BorderRadius.circular(8),
+      ),
       columns: [
         for (final header in headers)
           DataColumn(
-            label: Text(
-              header,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            label: Expanded(
+              child: Text(
+                header,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+              ),
             ),
           ),
       ],
@@ -354,14 +381,19 @@ class _TruthTableWidget extends StatelessWidget {
             cells: [
               for (final cell in row)
                 DataCell(
-                  Text(
-                    getCellValue(
-                      localization.localeName,
-                      settings.truthFormat,
-                      cell,
+                  Center(
+                    child: Text(
+                      getCellValue(
+                        localization.localeName,
+                        settings.truthFormat,
+                        cell,
+                      ),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: _getCellColor(cell, isDark),
+                      ),
                     ),
-                    style: const TextStyle(fontSize: 12),
-                    textAlign: TextAlign.center,
                   ),
                 ),
             ],
@@ -369,49 +401,117 @@ class _TruthTableWidget extends StatelessWidget {
       ],
     );
   }
+
+  Color? _getCellColor(String cell, bool isDark) {
+    if (cell.toUpperCase() == 'V' || cell == '1') {
+      return Colors.green[400];
+    }
+    if (cell.toUpperCase() == 'F' || cell == '0') {
+      return Colors.red[400];
+    }
+    return null;
+  }
 }
 
-/// Banner that highlights the overall result (tautology, contradiction, contingencia, etc.).
 class _FinalResultBanner extends StatelessWidget {
-  final String result;
-  final Function? onTap;
+  final TruthTableType type;
+  final String label;
+  final VoidCallback onTap;
 
-  const _FinalResultBanner({required this.result, this.onTap});
+  const _FinalResultBanner({
+    required this.type,
+    required this.label,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final localization = AppLocalizations.of(context)!;
 
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: scheme.primaryContainer,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Text(
-            result,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: scheme.onPrimaryContainer,
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
+    Color baseColor;
+    IconData icon;
+
+    switch (type) {
+      case TruthTableType.tautology:
+        baseColor = Colors.green;
+        icon = Icons.check_circle_outline;
+        break;
+      case TruthTableType.contradiction:
+        baseColor = Colors.red;
+        icon = Icons.error_outline;
+        break;
+      case TruthTableType.contingency:
+        baseColor = Colors.amber;
+        icon = Icons.help_outline;
+        break;
+    }
+
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: baseColor.withOpacity(isDark ? 0.15 : 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: baseColor.withOpacity(0.3)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: baseColor.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: baseColor, size: 28),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              isDark
+                                  ? (baseColor as MaterialColor)[300]
+                                  : (baseColor as MaterialColor)[700],
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Text(
+                            localization.more_info,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark ? Colors.white38 : Colors.black38,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 10,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-        Positioned(
-          right: 0.0,
-          bottom: 0.0,
-          child: IconButton(
-            icon: Icon(Icons.info, color: scheme.onPrimaryContainer),
-            onPressed: () {
-              onTap?.call();
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

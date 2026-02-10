@@ -21,7 +21,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ascending => 'Aufsteigend';
 
   @override
+  String get appearance => 'Aussehen';
+
+  @override
+  String get about => 'Über';
+
+  @override
   String get becomePro => 'Werden Sie Pro!';
+
+  @override
+  String get clear_all => 'Alles löschen';
+
+  @override
+  String get close => 'Schließen';
 
   @override
   String get buyPro => 'Kaufen';
@@ -116,6 +128,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get premiumOperatorsAccess => 'Zugriff auf alle Premium-Operatoren';
 
   @override
+  String get preferences => 'Präferenzen';
+
+  @override
   String get premiumSupport => 'Premium-Support';
 
   @override
@@ -146,6 +161,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get remainingExpressions => 'Verbleibend';
 
   @override
+  String get resetDefaults => 'Auf Standardeinstellungen zurücksetzen';
+
+  @override
+  String get confirmReset => 'Zurücksetzen bestätigen';
+
+  @override
+  String get confirmResetDesc => 'Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen möchten?';
+
+  @override
+  String get ok => 'OK';
+
+  @override
   String get result => 'Ergebnis';
 
   @override
@@ -159,6 +186,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get simple_mode => 'Einfacher Modus';
+
+  @override
+  String get steps => 'Lösungsschritte';
+
+  @override
+  String get more_info => 'Mehr Informationen';
 
   @override
   String get t_f => 'W/F';

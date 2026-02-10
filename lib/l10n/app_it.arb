@@ -11,7 +11,11 @@
   "advanced_mode": "Modalità avanzata",
   "appName": "Tavole di Verità",
   "ascending": "Crescente",
+  "appearance": "Aspetto",
+  "about": "Informazioni",
   "becomePro": "Diventa Pro!",
+  "clear_all": "Cancella tutto",
+  "close": "Chiudi",
   "buyPro": "Acquista",
   "calculationHistory": "Cronologia Calcoli",
   "cancel": "Annulla",
@@ -57,6 +61,8 @@
   "settingsTitle": "Impostazioni",
   "settings_mode": "Modalità",
   "simple_mode": "Modalità semplice",
+  "steps": "Passaggi di risoluzione",
+  "more_info": "Ulteriori informazioni",
   "t_f": "V/F",
   "tautology": "Tautologia ✅",
   "tautology_description": "Una tautologia è una proposizione o formula logica che è sempre vera, indipendentemente dai valori di verità dei suoi componenti. In altre parole, è un'espressione che è valida sotto qualsiasi interpretazione o assegnazione di valori di verità alle sue variabili.",
@@ -71,5 +77,10 @@
   "videoScreenDescription": "Questo video spiega la risoluzione passo dopo passo di questa espressione logica.",
   "videoScreenTitle": "Spiegazione Video",
   "watchVideoFree": "Guarda Video (Gratis)",
-  "youtubeChannel": "Canale YouTube"
+  "youtubeChannel": "Canale YouTube",
+  "resetDefaults": "Ripristina impostazioni predefinite",
+  "confirmReset": "Conferma ripristino",
+  "confirmResetDesc": "Sei sicuro di voler ripristinare tutte le impostazioni ai valori predefiniti?",
+  "ok": "OK",
+  "preferences": "Preferenze"
 }

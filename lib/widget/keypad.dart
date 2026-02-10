@@ -53,16 +53,19 @@ class TruthKeypad extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: GridView.count(
-            crossAxisCount: 5,
-            padding: const EdgeInsets.all(8),
-            mainAxisSpacing: 6,
-            crossAxisSpacing: 6,
-            children: buttons,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: GridView.count(
+              crossAxisCount:
+                  4, // 4 columns looks more professional for calculator
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              children: buttons,
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        Container(
+          padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
           child: Row(
             children: [
               Expanded(
@@ -70,11 +73,11 @@ class TruthKeypad extends StatelessWidget {
                 child: _Key(
                   label: 'AC',
                   kind: KeyKind.action,
-                  colorOverride: Colors.red,
+                  colorOverride: Colors.redAccent,
                   onTap: onClear,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
               Expanded(
                 child: _Key(
                   label: '⌫',
@@ -82,7 +85,7 @@ class TruthKeypad extends StatelessWidget {
                   onTap: onBackspace,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
               Expanded(
                 child: _Key(
                   label: 'Aa',
@@ -90,12 +93,12 @@ class TruthKeypad extends StatelessWidget {
                   onTap: onToggleAa,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
               Expanded(
                 child: _Key(
                   label: '=',
                   kind: KeyKind.action,
-                  colorOverride: Colors.green,
+                  colorOverride: kSeedColor,
                   onTap: onEvaluate,
                 ),
               ),
@@ -107,13 +110,12 @@ class TruthKeypad extends StatelessWidget {
   }
 }
 
-/* ───── Botón individual con estilos según tipo ─────────────────── */
-
 class _Key extends StatelessWidget {
   final String label;
   final KeyKind kind;
   final VoidCallback onTap;
   final Color? colorOverride;
+
   const _Key({
     required this.label,
     required this.kind,
@@ -124,43 +126,66 @@ class _Key extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    Settings settings = context.watch<Settings>();
-
-    bool isDark = settings.themeMode == ThemeMode.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     Color bg;
     Color fg;
+    double fontSize = 22;
 
     if (colorOverride != null) {
       bg = colorOverride!;
-      fg = scheme.onError;
+      fg = Colors.white;
     } else {
       switch (kind) {
         case KeyKind.operand:
-          bg = isDark ? Colors.grey.shade800 : Colors.white;
-          fg = isDark ? Colors.white : Colors.grey.shade800;
+          bg = isDark ? Colors.grey[850]! : Colors.white;
+          fg = isDark ? Colors.white : Colors.black87;
           break;
         case KeyKind.operator:
-          bg = isDark ? scheme.inversePrimary : Colors.white;
-          fg = isDark ? Colors.white : kSeedColor;
+          bg =
+              isDark
+                  ? scheme.primaryContainer.withOpacity(0.3)
+                  : scheme.primaryContainer.withOpacity(0.1);
+          fg = isDark ? Colors.orange[300]! : kSeedColor;
+          fontSize = 24;
           break;
         case KeyKind.action:
-          bg = scheme.surfaceContainerHighest;
-          fg = scheme.onSurfaceVariant;
+          bg = isDark ? Colors.grey[800]! : Colors.grey[200]!;
+          fg = isDark ? Colors.white70 : Colors.black87;
           break;
       }
     }
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: bg,
-        foregroundColor: fg,
-        padding: EdgeInsets.zero,
-      ),
-      onPressed: onTap,
-      child: Center(
-        child: Text(
-          label,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Ink(
+          decoration: BoxDecoration(
+            color: bg,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow:
+                isDark
+                    ? []
+                    : [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.w600,
+                color: fg,
+              ),
+            ),
+          ),
         ),
       ),
     );

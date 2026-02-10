@@ -135,11 +135,35 @@ abstract class AppLocalizations {
   /// **'Ascendente'**
   String get ascending;
 
+  /// No description provided for @appearance.
+  ///
+  /// In es, this message translates to:
+  /// **'Apariencia'**
+  String get appearance;
+
+  /// No description provided for @about.
+  ///
+  /// In es, this message translates to:
+  /// **'Acerca de'**
+  String get about;
+
   /// No description provided for @becomePro.
   ///
   /// In es, this message translates to:
   /// **'¡Conviértete en Pro!'**
   String get becomePro;
+
+  /// No description provided for @clear_all.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar todo'**
+  String get clear_all;
+
+  /// No description provided for @close.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar'**
+  String get close;
 
   /// No description provided for @buyPro.
   ///
@@ -321,6 +345,12 @@ abstract class AppLocalizations {
   /// **'Acceso a todos los operadores premium'**
   String get premiumOperatorsAccess;
 
+  /// No description provided for @preferences.
+  ///
+  /// In es, this message translates to:
+  /// **'Preferencias'**
+  String get preferences;
+
   /// No description provided for @premiumSupport.
   ///
   /// In es, this message translates to:
@@ -381,6 +411,30 @@ abstract class AppLocalizations {
   /// **'Quedan'**
   String get remainingExpressions;
 
+  /// No description provided for @resetDefaults.
+  ///
+  /// In es, this message translates to:
+  /// **'Restablecer valores predeterminados'**
+  String get resetDefaults;
+
+  /// No description provided for @confirmReset.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirmar restablecimiento'**
+  String get confirmReset;
+
+  /// No description provided for @confirmResetDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Estás seguro de que quieres restablecer todos los ajustes a sus valores predeterminados?'**
+  String get confirmResetDesc;
+
+  /// No description provided for @ok.
+  ///
+  /// In es, this message translates to:
+  /// **'Aceptar'**
+  String get ok;
+
   /// No description provided for @result.
   ///
   /// In es, this message translates to:
@@ -410,6 +464,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Modo simple'**
   String get simple_mode;
+
+  /// No description provided for @steps.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasos de resolución'**
+  String get steps;
+
+  /// No description provided for @more_info.
+  ///
+  /// In es, this message translates to:
+  /// **'Más información'**
+  String get more_info;
 
   /// No description provided for @t_f.
   ///

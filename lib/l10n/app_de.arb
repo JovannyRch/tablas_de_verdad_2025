@@ -12,6 +12,8 @@
   "appName": "Wahrheitstabellen",
   "ascending": "Aufsteigend",
   "becomePro": "Werden Sie Pro!",
+  "clear_all": "Alles löschen",
+  "close": "Schließen",
   "buyPro": "Kaufen",
   "calculationHistory": "Berechnungsverlauf",
   "cancel": "Abbrechen",
@@ -42,6 +44,7 @@
   "premiumOperator": "Premium-Operator",
   "premiumOperatorMessage": "Dieser erweiterte Operator erfordert das Ansehen eines Videos oder ein Upgrade auf Pro für unbegrenzten Zugriff.",
   "premiumOperatorsAccess": "Zugriff auf alle Premium-Operatoren",
+  "preferences": "Präferenzen",
   "premiumSupport": "Premium-Support",
   "privacyPolicy": "Datenschutzrichtlinie",
   "propositions": "Propositionen",
@@ -57,6 +60,8 @@
   "settingsTitle": "Einstellungen",
   "settings_mode": "Modus",
   "simple_mode": "Einfacher Modus",
+  "steps": "Lösungsschritte",
+  "more_info": "Mehr Informationen",
   "t_f": "W/F",
   "tautology": "Tautologie ✅",
   "tautology_description": "Eine Tautologie ist eine Aussage oder logische Formel, die immer wahr ist, unabhängig von den Wahrheitswerten ihrer Komponenten. Mit anderen Worten, es ist ein Ausdruck, der unter jeder Interpretation oder Zuweisung von Wahrheitswerten zu seinen Variablen gilt.",
@@ -71,5 +76,11 @@
   "videoScreenDescription": "Dieses Video erklärt Schritt für Schritt die Lösung dieses logischen Ausdrucks.",
   "videoScreenTitle": "Videoerklärung",
   "watchVideoFree": "Video ansehen (Kostenlos)",
-  "youtubeChannel": "YouTube-Kanal"
+  "youtubeChannel": "YouTube-Kanal",
+  "appearance": "Aussehen",
+  "about": "Über",
+  "resetDefaults": "Auf Standardeinstellungen zurücksetzen",
+  "confirmReset": "Zurücksetzen bestätigen",
+  "confirmResetDesc": "Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen möchten?",
+  "ok": "OK"
 }

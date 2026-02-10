@@ -21,7 +21,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ascending => 'По возрастанию';
 
   @override
+  String get appearance => 'Внешний вид';
+
+  @override
+  String get about => 'О программе';
+
+  @override
   String get becomePro => 'Станьте Pro!';
+
+  @override
+  String get clear_all => 'Очистить всё';
+
+  @override
+  String get close => 'Закрыть';
 
   @override
   String get buyPro => 'Купить';
@@ -116,6 +128,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get premiumOperatorsAccess => 'Доступ ко всем премиум операторам';
 
   @override
+  String get preferences => 'Предпочтения';
+
+  @override
   String get premiumSupport => 'Премиум поддержка';
 
   @override
@@ -146,6 +161,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get remainingExpressions => 'Осталось';
 
   @override
+  String get resetDefaults => 'Сбросить настройки';
+
+  @override
+  String get confirmReset => 'Подтвердить сброс';
+
+  @override
+  String get confirmResetDesc => 'Вы уверены, что хотите сбросить все настройки до значений по умолчанию?';
+
+  @override
+  String get ok => 'ОК';
+
+  @override
   String get result => 'Результат';
 
   @override
@@ -159,6 +186,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get simple_mode => 'Простой режим';
+
+  @override
+  String get steps => 'Шаги решения';
+
+  @override
+  String get more_info => 'Дополнительная информация';
 
   @override
   String get t_f => 'И/Л';

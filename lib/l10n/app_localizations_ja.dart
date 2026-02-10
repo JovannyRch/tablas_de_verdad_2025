@@ -21,7 +21,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get ascending => '昇順';
 
   @override
+  String get appearance => '外観';
+
+  @override
+  String get about => 'アプリについて';
+
+  @override
   String get becomePro => 'プロになる！';
+
+  @override
+  String get clear_all => 'すべてクリア';
+
+  @override
+  String get close => '閉じる';
 
   @override
   String get buyPro => '購入';
@@ -116,6 +128,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get premiumOperatorsAccess => 'すべてのプレミアム演算子へのアクセス';
 
   @override
+  String get preferences => '設定';
+
+  @override
   String get premiumSupport => 'プレミアムサポート';
 
   @override
@@ -146,6 +161,18 @@ class AppLocalizationsJa extends AppLocalizations {
   String get remainingExpressions => '残り';
 
   @override
+  String get resetDefaults => 'デフォルトにリセット';
+
+  @override
+  String get confirmReset => 'リセットの確認';
+
+  @override
+  String get confirmResetDesc => 'すべての設定をデフォルトに戻してもよろしいですか？';
+
+  @override
+  String get ok => 'OK';
+
+  @override
   String get result => '結果';
 
   @override
@@ -159,6 +186,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get simple_mode => 'シンプルモード';
+
+  @override
+  String get steps => '解決の手順';
+
+  @override
+  String get more_info => '詳細情報';
 
   @override
   String get t_f => '真/偽';
