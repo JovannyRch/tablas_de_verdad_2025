@@ -37,9 +37,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
   void _startQuiz(QuizDifficulty difficulty) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => QuizScreen(difficulty: difficulty),
-      ),
+      MaterialPageRoute(builder: (_) => QuizScreen(difficulty: difficulty)),
     );
     _loadStats(); // Refresh stats after returning
   }
@@ -50,10 +48,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.practiceMode),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(t.practiceMode), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -137,9 +132,10 @@ class _StatsCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: isDark
-              ? [const Color(0xFF1E293B), const Color(0xFF0F172A)]
-              : [Colors.white, Colors.grey.shade50],
+          colors:
+              isDark
+                  ? [const Color(0xFF1E293B), const Color(0xFF0F172A)]
+                  : [Colors.white, Colors.grey.shade50],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -273,13 +269,9 @@ class _DifficultyCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark
-                ? color.withOpacity(0.1)
-                : color.withOpacity(0.06),
+            color: isDark ? color.withOpacity(0.1) : color.withOpacity(0.06),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: color.withOpacity(isDark ? 0.3 : 0.15),
-            ),
+            border: Border.all(color: color.withOpacity(isDark ? 0.3 : 0.15)),
           ),
           child: Row(
             children: [

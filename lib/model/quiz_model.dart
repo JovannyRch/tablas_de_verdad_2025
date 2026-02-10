@@ -49,20 +49,14 @@ class QuizBank {
     QuizQuestion(expression: '(A ⇒ B) ⇔ (¬B ⇒ ¬A)', correctAnswerIndex: 1),
     QuizQuestion(expression: '(A ∧ B) ⇒ A', correctAnswerIndex: 1),
     QuizQuestion(expression: 'A ⇒ (A ∨ B)', correctAnswerIndex: 1),
-    QuizQuestion(
-      expression: '(A ⇒ B) ⇔ (¬A ∨ B)',
-      correctAnswerIndex: 1,
-    ),
+    QuizQuestion(expression: '(A ⇒ B) ⇔ (¬A ∨ B)', correctAnswerIndex: 1),
     QuizQuestion(
       expression: '((A ⇒ B) ∧ (B ⇒ C)) ⇒ (A ⇒ C)',
       correctAnswerIndex: 1,
     ),
     // Contradictions
     QuizQuestion(expression: '(A ∧ ¬A) ∧ (B ∨ C)', correctAnswerIndex: 0),
-    QuizQuestion(
-      expression: '(A ⇒ B) ∧ (A ∧ ¬B)',
-      correctAnswerIndex: 0,
-    ),
+    QuizQuestion(expression: '(A ⇒ B) ∧ (A ∧ ¬B)', correctAnswerIndex: 0),
     QuizQuestion(expression: '¬(A ⇒ A)', correctAnswerIndex: 0),
     // Contingencies
     QuizQuestion(expression: '(A ∨ B) ∧ ¬C', correctAnswerIndex: 2),
@@ -81,56 +75,26 @@ class QuizBank {
       expression: '((A ⇒ B) ∧ (B ⇒ C)) ⇒ (A ⇒ C)',
       correctAnswerIndex: 1,
     ),
-    QuizQuestion(
-      expression: '(A ∧ (A ⇒ B)) ⇒ B',
-      correctAnswerIndex: 1,
-    ),
-    QuizQuestion(
-      expression: '(¬A ⇒ B) ⇔ (¬B ⇒ A)',
-      correctAnswerIndex: 1,
-    ),
-    QuizQuestion(
-      expression: '((A ∨ B) ∧ ¬A) ⇒ B',
-      correctAnswerIndex: 1,
-    ),
+    QuizQuestion(expression: '(A ∧ (A ⇒ B)) ⇒ B', correctAnswerIndex: 1),
+    QuizQuestion(expression: '(¬A ⇒ B) ⇔ (¬B ⇒ A)', correctAnswerIndex: 1),
+    QuizQuestion(expression: '((A ∨ B) ∧ ¬A) ⇒ B', correctAnswerIndex: 1),
     QuizQuestion(
       expression: '(A ⇒ (B ⇒ C)) ⇔ ((A ∧ B) ⇒ C)',
       correctAnswerIndex: 1,
     ),
     // Contradictions
-    QuizQuestion(
-      expression: '(A ⇔ ¬A)',
-      correctAnswerIndex: 0,
-    ),
-    QuizQuestion(
-      expression: '(A ∧ B) ∧ (¬A ∧ ¬B)',
-      correctAnswerIndex: 0,
-    ),
+    QuizQuestion(expression: '(A ⇔ ¬A)', correctAnswerIndex: 0),
+    QuizQuestion(expression: '(A ∧ B) ∧ (¬A ∧ ¬B)', correctAnswerIndex: 0),
     QuizQuestion(
       expression: '(A ⇒ B) ∧ (B ⇒ A) ∧ (A ⇔ ¬B)',
       correctAnswerIndex: 0,
     ),
     // Contingencies
-    QuizQuestion(
-      expression: '(A ⇒ B) ∧ (C ⇒ D)',
-      correctAnswerIndex: 2,
-    ),
-    QuizQuestion(
-      expression: '(A ∧ B) ⇔ (C ∨ D)',
-      correctAnswerIndex: 2,
-    ),
-    QuizQuestion(
-      expression: '(A ⇒ (B ∧ C)) ∨ (D ⇒ A)',
-      correctAnswerIndex: 2,
-    ),
-    QuizQuestion(
-      expression: '¬(A ⇔ B) ∧ (C ⇒ A)',
-      correctAnswerIndex: 2,
-    ),
-    QuizQuestion(
-      expression: '(A ∧ ¬B) ⇒ (C ∨ D)',
-      correctAnswerIndex: 2,
-    ),
+    QuizQuestion(expression: '(A ⇒ B) ∧ (C ⇒ D)', correctAnswerIndex: 2),
+    QuizQuestion(expression: '(A ∧ B) ⇔ (C ∨ D)', correctAnswerIndex: 2),
+    QuizQuestion(expression: '(A ⇒ (B ∧ C)) ∨ (D ⇒ A)', correctAnswerIndex: 2),
+    QuizQuestion(expression: '¬(A ⇔ B) ∧ (C ⇒ A)', correctAnswerIndex: 2),
+    QuizQuestion(expression: '(A ∧ ¬B) ⇒ (C ∨ D)', correctAnswerIndex: 2),
     QuizQuestion(
       expression: '((A ∨ B) ∧ (C ∨ D)) ⇒ (A ∧ D)',
       correctAnswerIndex: 2,
@@ -138,8 +102,10 @@ class QuizBank {
   ];
 
   /// Returns a shuffled list of [count] questions for the given difficulty.
-  static List<QuizQuestion> getQuestions(QuizDifficulty difficulty,
-      {int count = 10}) {
+  static List<QuizQuestion> getQuestions(
+    QuizDifficulty difficulty, {
+    int count = 10,
+  }) {
     final pool = switch (difficulty) {
       QuizDifficulty.easy => List<QuizQuestion>.from(_easy),
       QuizDifficulty.medium => List<QuizQuestion>.from(_medium),

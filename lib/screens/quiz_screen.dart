@@ -57,7 +57,11 @@ class _QuizScreenState extends State<QuizScreen>
     final settings = context.read<Settings>();
     final t = AppLocalizations.of(context)!;
     try {
-      final tt = TruthTable(question.expression, t.localeName, settings.truthFormat);
+      final tt = TruthTable(
+        question.expression,
+        t.localeName,
+        settings.truthFormat,
+      );
       tt.makeAll();
       if (tt.tipo == TruthTableType.tautology) return 1;
       if (tt.tipo == TruthTableType.contradiction) return 0;
@@ -255,14 +259,14 @@ class _QuizScreenState extends State<QuizScreen>
                         vertical: 28,
                       ),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? const Color(0xFF1E293B)
-                            : Colors.grey[50],
+                        color:
+                            isDark ? const Color(0xFF1E293B) : Colors.grey[50],
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: isDark
-                              ? Colors.white12
-                              : Colors.black.withOpacity(0.06),
+                          color:
+                              isDark
+                                  ? Colors.white12
+                                  : Colors.black.withOpacity(0.06),
                         ),
                       ),
                       child: Text(
@@ -400,9 +404,7 @@ class _AnswerButton extends StatelessWidget {
       borderColor = const Color(0xFFE53935).withOpacity(0.4);
       textColor = const Color(0xFFC62828);
     } else {
-      bgColor = isDark
-          ? Colors.white.withOpacity(0.03)
-          : Colors.grey[100]!;
+      bgColor = isDark ? Colors.white.withOpacity(0.03) : Colors.grey[100]!;
       borderColor = isDark ? Colors.white10 : Colors.black.withOpacity(0.04);
       textColor = isDark ? Colors.white38 : Colors.black26;
     }
@@ -435,9 +437,17 @@ class _AnswerButton extends StatelessWidget {
                 ),
               ),
               if (answered && index == correctAnswer)
-                const Icon(Icons.check_rounded, color: Color(0xFF4CAF50), size: 22),
+                const Icon(
+                  Icons.check_rounded,
+                  color: Color(0xFF4CAF50),
+                  size: 22,
+                ),
               if (answered && index == selectedAnswer && index != correctAnswer)
-                const Icon(Icons.close_rounded, color: Color(0xFFE53935), size: 22),
+                const Icon(
+                  Icons.close_rounded,
+                  color: Color(0xFFE53935),
+                  size: 22,
+                ),
             ],
           ),
         ),
@@ -473,9 +483,7 @@ class _FeedbackBanner extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            isCorrect
-                ? Icons.celebration_rounded
-                : Icons.info_outline_rounded,
+            isCorrect ? Icons.celebration_rounded : Icons.info_outline_rounded,
             color: color,
             size: 24,
           ),
@@ -541,10 +549,7 @@ class _ResultsView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                _getEmoji(),
-                style: const TextStyle(fontSize: 64),
-              ),
+              Text(_getEmoji(), style: const TextStyle(fontSize: 64)),
               const SizedBox(height: 24),
               Text(
                 '$pct%',
