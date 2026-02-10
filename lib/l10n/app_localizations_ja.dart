@@ -9,31 +9,34 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get about => 'アプリについて';
+
+  @override
   String get adNotAvailable => 'ビデオは利用できません。後でもう一度試すか、プロ版にアップグレードしてください。';
+
+  @override
+  String get addedToFavorites => 'お気に入りに追加しました';
 
   @override
   String get advanced_mode => '高度なモード';
 
   @override
-  String get appName => '真理値表';
+  String get all => 'すべて';
 
   @override
-  String get ascending => '昇順';
+  String get appName => '真理値表';
 
   @override
   String get appearance => '外観';
 
   @override
-  String get about => 'アプリについて';
+  String get ascending => '昇順';
 
   @override
   String get becomePro => 'プロになる！';
 
   @override
-  String get clear_all => 'すべてクリア';
-
-  @override
-  String get close => '閉じる';
+  String get bestStreak => 'ベスト連続';
 
   @override
   String get buyPro => '購入';
@@ -43,6 +46,36 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get cancel => 'キャンセル';
+
+  @override
+  String get checkEquivalence => '等価性を確認';
+
+  @override
+  String get chooseDifficulty => '難易度を選択';
+
+  @override
+  String get clear_all => 'すべてクリア';
+
+  @override
+  String get close => '閉じる';
+
+  @override
+  String get cnfDescription => '最大項のAND：結果が0の各行に対する1つのOR項。';
+
+  @override
+  String get cnfTautology => 'CNFなし — 式はトートロジー（常に真）です。';
+
+  @override
+  String get cnfTitle => '連言標準形 (CNF)';
+
+  @override
+  String get comparisonTable => '比較表';
+
+  @override
+  String get confirmReset => 'リセットの確認';
+
+  @override
+  String get confirmResetDesc => 'すべての設定をデフォルトに戻してもよろしいですか？';
 
   @override
   String get contingency => '偶発的 ⚠️';
@@ -57,31 +90,61 @@ class AppLocalizationsJa extends AppLocalizations {
   String get contradiction_description => '矛盾とは、構成要素の真理値に関係なく常に偽である命題または論理式です。言い換えれば、変数への真理値の解釈または割り当てのいかなる場合でも成立しない表現です。';
 
   @override
+  String get correctAnswer => '正解！🎉';
+
+  @override
+  String get correctAnswers => '正解';
+
+  @override
   String get darkMode => 'ダークモード';
 
   @override
   String get descending => '降順';
 
   @override
+  String get dnfContradiction => 'DNFなし — 式は矛盾（常に偽）です。';
+
+  @override
+  String get dnfDescription => '最小項のOR：結果が1の各行に対する1つのAND項。';
+
+  @override
+  String get dnfTitle => '選言標準形 (DNF)';
+
+  @override
+  String get easy => '簡単';
+
+  @override
+  String get easyDesc => '1-2変数の簡単な式';
+
+  @override
   String get emptyExpression => '論理式を入力してください';
+
+  @override
+  String get equivalenceChecker => '等価性チェッカー';
+
+  @override
+  String get equivalenceError => '評価エラー';
+
+  @override
+  String get equivalentDescription => '両方の式は、すべての可能な入力の組み合わせに対して同じ真理値を生成します。';
 
   @override
   String get expression => '式';
 
   @override
-  String get fileOptions => 'ファイルオプション';
+  String get expressionA => '式 A';
 
   @override
-  String get openFile => 'ファイルを開く';
-
-  @override
-  String get shareFile => 'ファイルを共有';
-
-  @override
-  String get shareFileMessage => 'このファイルを共有します。';
+  String get expressionB => '式 B';
 
   @override
   String get expressionLibrary => '式ライブラリ';
+
+  @override
+  String get expressionsEquivalent => '等価 ✅';
+
+  @override
+  String get expressionsNotEquivalent => '等価でない ❌';
 
   @override
   String expressionsRemaining(int count) {
@@ -89,10 +152,28 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get favorites => 'お気に入り';
+
+  @override
+  String get fileOptions => 'ファイルオプション';
+
+  @override
   String get fullFeatureAccess => 'すべての機能への完全アクセス';
 
   @override
   String get fullLibraryAccess => '式ライブラリへの完全アクセス';
+
+  @override
+  String get fullTable => '完全な表';
+
+  @override
+  String get getStarted => '始めよう!';
+
+  @override
+  String get hard => '難しい';
+
+  @override
+  String get hardDesc => '3-4変数の複雑な式';
 
   @override
   String get history => '履歴';
@@ -107,16 +188,68 @@ class AppLocalizationsJa extends AppLocalizations {
   String get libraryUnlocked => '🎉 完全なライブラリがアンロックされました！';
 
   @override
+  String get maxterms => '最大項';
+
+  @override
+  String get medium => '普通';
+
+  @override
+  String get mediumDesc => '2-3変数の複合式';
+
+  @override
   String get mintermOrder => '最小項の順序';
+
+  @override
+  String get minterms => '最小項';
 
   @override
   String get moreExpressions => 'さらに式';
 
   @override
+  String get more_info => '詳細情報';
+
+  @override
+  String get next => '次へ';
+
+  @override
   String get noAds => '広告なし';
 
   @override
+  String get noFavorites => 'お気に入りなし';
+
+  @override
+  String get noPurchasesFound => '以前の購入が見つかりません';
+
+  @override
   String get no_history => '履歴なし';
+
+  @override
+  String get normalForms => '標準形';
+
+  @override
+  String get normalFormsAdGate => 'この式の標準形をアンロックするには、短い動画を視聴してください。';
+
+  @override
+  String get normalFormsDescription => '真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。';
+
+  @override
+  String get normalFormsProHint => 'Proにアップグレードすると、広告なしで標準形を即座に表示できます。';
+
+  @override
+  String get normalFormsTitle => '標準形';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return '変数が多すぎます（最大 $max）';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => '標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return '$total 行中 $differing 行が異なります（$pct% 一致）。';
+  }
 
   @override
   String get numberOfPropositions => '命題の数';
@@ -125,10 +258,46 @@ class AppLocalizationsJa extends AppLocalizations {
   String get numberOfRows => '行数';
 
   @override
+  String get ok => 'OK';
+
+  @override
+  String get onboardingDesc1 => 'キーパッドを使って変数と演算子で論理式を入力';
+
+  @override
+  String get onboardingDesc2 => '解法の各ステップと完全な真理値表を表示';
+
+  @override
+  String get onboardingDesc3 => 'プロフェッショナルなPDFを生成し、結果を簡単に共有';
+
+  @override
+  String get onboardingTitle1 => '式を入力';
+
+  @override
+  String get onboardingTitle2 => 'ステップバイステップの解法';
+
+  @override
+  String get onboardingTitle3 => 'エクスポートして共有';
+
+  @override
+  String get oneTimePurchase => '1回限りの購入';
+
+  @override
   String get only_tutorials => 'チュートリアルのみ表示';
 
   @override
+  String get openFile => 'ファイルを開く';
+
+  @override
   String get pdfFilename => '真理値表';
+
+  @override
+  String get playAgain => 'もう一度プレイ';
+
+  @override
+  String get practiceMode => '練習モード';
+
+  @override
+  String get preferences => '設定';
 
   @override
   String get premiumOperator => 'プレミアム演算子';
@@ -140,16 +309,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get premiumOperatorsAccess => 'すべてのプレミアム演算子へのアクセス';
 
   @override
-  String get preferences => '設定';
-
-  @override
   String get premiumSupport => 'プレミアムサポート';
 
   @override
   String get privacyPolicy => 'プライバシーポリシー';
 
   @override
+  String get proUpgradeHint => 'Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！';
+
+  @override
   String get propositions => '命題';
+
+  @override
+  String get purchaseError => '購入に失敗しました。もう一度お試しください。';
+
+  @override
+  String get question => '問題';
+
+  @override
+  String get quizResults => 'クイズ結果';
+
+  @override
+  String get quizzesPlayed => 'プレイ済み';
 
   @override
   String get rateTheApp => 'アプリを評価';
@@ -173,19 +354,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get remainingExpressions => '残り';
 
   @override
+  String get removedFromFavorites => 'お気に入りから削除しました';
+
+  @override
   String get resetDefaults => 'デフォルトにリセット';
 
   @override
-  String get confirmReset => 'リセットの確認';
-
-  @override
-  String get confirmResetDesc => 'すべての設定をデフォルトに戻してもよろしいですか？';
-
-  @override
-  String get ok => 'OK';
+  String get restorePurchases => '購入を復元';
 
   @override
   String get result => '結果';
+
+  @override
+  String get searchHistory => '履歴を検索...';
+
+  @override
+  String get seeResults => '結果を見る';
 
   @override
   String get settings => '設定';
@@ -197,13 +381,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settings_mode => 'モード';
 
   @override
+  String get shareFile => 'ファイルを共有';
+
+  @override
+  String get shareFileMessage => 'このファイルを共有します。';
+
+  @override
   String get simple_mode => 'シンプルモード';
+
+  @override
+  String get skip => 'スキップ';
+
+  @override
+  String get socialProof => '何千人もの学生に信頼されています';
 
   @override
   String get steps => '解決の手順';
 
   @override
-  String get more_info => '詳細情報';
+  String get supportDeveloper => '開発者をサポート';
+
+  @override
+  String get swapExpressions => '式を入れ替え';
 
   @override
   String get t_f => '真/偽';
@@ -224,6 +423,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get type => 'タイプ';
 
   @override
+  String get unlimitedPremiumOps => '無制限のプレミアム演算子';
+
+  @override
   String get unlockFullLibrary => '完全なライブラリをアンロック！';
 
   @override
@@ -231,6 +433,21 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get upgradePro => 'プロ版にアップグレード';
+
+  @override
+  String get validationMissingOperand => 'オペランドがありません';
+
+  @override
+  String get validationMissingOperator => '変数間の演算子がありません';
+
+  @override
+  String get validationTrailingOp => '式が不完全です';
+
+  @override
+  String get validationUnmatched => '括弧が閉じていません';
+
+  @override
+  String get validationValid => '評価準備完了';
 
   @override
   String get videoFABLabel => 'ビデオを見る';
@@ -248,273 +465,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get watchVideoFree => 'ビデオを見る（無料）';
 
   @override
-  String get youtubeChannel => 'YouTubeチャンネル';
-
-  @override
-  String get favorites => 'お気に入り';
-
-  @override
-  String get noFavorites => 'お気に入りなし';
-
-  @override
-  String get addedToFavorites => 'お気に入りに追加しました';
-
-  @override
-  String get removedFromFavorites => 'お気に入りから削除しました';
-
-  @override
-  String get searchHistory => '履歴を検索...';
-
-  @override
-  String get all => 'すべて';
-
-  @override
-  String get onboardingTitle1 => '式を入力';
-
-  @override
-  String get onboardingDesc1 => 'キーパッドを使って変数と演算子で論理式を入力';
-
-  @override
-  String get onboardingTitle2 => 'ステップバイステップの解法';
-
-  @override
-  String get onboardingDesc2 => '解法の各ステップと完全な真理値表を表示';
-
-  @override
-  String get onboardingTitle3 => 'エクスポートして共有';
-
-  @override
-  String get onboardingDesc3 => 'プロフェッショナルなPDFを生成し、結果を簡単に共有';
-
-  @override
-  String get getStarted => '始めよう!';
-
-  @override
-  String get next => '次へ';
-
-  @override
-  String get skip => 'スキップ';
-
-  @override
-  String get practiceMode => '練習モード';
-
-  @override
-  String get chooseDifficulty => '難易度を選択';
-
-  @override
-  String get easy => '簡単';
-
-  @override
-  String get easyDesc => '1-2変数の簡単な式';
-
-  @override
-  String get medium => '普通';
-
-  @override
-  String get mediumDesc => '2-3変数の複合式';
-
-  @override
-  String get hard => '難しい';
-
-  @override
-  String get hardDesc => '3-4変数の複雑な式';
-
-  @override
-  String get yourStats => 'あなたの統計';
-
-  @override
-  String get quizzesPlayed => 'プレイ済み';
-
-  @override
-  String get bestStreak => 'ベスト連続';
-
-  @override
-  String get correctAnswers => '正解';
-
-  @override
-  String get question => '問題';
-
-  @override
   String get whatTypeIsThis => 'この式のタイプは？';
-
-  @override
-  String get correctAnswer => '正解！🎉';
 
   @override
   String get wrongAnswer => '不正解。頑張って！';
 
   @override
-  String get seeResults => '結果を見る';
+  String get yourStats => 'あなたの統計';
 
   @override
-  String get quizResults => 'クイズ結果';
-
-  @override
-  String get playAgain => 'もう一度プレイ';
-
-  @override
-  String get fullTable => '完全な表';
-
-  @override
-  String get oneTimePurchase => '1回限りの購入';
-
-  @override
-  String get unlimitedPremiumOps => '無制限のプレミアム演算子';
-
-  @override
-  String get supportDeveloper => '開発者をサポート';
-
-  @override
-  String get socialProof => '何千人もの学生に信頼されています';
-
-  @override
-  String get purchaseError => '購入に失敗しました。もう一度お試しください。';
-
-  @override
-  String get noPurchasesFound => '以前の購入が見つかりません';
-
-  @override
-  String get restorePurchases => '購入を復元';
-
-  @override
-  String get proUpgradeHint => 'Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！';
-
-  @override
-  String get validationUnmatched => '括弧が閉じていません';
-
-  @override
-  String get validationMissingOperand => 'オペランドがありません';
-
-  @override
-  String get validationMissingOperator => '変数間の演算子がありません';
-
-  @override
-  String get validationTrailingOp => '式が不完全です';
-
-  @override
-  String get validationValid => '評価準備完了';
-
-  @override
-  String get equivalenceChecker => '等価性チェッカー';
-
-  @override
-  String get expressionA => '式 A';
-
-  @override
-  String get expressionB => '式 B';
-
-  @override
-  String get swapExpressions => '式を入れ替え';
-
-  @override
-  String get checkEquivalence => '等価性を確認';
-
-  @override
-  String get expressionsEquivalent => '等価 ✅';
-
-  @override
-  String get expressionsNotEquivalent => '等価でない ❌';
-
-  @override
-  String get equivalentDescription => '両方の式は、すべての可能な入力の組み合わせに対して同じ真理値を生成します。';
-
-  @override
-  String notEquivalentDescription(Object differing, Object pct, Object total) {
-    return '$total 行中 $differing 行が異なります（$pct% 一致）。';
-  }
-
-  @override
-  String get equivalenceError => '評価エラー';
-
-  @override
-  String get comparisonTable => '比較表';
-
-  @override
-  String get normalForms => '標準形';
-
-  @override
-  String get normalFormsTitle => '標準形';
-
-  @override
-  String get normalFormsDescription => '真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。';
-
-  @override
-  String get dnfTitle => '選言標準形 (DNF)';
-
-  @override
-  String get dnfDescription => '最小項のOR：結果が1の各行に対する1つのAND項。';
-
-  @override
-  String get cnfTitle => '連言標準形 (CNF)';
-
-  @override
-  String get cnfDescription => '最大項のAND：結果が0の各行に対する1つのOR項。';
-
-  @override
-  String get dnfContradiction => 'DNFなし — 式は矛盾（常に偽）です。';
-
-  @override
-  String get cnfTautology => 'CNFなし — 式はトートロジー（常に真）です。';
-
-  @override
-  String get minterms => '最小項';
-
-  @override
-  String get maxterms => '最大項';
-
-  @override
-  String normalFormsTooManyVars(Object max) {
-    return '変数が多すぎます（最大 $max）';
-  }
-
-  @override
-  String get normalFormsTooManyVarsDesc => '標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。';
-
-  @override
-  String get normalFormsAdGate => 'この式の標準形をアンロックするには、短い動画を視聴してください。';
-
-  @override
-  String get normalFormsProHint => 'Proにアップグレードすると、広告なしで標準形を即座に表示できます。';
-
-  @override
-  String get ocrScan => '式をスキャン';
-
-  @override
-  String get ocrScanTitle => '式をスキャン';
-
-  @override
-  String get ocrScanDescription => '論理式の写真を撮るかギャラリーから画像を選択して、自動的に認識します。';
-
-  @override
-  String get ocrTakePhoto => '写真を撮る';
-
-  @override
-  String get ocrFromGallery => 'ギャラリーから選択';
-
-  @override
-  String get ocrProcessing => '式を認識中…';
-
-  @override
-  String get ocrNoTextFound => 'テキストが検出されませんでした。より鮮明な画像でお試しください。';
-
-  @override
-  String get ocrDetectedRaw => '検出されたテキスト';
-
-  @override
-  String get ocrMappedExpression => '式（編集可能）';
-
-  @override
-  String get ocrUseExpression => '式を使用';
-
-  @override
-  String get ocrRetry => '再スキャン';
-
-  @override
-  String get ocrCropHint => '式をトリミング';
-
-  @override
-  String get ocrError => 'スキャン中にエラーが発生しました。もう一度お試しください。';
-
-  @override
-  String get ocrProHint => 'Proにアップグレードして、広告なしで無制限のOCRスキャンを利用しましょう。';
+  String get youtubeChannel => 'YouTubeチャンネル';
 }

@@ -7,6 +7,26 @@
       }
     }
   },
+  "@normalFormsTooManyVars": {
+    "placeholders": {
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "@notEquivalentDescription": {
+    "placeholders": {
+      "differing": {
+        "type": "Object"
+      },
+      "pct": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
   "about": "About",
   "adNotAvailable": "Video not available. Try later or upgrade to Pro.",
   "addedToFavorites": "Added to favorites",
@@ -20,9 +40,14 @@
   "buyPro": "Buy",
   "calculationHistory": "Calculation History",
   "cancel": "Cancel",
+  "checkEquivalence": "Check Equivalence",
   "chooseDifficulty": "Choose difficulty",
   "clear_all": "Clear all",
   "close": "Close",
+  "cnfDescription": "AND of maxterms: one OR-term for each row where the result is 0.",
+  "cnfTautology": "No CNF exists — the expression is a tautology (always true).",
+  "cnfTitle": "Conjunctive Normal Form (CNF)",
+  "comparisonTable": "Comparison Table",
   "confirmReset": "Confirm Reset",
   "confirmResetDesc": "Are you sure you want to reset all settings to their defaults?",
   "contingency": "Contingency ⚠️",
@@ -33,11 +58,21 @@
   "correctAnswers": "Correct",
   "darkMode": "Dark mode",
   "descending": "Descending",
+  "dnfContradiction": "No DNF exists — the expression is a contradiction (always false).",
+  "dnfDescription": "OR of minterms: one AND-term for each row where the result is 1.",
+  "dnfTitle": "Disjunctive Normal Form (DNF)",
   "easy": "Easy",
   "easyDesc": "Simple expressions with 1-2 variables",
   "emptyExpression": "Please enter a logical expression",
+  "equivalenceChecker": "Equivalence Checker",
+  "equivalenceError": "Evaluation Error",
+  "equivalentDescription": "Both expressions produce the same truth values for all possible input combinations.",
   "expression": "Expression",
+  "expressionA": "Expression A",
+  "expressionB": "Expression B",
   "expressionLibrary": "Expression Library",
+  "expressionsEquivalent": "Equivalent ✅",
+  "expressionsNotEquivalent": "Not Equivalent ❌",
   "expressionsRemaining": "{count} more expressions remaining",
   "favorites": "Favorites",
   "fileOptions": "File Options",
@@ -51,9 +86,11 @@
   "language": "Language",
   "later": "Later",
   "libraryUnlocked": "🎉 Complete library unlocked!",
+  "maxterms": "maxterms",
   "medium": "Medium",
   "mediumDesc": "Compound expressions with 2-3 variables",
   "mintermOrder": "Order of minterms",
+  "minterms": "minterms",
   "moreExpressions": "more expressions",
   "more_info": "More information",
   "next": "Next",
@@ -61,6 +98,14 @@
   "noFavorites": "No favorites yet",
   "noPurchasesFound": "No previous purchases found",
   "no_history": "No history",
+  "normalForms": "Normal Forms",
+  "normalFormsAdGate": "Watch a short video to unlock the Normal Forms for this expression.",
+  "normalFormsDescription": "Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.",
+  "normalFormsProHint": "Upgrade to Pro to see Normal Forms instantly without ads.",
+  "normalFormsTitle": "Normal Forms",
+  "normalFormsTooManyVars": "Too many variables (max {max})",
+  "normalFormsTooManyVarsDesc": "Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.",
+  "notEquivalentDescription": "They differ in {differing} of {total} rows ({pct}% match).",
   "numberOfPropositions": "Number of propositions",
   "numberOfRows": "Number of rows",
   "ok": "OK",
@@ -111,6 +156,7 @@
   "socialProof": "Trusted by thousands of students",
   "steps": "Resolution steps",
   "supportDeveloper": "Support the developer",
+  "swapExpressions": "Swap expressions",
   "t_f": "T/F",
   "tautology": "Tautology ✅",
   "tautology_description": "A tautology is a proposition or logical formula that is always true, regardless of the truth values of its components. In other words, it is an expression that holds under any interpretation or assignment of truth values to its variables.",
@@ -134,57 +180,5 @@
   "whatTypeIsThis": "What type is this expression?",
   "wrongAnswer": "Incorrect. Keep trying!",
   "yourStats": "Your stats",
-  "youtubeChannel": "YouTube Channel",
-  "equivalenceChecker": "Equivalence Checker",
-  "expressionA": "Expression A",
-  "expressionB": "Expression B",
-  "swapExpressions": "Swap expressions",
-  "checkEquivalence": "Check Equivalence",
-  "expressionsEquivalent": "Equivalent ✅",
-  "expressionsNotEquivalent": "Not Equivalent ❌",
-  "equivalentDescription": "Both expressions produce the same truth values for all possible input combinations.",
-  "@notEquivalentDescription": {
-    "placeholders": {
-      "differing": { "type": "Object" },
-      "total": { "type": "Object" },
-      "pct": { "type": "Object" }
-    }
-  },
-  "notEquivalentDescription": "They differ in {differing} of {total} rows ({pct}% match).",
-  "equivalenceError": "Evaluation Error",
-  "comparisonTable": "Comparison Table",
-  "normalForms": "Normal Forms",
-  "normalFormsTitle": "Normal Forms",
-  "normalFormsDescription": "Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.",
-  "dnfTitle": "Disjunctive Normal Form (DNF)",
-  "dnfDescription": "OR of minterms: one AND-term for each row where the result is 1.",
-  "cnfTitle": "Conjunctive Normal Form (CNF)",
-  "cnfDescription": "AND of maxterms: one OR-term for each row where the result is 0.",
-  "dnfContradiction": "No DNF exists — the expression is a contradiction (always false).",
-  "cnfTautology": "No CNF exists — the expression is a tautology (always true).",
-  "minterms": "minterms",
-  "maxterms": "maxterms",
-  "@normalFormsTooManyVars": {
-    "placeholders": {
-      "max": { "type": "Object" }
-    }
-  },
-  "normalFormsTooManyVars": "Too many variables (max {max})",
-  "normalFormsTooManyVarsDesc": "Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.",
-  "normalFormsAdGate": "Watch a short video to unlock the Normal Forms for this expression.",
-  "normalFormsProHint": "Upgrade to Pro to see Normal Forms instantly without ads.",
-  "ocrScan": "Scan Expression",
-  "ocrScanTitle": "Scan Expression",
-  "ocrScanDescription": "Take a photo or pick an image of a logical expression to recognize it automatically.",
-  "ocrTakePhoto": "Take Photo",
-  "ocrFromGallery": "Choose from Gallery",
-  "ocrProcessing": "Recognizing expression…",
-  "ocrNoTextFound": "No text detected. Try again with a clearer image.",
-  "ocrDetectedRaw": "DETECTED TEXT",
-  "ocrMappedExpression": "EXPRESSION (EDITABLE)",
-  "ocrUseExpression": "Use Expression",
-  "ocrRetry": "Scan Again",
-  "ocrCropHint": "Crop the expression",
-  "ocrError": "An error occurred during scanning. Please try again.",
-  "ocrProHint": "Upgrade to Pro for unlimited OCR scans without ads."
+  "youtubeChannel": "YouTube Channel"
 }

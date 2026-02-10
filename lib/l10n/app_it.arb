@@ -160,19 +160,5 @@
   "normalFormsTooManyVars": "Troppe variabili (max {max})",
   "normalFormsTooManyVarsDesc": "La conversione in forme normali è limitata a espressioni con al massimo 5 variabili per mantenere l'output leggibile.",
   "normalFormsAdGate": "Guarda un breve video per sbloccare le Forme Normali di questa espressione.",
-  "normalFormsProHint": "Passa a Pro per vedere le Forme Normali istantaneamente senza pubblicità.",
-  "ocrScan": "Scansiona Espressione",
-  "ocrScanTitle": "Scansiona Espressione",
-  "ocrScanDescription": "Scatta una foto o scegli un'immagine di un'espressione logica per riconoscerla automaticamente.",
-  "ocrTakePhoto": "Scatta Foto",
-  "ocrFromGallery": "Scegli dalla Galleria",
-  "ocrProcessing": "Riconoscimento dell'espressione…",
-  "ocrNoTextFound": "Nessun testo rilevato. Riprova con un'immagine più chiara.",
-  "ocrDetectedRaw": "TESTO RILEVATO",
-  "ocrMappedExpression": "ESPRESSIONE (MODIFICABILE)",
-  "ocrUseExpression": "Usa Espressione",
-  "ocrRetry": "Scansiona di nuovo",
-  "ocrCropHint": "Ritaglia l'espressione",
-  "ocrError": "Si è verificato un errore durante la scansione. Riprova.",
-  "ocrProHint": "Passa a Pro per scansioni OCR illimitate senza pubblicità."
+  "normalFormsProHint": "Passa a Pro per vedere le Forme Normali istantaneamente senza pubblicità."
 }
