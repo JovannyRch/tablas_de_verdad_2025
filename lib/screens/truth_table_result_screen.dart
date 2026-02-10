@@ -6,8 +6,10 @@ import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
+import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
+import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
@@ -60,11 +62,46 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
   late AppLocalizations _localization;
   late Settings _settings;
   late TabController _tabController;
+  bool _isFavorite = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _checkFavoriteStatus();
+  }
+
+  Future<void> _checkFavoriteStatus() async {
+    final expr = widget.expression ?? widget.truthTable.infix;
+    final fav = await isFavorite(expr);
+    if (mounted) setState(() => _isFavorite = fav);
+  }
+
+  Future<void> _toggleFavorite() async {
+    final expr = widget.expression ?? widget.truthTable.infix;
+    if (_isFavorite) {
+      await deleteFavorite(expr);
+    } else {
+      await saveFavorite(expr);
+      Analytics.instance.logFavoriteAdded(expr);
+    }
+    if (mounted) {
+      setState(() => _isFavorite = !_isFavorite);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            _isFavorite
+                ? _localization.addedToFavorites
+                : _localization.removedFromFavorites,
+          ),
+          duration: const Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -85,10 +122,21 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
         centerTitle: true,
         actions: [
           IconButton(
+            onPressed: _toggleFavorite,
+            icon: Icon(
+              _isFavorite
+                  ? Icons.favorite_rounded
+                  : Icons.favorite_border_rounded,
+              color: _isFavorite ? Colors.redAccent : null,
+            ),
+            tooltip: _localization.favorites,
+          ),
+          IconButton(
             onPressed: () {
               final expr = widget.expression ?? widget.truthTable.infix;
               final type = getType(widget.truthTable.tipo);
               SharePlus.instance.share(ShareParams(text: '$expr\n$type'));
+              Analytics.instance.logExpressionShared();
             },
             icon: const Icon(Icons.share_outlined),
             tooltip: 'Share',
@@ -102,6 +150,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
           ),
           IconButton(
             onPressed: () {
+              Analytics.instance.logPdfExported();
               Navigator.push(
                 context,
                 MaterialPageRoute(

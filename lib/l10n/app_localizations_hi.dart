@@ -251,5 +251,107 @@ class AppLocalizationsHi extends AppLocalizations {
   String get youtubeChannel => 'YouTube चैनल';
 
   @override
+  String get favorites => 'पसंदीदा';
+
+  @override
+  String get noFavorites => 'कोई पसंदीदा नहीं';
+
+  @override
+  String get addedToFavorites => 'पसंदीदा में जोड़ा गया';
+
+  @override
+  String get removedFromFavorites => 'पसंदीदा से हटाया गया';
+
+  @override
+  String get searchHistory => 'इतिहास में खोजें...';
+
+  @override
+  String get all => 'सभी';
+
+  @override
+  String get onboardingTitle1 => 'अपनी अभिव्यक्ति लिखें';
+
+  @override
+  String get onboardingDesc1 => 'चर और ऑपरेटरों के साथ कोई भी तार्किक अभिव्यक्ति दर्ज करने के लिए कीपैड का उपयोग करें';
+
+  @override
+  String get onboardingTitle2 => 'चरण-दर-चरण समाधान';
+
+  @override
+  String get onboardingDesc2 => 'समाधान के प्रत्येक चरण और पूर्ण सत्य तालिका को देखें';
+
+  @override
+  String get onboardingTitle3 => 'निर्यात करें और साझा करें';
+
+  @override
+  String get onboardingDesc3 => 'पेशेवर PDF बनाएं और अपने परिणाम आसानी से साझा करें';
+
+  @override
+  String get getStarted => 'शुरू करें!';
+
+  @override
+  String get next => 'अगला';
+
+  @override
+  String get skip => 'छोड़ें';
+
+  @override
+  String get practiceMode => 'अभ्यास मोड';
+
+  @override
+  String get chooseDifficulty => 'कठिनाई चुनें';
+
+  @override
+  String get easy => 'आसान';
+
+  @override
+  String get easyDesc => '1-2 चर के साथ सरल अभिव्यक्तियाँ';
+
+  @override
+  String get medium => 'मध्यम';
+
+  @override
+  String get mediumDesc => '2-3 चर के साथ यौगिक अभिव्यक्तियाँ';
+
+  @override
+  String get hard => 'कठिन';
+
+  @override
+  String get hardDesc => '3-4 चर के साथ जटिल अभिव्यक्तियाँ';
+
+  @override
+  String get yourStats => 'आपके आँकड़े';
+
+  @override
+  String get quizzesPlayed => 'खेले गए';
+
+  @override
+  String get bestStreak => 'सबसे अच्छी लय';
+
+  @override
+  String get correctAnswers => 'सही उत्तर';
+
+  @override
+  String get question => 'प्रश्न';
+
+  @override
+  String get whatTypeIsThis => 'इस अभिव्यक्ति का प्रकार क्या है?';
+
+  @override
+  String get correctAnswer => 'सही! 🎉';
+
+  @override
+  String get wrongAnswer => 'गलत। कोशिश करते रहें!';
+
+  @override
+  String get seeResults => 'परिणाम देखें';
+
+  @override
+  String get quizResults => 'क्विज़ परिणाम';
+
+  @override
+  String get playAgain => 'फिर से खेलें';
+
+  @override
   String get fullTable => 'पूर्ण तालिका';
 }

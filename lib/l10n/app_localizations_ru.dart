@@ -251,5 +251,107 @@ class AppLocalizationsRu extends AppLocalizations {
   String get youtubeChannel => 'YouTube канал';
 
   @override
+  String get favorites => 'Избранное';
+
+  @override
+  String get noFavorites => 'Нет избранного';
+
+  @override
+  String get addedToFavorites => 'Добавлено в избранное';
+
+  @override
+  String get removedFromFavorites => 'Удалено из избранного';
+
+  @override
+  String get searchHistory => 'Поиск в истории...';
+
+  @override
+  String get all => 'Все';
+
+  @override
+  String get onboardingTitle1 => 'Напишите выражение';
+
+  @override
+  String get onboardingDesc1 => 'Используйте клавиатуру для ввода логического выражения с переменными и операторами';
+
+  @override
+  String get onboardingTitle2 => 'Пошаговое решение';
+
+  @override
+  String get onboardingDesc2 => 'Просматривайте каждый шаг решения и полную таблицу истинности';
+
+  @override
+  String get onboardingTitle3 => 'Экспортируйте и делитесь';
+
+  @override
+  String get onboardingDesc3 => 'Создавайте профессиональные PDF и легко делитесь результатами';
+
+  @override
+  String get getStarted => 'Начать!';
+
+  @override
+  String get next => 'Далее';
+
+  @override
+  String get skip => 'Пропустить';
+
+  @override
+  String get practiceMode => 'Режим практики';
+
+  @override
+  String get chooseDifficulty => 'Выберите сложность';
+
+  @override
+  String get easy => 'Легко';
+
+  @override
+  String get easyDesc => 'Простые выражения с 1-2 переменными';
+
+  @override
+  String get medium => 'Средне';
+
+  @override
+  String get mediumDesc => 'Составные выражения с 2-3 переменными';
+
+  @override
+  String get hard => 'Сложно';
+
+  @override
+  String get hardDesc => 'Сложные выражения с 3-4 переменными';
+
+  @override
+  String get yourStats => 'Ваша статистика';
+
+  @override
+  String get quizzesPlayed => 'Сыграно';
+
+  @override
+  String get bestStreak => 'Лучшая серия';
+
+  @override
+  String get correctAnswers => 'Правильных';
+
+  @override
+  String get question => 'Вопрос';
+
+  @override
+  String get whatTypeIsThis => 'Какого типа это выражение?';
+
+  @override
+  String get correctAnswer => 'Правильно! 🎉';
+
+  @override
+  String get wrongAnswer => 'Неправильно. Продолжайте!';
+
+  @override
+  String get seeResults => 'Посмотреть результаты';
+
+  @override
+  String get quizResults => 'Результаты теста';
+
+  @override
+  String get playAgain => 'Играть снова';
+
+  @override
   String get fullTable => 'Полная таблица';
 }

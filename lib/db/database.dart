@@ -46,3 +46,51 @@ Future<int> saveExpression(String expression) async {
   Database db = await initDatabase();
   return await db.insert('expressions', {'expression': expression});
 }
+
+// ── Favorites ──────────────────────────────────────────────
+
+Future<List<String>> getFavorites() async {
+  final db = await initDatabase();
+  final rows = await db.query(
+    'favorites',
+    columns: ['expression'],
+    orderBy: 'id DESC',
+  );
+  return rows.map((r) => r['expression'] as String).toList();
+}
+
+Future<bool> isFavorite(String expression) async {
+  final db = await initDatabase();
+  final rows = await db.query(
+    'favorites',
+    where: 'expression = ?',
+    whereArgs: [expression],
+  );
+  return rows.isNotEmpty;
+}
+
+Future<int> saveFavorite(String expression) async {
+  final db = await initDatabase();
+  // Avoid duplicates
+  final existing = await db.query(
+    'favorites',
+    where: 'expression = ?',
+    whereArgs: [expression],
+  );
+  if (existing.isNotEmpty) return 0;
+  return await db.insert('favorites', {'expression': expression});
+}
+
+Future<void> deleteFavorite(String expression) async {
+  final db = await initDatabase();
+  await db.delete(
+    'favorites',
+    where: 'expression = ?',
+    whereArgs: [expression],
+  );
+}
+
+Future<void> clearFavorites() async {
+  final db = await initDatabase();
+  await db.delete('favorites');
+}

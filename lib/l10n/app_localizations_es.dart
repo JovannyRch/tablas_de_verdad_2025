@@ -251,5 +251,107 @@ class AppLocalizationsEs extends AppLocalizations {
   String get youtubeChannel => 'Canal de YouTube';
 
   @override
+  String get favorites => 'Favoritos';
+
+  @override
+  String get noFavorites => 'Sin favoritos';
+
+  @override
+  String get addedToFavorites => 'Agregado a favoritos';
+
+  @override
+  String get removedFromFavorites => 'Eliminado de favoritos';
+
+  @override
+  String get searchHistory => 'Buscar en historial...';
+
+  @override
+  String get all => 'Todos';
+
+  @override
+  String get onboardingTitle1 => 'Escribe tu expresión';
+
+  @override
+  String get onboardingDesc1 => 'Usa el teclado para ingresar cualquier expresión lógica con variables y operadores';
+
+  @override
+  String get onboardingTitle2 => 'Solución paso a paso';
+
+  @override
+  String get onboardingDesc2 => 'Visualiza cada paso de la resolución y la tabla de verdad completa';
+
+  @override
+  String get onboardingTitle3 => 'Exporta y comparte';
+
+  @override
+  String get onboardingDesc3 => 'Genera PDFs profesionales y comparte tus resultados fácilmente';
+
+  @override
+  String get getStarted => '¡Empezar!';
+
+  @override
+  String get next => 'Siguiente';
+
+  @override
+  String get skip => 'Omitir';
+
+  @override
+  String get practiceMode => 'Modo Práctica';
+
+  @override
+  String get chooseDifficulty => 'Elige la dificultad';
+
+  @override
+  String get easy => 'Fácil';
+
+  @override
+  String get easyDesc => 'Expresiones simples con 1-2 variables';
+
+  @override
+  String get medium => 'Medio';
+
+  @override
+  String get mediumDesc => 'Expresiones compuestas con 2-3 variables';
+
+  @override
+  String get hard => 'Difícil';
+
+  @override
+  String get hardDesc => 'Expresiones complejas con 3-4 variables';
+
+  @override
+  String get yourStats => 'Tus estadísticas';
+
+  @override
+  String get quizzesPlayed => 'Jugados';
+
+  @override
+  String get bestStreak => 'Mejor racha';
+
+  @override
+  String get correctAnswers => 'Correctas';
+
+  @override
+  String get question => 'Pregunta';
+
+  @override
+  String get whatTypeIsThis => '¿Qué tipo de expresión es?';
+
+  @override
+  String get correctAnswer => '¡Correcto! 🎉';
+
+  @override
+  String get wrongAnswer => 'Incorrecto. ¡Sigue intentando!';
+
+  @override
+  String get seeResults => 'Ver resultados';
+
+  @override
+  String get quizResults => 'Resultados del quiz';
+
+  @override
+  String get playAgain => 'Jugar de nuevo';
+
+  @override
   String get fullTable => 'Tabla completa';
 }

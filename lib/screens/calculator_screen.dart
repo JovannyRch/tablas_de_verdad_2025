@@ -10,6 +10,7 @@ import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
 import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
+import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 import 'package:tablas_de_verdad_2025/widget/drawer.dart';
@@ -264,6 +265,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
 
     await _settings.incrementOperationsCount();
+
+    // Analytics: track calculation
+    Analytics.instance.logExpressionCalculated(expression);
 
     // Incrementar contador para el sistema de rating
     await RatingHelper.incrementCalculationCount();

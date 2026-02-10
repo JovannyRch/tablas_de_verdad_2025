@@ -591,6 +591,210 @@ abstract class AppLocalizations {
   /// **'Canal de YouTube'**
   String get youtubeChannel;
 
+  /// No description provided for @favorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Favoritos'**
+  String get favorites;
+
+  /// No description provided for @noFavorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin favoritos'**
+  String get noFavorites;
+
+  /// No description provided for @addedToFavorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregado a favoritos'**
+  String get addedToFavorites;
+
+  /// No description provided for @removedFromFavorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminado de favoritos'**
+  String get removedFromFavorites;
+
+  /// No description provided for @searchHistory.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar en historial...'**
+  String get searchHistory;
+
+  /// No description provided for @all.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos'**
+  String get all;
+
+  /// No description provided for @onboardingTitle1.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe tu expresión'**
+  String get onboardingTitle1;
+
+  /// No description provided for @onboardingDesc1.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa el teclado para ingresar cualquier expresión lógica con variables y operadores'**
+  String get onboardingDesc1;
+
+  /// No description provided for @onboardingTitle2.
+  ///
+  /// In es, this message translates to:
+  /// **'Solución paso a paso'**
+  String get onboardingTitle2;
+
+  /// No description provided for @onboardingDesc2.
+  ///
+  /// In es, this message translates to:
+  /// **'Visualiza cada paso de la resolución y la tabla de verdad completa'**
+  String get onboardingDesc2;
+
+  /// No description provided for @onboardingTitle3.
+  ///
+  /// In es, this message translates to:
+  /// **'Exporta y comparte'**
+  String get onboardingTitle3;
+
+  /// No description provided for @onboardingDesc3.
+  ///
+  /// In es, this message translates to:
+  /// **'Genera PDFs profesionales y comparte tus resultados fácilmente'**
+  String get onboardingDesc3;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Empezar!'**
+  String get getStarted;
+
+  /// No description provided for @next.
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente'**
+  String get next;
+
+  /// No description provided for @skip.
+  ///
+  /// In es, this message translates to:
+  /// **'Omitir'**
+  String get skip;
+
+  /// No description provided for @practiceMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo Práctica'**
+  String get practiceMode;
+
+  /// No description provided for @chooseDifficulty.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige la dificultad'**
+  String get chooseDifficulty;
+
+  /// No description provided for @easy.
+  ///
+  /// In es, this message translates to:
+  /// **'Fácil'**
+  String get easy;
+
+  /// No description provided for @easyDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresiones simples con 1-2 variables'**
+  String get easyDesc;
+
+  /// No description provided for @medium.
+  ///
+  /// In es, this message translates to:
+  /// **'Medio'**
+  String get medium;
+
+  /// No description provided for @mediumDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresiones compuestas con 2-3 variables'**
+  String get mediumDesc;
+
+  /// No description provided for @hard.
+  ///
+  /// In es, this message translates to:
+  /// **'Difícil'**
+  String get hard;
+
+  /// No description provided for @hardDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresiones complejas con 3-4 variables'**
+  String get hardDesc;
+
+  /// No description provided for @yourStats.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus estadísticas'**
+  String get yourStats;
+
+  /// No description provided for @quizzesPlayed.
+  ///
+  /// In es, this message translates to:
+  /// **'Jugados'**
+  String get quizzesPlayed;
+
+  /// No description provided for @bestStreak.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor racha'**
+  String get bestStreak;
+
+  /// No description provided for @correctAnswers.
+  ///
+  /// In es, this message translates to:
+  /// **'Correctas'**
+  String get correctAnswers;
+
+  /// No description provided for @question.
+  ///
+  /// In es, this message translates to:
+  /// **'Pregunta'**
+  String get question;
+
+  /// No description provided for @whatTypeIsThis.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué tipo de expresión es?'**
+  String get whatTypeIsThis;
+
+  /// No description provided for @correctAnswer.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Correcto! 🎉'**
+  String get correctAnswer;
+
+  /// No description provided for @wrongAnswer.
+  ///
+  /// In es, this message translates to:
+  /// **'Incorrecto. ¡Sigue intentando!'**
+  String get wrongAnswer;
+
+  /// No description provided for @seeResults.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver resultados'**
+  String get seeResults;
+
+  /// No description provided for @quizResults.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultados del quiz'**
+  String get quizResults;
+
+  /// No description provided for @playAgain.
+  ///
+  /// In es, this message translates to:
+  /// **'Jugar de nuevo'**
+  String get playAgain;
+
   /// No description provided for @fullTable.
   ///
   /// In es, this message translates to:

@@ -1,8 +1,10 @@
 class Routes {
+  static const String onboarding = '/onboarding';
   static const String calculator = '/calculator';
   static const String library = '/library';
   static const String tutorials = '/tutorials';
   static const String exercises = '/exercises';
+  static const String practice = '/practice';
   static const String history = '/history';
   /*  static const String login = '/login';
   static const String register = '/register';

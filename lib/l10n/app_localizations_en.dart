@@ -251,5 +251,107 @@ class AppLocalizationsEn extends AppLocalizations {
   String get youtubeChannel => 'YouTube Channel';
 
   @override
+  String get favorites => 'Favorites';
+
+  @override
+  String get noFavorites => 'No favorites yet';
+
+  @override
+  String get addedToFavorites => 'Added to favorites';
+
+  @override
+  String get removedFromFavorites => 'Removed from favorites';
+
+  @override
+  String get searchHistory => 'Search history...';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get onboardingTitle1 => 'Write your expression';
+
+  @override
+  String get onboardingDesc1 => 'Use the keypad to enter any logical expression with variables and operators';
+
+  @override
+  String get onboardingTitle2 => 'Step-by-step solution';
+
+  @override
+  String get onboardingDesc2 => 'See each step of the resolution and the complete truth table';
+
+  @override
+  String get onboardingTitle3 => 'Export and share';
+
+  @override
+  String get onboardingDesc3 => 'Generate professional PDFs and share your results easily';
+
+  @override
+  String get getStarted => 'Get started!';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get practiceMode => 'Practice Mode';
+
+  @override
+  String get chooseDifficulty => 'Choose difficulty';
+
+  @override
+  String get easy => 'Easy';
+
+  @override
+  String get easyDesc => 'Simple expressions with 1-2 variables';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get mediumDesc => 'Compound expressions with 2-3 variables';
+
+  @override
+  String get hard => 'Hard';
+
+  @override
+  String get hardDesc => 'Complex expressions with 3-4 variables';
+
+  @override
+  String get yourStats => 'Your stats';
+
+  @override
+  String get quizzesPlayed => 'Played';
+
+  @override
+  String get bestStreak => 'Best streak';
+
+  @override
+  String get correctAnswers => 'Correct';
+
+  @override
+  String get question => 'Question';
+
+  @override
+  String get whatTypeIsThis => 'What type is this expression?';
+
+  @override
+  String get correctAnswer => 'Correct! 🎉';
+
+  @override
+  String get wrongAnswer => 'Incorrect. Keep trying!';
+
+  @override
+  String get seeResults => 'See results';
+
+  @override
+  String get quizResults => 'Quiz Results';
+
+  @override
+  String get playAgain => 'Play again';
+
+  @override
   String get fullTable => 'Full table';
 }

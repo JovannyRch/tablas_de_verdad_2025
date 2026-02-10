@@ -4,6 +4,7 @@ import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
 import 'package:tablas_de_verdad_2025/dialogs/history_dialog.dart';
+import 'package:tablas_de_verdad_2025/dialogs/favorites_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/open_support_chat.dart';
@@ -62,11 +63,36 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
                 _DrawerTile(
+                  icon: Icons.favorite_rounded,
+                  title: t.favorites,
+                  iconColor: Colors.redAccent,
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final selectedExpr = await showDialog<String>(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (_) => const FavoritesDialog(),
+                    );
+                    if (selectedExpr != null) {
+                      onExpressionSelected(selectedExpr);
+                    }
+                  },
+                ),
+                _DrawerTile(
                   icon: Icons.auto_stories_outlined,
                   title: t.expressionLibrary,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.pushNamed(context, Routes.library);
+                  },
+                ),
+                _DrawerTile(
+                  icon: Icons.quiz_rounded,
+                  title: t.practiceMode,
+                  iconColor: const Color(0xFF4CAF50),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, Routes.practice);
                   },
                 ),
                 _DrawerTile(

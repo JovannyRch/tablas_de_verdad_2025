@@ -251,5 +251,107 @@ class AppLocalizationsZh extends AppLocalizations {
   String get youtubeChannel => 'YouTube 频道';
 
   @override
+  String get favorites => '收藏夹';
+
+  @override
+  String get noFavorites => '没有收藏';
+
+  @override
+  String get addedToFavorites => '已添加到收藏夹';
+
+  @override
+  String get removedFromFavorites => '已从收藏夹移除';
+
+  @override
+  String get searchHistory => '搜索历史...';
+
+  @override
+  String get all => '全部';
+
+  @override
+  String get onboardingTitle1 => '写下你的表达式';
+
+  @override
+  String get onboardingDesc1 => '使用键盘输入任何包含变量和运算符的逻辑表达式';
+
+  @override
+  String get onboardingTitle2 => '逐步解答';
+
+  @override
+  String get onboardingDesc2 => '查看解题的每一步和完整的真值表';
+
+  @override
+  String get onboardingTitle3 => '导出和分享';
+
+  @override
+  String get onboardingDesc3 => '生成专业的PDF并轻松分享您的结果';
+
+  @override
+  String get getStarted => '开始吧!';
+
+  @override
+  String get next => '下一步';
+
+  @override
+  String get skip => '跳过';
+
+  @override
+  String get practiceMode => '练习模式';
+
+  @override
+  String get chooseDifficulty => '选择难度';
+
+  @override
+  String get easy => '简单';
+
+  @override
+  String get easyDesc => '1-2个变量的简单表达式';
+
+  @override
+  String get medium => '中等';
+
+  @override
+  String get mediumDesc => '2-3个变量的复合表达式';
+
+  @override
+  String get hard => '困难';
+
+  @override
+  String get hardDesc => '3-4个变量的复杂表达式';
+
+  @override
+  String get yourStats => '你的统计';
+
+  @override
+  String get quizzesPlayed => '已完成';
+
+  @override
+  String get bestStreak => '最佳连胜';
+
+  @override
+  String get correctAnswers => '正确';
+
+  @override
+  String get question => '题目';
+
+  @override
+  String get whatTypeIsThis => '这个表达式是什么类型？';
+
+  @override
+  String get correctAnswer => '正确！🎉';
+
+  @override
+  String get wrongAnswer => '不正确。继续尝试！';
+
+  @override
+  String get seeResults => '查看结果';
+
+  @override
+  String get quizResults => '测验结果';
+
+  @override
+  String get playAgain => '再玩一次';
+
+  @override
   String get fullTable => '完整表';
 }

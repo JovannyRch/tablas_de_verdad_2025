@@ -251,5 +251,107 @@ class AppLocalizationsJa extends AppLocalizations {
   String get youtubeChannel => 'YouTubeチャンネル';
 
   @override
+  String get favorites => 'お気に入り';
+
+  @override
+  String get noFavorites => 'お気に入りなし';
+
+  @override
+  String get addedToFavorites => 'お気に入りに追加しました';
+
+  @override
+  String get removedFromFavorites => 'お気に入りから削除しました';
+
+  @override
+  String get searchHistory => '履歴を検索...';
+
+  @override
+  String get all => 'すべて';
+
+  @override
+  String get onboardingTitle1 => '式を入力';
+
+  @override
+  String get onboardingDesc1 => 'キーパッドを使って変数と演算子で論理式を入力';
+
+  @override
+  String get onboardingTitle2 => 'ステップバイステップの解法';
+
+  @override
+  String get onboardingDesc2 => '解法の各ステップと完全な真理値表を表示';
+
+  @override
+  String get onboardingTitle3 => 'エクスポートして共有';
+
+  @override
+  String get onboardingDesc3 => 'プロフェッショナルなPDFを生成し、結果を簡単に共有';
+
+  @override
+  String get getStarted => '始めよう!';
+
+  @override
+  String get next => '次へ';
+
+  @override
+  String get skip => 'スキップ';
+
+  @override
+  String get practiceMode => '練習モード';
+
+  @override
+  String get chooseDifficulty => '難易度を選択';
+
+  @override
+  String get easy => '簡単';
+
+  @override
+  String get easyDesc => '1-2変数の簡単な式';
+
+  @override
+  String get medium => '普通';
+
+  @override
+  String get mediumDesc => '2-3変数の複合式';
+
+  @override
+  String get hard => '難しい';
+
+  @override
+  String get hardDesc => '3-4変数の複雑な式';
+
+  @override
+  String get yourStats => 'あなたの統計';
+
+  @override
+  String get quizzesPlayed => 'プレイ済み';
+
+  @override
+  String get bestStreak => 'ベスト連続';
+
+  @override
+  String get correctAnswers => '正解';
+
+  @override
+  String get question => '問題';
+
+  @override
+  String get whatTypeIsThis => 'この式のタイプは？';
+
+  @override
+  String get correctAnswer => '正解！🎉';
+
+  @override
+  String get wrongAnswer => '不正解。頑張って！';
+
+  @override
+  String get seeResults => '結果を見る';
+
+  @override
+  String get quizResults => 'クイズ結果';
+
+  @override
+  String get playAgain => 'もう一度プレイ';
+
+  @override
   String get fullTable => '完全な表';
 }
