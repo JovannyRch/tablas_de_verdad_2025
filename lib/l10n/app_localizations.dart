@@ -800,6 +800,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tabla completa'**
   String get fullTable;
+
+  /// No description provided for @oneTimePurchase.
+  ///
+  /// In es, this message translates to:
+  /// **'Compra única'**
+  String get oneTimePurchase;
+
+  /// No description provided for @unlimitedPremiumOps.
+  ///
+  /// In es, this message translates to:
+  /// **'Operadores premium ilimitados'**
+  String get unlimitedPremiumOps;
+
+  /// No description provided for @supportDeveloper.
+  ///
+  /// In es, this message translates to:
+  /// **'Apoya al desarrollador'**
+  String get supportDeveloper;
+
+  /// No description provided for @socialProof.
+  ///
+  /// In es, this message translates to:
+  /// **'Confiado por miles de estudiantes'**
+  String get socialProof;
+
+  /// No description provided for @purchaseError.
+  ///
+  /// In es, this message translates to:
+  /// **'Error en la compra. Intenta de nuevo.'**
+  String get purchaseError;
+
+  /// No description provided for @noPurchasesFound.
+  ///
+  /// In es, this message translates to:
+  /// **'No se encontraron compras previas'**
+  String get noPurchasesFound;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurar compras'**
+  String get restorePurchases;
+
+  /// No description provided for @proUpgradeHint.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Mejora a Pro para práctica ilimitada con todos los operadores y sin anuncios!'**
+  String get proUpgradeHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

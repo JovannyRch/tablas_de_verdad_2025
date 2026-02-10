@@ -354,4 +354,28 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get fullTable => 'Полная таблица';
+
+  @override
+  String get oneTimePurchase => 'Разовая покупка';
+
+  @override
+  String get unlimitedPremiumOps => 'Безлимитные премиум-операторы';
+
+  @override
+  String get supportDeveloper => 'Поддержите разработчика';
+
+  @override
+  String get socialProof => 'Доверяют тысячи студентов';
+
+  @override
+  String get purchaseError => 'Ошибка покупки. Попробуйте ещё раз.';
+
+  @override
+  String get noPurchasesFound => 'Предыдущие покупки не найдены';
+
+  @override
+  String get restorePurchases => 'Восстановить покупки';
+
+  @override
+  String get proUpgradeHint => 'Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!';
 }

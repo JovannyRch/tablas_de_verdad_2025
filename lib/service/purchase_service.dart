@@ -9,14 +9,22 @@ class PurchaseService {
 
   ValueNotifier<bool> isProVersion = ValueNotifier<bool>(false);
 
+  /// Cached product details (price string, etc.)
+  ProductDetails? productDetails;
+
+  /// Loading / error state for UI
+  ValueNotifier<bool> isPurchasing = ValueNotifier<bool>(false);
+  String? lastError;
+
   void initPurchaseListener() {
-    // Solo inicializar si no está ya inicializado
     if (_subscription != null) return;
 
     _subscription = _iap.purchaseStream.listen(
       _onPurchaseUpdated,
       onError: (error) {
         if (kDebugMode) print('Purchase error: $error');
+        isPurchasing.value = false;
+        lastError = error.toString();
       },
     );
   }
@@ -24,6 +32,20 @@ class PurchaseService {
   void dispose() {
     _subscription?.cancel();
   }
+
+  /// Pre-fetch product details so price is available before showing paywall.
+  Future<void> loadProductDetails() async {
+    final bool available = await _iap.isAvailable();
+    if (!available) return;
+
+    final response = await _iap.queryProductDetails({_proProductId});
+    if (response.productDetails.isNotEmpty) {
+      productDetails = response.productDetails.first;
+    }
+  }
+
+  /// Returns the localized price string (e.g. "$4.99") or null.
+  String? get priceString => productDetails?.price;
 
   Future<void> restorePurchases() async {
     final bool available = await _iap.isAvailable();
@@ -43,8 +65,10 @@ class PurchaseService {
           break;
         }
       }
-      restoration.complete();
-    }, onError: (_) => restoration.complete());
+      if (!restoration.isCompleted) restoration.complete();
+    }, onError: (_) {
+      if (!restoration.isCompleted) restoration.complete();
+    });
 
     await _iap.restorePurchases();
     await restoration.future;
@@ -52,21 +76,56 @@ class PurchaseService {
   }
 
   Future<void> buyProVersion() async {
-    final response = await _iap.queryProductDetails({_proProductId});
-    if (response.notFoundIDs.isNotEmpty || response.productDetails.isEmpty) {
-      throw Exception('Producto no disponible');
-    }
+    isPurchasing.value = true;
+    lastError = null;
 
-    final product = response.productDetails.first;
-    final purchaseParam = PurchaseParam(productDetails: product);
-    _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    try {
+      // Use cached product details if available, otherwise fetch
+      ProductDetails? product = productDetails;
+      if (product == null) {
+        final response = await _iap.queryProductDetails({_proProductId});
+        if (response.notFoundIDs.isNotEmpty ||
+            response.productDetails.isEmpty) {
+          throw Exception('Product not available');
+        }
+        product = response.productDetails.first;
+        productDetails = product;
+      }
+
+      final purchaseParam = PurchaseParam(productDetails: product);
+      await _iap.buyNonConsumable(purchaseParam: purchaseParam);
+    } catch (e) {
+      isPurchasing.value = false;
+      lastError = e.toString();
+      rethrow;
+    }
   }
 
-  void _onPurchaseUpdated(List<PurchaseDetails> purchases) {
+  void _onPurchaseUpdated(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
-      if (purchase.productID == _proProductId &&
-          purchase.status == PurchaseStatus.purchased) {
-        isProVersion.value = true;
+      if (purchase.productID != _proProductId) continue;
+
+      switch (purchase.status) {
+        case PurchaseStatus.purchased:
+        case PurchaseStatus.restored:
+          isProVersion.value = true;
+          // CRITICAL: Acknowledge purchase to prevent auto-refund
+          if (purchase.pendingCompletePurchase) {
+            await _iap.completePurchase(purchase);
+          }
+          isPurchasing.value = false;
+          break;
+        case PurchaseStatus.error:
+          isPurchasing.value = false;
+          lastError = purchase.error?.message ?? 'Purchase failed';
+          if (kDebugMode) print('Purchase error: ${purchase.error}');
+          break;
+        case PurchaseStatus.canceled:
+          isPurchasing.value = false;
+          break;
+        case PurchaseStatus.pending:
+          isPurchasing.value = true;
+          break;
       }
     }
   }

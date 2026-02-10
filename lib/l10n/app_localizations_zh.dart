@@ -354,4 +354,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fullTable => '完整表';
+
+  @override
+  String get oneTimePurchase => '一次性购买';
+
+  @override
+  String get unlimitedPremiumOps => '无限高级运算符';
+
+  @override
+  String get supportDeveloper => '支持开发者';
+
+  @override
+  String get socialProof => '受到数千名学生的信赖';
+
+  @override
+  String get purchaseError => '购买失败，请重试。';
+
+  @override
+  String get noPurchasesFound => '未找到之前的购买记录';
+
+  @override
+  String get restorePurchases => '恢复购买';
+
+  @override
+  String get proUpgradeHint => '升级到Pro版，享受无限练习、所有运算符和无广告体验！';
 }

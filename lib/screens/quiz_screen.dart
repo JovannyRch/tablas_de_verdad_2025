@@ -7,6 +7,7 @@ import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/quiz_model.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
+import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:provider/provider.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -133,12 +134,15 @@ class _QuizScreenState extends State<QuizScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (_quizFinished) {
+      final pct = _score / _questions.length;
+      final settings = Provider.of<Settings>(context, listen: false);
       return _ResultsView(
         score: _score,
         total: _questions.length,
         bestStreak: _bestStreak,
         isDark: isDark,
         t: t,
+        showProHint: pct < 0.7 && !settings.isProVersion,
         onRetry: () {
           _animController.reset();
           setState(() {
@@ -514,6 +518,7 @@ class _ResultsView extends StatelessWidget {
   final AppLocalizations t;
   final VoidCallback onRetry;
   final VoidCallback onExit;
+  final bool showProHint;
 
   const _ResultsView({
     required this.score,
@@ -523,6 +528,7 @@ class _ResultsView extends StatelessWidget {
     required this.t,
     required this.onRetry,
     required this.onExit,
+    this.showProHint = false,
   });
 
   String _getEmoji() {
@@ -590,6 +596,64 @@ class _ResultsView extends StatelessWidget {
                   ],
                 ),
               const SizedBox(height: 40),
+              // Contextual Pro upgrade nudge
+              if (showProHint) ...[
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        kSeedColor.withValues(alpha: 0.08),
+                        kSeedColor.withValues(alpha: 0.02),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: kSeedColor.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.workspace_premium_rounded,
+                        color: kSeedColor,
+                        size: 28,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        t.proUpgradeHint,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white70 : Colors.black54,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () {
+                          Analytics.instance.logEvent('quiz_pro_hint_tapped');
+                          final settings = Provider.of<Settings>(
+                            context,
+                            listen: false,
+                          );
+                          showProVersionDialog(context, settings, t);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: kSeedColor,
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                          ),
+                        ),
+                        child: Text(t.upgradePro),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
               SizedBox(
                 width: double.infinity,
                 height: 52,

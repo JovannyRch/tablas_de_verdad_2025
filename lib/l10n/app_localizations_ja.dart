@@ -354,4 +354,28 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get fullTable => '完全な表';
+
+  @override
+  String get oneTimePurchase => '1回限りの購入';
+
+  @override
+  String get unlimitedPremiumOps => '無制限のプレミアム演算子';
+
+  @override
+  String get supportDeveloper => '開発者をサポート';
+
+  @override
+  String get socialProof => '何千人もの学生に信頼されています';
+
+  @override
+  String get purchaseError => '購入に失敗しました。もう一度お試しください。';
+
+  @override
+  String get noPurchasesFound => '以前の購入が見つかりません';
+
+  @override
+  String get restorePurchases => '購入を復元';
+
+  @override
+  String get proUpgradeHint => 'Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！';
 }

@@ -354,4 +354,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get fullTable => 'पूर्ण तालिका';
+
+  @override
+  String get oneTimePurchase => 'एक बार की खरीदारी';
+
+  @override
+  String get unlimitedPremiumOps => 'असीमित प्रीमियम ऑपरेटर';
+
+  @override
+  String get supportDeveloper => 'डेवलपर का समर्थन करें';
+
+  @override
+  String get socialProof => 'हजारों छात्रों द्वारा विश्वसनीय';
+
+  @override
+  String get purchaseError => 'खरीदारी विफल। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get noPurchasesFound => 'कोई पिछली खरीदारी नहीं मिली';
+
+  @override
+  String get restorePurchases => 'खरीदारी पुनर्स्थापित करें';
+
+  @override
+  String get proUpgradeHint => 'सभी ऑपरेटरों और बिना विज्ञापनों के असीमित अभ्यास के लिए Pro में अपग्रेड करें!';
 }

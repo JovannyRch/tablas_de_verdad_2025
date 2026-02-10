@@ -121,5 +121,13 @@
   "seeResults": "See results",
   "quizResults": "Quiz Results",
   "playAgain": "Play again",
-  "fullTable": "Full table"
+  "fullTable": "Full table",
+  "oneTimePurchase": "One-time purchase",
+  "unlimitedPremiumOps": "Unlimited premium operators",
+  "supportDeveloper": "Support the developer",
+  "socialProof": "Trusted by thousands of students",
+  "purchaseError": "Purchase failed. Please try again.",
+  "noPurchasesFound": "No previous purchases found",
+  "restorePurchases": "Restore Purchases",
+  "proUpgradeHint": "Upgrade to Pro for unlimited practice with all operators and no ads!"
 }

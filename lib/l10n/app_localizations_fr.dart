@@ -354,4 +354,28 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fullTable => 'Table complète';
+
+  @override
+  String get oneTimePurchase => 'Achat unique';
+
+  @override
+  String get unlimitedPremiumOps => 'Opérateurs premium illimités';
+
+  @override
+  String get supportDeveloper => 'Soutenez le développeur';
+
+  @override
+  String get socialProof => 'Utilisé par des milliers d\'étudiants';
+
+  @override
+  String get purchaseError => 'Échec de l\'achat. Veuillez réessayer.';
+
+  @override
+  String get noPurchasesFound => 'Aucun achat précédent trouvé';
+
+  @override
+  String get restorePurchases => 'Restaurer les achats';
+
+  @override
+  String get proUpgradeHint => 'Passez à Pro pour une pratique illimitée avec tous les opérateurs et sans publicités !';
 }

@@ -121,5 +121,13 @@
   "seeResults": "查看结果",
   "quizResults": "测验结果",
   "playAgain": "再玩一次",
-  "fullTable": "完整表"
+  "fullTable": "完整表",
+  "oneTimePurchase": "一次性购买",
+  "unlimitedPremiumOps": "无限高级运算符",
+  "supportDeveloper": "支持开发者",
+  "socialProof": "受到数千名学生的信赖",
+  "purchaseError": "购买失败，请重试。",
+  "noPurchasesFound": "未找到之前的购买记录",
+  "restorePurchases": "恢复购买",
+  "proUpgradeHint": "升级到Pro版，享受无限练习、所有运算符和无广告体验！"
 }

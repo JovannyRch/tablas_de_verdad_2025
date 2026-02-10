@@ -36,6 +36,12 @@ class Settings extends ChangeNotifier {
 
   final PurchaseService _purchaseService = PurchaseService();
 
+  /// Expose purchase service for price display and loading states
+  PurchaseService get purchaseService => _purchaseService;
+
+  /// Convenience: localized price string (e.g. "$4.99") or null
+  String? get proPrice => _purchaseService.priceString;
+
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     locale = Locale(prefs.getString('locale') ?? _detectSystemLocale());
@@ -60,6 +66,9 @@ class Settings extends ChangeNotifier {
     // Inicializar listener y restaurar compras
     _purchaseService.initPurchaseListener();
     await _purchaseService.restorePurchases();
+
+    // Pre-fetch product details for price display
+    _purchaseService.loadProductDetails();
 
     // Leer local por si ya se activó previamente (fallback)
     final localFlag = prefs.getBool('isProVersion') ?? false;

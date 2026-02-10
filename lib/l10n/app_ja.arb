@@ -121,5 +121,13 @@
   "seeResults": "結果を見る",
   "quizResults": "クイズ結果",
   "playAgain": "もう一度プレイ",
-  "fullTable": "完全な表"
+  "fullTable": "完全な表",
+  "oneTimePurchase": "1回限りの購入",
+  "unlimitedPremiumOps": "無制限のプレミアム演算子",
+  "supportDeveloper": "開発者をサポート",
+  "socialProof": "何千人もの学生に信頼されています",
+  "purchaseError": "購入に失敗しました。もう一度お試しください。",
+  "noPurchasesFound": "以前の購入が見つかりません",
+  "restorePurchases": "購入を復元",
+  "proUpgradeHint": "Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！"
 }

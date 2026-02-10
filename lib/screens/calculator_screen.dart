@@ -297,48 +297,166 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   Future<bool> _showPremiumOperatorDialog() async {
+    final isDark = _settings.isDarkMode(context);
+    final remaining = _settings.remainingFreePremiumUses;
+
     return await showDialog<bool>(
           context: context,
-          builder:
-              (context) => AlertDialog(
-                title: Text('🎯 ${_localization.premiumOperator}'),
-                content: Text(_localization.premiumOperatorMessage),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, false),
-                    child: Text(_localization.cancel),
+          builder: (ctx) => Dialog(
+            backgroundColor: isDark ? const Color(0xFF1E1E2E) : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Icon
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFF4A00E0).withOpacity(0.1),
+                    ),
+                    child: const Icon(
+                      Icons.lock_outline_rounded,
+                      color: Color(0xFF4A00E0),
+                      size: 32,
+                    ),
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      Navigator.pop(context, false);
-
-                      final success = await rewardedAdHelper.showRewardedAd();
-                      if (success) {
-                        _settings.markFullscreenAdShown();
-                        if (mounted) {
-                          // Re-ejecutar la evaluación tras ver el video
-                          _evaluateAfterReward();
+                  const SizedBox(height: 16),
+                  // Title
+                  Text(
+                    _localization.premiumOperator,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Message
+                  Text(
+                    _localization.premiumOperatorMessage,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white54 : Colors.black54,
+                      height: 1.4,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Remaining uses indicator
+                  if (remaining > 0)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4CAF50).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${_localization.expressionsRemaining(remaining)}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF4CAF50),
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 24),
+                  // Watch video button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: OutlinedButton.icon(
+                      onPressed: () async {
+                        Navigator.pop(ctx, false);
+                        final success =
+                            await rewardedAdHelper.showRewardedAd();
+                        if (success) {
+                          _settings.markFullscreenAdShown();
+                          if (mounted) _evaluateAfterReward();
+                        } else {
+                          if (mounted) {
+                            showSnackBarMessage(
+                              context,
+                              _localization.adNotAvailable,
+                            );
+                          }
                         }
-                      } else {
-                        if (mounted) {
-                          showSnackBarMessage(
+                      },
+                      icon: const Icon(Icons.play_circle_outline_rounded),
+                      label: Text(_localization.watchVideoFree),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor:
+                            isDark ? Colors.white70 : Colors.black87,
+                        side: BorderSide(
+                          color: isDark ? Colors.white24 : Colors.black12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Upgrade Pro button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+                        ),
+                      ),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx, false);
+                          showProVersionDialog(
                             context,
-                            _localization.adNotAvailable,
+                            _settings,
+                            _localization,
                           );
-                        }
-                      }
-                    },
-                    child: Text(_localization.watchVideoFree),
+                        },
+                        icon: const Icon(Icons.diamond_rounded, size: 18),
+                        label: Text(
+                          _settings.proPrice != null
+                              ? '${_localization.upgradePro} · ${_settings.proPrice}'
+                              : _localization.upgradePro,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.white,
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                      showProVersionDialog(context, _settings, _localization);
-                    },
-                    child: Text(_localization.upgradePro),
+                  const SizedBox(height: 8),
+                  // Cancel
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, false),
+                    style: TextButton.styleFrom(
+                      foregroundColor:
+                          isDark ? Colors.white38 : Colors.black26,
+                    ),
+                    child: Text(_localization.cancel),
                   ),
                 ],
               ),
+            ),
+          ),
         ) ??
         false;
   }

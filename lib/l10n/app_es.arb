@@ -121,5 +121,13 @@
   "seeResults": "Ver resultados",
   "quizResults": "Resultados del quiz",
   "playAgain": "Jugar de nuevo",
-  "fullTable": "Tabla completa"
+  "fullTable": "Tabla completa",
+  "oneTimePurchase": "Compra única",
+  "unlimitedPremiumOps": "Operadores premium ilimitados",
+  "supportDeveloper": "Apoya al desarrollador",
+  "socialProof": "Confiado por miles de estudiantes",
+  "purchaseError": "Error en la compra. Intenta de nuevo.",
+  "noPurchasesFound": "No se encontraron compras previas",
+  "restorePurchases": "Restaurar compras",
+  "proUpgradeHint": "¡Mejora a Pro para práctica ilimitada con todos los operadores y sin anuncios!"
 }
