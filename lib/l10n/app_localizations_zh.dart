@@ -475,4 +475,46 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get normalFormsProHint => '升级到Pro，无需广告即可立即查看范式。';
+
+  @override
+  String get ocrScan => '扫描表达式';
+
+  @override
+  String get ocrScanTitle => '扫描表达式';
+
+  @override
+  String get ocrScanDescription => '拍一张逻辑表达式的照片或从相册选择图片，自动识别表达式。';
+
+  @override
+  String get ocrTakePhoto => '拍照';
+
+  @override
+  String get ocrFromGallery => '从相册选择';
+
+  @override
+  String get ocrProcessing => '正在识别表达式…';
+
+  @override
+  String get ocrNoTextFound => '未检测到文字。请使用更清晰的图片重试。';
+
+  @override
+  String get ocrDetectedRaw => '检测到的文字';
+
+  @override
+  String get ocrMappedExpression => '表达式（可编辑）';
+
+  @override
+  String get ocrUseExpression => '使用表达式';
+
+  @override
+  String get ocrRetry => '重新扫描';
+
+  @override
+  String get ocrCropHint => '裁剪表达式';
+
+  @override
+  String get ocrError => '扫描时出错，请重试。';
+
+  @override
+  String get ocrProHint => '升级到Pro，享受无限制OCR扫描，无广告。';
 }

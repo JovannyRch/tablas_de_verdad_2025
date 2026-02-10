@@ -31,6 +31,8 @@ dependencies:
   url_launcher: ^6.3.1
   font_awesome_flutter: ^10.8.0
   package_info_plus: ^8.2.0
+  image_picker: ^1.1.2
+  google_mlkit_text_recognition: ^0.14.0
 
 dev_dependencies:
   flutter_test:

@@ -160,5 +160,19 @@
   "normalFormsTooManyVars": "Demasiadas variables (máx {max})",
   "normalFormsTooManyVarsDesc": "La conversión a formas normales está limitada a expresiones con hasta 5 variables para mantener la salida legible.",
   "normalFormsAdGate": "Mira un breve video para desbloquear las Formas Normales de esta expresión.",
-  "normalFormsProHint": "Actualiza a Pro para ver las Formas Normales al instante sin anuncios."
+  "normalFormsProHint": "Actualiza a Pro para ver las Formas Normales al instante sin anuncios.",
+  "ocrScan": "Escanear Expresión",
+  "ocrScanTitle": "Escanear Expresión",
+  "ocrScanDescription": "Toma una foto o elige una imagen de una expresión lógica para reconocerla automáticamente.",
+  "ocrTakePhoto": "Tomar Foto",
+  "ocrFromGallery": "Elegir de la Galería",
+  "ocrProcessing": "Reconociendo expresión…",
+  "ocrNoTextFound": "No se detectó texto. Intenta con una imagen más clara.",
+  "ocrDetectedRaw": "TEXTO DETECTADO",
+  "ocrMappedExpression": "EXPRESIÓN (EDITABLE)",
+  "ocrUseExpression": "Usar Expresión",
+  "ocrRetry": "Escanear de Nuevo",
+  "ocrCropHint": "Recorta la expresión",
+  "ocrError": "Ocurrió un error durante el escaneo. Inténtalo de nuevo.",
+  "ocrProHint": "Actualiza a Pro para escaneos OCR ilimitados sin anuncios."
 }

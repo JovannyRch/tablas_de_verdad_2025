@@ -160,5 +160,19 @@
   "normalFormsTooManyVars": "変数が多すぎます（最大 {max}）",
   "normalFormsTooManyVarsDesc": "標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。",
   "normalFormsAdGate": "この式の標準形をアンロックするには、短い動画を視聴してください。",
-  "normalFormsProHint": "Proにアップグレードすると、広告なしで標準形を即座に表示できます。"
+  "normalFormsProHint": "Proにアップグレードすると、広告なしで標準形を即座に表示できます。",
+  "ocrScan": "式をスキャン",
+  "ocrScanTitle": "式をスキャン",
+  "ocrScanDescription": "論理式の写真を撮るかギャラリーから画像を選択して、自動的に認識します。",
+  "ocrTakePhoto": "写真を撮る",
+  "ocrFromGallery": "ギャラリーから選択",
+  "ocrProcessing": "式を認識中…",
+  "ocrNoTextFound": "テキストが検出されませんでした。より鮮明な画像でお試しください。",
+  "ocrDetectedRaw": "検出されたテキスト",
+  "ocrMappedExpression": "式（編集可能）",
+  "ocrUseExpression": "式を使用",
+  "ocrRetry": "再スキャン",
+  "ocrCropHint": "式をトリミング",
+  "ocrError": "スキャン中にエラーが発生しました。もう一度お試しください。",
+  "ocrProHint": "Proにアップグレードして、広告なしで無制限のOCRスキャンを利用しましょう。"
 }

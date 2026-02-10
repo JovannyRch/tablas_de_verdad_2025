@@ -160,5 +160,19 @@
   "normalFormsTooManyVars": "变量过多（最多 {max} 个）",
   "normalFormsTooManyVarsDesc": "范式转换限制为不超过5个变量的表达式，以保持输出可读性。",
   "normalFormsAdGate": "观看一段短视频以解锁此表达式的范式。",
-  "normalFormsProHint": "升级到Pro，无需广告即可立即查看范式。"
+  "normalFormsProHint": "升级到Pro，无需广告即可立即查看范式。",
+  "ocrScan": "扫描表达式",
+  "ocrScanTitle": "扫描表达式",
+  "ocrScanDescription": "拍一张逻辑表达式的照片或从相册选择图片，自动识别表达式。",
+  "ocrTakePhoto": "拍照",
+  "ocrFromGallery": "从相册选择",
+  "ocrProcessing": "正在识别表达式…",
+  "ocrNoTextFound": "未检测到文字。请使用更清晰的图片重试。",
+  "ocrDetectedRaw": "检测到的文字",
+  "ocrMappedExpression": "表达式（可编辑）",
+  "ocrUseExpression": "使用表达式",
+  "ocrRetry": "重新扫描",
+  "ocrCropHint": "裁剪表达式",
+  "ocrError": "扫描时出错，请重试。",
+  "ocrProHint": "升级到Pro，享受无限制OCR扫描，无广告。"
 }

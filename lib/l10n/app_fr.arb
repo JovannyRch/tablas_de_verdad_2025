@@ -160,5 +160,19 @@
   "normalFormsTooManyVars": "Trop de variables (max {max})",
   "normalFormsTooManyVarsDesc": "La conversion en formes normales est limitée aux expressions avec jusqu'à 5 variables pour garder la sortie lisible.",
   "normalFormsAdGate": "Regardez une courte vidéo pour débloquer les Formes Normales de cette expression.",
-  "normalFormsProHint": "Passez à Pro pour voir les Formes Normales instantanément sans publicités."
+  "normalFormsProHint": "Passez à Pro pour voir les Formes Normales instantanément sans publicités.",
+  "ocrScan": "Scanner l'expression",
+  "ocrScanTitle": "Scanner l'expression",
+  "ocrScanDescription": "Prenez une photo ou choisissez une image d'une expression logique pour la reconnaître automatiquement.",
+  "ocrTakePhoto": "Prendre une Photo",
+  "ocrFromGallery": "Choisir dans la Galerie",
+  "ocrProcessing": "Reconnaissance de l'expression…",
+  "ocrNoTextFound": "Aucun texte détecté. Réessayez avec une image plus claire.",
+  "ocrDetectedRaw": "TEXTE DÉTECTÉ",
+  "ocrMappedExpression": "EXPRESSION (MODIFIABLE)",
+  "ocrUseExpression": "Utiliser l'expression",
+  "ocrRetry": "Scanner à nouveau",
+  "ocrCropHint": "Recadrer l'expression",
+  "ocrError": "Une erreur s'est produite lors du scan. Veuillez réessayer.",
+  "ocrProHint": "Passez à Pro pour des scans OCR illimités sans publicités."
 }

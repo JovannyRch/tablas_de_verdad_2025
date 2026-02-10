@@ -172,5 +172,19 @@
   "normalFormsTooManyVars": "Too many variables (max {max})",
   "normalFormsTooManyVarsDesc": "Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.",
   "normalFormsAdGate": "Watch a short video to unlock the Normal Forms for this expression.",
-  "normalFormsProHint": "Upgrade to Pro to see Normal Forms instantly without ads."
+  "normalFormsProHint": "Upgrade to Pro to see Normal Forms instantly without ads.",
+  "ocrScan": "Scan Expression",
+  "ocrScanTitle": "Scan Expression",
+  "ocrScanDescription": "Take a photo or pick an image of a logical expression to recognize it automatically.",
+  "ocrTakePhoto": "Take Photo",
+  "ocrFromGallery": "Choose from Gallery",
+  "ocrProcessing": "Recognizing expression…",
+  "ocrNoTextFound": "No text detected. Try again with a clearer image.",
+  "ocrDetectedRaw": "DETECTED TEXT",
+  "ocrMappedExpression": "EXPRESSION (EDITABLE)",
+  "ocrUseExpression": "Use Expression",
+  "ocrRetry": "Scan Again",
+  "ocrCropHint": "Crop the expression",
+  "ocrError": "An error occurred during scanning. Please try again.",
+  "ocrProHint": "Upgrade to Pro for unlimited OCR scans without ads."
 }

@@ -475,4 +475,46 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'Обновитесь до Pro, чтобы видеть Нормальные Формы мгновенно без рекламы.';
+
+  @override
+  String get ocrScan => 'Сканировать выражение';
+
+  @override
+  String get ocrScanTitle => 'Сканировать выражение';
+
+  @override
+  String get ocrScanDescription => 'Сделайте фото или выберите изображение логического выражения для его автоматического распознавания.';
+
+  @override
+  String get ocrTakePhoto => 'Сделать фото';
+
+  @override
+  String get ocrFromGallery => 'Выбрать из галереи';
+
+  @override
+  String get ocrProcessing => 'Распознавание выражения…';
+
+  @override
+  String get ocrNoTextFound => 'Текст не обнаружен. Попробуйте с более чётким изображением.';
+
+  @override
+  String get ocrDetectedRaw => 'РАСПОЗНАННЫЙ ТЕКСТ';
+
+  @override
+  String get ocrMappedExpression => 'ВЫРАЖЕНИЕ (РЕДАКТИРУЕМОЕ)';
+
+  @override
+  String get ocrUseExpression => 'Использовать выражение';
+
+  @override
+  String get ocrRetry => 'Сканировать снова';
+
+  @override
+  String get ocrCropHint => 'Обрежьте выражение';
+
+  @override
+  String get ocrError => 'Произошла ошибка при сканировании. Попробуйте ещё раз.';
+
+  @override
+  String get ocrProHint => 'Обновитесь до Pro для неограниченного OCR-сканирования без рекламы.';
 }

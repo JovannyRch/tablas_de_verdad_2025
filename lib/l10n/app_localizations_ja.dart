@@ -475,4 +475,46 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'Proにアップグレードすると、広告なしで標準形を即座に表示できます。';
+
+  @override
+  String get ocrScan => '式をスキャン';
+
+  @override
+  String get ocrScanTitle => '式をスキャン';
+
+  @override
+  String get ocrScanDescription => '論理式の写真を撮るかギャラリーから画像を選択して、自動的に認識します。';
+
+  @override
+  String get ocrTakePhoto => '写真を撮る';
+
+  @override
+  String get ocrFromGallery => 'ギャラリーから選択';
+
+  @override
+  String get ocrProcessing => '式を認識中…';
+
+  @override
+  String get ocrNoTextFound => 'テキストが検出されませんでした。より鮮明な画像でお試しください。';
+
+  @override
+  String get ocrDetectedRaw => '検出されたテキスト';
+
+  @override
+  String get ocrMappedExpression => '式（編集可能）';
+
+  @override
+  String get ocrUseExpression => '式を使用';
+
+  @override
+  String get ocrRetry => '再スキャン';
+
+  @override
+  String get ocrCropHint => '式をトリミング';
+
+  @override
+  String get ocrError => 'スキャン中にエラーが発生しました。もう一度お試しください。';
+
+  @override
+  String get ocrProHint => 'Proにアップグレードして、広告なしで無制限のOCRスキャンを利用しましょう。';
 }

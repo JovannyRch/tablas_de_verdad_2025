@@ -3,6 +3,7 @@ import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/ad_mob_service.dart';
+import 'package:tablas_de_verdad_2025/screens/ocr_scan_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/ads.dart';
 import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
@@ -128,6 +129,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text(_localization.appName),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.camera_alt_rounded),
+            tooltip: _localization.ocrScan,
+            onPressed: _openOcrScan,
+          ),
           IconButton(
             icon: Icon(
               _settings.keypadMode == KeypadMode.simple
@@ -280,6 +286,30 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void setExpression(String expression) {
     _controller.text = expression;
     _controller.selection = TextSelection.collapsed(offset: expression.length);
+  }
+
+  /// Opens the OCR scan screen. Free users see an interstitial ad before
+  /// accessing the scanner. Pro users go straight in.
+  void _openOcrScan() async {
+    Analytics.instance.logEvent('ocr_scan_opened');
+
+    // Free users: show interstitial before OCR
+    if (!_settings.isProVersion) {
+      if (_settings.shouldShowInterstitialAd()) {
+        ads.showInterstitialAd();
+        _settings.markFullscreenAdShown();
+      }
+    }
+
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (_) => const OcrScanScreen()),
+    );
+
+    if (result != null && result.isNotEmpty && mounted) {
+      setExpression(result);
+      Analytics.instance.logEvent('ocr_expression_used');
+    }
   }
 
   void _insert(String txt) {

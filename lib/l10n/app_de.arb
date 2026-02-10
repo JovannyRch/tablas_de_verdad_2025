@@ -160,5 +160,19 @@
   "normalFormsTooManyVars": "Zu viele Variablen (max {max})",
   "normalFormsTooManyVarsDesc": "Die Normalformkonvertierung ist auf Ausdrücke mit bis zu 5 Variablen beschränkt, um die Ausgabe lesbar zu halten.",
   "normalFormsAdGate": "Sehen Sie sich ein kurzes Video an, um die Normalformen für diesen Ausdruck freizuschalten.",
-  "normalFormsProHint": "Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen."
+  "normalFormsProHint": "Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen.",
+  "ocrScan": "Ausdruck scannen",
+  "ocrScanTitle": "Ausdruck scannen",
+  "ocrScanDescription": "Machen Sie ein Foto oder wählen Sie ein Bild eines logischen Ausdrucks, um ihn automatisch zu erkennen.",
+  "ocrTakePhoto": "Foto aufnehmen",
+  "ocrFromGallery": "Aus Galerie wählen",
+  "ocrProcessing": "Ausdruck wird erkannt…",
+  "ocrNoTextFound": "Kein Text erkannt. Versuchen Sie es mit einem klareren Bild.",
+  "ocrDetectedRaw": "ERKANNTER TEXT",
+  "ocrMappedExpression": "AUSDRUCK (BEARBEITBAR)",
+  "ocrUseExpression": "Ausdruck verwenden",
+  "ocrRetry": "Erneut scannen",
+  "ocrCropHint": "Ausdruck zuschneiden",
+  "ocrError": "Beim Scannen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+  "ocrProHint": "Upgraden Sie auf Pro für unbegrenzte OCR-Scans ohne Werbung."
 }

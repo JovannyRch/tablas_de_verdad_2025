@@ -475,4 +475,46 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'Passa a Pro per vedere le Forme Normali istantaneamente senza pubblicità.';
+
+  @override
+  String get ocrScan => 'Scansiona Espressione';
+
+  @override
+  String get ocrScanTitle => 'Scansiona Espressione';
+
+  @override
+  String get ocrScanDescription => 'Scatta una foto o scegli un\'immagine di un\'espressione logica per riconoscerla automaticamente.';
+
+  @override
+  String get ocrTakePhoto => 'Scatta Foto';
+
+  @override
+  String get ocrFromGallery => 'Scegli dalla Galleria';
+
+  @override
+  String get ocrProcessing => 'Riconoscimento dell\'espressione…';
+
+  @override
+  String get ocrNoTextFound => 'Nessun testo rilevato. Riprova con un\'immagine più chiara.';
+
+  @override
+  String get ocrDetectedRaw => 'TESTO RILEVATO';
+
+  @override
+  String get ocrMappedExpression => 'ESPRESSIONE (MODIFICABILE)';
+
+  @override
+  String get ocrUseExpression => 'Usa Espressione';
+
+  @override
+  String get ocrRetry => 'Scansiona di nuovo';
+
+  @override
+  String get ocrCropHint => 'Ritaglia l\'espressione';
+
+  @override
+  String get ocrError => 'Si è verificato un errore durante la scansione. Riprova.';
+
+  @override
+  String get ocrProHint => 'Passa a Pro per scansioni OCR illimitate senza pubblicità.';
 }

@@ -475,4 +475,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'विज्ञापनों के बिना सामान्य रूप तुरंत देखने के लिए Pro में अपग्रेड करें।';
+
+  @override
+  String get ocrScan => 'अभिव्यक्ति स्कैन करें';
+
+  @override
+  String get ocrScanTitle => 'अभिव्यक्ति स्कैन करें';
+
+  @override
+  String get ocrScanDescription => 'तार्किक अभिव्यक्ति की फ़ोटो लें या गैलरी से चुनें ताकि इसे स्वचालित रूप से पहचाना जा सके।';
+
+  @override
+  String get ocrTakePhoto => 'फ़ोटो लें';
+
+  @override
+  String get ocrFromGallery => 'गैलरी से चुनें';
+
+  @override
+  String get ocrProcessing => 'अभिव्यक्ति पहचान रहे हैं…';
+
+  @override
+  String get ocrNoTextFound => 'कोई टेक्स्ट नहीं मिला। स्पष्ट छवि के साथ पुनः प्रयास करें।';
+
+  @override
+  String get ocrDetectedRaw => 'पहचाना गया टेक्स्ट';
+
+  @override
+  String get ocrMappedExpression => 'अभिव्यक्ति (संपादन योग्य)';
+
+  @override
+  String get ocrUseExpression => 'अभिव्यक्ति का उपयोग करें';
+
+  @override
+  String get ocrRetry => 'फिर से स्कैन करें';
+
+  @override
+  String get ocrCropHint => 'अभिव्यक्ति क्रॉप करें';
+
+  @override
+  String get ocrError => 'स्कैनिंग के दौरान त्रुटि हुई। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get ocrProHint => 'विज्ञापनों के बिना असीमित OCR स्कैन के लिए Pro में अपग्रेड करें।';
 }

@@ -475,4 +475,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'Upgrade to Pro to see Normal Forms instantly without ads.';
+
+  @override
+  String get ocrScan => 'Scan Expression';
+
+  @override
+  String get ocrScanTitle => 'Scan Expression';
+
+  @override
+  String get ocrScanDescription => 'Take a photo or pick an image of a logical expression to recognize it automatically.';
+
+  @override
+  String get ocrTakePhoto => 'Take Photo';
+
+  @override
+  String get ocrFromGallery => 'Choose from Gallery';
+
+  @override
+  String get ocrProcessing => 'Recognizing expression…';
+
+  @override
+  String get ocrNoTextFound => 'No text detected. Try again with a clearer image.';
+
+  @override
+  String get ocrDetectedRaw => 'DETECTED TEXT';
+
+  @override
+  String get ocrMappedExpression => 'EXPRESSION (EDITABLE)';
+
+  @override
+  String get ocrUseExpression => 'Use Expression';
+
+  @override
+  String get ocrRetry => 'Scan Again';
+
+  @override
+  String get ocrCropHint => 'Crop the expression';
+
+  @override
+  String get ocrError => 'An error occurred during scanning. Please try again.';
+
+  @override
+  String get ocrProHint => 'Upgrade to Pro for unlimited OCR scans without ads.';
 }

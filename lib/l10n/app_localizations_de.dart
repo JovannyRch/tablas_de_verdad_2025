@@ -475,4 +475,46 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get normalFormsProHint => 'Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen.';
+
+  @override
+  String get ocrScan => 'Ausdruck scannen';
+
+  @override
+  String get ocrScanTitle => 'Ausdruck scannen';
+
+  @override
+  String get ocrScanDescription => 'Machen Sie ein Foto oder wählen Sie ein Bild eines logischen Ausdrucks, um ihn automatisch zu erkennen.';
+
+  @override
+  String get ocrTakePhoto => 'Foto aufnehmen';
+
+  @override
+  String get ocrFromGallery => 'Aus Galerie wählen';
+
+  @override
+  String get ocrProcessing => 'Ausdruck wird erkannt…';
+
+  @override
+  String get ocrNoTextFound => 'Kein Text erkannt. Versuchen Sie es mit einem klareren Bild.';
+
+  @override
+  String get ocrDetectedRaw => 'ERKANNTER TEXT';
+
+  @override
+  String get ocrMappedExpression => 'AUSDRUCK (BEARBEITBAR)';
+
+  @override
+  String get ocrUseExpression => 'Ausdruck verwenden';
+
+  @override
+  String get ocrRetry => 'Erneut scannen';
+
+  @override
+  String get ocrCropHint => 'Ausdruck zuschneiden';
+
+  @override
+  String get ocrError => 'Beim Scannen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+
+  @override
+  String get ocrProHint => 'Upgraden Sie auf Pro für unbegrenzte OCR-Scans ohne Werbung.';
 }

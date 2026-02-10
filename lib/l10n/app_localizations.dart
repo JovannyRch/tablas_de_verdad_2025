@@ -1034,6 +1034,90 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Actualiza a Pro para ver las Formas Normales al instante sin anuncios.'**
   String get normalFormsProHint;
+
+  /// No description provided for @ocrScan.
+  ///
+  /// In es, this message translates to:
+  /// **'Escanear Expresión'**
+  String get ocrScan;
+
+  /// No description provided for @ocrScanTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Escanear Expresión'**
+  String get ocrScanTitle;
+
+  /// No description provided for @ocrScanDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Toma una foto o elige una imagen de una expresión lógica para reconocerla automáticamente.'**
+  String get ocrScanDescription;
+
+  /// No description provided for @ocrTakePhoto.
+  ///
+  /// In es, this message translates to:
+  /// **'Tomar Foto'**
+  String get ocrTakePhoto;
+
+  /// No description provided for @ocrFromGallery.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir de la Galería'**
+  String get ocrFromGallery;
+
+  /// No description provided for @ocrProcessing.
+  ///
+  /// In es, this message translates to:
+  /// **'Reconociendo expresión…'**
+  String get ocrProcessing;
+
+  /// No description provided for @ocrNoTextFound.
+  ///
+  /// In es, this message translates to:
+  /// **'No se detectó texto. Intenta con una imagen más clara.'**
+  String get ocrNoTextFound;
+
+  /// No description provided for @ocrDetectedRaw.
+  ///
+  /// In es, this message translates to:
+  /// **'TEXTO DETECTADO'**
+  String get ocrDetectedRaw;
+
+  /// No description provided for @ocrMappedExpression.
+  ///
+  /// In es, this message translates to:
+  /// **'EXPRESIÓN (EDITABLE)'**
+  String get ocrMappedExpression;
+
+  /// No description provided for @ocrUseExpression.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar Expresión'**
+  String get ocrUseExpression;
+
+  /// No description provided for @ocrRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Escanear de Nuevo'**
+  String get ocrRetry;
+
+  /// No description provided for @ocrCropHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Recorta la expresión'**
+  String get ocrCropHint;
+
+  /// No description provided for @ocrError.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error durante el escaneo. Inténtalo de nuevo.'**
+  String get ocrError;
+
+  /// No description provided for @ocrProHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Actualiza a Pro para escaneos OCR ilimitados sin anuncios.'**
+  String get ocrProHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
