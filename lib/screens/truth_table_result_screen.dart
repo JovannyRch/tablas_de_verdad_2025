@@ -138,10 +138,14 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
           IconButton(
             onPressed: () {
               final expr = widget.expression ?? widget.truthTable.infix;
-              final type = getType(widget.truthTable.tipo);
-              SharePlus.instance.share(ShareParams(text: '$expr\n$type'));
-              Analytics.instance.logExpressionShared();
+              final expression = expr;
+              final encoded = Uri.encodeComponent(expression);
+              final link =
+                  'https://tablas-de-verdad.vercel.app/calculadora?expression=$encoded';
+              SharePlus.instance.share(ShareParams(text: link));
+              Analytics.instance.logEvent('expression_shared');
             },
+
             icon: const Icon(Icons.share_outlined),
             tooltip: 'Share',
           ),
