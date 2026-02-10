@@ -145,5 +145,20 @@
   "equivalentDescription": "Beide Ausdrücke erzeugen die gleichen Wahrheitswerte für alle möglichen Eingabekombinationen.",
   "notEquivalentDescription": "Sie unterscheiden sich in {differing} von {total} Zeilen ({pct}% stimmen überein).",
   "equivalenceError": "Auswertungsfehler",
-  "comparisonTable": "Vergleichstabelle"
+  "comparisonTable": "Vergleichstabelle",
+  "normalForms": "Normalformen",
+  "normalFormsTitle": "Normalformen",
+  "normalFormsDescription": "Wandeln Sie den Ausdruck in seine Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF) mithilfe der Wahrheitstabelle um.",
+  "dnfTitle": "Disjunktive Normalform (DNF)",
+  "dnfDescription": "ODER der Minterme: ein UND-Term für jede Zeile, in der das Ergebnis 1 ist.",
+  "cnfTitle": "Konjunktive Normalform (KNF)",
+  "cnfDescription": "UND der Maxterme: ein ODER-Term für jede Zeile, in der das Ergebnis 0 ist.",
+  "dnfContradiction": "Keine DNF vorhanden — der Ausdruck ist ein Widerspruch (immer falsch).",
+  "cnfTautology": "Keine KNF vorhanden — der Ausdruck ist eine Tautologie (immer wahr).",
+  "minterms": "Minterme",
+  "maxterms": "Maxterme",
+  "normalFormsTooManyVars": "Zu viele Variablen (max {max})",
+  "normalFormsTooManyVarsDesc": "Die Normalformkonvertierung ist auf Ausdrücke mit bis zu 5 Variablen beschränkt, um die Ausgabe lesbar zu halten.",
+  "normalFormsAdGate": "Sehen Sie sich ein kurzes Video an, um die Normalformen für diesen Ausdruck freizuschalten.",
+  "normalFormsProHint": "Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen."
 }

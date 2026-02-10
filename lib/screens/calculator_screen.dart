@@ -68,6 +68,24 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void _onExpressionChanged() {
+    // Remove spaces from the input automatically
+    final text = _controller.text;
+    if (text.contains(' ')) {
+      final newText = text.replaceAll(' ', '');
+      final selection = _controller.selection;
+      _controller.value = TextEditingValue(
+        text: newText,
+        selection: TextSelection.collapsed(
+          offset:
+              selection.baseOffset > newText.length
+                  ? newText.length
+                  : (selection.baseOffset < 0 ? 0 : selection.baseOffset),
+        ),
+      );
+      // Return early because the value update will trigger another listener call
+      return;
+    }
+
     if (!_localizationReady) return;
     final t = _localization;
     final result = ExpressionValidator.validate(
@@ -172,7 +190,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     focusNode: _focusNode,
                     keyboardType: TextInputType.none,
                     showCursor: true,
-                    readOnly: true,
+                    readOnly: false,
                     autocorrect: false,
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(

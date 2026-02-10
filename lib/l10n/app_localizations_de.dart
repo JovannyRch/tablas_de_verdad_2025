@@ -428,4 +428,51 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get comparisonTable => 'Vergleichstabelle';
+
+  @override
+  String get normalForms => 'Normalformen';
+
+  @override
+  String get normalFormsTitle => 'Normalformen';
+
+  @override
+  String get normalFormsDescription => 'Wandeln Sie den Ausdruck in seine Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF) mithilfe der Wahrheitstabelle um.';
+
+  @override
+  String get dnfTitle => 'Disjunktive Normalform (DNF)';
+
+  @override
+  String get dnfDescription => 'ODER der Minterme: ein UND-Term für jede Zeile, in der das Ergebnis 1 ist.';
+
+  @override
+  String get cnfTitle => 'Konjunktive Normalform (KNF)';
+
+  @override
+  String get cnfDescription => 'UND der Maxterme: ein ODER-Term für jede Zeile, in der das Ergebnis 0 ist.';
+
+  @override
+  String get dnfContradiction => 'Keine DNF vorhanden — der Ausdruck ist ein Widerspruch (immer falsch).';
+
+  @override
+  String get cnfTautology => 'Keine KNF vorhanden — der Ausdruck ist eine Tautologie (immer wahr).';
+
+  @override
+  String get minterms => 'Minterme';
+
+  @override
+  String get maxterms => 'Maxterme';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'Zu viele Variablen (max $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'Die Normalformkonvertierung ist auf Ausdrücke mit bis zu 5 Variablen beschränkt, um die Ausgabe lesbar zu halten.';
+
+  @override
+  String get normalFormsAdGate => 'Sehen Sie sich ein kurzes Video an, um die Normalformen für diesen Ausdruck freizuschalten.';
+
+  @override
+  String get normalFormsProHint => 'Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen.';
 }

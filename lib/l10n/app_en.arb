@@ -152,5 +152,25 @@
   },
   "notEquivalentDescription": "They differ in {differing} of {total} rows ({pct}% match).",
   "equivalenceError": "Evaluation Error",
-  "comparisonTable": "Comparison Table"
+  "comparisonTable": "Comparison Table",
+  "normalForms": "Normal Forms",
+  "normalFormsTitle": "Normal Forms",
+  "normalFormsDescription": "Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.",
+  "dnfTitle": "Disjunctive Normal Form (DNF)",
+  "dnfDescription": "OR of minterms: one AND-term for each row where the result is 1.",
+  "cnfTitle": "Conjunctive Normal Form (CNF)",
+  "cnfDescription": "AND of maxterms: one OR-term for each row where the result is 0.",
+  "dnfContradiction": "No DNF exists — the expression is a contradiction (always false).",
+  "cnfTautology": "No CNF exists — the expression is a tautology (always true).",
+  "minterms": "minterms",
+  "maxterms": "maxterms",
+  "@normalFormsTooManyVars": {
+    "placeholders": {
+      "max": { "type": "Object" }
+    }
+  },
+  "normalFormsTooManyVars": "Too many variables (max {max})",
+  "normalFormsTooManyVarsDesc": "Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.",
+  "normalFormsAdGate": "Watch a short video to unlock the Normal Forms for this expression.",
+  "normalFormsProHint": "Upgrade to Pro to see Normal Forms instantly without ads."
 }

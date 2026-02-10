@@ -428,4 +428,51 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get comparisonTable => 'Сравнительная Таблица';
+
+  @override
+  String get normalForms => 'Нормальные Формы';
+
+  @override
+  String get normalFormsTitle => 'Нормальные Формы';
+
+  @override
+  String get normalFormsDescription => 'Преобразуйте выражение в Дизъюнктивную Нормальную Форму (ДНФ) и Конъюнктивную Нормальную Форму (КНФ) с помощью таблицы истинности.';
+
+  @override
+  String get dnfTitle => 'Дизъюнктивная Нормальная Форма (ДНФ)';
+
+  @override
+  String get dnfDescription => 'ИЛИ минтермов: один И-терм для каждой строки, где результат 1.';
+
+  @override
+  String get cnfTitle => 'Конъюнктивная Нормальная Форма (КНФ)';
+
+  @override
+  String get cnfDescription => 'И макстермов: один ИЛИ-терм для каждой строки, где результат 0.';
+
+  @override
+  String get dnfContradiction => 'ДНФ не существует — выражение является противоречием (всегда ложно).';
+
+  @override
+  String get cnfTautology => 'КНФ не существует — выражение является тавтологией (всегда истинно).';
+
+  @override
+  String get minterms => 'минтермы';
+
+  @override
+  String get maxterms => 'макстермы';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'Слишком много переменных (макс $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'Преобразование в нормальные формы ограничено выражениями до 5 переменных для удобочитаемости.';
+
+  @override
+  String get normalFormsAdGate => 'Посмотрите короткое видео, чтобы разблокировать Нормальные Формы для этого выражения.';
+
+  @override
+  String get normalFormsProHint => 'Обновитесь до Pro, чтобы видеть Нормальные Формы мгновенно без рекламы.';
 }

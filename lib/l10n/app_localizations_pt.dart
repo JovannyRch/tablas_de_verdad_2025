@@ -428,4 +428,51 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get comparisonTable => 'Tabela Comparativa';
+
+  @override
+  String get normalForms => 'Formas Normais';
+
+  @override
+  String get normalFormsTitle => 'Formas Normais';
+
+  @override
+  String get normalFormsDescription => 'Converta a expressão para sua Forma Normal Disjuntiva (FND) e Forma Normal Conjuntiva (FNC) usando a tabela verdade.';
+
+  @override
+  String get dnfTitle => 'Forma Normal Disjuntiva (FND)';
+
+  @override
+  String get dnfDescription => 'OR dos mintermos: um termo AND para cada linha onde o resultado é 1.';
+
+  @override
+  String get cnfTitle => 'Forma Normal Conjuntiva (FNC)';
+
+  @override
+  String get cnfDescription => 'AND dos maxtermos: um termo OR para cada linha onde o resultado é 0.';
+
+  @override
+  String get dnfContradiction => 'Não existe FND — a expressão é uma contradição (sempre falsa).';
+
+  @override
+  String get cnfTautology => 'Não existe FNC — a expressão é uma tautologia (sempre verdadeira).';
+
+  @override
+  String get minterms => 'mintermos';
+
+  @override
+  String get maxterms => 'maxtermos';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'Muitas variáveis (máx $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'A conversão para formas normais é limitada a expressões com até 5 variáveis para manter a saída legível.';
+
+  @override
+  String get normalFormsAdGate => 'Assista a um breve vídeo para desbloquear as Formas Normais desta expressão.';
+
+  @override
+  String get normalFormsProHint => 'Atualize para Pro para ver as Formas Normais instantaneamente sem anúncios.';
 }

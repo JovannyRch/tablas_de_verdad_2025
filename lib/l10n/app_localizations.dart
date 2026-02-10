@@ -944,6 +944,96 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tabla Comparativa'**
   String get comparisonTable;
+
+  /// No description provided for @normalForms.
+  ///
+  /// In es, this message translates to:
+  /// **'Formas Normales'**
+  String get normalForms;
+
+  /// No description provided for @normalFormsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Formas Normales'**
+  String get normalFormsTitle;
+
+  /// No description provided for @normalFormsDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Convierte la expresión a su Forma Normal Disyuntiva (FND) y Forma Normal Conjuntiva (FNC) usando la tabla de verdad.'**
+  String get normalFormsDescription;
+
+  /// No description provided for @dnfTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Forma Normal Disyuntiva (FND)'**
+  String get dnfTitle;
+
+  /// No description provided for @dnfDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'OR de mintérminos: un término AND por cada fila donde el resultado es 1.'**
+  String get dnfDescription;
+
+  /// No description provided for @cnfTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Forma Normal Conjuntiva (FNC)'**
+  String get cnfTitle;
+
+  /// No description provided for @cnfDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'AND de maxtérminos: un término OR por cada fila donde el resultado es 0.'**
+  String get cnfDescription;
+
+  /// No description provided for @dnfContradiction.
+  ///
+  /// In es, this message translates to:
+  /// **'No existe FND — la expresión es una contradicción (siempre falsa).'**
+  String get dnfContradiction;
+
+  /// No description provided for @cnfTautology.
+  ///
+  /// In es, this message translates to:
+  /// **'No existe FNC — la expresión es una tautología (siempre verdadera).'**
+  String get cnfTautology;
+
+  /// No description provided for @minterms.
+  ///
+  /// In es, this message translates to:
+  /// **'mintérminos'**
+  String get minterms;
+
+  /// No description provided for @maxterms.
+  ///
+  /// In es, this message translates to:
+  /// **'maxtérminos'**
+  String get maxterms;
+
+  /// No description provided for @normalFormsTooManyVars.
+  ///
+  /// In es, this message translates to:
+  /// **'Demasiadas variables (máx {max})'**
+  String normalFormsTooManyVars(Object max);
+
+  /// No description provided for @normalFormsTooManyVarsDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'La conversión a formas normales está limitada a expresiones con hasta 5 variables para mantener la salida legible.'**
+  String get normalFormsTooManyVarsDesc;
+
+  /// No description provided for @normalFormsAdGate.
+  ///
+  /// In es, this message translates to:
+  /// **'Mira un breve video para desbloquear las Formas Normales de esta expresión.'**
+  String get normalFormsAdGate;
+
+  /// No description provided for @normalFormsProHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Actualiza a Pro para ver las Formas Normales al instante sin anuncios.'**
+  String get normalFormsProHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -428,4 +428,51 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get comparisonTable => '比較表';
+
+  @override
+  String get normalForms => '標準形';
+
+  @override
+  String get normalFormsTitle => '標準形';
+
+  @override
+  String get normalFormsDescription => '真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。';
+
+  @override
+  String get dnfTitle => '選言標準形 (DNF)';
+
+  @override
+  String get dnfDescription => '最小項のOR：結果が1の各行に対する1つのAND項。';
+
+  @override
+  String get cnfTitle => '連言標準形 (CNF)';
+
+  @override
+  String get cnfDescription => '最大項のAND：結果が0の各行に対する1つのOR項。';
+
+  @override
+  String get dnfContradiction => 'DNFなし — 式は矛盾（常に偽）です。';
+
+  @override
+  String get cnfTautology => 'CNFなし — 式はトートロジー（常に真）です。';
+
+  @override
+  String get minterms => '最小項';
+
+  @override
+  String get maxterms => '最大項';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return '変数が多すぎます（最大 $max）';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => '標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。';
+
+  @override
+  String get normalFormsAdGate => 'この式の標準形をアンロックするには、短い動画を視聴してください。';
+
+  @override
+  String get normalFormsProHint => 'Proにアップグレードすると、広告なしで標準形を即座に表示できます。';
 }

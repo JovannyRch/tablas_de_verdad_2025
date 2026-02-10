@@ -428,4 +428,51 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get comparisonTable => 'Tabella Comparativa';
+
+  @override
+  String get normalForms => 'Forme Normali';
+
+  @override
+  String get normalFormsTitle => 'Forme Normali';
+
+  @override
+  String get normalFormsDescription => 'Converti l\'espressione nella sua Forma Normale Disgiuntiva (FND) e Forma Normale Congiuntiva (FNC) usando la tabella di verità.';
+
+  @override
+  String get dnfTitle => 'Forma Normale Disgiuntiva (FND)';
+
+  @override
+  String get dnfDescription => 'OR dei mintermini: un termine AND per ogni riga dove il risultato è 1.';
+
+  @override
+  String get cnfTitle => 'Forma Normale Congiuntiva (FNC)';
+
+  @override
+  String get cnfDescription => 'AND dei maxtermini: un termine OR per ogni riga dove il risultato è 0.';
+
+  @override
+  String get dnfContradiction => 'Non esiste FND — l\'espressione è una contraddizione (sempre falsa).';
+
+  @override
+  String get cnfTautology => 'Non esiste FNC — l\'espressione è una tautologia (sempre vera).';
+
+  @override
+  String get minterms => 'mintermini';
+
+  @override
+  String get maxterms => 'maxtermini';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'Troppe variabili (max $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'La conversione in forme normali è limitata a espressioni con al massimo 5 variabili per mantenere l\'output leggibile.';
+
+  @override
+  String get normalFormsAdGate => 'Guarda un breve video per sbloccare le Forme Normali di questa espressione.';
+
+  @override
+  String get normalFormsProHint => 'Passa a Pro per vedere le Forme Normali istantaneamente senza pubblicità.';
 }

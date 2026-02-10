@@ -428,4 +428,51 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get comparisonTable => 'तुलना तालिका';
+
+  @override
+  String get normalForms => 'सामान्य रूप';
+
+  @override
+  String get normalFormsTitle => 'सामान्य रूप';
+
+  @override
+  String get normalFormsDescription => 'सत्य तालिका का उपयोग करके अभिव्यक्ति को उसके विच्छेदक सामान्य रूप (DNF) और संयुग्मक सामान्य रूप (CNF) में बदलें।';
+
+  @override
+  String get dnfTitle => 'विच्छेदक सामान्य रूप (DNF)';
+
+  @override
+  String get dnfDescription => 'मिनटर्म्स का OR: प्रत्येक पंक्ति के लिए एक AND-पद जहाँ परिणाम 1 है।';
+
+  @override
+  String get cnfTitle => 'संयुग्मक सामान्य रूप (CNF)';
+
+  @override
+  String get cnfDescription => 'मैक्सटर्म्स का AND: प्रत्येक पंक्ति के लिए एक OR-पद जहाँ परिणाम 0 है।';
+
+  @override
+  String get dnfContradiction => 'कोई DNF नहीं — अभिव्यक्ति एक विरोधाभास है (हमेशा असत्य)।';
+
+  @override
+  String get cnfTautology => 'कोई CNF नहीं — अभिव्यक्ति एक पुनरुक्ति है (हमेशा सत्य)।';
+
+  @override
+  String get minterms => 'मिनटर्म';
+
+  @override
+  String get maxterms => 'मैक्सटर्म';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'बहुत अधिक चर (अधिकतम $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'सामान्य रूप रूपांतरण आउटपुट को पठनीय रखने के लिए 5 चर तक सीमित है।';
+
+  @override
+  String get normalFormsAdGate => 'इस अभिव्यक्ति के सामान्य रूपों को अनलॉक करने के लिए एक छोटा वीडियो देखें।';
+
+  @override
+  String get normalFormsProHint => 'विज्ञापनों के बिना सामान्य रूप तुरंत देखने के लिए Pro में अपग्रेड करें।';
 }

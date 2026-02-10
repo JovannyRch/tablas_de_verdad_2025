@@ -63,6 +63,13 @@ class ExpressionValidator {
       return const ValidationResult(ValidationStatus.empty);
     }
 
+    // Clean spaces
+    expression = expression.replaceAll(' ', '');
+
+    if (expression.isEmpty) {
+      return const ValidationResult(ValidationStatus.empty);
+    }
+
     // Normalize: replace [ ] { } with ( )
     final normalized = expression
         .replaceAll('[', '(')

@@ -145,5 +145,20 @@
   "equivalentDescription": "両方の式は、すべての可能な入力の組み合わせに対して同じ真理値を生成します。",
   "notEquivalentDescription": "{total} 行中 {differing} 行が異なります（{pct}% 一致）。",
   "equivalenceError": "評価エラー",
-  "comparisonTable": "比較表"
+  "comparisonTable": "比較表",
+  "normalForms": "標準形",
+  "normalFormsTitle": "標準形",
+  "normalFormsDescription": "真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。",
+  "dnfTitle": "選言標準形 (DNF)",
+  "dnfDescription": "最小項のOR：結果が1の各行に対する1つのAND項。",
+  "cnfTitle": "連言標準形 (CNF)",
+  "cnfDescription": "最大項のAND：結果が0の各行に対する1つのOR項。",
+  "dnfContradiction": "DNFなし — 式は矛盾（常に偽）です。",
+  "cnfTautology": "CNFなし — 式はトートロジー（常に真）です。",
+  "minterms": "最小項",
+  "maxterms": "最大項",
+  "normalFormsTooManyVars": "変数が多すぎます（最大 {max}）",
+  "normalFormsTooManyVarsDesc": "標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。",
+  "normalFormsAdGate": "この式の標準形をアンロックするには、短い動画を視聴してください。",
+  "normalFormsProHint": "Proにアップグレードすると、広告なしで標準形を即座に表示できます。"
 }

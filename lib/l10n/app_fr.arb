@@ -145,5 +145,20 @@
   "equivalentDescription": "Les deux expressions produisent les mêmes valeurs de vérité pour toutes les combinaisons possibles.",
   "notEquivalentDescription": "Elles diffèrent dans {differing} sur {total} lignes ({pct}% correspondent).",
   "equivalenceError": "Erreur d'Évaluation",
-  "comparisonTable": "Tableau Comparatif"
+  "comparisonTable": "Tableau Comparatif",
+  "normalForms": "Formes Normales",
+  "normalFormsTitle": "Formes Normales",
+  "normalFormsDescription": "Convertissez l'expression en Forme Normale Disjonctive (FND) et Forme Normale Conjonctive (FNC) à partir de la table de vérité.",
+  "dnfTitle": "Forme Normale Disjonctive (FND)",
+  "dnfDescription": "OU des mintermes : un terme ET pour chaque ligne où le résultat est 1.",
+  "cnfTitle": "Forme Normale Conjonctive (FNC)",
+  "cnfDescription": "ET des maxtermes : un terme OU pour chaque ligne où le résultat est 0.",
+  "dnfContradiction": "Pas de FND — l'expression est une contradiction (toujours fausse).",
+  "cnfTautology": "Pas de FNC — l'expression est une tautologie (toujours vraie).",
+  "minterms": "mintermes",
+  "maxterms": "maxtermes",
+  "normalFormsTooManyVars": "Trop de variables (max {max})",
+  "normalFormsTooManyVarsDesc": "La conversion en formes normales est limitée aux expressions avec jusqu'à 5 variables pour garder la sortie lisible.",
+  "normalFormsAdGate": "Regardez une courte vidéo pour débloquer les Formes Normales de cette expression.",
+  "normalFormsProHint": "Passez à Pro pour voir les Formes Normales instantanément sans publicités."
 }

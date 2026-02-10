@@ -145,5 +145,20 @@
   "equivalentDescription": "Ambas as expressões produzem os mesmos valores de verdade para todas as combinações possíveis.",
   "notEquivalentDescription": "Diferem em {differing} de {total} linhas ({pct}% coincidem).",
   "equivalenceError": "Erro de Avaliação",
-  "comparisonTable": "Tabela Comparativa"
+  "comparisonTable": "Tabela Comparativa",
+  "normalForms": "Formas Normais",
+  "normalFormsTitle": "Formas Normais",
+  "normalFormsDescription": "Converta a expressão para sua Forma Normal Disjuntiva (FND) e Forma Normal Conjuntiva (FNC) usando a tabela verdade.",
+  "dnfTitle": "Forma Normal Disjuntiva (FND)",
+  "dnfDescription": "OR dos mintermos: um termo AND para cada linha onde o resultado é 1.",
+  "cnfTitle": "Forma Normal Conjuntiva (FNC)",
+  "cnfDescription": "AND dos maxtermos: um termo OR para cada linha onde o resultado é 0.",
+  "dnfContradiction": "Não existe FND — a expressão é uma contradição (sempre falsa).",
+  "cnfTautology": "Não existe FNC — a expressão é uma tautologia (sempre verdadeira).",
+  "minterms": "mintermos",
+  "maxterms": "maxtermos",
+  "normalFormsTooManyVars": "Muitas variáveis (máx {max})",
+  "normalFormsTooManyVarsDesc": "A conversão para formas normais é limitada a expressões com até 5 variáveis para manter a saída legível.",
+  "normalFormsAdGate": "Assista a um breve vídeo para desbloquear as Formas Normais desta expressão.",
+  "normalFormsProHint": "Atualize para Pro para ver as Formas Normais instantaneamente sem anúncios."
 }

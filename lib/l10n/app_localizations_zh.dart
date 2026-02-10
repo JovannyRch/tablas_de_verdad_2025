@@ -428,4 +428,51 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get comparisonTable => '比较表';
+
+  @override
+  String get normalForms => '范式';
+
+  @override
+  String get normalFormsTitle => '范式';
+
+  @override
+  String get normalFormsDescription => '使用真值表将表达式转换为析取范式 (DNF) 和合取范式 (CNF)。';
+
+  @override
+  String get dnfTitle => '析取范式 (DNF)';
+
+  @override
+  String get dnfDescription => '最小项的析取：结果为1的每一行对应一个合取项。';
+
+  @override
+  String get cnfTitle => '合取范式 (CNF)';
+
+  @override
+  String get cnfDescription => '最大项的合取：结果为0的每一行对应一个析取项。';
+
+  @override
+  String get dnfContradiction => '无DNF — 表达式是矛盾式（恒假）。';
+
+  @override
+  String get cnfTautology => '无CNF — 表达式是重言式（恒真）。';
+
+  @override
+  String get minterms => '最小项';
+
+  @override
+  String get maxterms => '最大项';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return '变量过多（最多 $max 个）';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => '范式转换限制为不超过5个变量的表达式，以保持输出可读性。';
+
+  @override
+  String get normalFormsAdGate => '观看一段短视频以解锁此表达式的范式。';
+
+  @override
+  String get normalFormsProHint => '升级到Pro，无需广告即可立即查看范式。';
 }

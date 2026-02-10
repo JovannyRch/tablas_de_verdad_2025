@@ -145,5 +145,20 @@
   "equivalentDescription": "两个表达式对所有可能的输入组合产生相同的真值。",
   "notEquivalentDescription": "在 {total} 行中有 {differing} 行不同（{pct}% 匹配）。",
   "equivalenceError": "求值错误",
-  "comparisonTable": "比较表"
+  "comparisonTable": "比较表",
+  "normalForms": "范式",
+  "normalFormsTitle": "范式",
+  "normalFormsDescription": "使用真值表将表达式转换为析取范式 (DNF) 和合取范式 (CNF)。",
+  "dnfTitle": "析取范式 (DNF)",
+  "dnfDescription": "最小项的析取：结果为1的每一行对应一个合取项。",
+  "cnfTitle": "合取范式 (CNF)",
+  "cnfDescription": "最大项的合取：结果为0的每一行对应一个析取项。",
+  "dnfContradiction": "无DNF — 表达式是矛盾式（恒假）。",
+  "cnfTautology": "无CNF — 表达式是重言式（恒真）。",
+  "minterms": "最小项",
+  "maxterms": "最大项",
+  "normalFormsTooManyVars": "变量过多（最多 {max} 个）",
+  "normalFormsTooManyVarsDesc": "范式转换限制为不超过5个变量的表达式，以保持输出可读性。",
+  "normalFormsAdGate": "观看一段短视频以解锁此表达式的范式。",
+  "normalFormsProHint": "升级到Pro，无需广告即可立即查看范式。"
 }

@@ -428,4 +428,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comparisonTable => 'Comparison Table';
+
+  @override
+  String get normalForms => 'Normal Forms';
+
+  @override
+  String get normalFormsTitle => 'Normal Forms';
+
+  @override
+  String get normalFormsDescription => 'Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.';
+
+  @override
+  String get dnfTitle => 'Disjunctive Normal Form (DNF)';
+
+  @override
+  String get dnfDescription => 'OR of minterms: one AND-term for each row where the result is 1.';
+
+  @override
+  String get cnfTitle => 'Conjunctive Normal Form (CNF)';
+
+  @override
+  String get cnfDescription => 'AND of maxterms: one OR-term for each row where the result is 0.';
+
+  @override
+  String get dnfContradiction => 'No DNF exists — the expression is a contradiction (always false).';
+
+  @override
+  String get cnfTautology => 'No CNF exists — the expression is a tautology (always true).';
+
+  @override
+  String get minterms => 'minterms';
+
+  @override
+  String get maxterms => 'maxterms';
+
+  @override
+  String normalFormsTooManyVars(Object max) {
+    return 'Too many variables (max $max)';
+  }
+
+  @override
+  String get normalFormsTooManyVarsDesc => 'Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.';
+
+  @override
+  String get normalFormsAdGate => 'Watch a short video to unlock the Normal Forms for this expression.';
+
+  @override
+  String get normalFormsProHint => 'Upgrade to Pro to see Normal Forms instantly without ads.';
 }
