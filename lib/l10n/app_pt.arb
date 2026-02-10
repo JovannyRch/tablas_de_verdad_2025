@@ -129,5 +129,21 @@
   "purchaseError": "Falha na compra. Tente novamente.",
   "noPurchasesFound": "Nenhuma compra anterior encontrada",
   "restorePurchases": "Restaurar compras",
-  "proUpgradeHint": "Atualize para Pro para prática ilimitada com todos os operadores e sem anúncios!"
+  "proUpgradeHint": "Atualize para Pro para prática ilimitada com todos os operadores e sem anúncios!",
+  "validationUnmatched": "Parênteses não fechados",
+  "validationMissingOperand": "Falta um operando",
+  "validationMissingOperator": "Falta um operador entre variáveis",
+  "validationTrailingOp": "Expressão incompleta",
+  "validationValid": "Pronta para avaliar",
+  "equivalenceChecker": "Verificador de Equivalência",
+  "expressionA": "Expressão A",
+  "expressionB": "Expressão B",
+  "swapExpressions": "Trocar expressões",
+  "checkEquivalence": "Verificar Equivalência",
+  "expressionsEquivalent": "Equivalentes ✅",
+  "expressionsNotEquivalent": "Não Equivalentes ❌",
+  "equivalentDescription": "Ambas as expressões produzem os mesmos valores de verdade para todas as combinações possíveis.",
+  "notEquivalentDescription": "Diferem em {differing} de {total} linhas ({pct}% coincidem).",
+  "equivalenceError": "Erro de Avaliação",
+  "comparisonTable": "Tabela Comparativa"
 }

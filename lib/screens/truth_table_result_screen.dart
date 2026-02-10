@@ -11,6 +11,8 @@ import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
+import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
+import 'package:tablas_de_verdad_2025/widget/theory_card.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 
@@ -118,7 +120,6 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_localization.result),
         centerTitle: true,
         actions: [
           IconButton(
@@ -180,24 +181,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                   type: widget.truthTable.tipo,
                   label: getType(widget.truthTable.tipo),
                   onTap: () {
-                    String description = getDescription(widget.truthTable.tipo);
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(getType(widget.truthTable.tipo)),
-                          content: Text(description),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('Ok'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    _showTypeExplanationSheet(context, widget.truthTable.tipo);
                   },
                 ),
                 const SizedBox(height: 16),
@@ -264,6 +248,159 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
       case TruthTableType.contingency:
         return _localization.contingency_description;
     }
+  }
+
+  void _showTypeExplanationSheet(BuildContext context, TruthTableType type) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final title = getType(type);
+    final description = getDescription(type);
+
+    Color baseColor;
+    IconData icon;
+    switch (type) {
+      case TruthTableType.tautology:
+        baseColor = Colors.green;
+        icon = Icons.check_circle_rounded;
+        break;
+      case TruthTableType.contradiction:
+        baseColor = Colors.red;
+        icon = Icons.cancel_rounded;
+        break;
+      case TruthTableType.contingency:
+        baseColor = Colors.amber;
+        icon = Icons.help_rounded;
+        break;
+    }
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder:
+          (_) => Container(
+            padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF1E1E2E) : Colors.white,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(28),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Drag handle
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: isDark ? Colors.white24 : Colors.black12,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                // Icon
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: baseColor.withValues(alpha: 0.12),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: baseColor, size: 36),
+                ),
+                const SizedBox(height: 16),
+                // Title
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                // Expression
+                Text(
+                  widget.expression ?? widget.truthTable.infix,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Courier',
+                    color: baseColor,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Description
+                Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 1.6,
+                    color: isDark ? Colors.white60 : Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Stats row
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        isDark
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _statChip(
+                        _localization.propositions,
+                        '${widget.truthTable.variables.length}',
+                        isDark,
+                      ),
+                      _statChip(
+                        _localization.numberOfRows,
+                        '${widget.truthTable.totalRows}',
+                        isDark,
+                      ),
+                      _statChip(
+                        _localization.steps,
+                        '${widget.steps.length}',
+                        isDark,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
+  Widget _statChip(String label, String value, bool isDark) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+            color: kSeedColor,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white38 : Colors.black38,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _inputLabel(bool isDark) {
@@ -348,6 +485,26 @@ class _StepTile extends StatelessWidget {
         ),
         subtitle: _buildSubTitle(),
         children: [
+          // Theory explanation card
+          Builder(
+            builder: (ctx) {
+              final locale = AppLocalizations.of(ctx)!.localeName;
+              final theory = OperatorTheory.forOperator(
+                step.stepProcess.operator,
+                locale,
+              );
+              if (theory == null) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: TheoryCard(
+                  theory: theory,
+                  operatorName: step.stepProcess.operator.getLocalizedName(
+                    locale,
+                  ),
+                ),
+              );
+            },
+          ),
           const Divider(height: 1, thickness: 0.5),
           const SizedBox(height: 16),
           SingleChildScrollView(

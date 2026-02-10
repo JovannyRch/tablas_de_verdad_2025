@@ -53,22 +53,25 @@ class PurchaseService {
 
     final Completer<void> restoration = Completer();
 
-    final sub = _iap.purchaseStream.listen((purchases) async {
-      for (final purchase in purchases) {
-        if (purchase.productID == _proProductId &&
-            (purchase.status == PurchaseStatus.purchased ||
-                purchase.status == PurchaseStatus.restored)) {
-          isProVersion.value = true;
-          if (purchase.pendingCompletePurchase) {
-            await _iap.completePurchase(purchase);
+    final sub = _iap.purchaseStream.listen(
+      (purchases) async {
+        for (final purchase in purchases) {
+          if (purchase.productID == _proProductId &&
+              (purchase.status == PurchaseStatus.purchased ||
+                  purchase.status == PurchaseStatus.restored)) {
+            isProVersion.value = true;
+            if (purchase.pendingCompletePurchase) {
+              await _iap.completePurchase(purchase);
+            }
+            break;
           }
-          break;
         }
-      }
-      if (!restoration.isCompleted) restoration.complete();
-    }, onError: (_) {
-      if (!restoration.isCompleted) restoration.complete();
-    });
+        if (!restoration.isCompleted) restoration.complete();
+      },
+      onError: (_) {
+        if (!restoration.isCompleted) restoration.complete();
+      },
+    );
 
     await _iap.restorePurchases();
     await restoration.future;

@@ -129,5 +129,21 @@
   "purchaseError": "購入に失敗しました。もう一度お試しください。",
   "noPurchasesFound": "以前の購入が見つかりません",
   "restorePurchases": "購入を復元",
-  "proUpgradeHint": "Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！"
+  "proUpgradeHint": "Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！",
+  "validationUnmatched": "括弧が閉じていません",
+  "validationMissingOperand": "オペランドがありません",
+  "validationMissingOperator": "変数間の演算子がありません",
+  "validationTrailingOp": "式が不完全です",
+  "validationValid": "評価準備完了",
+  "equivalenceChecker": "等価性チェッカー",
+  "expressionA": "式 A",
+  "expressionB": "式 B",
+  "swapExpressions": "式を入れ替え",
+  "checkEquivalence": "等価性を確認",
+  "expressionsEquivalent": "等価 ✅",
+  "expressionsNotEquivalent": "等価でない ❌",
+  "equivalentDescription": "両方の式は、すべての可能な入力の組み合わせに対して同じ真理値を生成します。",
+  "notEquivalentDescription": "{total} 行中 {differing} 行が異なります（{pct}% 一致）。",
+  "equivalenceError": "評価エラー",
+  "comparisonTable": "比較表"
 }

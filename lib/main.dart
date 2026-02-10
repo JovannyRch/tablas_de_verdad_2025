@@ -10,6 +10,7 @@ import 'package:tablas_de_verdad_2025/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
+import 'package:tablas_de_verdad_2025/screens/equivalence_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/practice_mode_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/privacy_policy_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
@@ -77,6 +78,7 @@ class TruthTableApp extends StatelessWidget {
         Routes.settings: (context) => const SettingsScreen(),
         Routes.library: (context) => const ExpressionLibraryScreen(),
         Routes.practice: (context) => const PracticeModeScreen(),
+        Routes.equivalence: (context) => const EquivalenceScreen(),
         Routes.privacy: (context) => PrivacyPolicyScreen(),
       },
     );

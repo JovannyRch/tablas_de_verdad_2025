@@ -129,5 +129,21 @@
   "purchaseError": "Kauf fehlgeschlagen. Bitte erneut versuchen.",
   "noPurchasesFound": "Keine früheren Käufe gefunden",
   "restorePurchases": "Käufe wiederherstellen",
-  "proUpgradeHint": "Upgrade auf Pro für unbegrenztes Üben mit allen Operatoren und ohne Werbung!"
+  "proUpgradeHint": "Upgrade auf Pro für unbegrenztes Üben mit allen Operatoren und ohne Werbung!",
+  "validationUnmatched": "Klammern nicht geschlossen",
+  "validationMissingOperand": "Operand fehlt",
+  "validationMissingOperator": "Operator zwischen Variablen fehlt",
+  "validationTrailingOp": "Ausdruck unvollständig",
+  "validationValid": "Bereit zur Auswertung",
+  "equivalenceChecker": "Äquivalenzprüfer",
+  "expressionA": "Ausdruck A",
+  "expressionB": "Ausdruck B",
+  "swapExpressions": "Ausdrücke tauschen",
+  "checkEquivalence": "Äquivalenz prüfen",
+  "expressionsEquivalent": "Äquivalent ✅",
+  "expressionsNotEquivalent": "Nicht Äquivalent ❌",
+  "equivalentDescription": "Beide Ausdrücke erzeugen die gleichen Wahrheitswerte für alle möglichen Eingabekombinationen.",
+  "notEquivalentDescription": "Sie unterscheiden sich in {differing} von {total} Zeilen ({pct}% stimmen überein).",
+  "equivalenceError": "Auswertungsfehler",
+  "comparisonTable": "Vergleichstabelle"
 }

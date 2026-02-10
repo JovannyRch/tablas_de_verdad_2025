@@ -129,5 +129,21 @@
   "purchaseError": "购买失败，请重试。",
   "noPurchasesFound": "未找到之前的购买记录",
   "restorePurchases": "恢复购买",
-  "proUpgradeHint": "升级到Pro版，享受无限练习、所有运算符和无广告体验！"
+  "proUpgradeHint": "升级到Pro版，享受无限练习、所有运算符和无广告体验！",
+  "validationUnmatched": "括号未关闭",
+  "validationMissingOperand": "缺少操作数",
+  "validationMissingOperator": "变量之间缺少运算符",
+  "validationTrailingOp": "表达式不完整",
+  "validationValid": "可以求值",
+  "equivalenceChecker": "等价检查器",
+  "expressionA": "表达式 A",
+  "expressionB": "表达式 B",
+  "swapExpressions": "交换表达式",
+  "checkEquivalence": "检查等价性",
+  "expressionsEquivalent": "等价 ✅",
+  "expressionsNotEquivalent": "不等价 ❌",
+  "equivalentDescription": "两个表达式对所有可能的输入组合产生相同的真值。",
+  "notEquivalentDescription": "在 {total} 行中有 {differing} 行不同（{pct}% 匹配）。",
+  "equivalenceError": "求值错误",
+  "comparisonTable": "比较表"
 }

@@ -848,6 +848,102 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'¡Mejora a Pro para práctica ilimitada con todos los operadores y sin anuncios!'**
   String get proUpgradeHint;
+
+  /// No description provided for @validationUnmatched.
+  ///
+  /// In es, this message translates to:
+  /// **'Paréntesis sin cerrar'**
+  String get validationUnmatched;
+
+  /// No description provided for @validationMissingOperand.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta un operando'**
+  String get validationMissingOperand;
+
+  /// No description provided for @validationMissingOperator.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta un operador entre variables'**
+  String get validationMissingOperator;
+
+  /// No description provided for @validationTrailingOp.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresión incompleta'**
+  String get validationTrailingOp;
+
+  /// No description provided for @validationValid.
+  ///
+  /// In es, this message translates to:
+  /// **'Lista para evaluar'**
+  String get validationValid;
+
+  /// No description provided for @equivalenceChecker.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificador de Equivalencia'**
+  String get equivalenceChecker;
+
+  /// No description provided for @expressionA.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresión A'**
+  String get expressionA;
+
+  /// No description provided for @expressionB.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresión B'**
+  String get expressionB;
+
+  /// No description provided for @swapExpressions.
+  ///
+  /// In es, this message translates to:
+  /// **'Intercambiar expresiones'**
+  String get swapExpressions;
+
+  /// No description provided for @checkEquivalence.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificar Equivalencia'**
+  String get checkEquivalence;
+
+  /// No description provided for @expressionsEquivalent.
+  ///
+  /// In es, this message translates to:
+  /// **'Equivalentes ✅'**
+  String get expressionsEquivalent;
+
+  /// No description provided for @expressionsNotEquivalent.
+  ///
+  /// In es, this message translates to:
+  /// **'No Equivalentes ❌'**
+  String get expressionsNotEquivalent;
+
+  /// No description provided for @equivalentDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Ambas expresiones producen los mismos valores de verdad para todas las combinaciones posibles.'**
+  String get equivalentDescription;
+
+  /// No description provided for @notEquivalentDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Difieren en {differing} de {total} filas ({pct}% coinciden).'**
+  String notEquivalentDescription(Object differing, Object pct, Object total);
+
+  /// No description provided for @equivalenceError.
+  ///
+  /// In es, this message translates to:
+  /// **'Error de Evaluación'**
+  String get equivalenceError;
+
+  /// No description provided for @comparisonTable.
+  ///
+  /// In es, this message translates to:
+  /// **'Tabla Comparativa'**
+  String get comparisonTable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

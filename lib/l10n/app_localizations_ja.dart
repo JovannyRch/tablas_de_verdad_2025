@@ -378,4 +378,54 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get proUpgradeHint => 'Proにアップグレードして、すべての演算子で無制限に練習し、広告なしで楽しもう！';
+
+  @override
+  String get validationUnmatched => '括弧が閉じていません';
+
+  @override
+  String get validationMissingOperand => 'オペランドがありません';
+
+  @override
+  String get validationMissingOperator => '変数間の演算子がありません';
+
+  @override
+  String get validationTrailingOp => '式が不完全です';
+
+  @override
+  String get validationValid => '評価準備完了';
+
+  @override
+  String get equivalenceChecker => '等価性チェッカー';
+
+  @override
+  String get expressionA => '式 A';
+
+  @override
+  String get expressionB => '式 B';
+
+  @override
+  String get swapExpressions => '式を入れ替え';
+
+  @override
+  String get checkEquivalence => '等価性を確認';
+
+  @override
+  String get expressionsEquivalent => '等価 ✅';
+
+  @override
+  String get expressionsNotEquivalent => '等価でない ❌';
+
+  @override
+  String get equivalentDescription => '両方の式は、すべての可能な入力の組み合わせに対して同じ真理値を生成します。';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return '$total 行中 $differing 行が異なります（$pct% 一致）。';
+  }
+
+  @override
+  String get equivalenceError => '評価エラー';
+
+  @override
+  String get comparisonTable => '比較表';
 }

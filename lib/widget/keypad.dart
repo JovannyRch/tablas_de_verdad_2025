@@ -42,6 +42,7 @@ class TruthKeypad extends StatefulWidget {
   final VoidCallback onToggleAa;
   final VoidCallback onEvaluate;
   final Case calculatorCase;
+  final bool hideActionButtons;
 
   const TruthKeypad({
     super.key,
@@ -51,6 +52,7 @@ class TruthKeypad extends StatefulWidget {
     required this.onToggleAa,
     required this.onEvaluate,
     required this.calculatorCase,
+    this.hideActionButtons = false,
   });
 
   @override
@@ -168,52 +170,53 @@ class _TruthKeypadState extends State<TruthKeypad> {
           ),
         ),
         // Action row
-        Container(
-          padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
-          child: SizedBox(
-            height: 48,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: _Key(
-                    label: 'AC',
-                    kind: KeyKind.action,
-                    colorOverride: Colors.redAccent,
-                    onTap: widget.onClear,
+        if (!widget.hideActionButtons)
+          Container(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
+            child: SizedBox(
+              height: 48,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: _Key(
+                      label: 'AC',
+                      kind: KeyKind.action,
+                      colorOverride: Colors.redAccent,
+                      onTap: widget.onClear,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _Key(
-                    label: '⌫',
-                    kind: KeyKind.action,
-                    onTap: widget.onBackspace,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _Key(
+                      label: '⌫',
+                      kind: KeyKind.action,
+                      onTap: widget.onBackspace,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _Key(
-                    label: 'Aa',
-                    kind: KeyKind.action,
-                    onTap: widget.onToggleAa,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _Key(
+                      label: 'Aa',
+                      kind: KeyKind.action,
+                      onTap: widget.onToggleAa,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  flex: 2,
-                  child: _Key(
-                    label: '=',
-                    kind: KeyKind.action,
-                    colorOverride: kSeedColor,
-                    onTap: widget.onEvaluate,
-                    isEvaluate: true,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    flex: 2,
+                    child: _Key(
+                      label: '=',
+                      kind: KeyKind.action,
+                      colorOverride: kSeedColor,
+                      onTap: widget.onEvaluate,
+                      isEvaluate: true,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }

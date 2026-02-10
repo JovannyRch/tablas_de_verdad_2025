@@ -378,4 +378,54 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get proUpgradeHint => '升级到Pro版，享受无限练习、所有运算符和无广告体验！';
+
+  @override
+  String get validationUnmatched => '括号未关闭';
+
+  @override
+  String get validationMissingOperand => '缺少操作数';
+
+  @override
+  String get validationMissingOperator => '变量之间缺少运算符';
+
+  @override
+  String get validationTrailingOp => '表达式不完整';
+
+  @override
+  String get validationValid => '可以求值';
+
+  @override
+  String get equivalenceChecker => '等价检查器';
+
+  @override
+  String get expressionA => '表达式 A';
+
+  @override
+  String get expressionB => '表达式 B';
+
+  @override
+  String get swapExpressions => '交换表达式';
+
+  @override
+  String get checkEquivalence => '检查等价性';
+
+  @override
+  String get expressionsEquivalent => '等价 ✅';
+
+  @override
+  String get expressionsNotEquivalent => '不等价 ❌';
+
+  @override
+  String get equivalentDescription => '两个表达式对所有可能的输入组合产生相同的真值。';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return '在 $total 行中有 $differing 行不同（$pct% 匹配）。';
+  }
+
+  @override
+  String get equivalenceError => '求值错误';
+
+  @override
+  String get comparisonTable => '比较表';
 }

@@ -129,5 +129,21 @@
   "purchaseError": "Ошибка покупки. Попробуйте ещё раз.",
   "noPurchasesFound": "Предыдущие покупки не найдены",
   "restorePurchases": "Восстановить покупки",
-  "proUpgradeHint": "Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!"
+  "proUpgradeHint": "Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!",
+  "validationUnmatched": "Незакрытые скобки",
+  "validationMissingOperand": "Отсутствует операнд",
+  "validationMissingOperator": "Отсутствует оператор между переменными",
+  "validationTrailingOp": "Выражение неполное",
+  "validationValid": "Готово к вычислению",
+  "equivalenceChecker": "Проверка Эквивалентности",
+  "expressionA": "Выражение A",
+  "expressionB": "Выражение B",
+  "swapExpressions": "Поменять выражения",
+  "checkEquivalence": "Проверить Эквивалентность",
+  "expressionsEquivalent": "Эквивалентны ✅",
+  "expressionsNotEquivalent": "Не Эквивалентны ❌",
+  "equivalentDescription": "Оба выражения дают одинаковые значения истинности для всех возможных комбинаций входных данных.",
+  "notEquivalentDescription": "Различаются в {differing} из {total} строк ({pct}% совпадают).",
+  "equivalenceError": "Ошибка Вычисления",
+  "comparisonTable": "Сравнительная Таблица"
 }

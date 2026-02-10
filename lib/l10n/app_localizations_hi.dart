@@ -378,4 +378,54 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get proUpgradeHint => 'सभी ऑपरेटरों और बिना विज्ञापनों के असीमित अभ्यास के लिए Pro में अपग्रेड करें!';
+
+  @override
+  String get validationUnmatched => 'कोष्ठक बंद नहीं हुए';
+
+  @override
+  String get validationMissingOperand => 'ऑपरेंड गायब है';
+
+  @override
+  String get validationMissingOperator => 'चरों के बीच ऑपरेटर गायब है';
+
+  @override
+  String get validationTrailingOp => 'अभिव्यक्ति अधूरी है';
+
+  @override
+  String get validationValid => 'मूल्यांकन के लिए तैयार';
+
+  @override
+  String get equivalenceChecker => 'तुल्यता जाँचकर्ता';
+
+  @override
+  String get expressionA => 'अभिव्यक्ति A';
+
+  @override
+  String get expressionB => 'अभिव्यक्ति B';
+
+  @override
+  String get swapExpressions => 'अभिव्यक्तियाँ बदलें';
+
+  @override
+  String get checkEquivalence => 'तुल्यता जाँचें';
+
+  @override
+  String get expressionsEquivalent => 'तुल्य ✅';
+
+  @override
+  String get expressionsNotEquivalent => 'तुल्य नहीं ❌';
+
+  @override
+  String get equivalentDescription => 'दोनों अभिव्यक्तियाँ सभी संभव इनपुट संयोजनों के लिए समान सत्य मान उत्पन्न करती हैं।';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return '$total में से $differing पंक्तियों में भिन्नता ($pct% मेल)।';
+  }
+
+  @override
+  String get equivalenceError => 'मूल्यांकन त्रुटि';
+
+  @override
+  String get comparisonTable => 'तुलना तालिका';
 }

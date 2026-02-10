@@ -378,4 +378,54 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get proUpgradeHint => 'Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!';
+
+  @override
+  String get validationUnmatched => 'Незакрытые скобки';
+
+  @override
+  String get validationMissingOperand => 'Отсутствует операнд';
+
+  @override
+  String get validationMissingOperator => 'Отсутствует оператор между переменными';
+
+  @override
+  String get validationTrailingOp => 'Выражение неполное';
+
+  @override
+  String get validationValid => 'Готово к вычислению';
+
+  @override
+  String get equivalenceChecker => 'Проверка Эквивалентности';
+
+  @override
+  String get expressionA => 'Выражение A';
+
+  @override
+  String get expressionB => 'Выражение B';
+
+  @override
+  String get swapExpressions => 'Поменять выражения';
+
+  @override
+  String get checkEquivalence => 'Проверить Эквивалентность';
+
+  @override
+  String get expressionsEquivalent => 'Эквивалентны ✅';
+
+  @override
+  String get expressionsNotEquivalent => 'Не Эквивалентны ❌';
+
+  @override
+  String get equivalentDescription => 'Оба выражения дают одинаковые значения истинности для всех возможных комбинаций входных данных.';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return 'Различаются в $differing из $total строк ($pct% совпадают).';
+  }
+
+  @override
+  String get equivalenceError => 'Ошибка Вычисления';
+
+  @override
+  String get comparisonTable => 'Сравнительная Таблица';
 }

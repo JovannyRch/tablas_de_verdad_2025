@@ -378,4 +378,54 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get proUpgradeHint => 'Atualize para Pro para prática ilimitada com todos os operadores e sem anúncios!';
+
+  @override
+  String get validationUnmatched => 'Parênteses não fechados';
+
+  @override
+  String get validationMissingOperand => 'Falta um operando';
+
+  @override
+  String get validationMissingOperator => 'Falta um operador entre variáveis';
+
+  @override
+  String get validationTrailingOp => 'Expressão incompleta';
+
+  @override
+  String get validationValid => 'Pronta para avaliar';
+
+  @override
+  String get equivalenceChecker => 'Verificador de Equivalência';
+
+  @override
+  String get expressionA => 'Expressão A';
+
+  @override
+  String get expressionB => 'Expressão B';
+
+  @override
+  String get swapExpressions => 'Trocar expressões';
+
+  @override
+  String get checkEquivalence => 'Verificar Equivalência';
+
+  @override
+  String get expressionsEquivalent => 'Equivalentes ✅';
+
+  @override
+  String get expressionsNotEquivalent => 'Não Equivalentes ❌';
+
+  @override
+  String get equivalentDescription => 'Ambas as expressões produzem os mesmos valores de verdade para todas as combinações possíveis.';
+
+  @override
+  String notEquivalentDescription(Object differing, Object pct, Object total) {
+    return 'Diferem em $differing de $total linhas ($pct% coincidem).';
+  }
+
+  @override
+  String get equivalenceError => 'Erro de Avaliação';
+
+  @override
+  String get comparisonTable => 'Tabela Comparativa';
 }
