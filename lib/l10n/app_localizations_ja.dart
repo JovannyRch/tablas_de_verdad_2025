@@ -475,4 +475,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'YouTubeチャンネル';
+
+  @override
+  String get shareExpression => '式を共有';
 }

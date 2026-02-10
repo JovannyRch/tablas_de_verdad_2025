@@ -160,5 +160,6 @@
   "whatTypeIsThis": "¿Qué tipo de expresión es?",
   "wrongAnswer": "Incorrecto. ¡Sigue intentando!",
   "yourStats": "Tus estadísticas",
-  "youtubeChannel": "Canal de YouTube"
+  "youtubeChannel": "Canal de YouTube",
+  "shareExpression": "Compartir expresión"
 }

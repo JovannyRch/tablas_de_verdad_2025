@@ -160,5 +160,6 @@
   "whatTypeIsThis": "Какого типа это выражение?",
   "wrongAnswer": "Неправильно. Продолжайте!",
   "yourStats": "Ваша статистика",
-  "youtubeChannel": "YouTube канал"
+  "youtubeChannel": "YouTube канал",
+  "shareExpression": "Поделиться выражением"
 }

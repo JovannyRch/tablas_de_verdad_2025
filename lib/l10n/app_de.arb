@@ -160,5 +160,6 @@
   "whatTypeIsThis": "Welcher Typ ist dieser Ausdruck?",
   "wrongAnswer": "Falsch. Weiter versuchen!",
   "yourStats": "Deine Statistiken",
-  "youtubeChannel": "YouTube-Kanal"
+  "youtubeChannel": "YouTube-Kanal",
+  "shareExpression": "Ausdruck teilen"
 }

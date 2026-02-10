@@ -160,5 +160,6 @@
   "whatTypeIsThis": "この式のタイプは？",
   "wrongAnswer": "不正解。頑張って！",
   "yourStats": "あなたの統計",
-  "youtubeChannel": "YouTubeチャンネル"
+  "youtubeChannel": "YouTubeチャンネル",
+  "shareExpression": "式を共有"
 }

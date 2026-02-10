@@ -1034,6 +1034,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Canal de YouTube'**
   String get youtubeChannel;
+
+  /// No description provided for @shareExpression.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir expresión'**
+  String get shareExpression;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

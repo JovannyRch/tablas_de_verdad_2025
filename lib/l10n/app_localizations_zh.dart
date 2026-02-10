@@ -475,4 +475,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'YouTube 频道';
+
+  @override
+  String get shareExpression => '分享表达式';
 }

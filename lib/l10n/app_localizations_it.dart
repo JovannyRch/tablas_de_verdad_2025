@@ -475,4 +475,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get youtubeChannel => 'Canale YouTube';
+
+  @override
+  String get shareExpression => 'Condividi espressione';
 }

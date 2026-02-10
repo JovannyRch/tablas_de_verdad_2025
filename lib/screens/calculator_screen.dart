@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
@@ -128,6 +129,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text(_localization.appName),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.share_rounded),
+            tooltip: _localization.shareExpression,
+            onPressed: _shareExpression,
+          ),
           IconButton(
             icon: Icon(
               _settings.keypadMode == KeypadMode.simple
@@ -280,6 +286,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void setExpression(String expression) {
     _controller.text = expression;
     _controller.selection = TextSelection.collapsed(offset: expression.length);
+  }
+
+  void _shareExpression() {
+    final expression = _controller.text;
+    if (expression.isEmpty) {
+      showSnackBarMessage(context, _localization.emptyExpression);
+      return;
+    }
+
+    final encoded = Uri.encodeComponent(expression);
+    final link =
+        'https://tablas-de-verdad.vercel.app/calculadora?expression=$encoded';
+
+    SharePlus.instance.share(ShareParams(text: link));
+
+    Analytics.instance.logEvent('expression_shared');
   }
 
   void _insert(String txt) {

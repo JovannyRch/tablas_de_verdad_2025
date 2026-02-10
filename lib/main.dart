@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,18 +30,73 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
+  // Check if the app was opened from a deep link (cold start)
+  final appLinks = AppLinks();
+  final initialUri = await appLinks.getInitialLink();
+  final initialExpression = _extractExpression(initialUri);
+
   runApp(
     ChangeNotifierProvider.value(
       value: settings,
-      child: TruthTableApp(showOnboarding: !hasSeenOnboarding),
+      child: TruthTableApp(
+        showOnboarding: !hasSeenOnboarding,
+        initialExpression: initialExpression,
+      ),
     ),
   );
 }
 
-class TruthTableApp extends StatelessWidget {
-  final bool showOnboarding;
+/// Extracts the `expression` query parameter from a deep link URI.
+String? _extractExpression(Uri? uri) {
+  if (uri == null) return null;
+  final expr = uri.queryParameters['expression'];
+  if (expr == null || expr.isEmpty) return null;
+  return expr;
+}
 
-  const TruthTableApp({super.key, this.showOnboarding = false});
+class TruthTableApp extends StatefulWidget {
+  final bool showOnboarding;
+  final String? initialExpression;
+
+  const TruthTableApp({
+    super.key,
+    this.showOnboarding = false,
+    this.initialExpression,
+  });
+
+  @override
+  State<TruthTableApp> createState() => _TruthTableAppState();
+}
+
+class _TruthTableAppState extends State<TruthTableApp> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  late final AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSub;
+
+  @override
+  void initState() {
+    super.initState();
+    _appLinks = AppLinks();
+
+    // Listen for deep links while the app is running (warm/hot start)
+    _linkSub = _appLinks.uriLinkStream.listen((uri) {
+      final expression = _extractExpression(uri);
+      if (expression != null) {
+        // Pop to root and push calculator with expression
+        _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+        _navigatorKey.currentState?.pushReplacementNamed(
+          Routes.calculator,
+          arguments: expression,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _linkSub?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +106,7 @@ class TruthTableApp extends StatelessWidget {
     //settings.desactivateProLocally(); // Forzar desactivación de Pro
 
     return MaterialApp(
+      navigatorKey: _navigatorKey,
       locale: settings.locale,
       debugShowCheckedModeBanner: false,
       supportedLocales: const [
@@ -68,12 +127,16 @@ class TruthTableApp extends StatelessWidget {
       themeMode: settings.themeMode,
       title: t?.appName ?? APP_NAME,
 
-      initialRoute: showOnboarding ? Routes.onboarding : Routes.calculator,
+      initialRoute:
+          widget.showOnboarding ? Routes.onboarding : Routes.calculator,
       routes: {
         Routes.onboarding: (context) => const OnboardingScreen(),
         Routes.calculator: (context) {
+          // Deep link expression takes priority over route arguments
           final args = ModalRoute.of(context)!.settings.arguments as String?;
-          return CalculatorScreen(initialExpression: args);
+          return CalculatorScreen(
+            initialExpression: args ?? widget.initialExpression,
+          );
         },
         Routes.settings: (context) => const SettingsScreen(),
         Routes.library: (context) => const ExpressionLibraryScreen(),
