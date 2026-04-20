@@ -12,7 +12,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get about => 'О программе';
 
   @override
-  String get adNotAvailable => 'Видео недоступно. Попробуйте позже или перейдите на Pro.';
+  String get adNotAvailable =>
+      'Видео недоступно. Попробуйте позже или перейдите на Pro.';
 
   @override
   String get addedToFavorites => 'Добавлено в избранное';
@@ -60,10 +61,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get close => 'Закрыть';
 
   @override
-  String get cnfDescription => 'И макстермов: один ИЛИ-терм для каждой строки, где результат 0.';
+  String get cnfDescription =>
+      'И макстермов: один ИЛИ-терм для каждой строки, где результат 0.';
 
   @override
-  String get cnfTautology => 'КНФ не существует — выражение является тавтологией (всегда истинно).';
+  String get cnfTautology =>
+      'КНФ не существует — выражение является тавтологией (всегда истинно).';
 
   @override
   String get cnfTitle => 'Конъюнктивная Нормальная Форма (КНФ)';
@@ -75,19 +78,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get confirmReset => 'Подтвердить сброс';
 
   @override
-  String get confirmResetDesc => 'Вы уверены, что хотите сбросить все настройки до значений по умолчанию?';
+  String get confirmResetDesc =>
+      'Вы уверены, что хотите сбросить все настройки до значений по умолчанию?';
 
   @override
   String get contingency => 'Случайность ⚠️';
 
   @override
-  String get contingency_description => 'Случайность относится к утверждению или формуле, которая не является ни тавтологией, ни противоречием. Другими словами, это выражение, которое может быть истинным или ложным в зависимости от обстоятельств или значений истинности его компонентов.';
+  String get contingency_description =>
+      'Случайность относится к утверждению или формуле, которая не является ни тавтологией, ни противоречием. Другими словами, это выражение, которое может быть истинным или ложным в зависимости от обстоятельств или значений истинности его компонентов.';
 
   @override
   String get contradiction => 'Противоречие ❌';
 
   @override
-  String get contradiction_description => 'Противоречие - это утверждение или логическая формула, которая всегда ложна, независимо от значений истинности её компонентов. Другими словами, это выражение, которое не выполняется ни при какой интерпретации или присвоении значений истинности его переменным.';
+  String get contradiction_description =>
+      'Противоречие - это утверждение или логическая формула, которая всегда ложна, независимо от значений истинности её компонентов. Другими словами, это выражение, которое не выполняется ни при какой интерпретации или присвоении значений истинности его переменным.';
 
   @override
   String get correctAnswer => 'Правильно! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get descending => 'По убыванию';
 
   @override
-  String get dnfContradiction => 'ДНФ не существует — выражение является противоречием (всегда ложно).';
+  String get dnfContradiction =>
+      'ДНФ не существует — выражение является противоречием (всегда ложно).';
 
   @override
-  String get dnfDescription => 'ИЛИ минтермов: один И-терм для каждой строки, где результат 1.';
+  String get dnfDescription =>
+      'ИЛИ минтермов: один И-терм для каждой строки, где результат 1.';
 
   @override
   String get dnfTitle => 'Дизъюнктивная Нормальная Форма (ДНФ)';
@@ -126,7 +134,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get equivalenceError => 'Ошибка Вычисления';
 
   @override
-  String get equivalentDescription => 'Оба выражения дают одинаковые значения истинности для всех возможных комбинаций входных данных.';
+  String get equivalentDescription =>
+      'Оба выражения дают одинаковые значения истинности для всех возможных комбинаций входных данных.';
 
   @override
   String get expression => 'Выражение';
@@ -227,13 +236,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get normalForms => 'Нормальные Формы';
 
   @override
-  String get normalFormsAdGate => 'Посмотрите короткое видео, чтобы разблокировать Нормальные Формы для этого выражения.';
+  String get normalFormsAdGate =>
+      'Посмотрите короткое видео, чтобы разблокировать Нормальные Формы для этого выражения.';
 
   @override
-  String get normalFormsDescription => 'Преобразуйте выражение в Дизъюнктивную Нормальную Форму (ДНФ) и Конъюнктивную Нормальную Форму (КНФ) с помощью таблицы истинности.';
+  String get normalFormsDescription =>
+      'Преобразуйте выражение в Дизъюнктивную Нормальную Форму (ДНФ) и Конъюнктивную Нормальную Форму (КНФ) с помощью таблицы истинности.';
 
   @override
-  String get normalFormsProHint => 'Обновитесь до Pro, чтобы видеть Нормальные Формы мгновенно без рекламы.';
+  String get normalFormsProHint =>
+      'Обновитесь до Pro, чтобы видеть Нормальные Формы мгновенно без рекламы.';
 
   @override
   String get normalFormsTitle => 'Нормальные Формы';
@@ -244,7 +256,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'Преобразование в нормальные формы ограничено выражениями до 5 переменных для удобочитаемости.';
+  String get normalFormsTooManyVarsDesc =>
+      'Преобразование в нормальные формы ограничено выражениями до 5 переменных для удобочитаемости.';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +274,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ok => 'ОК';
 
   @override
-  String get onboardingDesc1 => 'Используйте клавиатуру для ввода логического выражения с переменными и операторами';
+  String get onboardingDesc1 =>
+      'Используйте клавиатуру для ввода логического выражения с переменными и операторами';
 
   @override
-  String get onboardingDesc2 => 'Просматривайте каждый шаг решения и полную таблицу истинности';
+  String get onboardingDesc2 =>
+      'Просматривайте каждый шаг решения и полную таблицу истинности';
 
   @override
-  String get onboardingDesc3 => 'Создавайте профессиональные PDF и легко делитесь результатами';
+  String get onboardingDesc3 =>
+      'Создавайте профессиональные PDF и легко делитесь результатами';
 
   @override
   String get onboardingTitle1 => 'Напишите выражение';
@@ -303,7 +319,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get premiumOperator => 'Премиум оператор';
 
   @override
-  String get premiumOperatorMessage => 'Этот расширенный оператор требует просмотра видео или обновления до Pro для неограниченного доступа.';
+  String get premiumOperatorMessage =>
+      'Этот расширенный оператор требует просмотра видео или обновления до Pro для неограниченного доступа.';
 
   @override
   String get premiumOperatorsAccess => 'Доступ ко всем премиум операторам';
@@ -315,7 +332,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get privacyPolicy => 'Политика конфиденциальности';
 
   @override
-  String get proUpgradeHint => 'Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!';
+  String get proUpgradeHint =>
+      'Перейдите на Pro для безлимитной практики со всеми операторами и без рекламы!';
 
   @override
   String get propositions => 'Утверждения';
@@ -336,7 +354,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get rateTheApp => 'Оценить приложение';
 
   @override
-  String get ratingDialogMessage => 'Ваше мнение очень важно для нас! Если вам понравились Таблицы Истинности, мы будем рады, если вы оставите нам 5-звёздочный рейтинг ⭐';
+  String get ratingDialogMessage =>
+      'Ваше мнение очень важно для нас! Если вам понравились Таблицы Истинности, мы будем рады, если вы оставите нам 5-звёздочный рейтинг ⭐';
 
   @override
   String get ratingDialogTitle => 'Нравится приложение?';
@@ -411,7 +430,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tautology => 'Тавтология ✅';
 
   @override
-  String get tautology_description => 'Тавтология - это утверждение или логическая формула, которая всегда истинна, независимо от значений истинности её компонентов. Другими словами, это выражение, которое выполняется при любой интерпретации или присвоении значений истинности его переменным.';
+  String get tautology_description =>
+      'Тавтология - это утверждение или логическая формула, которая всегда истинна, независимо от значений истинности её компонентов. Другими словами, это выражение, которое выполняется при любой интерпретации или присвоении значений истинности его переменным.';
 
   @override
   String get truthValues => 'Значения истинности';
@@ -438,7 +458,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get validationMissingOperand => 'Отсутствует операнд';
 
   @override
-  String get validationMissingOperator => 'Отсутствует оператор между переменными';
+  String get validationMissingOperator =>
+      'Отсутствует оператор между переменными';
 
   @override
   String get validationTrailingOp => 'Выражение неполное';
@@ -456,7 +477,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get videoFABTooltip => 'Видео объяснение';
 
   @override
-  String get videoScreenDescription => 'Это видео пошагово объясняет решение этого логического выражения.';
+  String get videoScreenDescription =>
+      'Это видео пошагово объясняет решение этого логического выражения.';
 
   @override
   String get videoScreenTitle => 'Видео объяснение';

@@ -12,7 +12,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get about => 'Über';
 
   @override
-  String get adNotAvailable => 'Video nicht verfügbar. Versuchen Sie es später erneut oder upgraden Sie auf Pro.';
+  String get adNotAvailable =>
+      'Video nicht verfügbar. Versuchen Sie es später erneut oder upgraden Sie auf Pro.';
 
   @override
   String get addedToFavorites => 'Zu Favoriten hinzugefügt';
@@ -60,10 +61,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get close => 'Schließen';
 
   @override
-  String get cnfDescription => 'UND der Maxterme: ein ODER-Term für jede Zeile, in der das Ergebnis 0 ist.';
+  String get cnfDescription =>
+      'UND der Maxterme: ein ODER-Term für jede Zeile, in der das Ergebnis 0 ist.';
 
   @override
-  String get cnfTautology => 'Keine KNF vorhanden — der Ausdruck ist eine Tautologie (immer wahr).';
+  String get cnfTautology =>
+      'Keine KNF vorhanden — der Ausdruck ist eine Tautologie (immer wahr).';
 
   @override
   String get cnfTitle => 'Konjunktive Normalform (KNF)';
@@ -75,19 +78,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get confirmReset => 'Zurücksetzen bestätigen';
 
   @override
-  String get confirmResetDesc => 'Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen möchten?';
+  String get confirmResetDesc =>
+      'Sind Sie sicher, dass Sie alle Einstellungen auf die Standardwerte zurücksetzen möchten?';
 
   @override
   String get contingency => 'Kontingenz ⚠️';
 
   @override
-  String get contingency_description => 'Eine Kontingenz bezieht sich auf eine Aussage oder Formel, die weder eine Tautologie noch ein Widerspruch ist. Mit anderen Worten, es ist ein Ausdruck, der wahr oder falsch sein kann, abhängig von den Umständen oder den Wahrheitswerten seiner Komponenten.';
+  String get contingency_description =>
+      'Eine Kontingenz bezieht sich auf eine Aussage oder Formel, die weder eine Tautologie noch ein Widerspruch ist. Mit anderen Worten, es ist ein Ausdruck, der wahr oder falsch sein kann, abhängig von den Umständen oder den Wahrheitswerten seiner Komponenten.';
 
   @override
   String get contradiction => 'Widerspruch ❌';
 
   @override
-  String get contradiction_description => 'Ein Widerspruch ist eine Aussage oder logische Formel, die immer falsch ist, unabhängig von den Wahrheitswerten ihrer Komponenten. Mit anderen Worten, es ist ein Ausdruck, der unter keiner Interpretation oder Zuweisung von Wahrheitswerten zu seinen Variablen gilt.';
+  String get contradiction_description =>
+      'Ein Widerspruch ist eine Aussage oder logische Formel, die immer falsch ist, unabhängig von den Wahrheitswerten ihrer Komponenten. Mit anderen Worten, es ist ein Ausdruck, der unter keiner Interpretation oder Zuweisung von Wahrheitswerten zu seinen Variablen gilt.';
 
   @override
   String get correctAnswer => 'Richtig! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get descending => 'Absteigend';
 
   @override
-  String get dnfContradiction => 'Keine DNF vorhanden — der Ausdruck ist ein Widerspruch (immer falsch).';
+  String get dnfContradiction =>
+      'Keine DNF vorhanden — der Ausdruck ist ein Widerspruch (immer falsch).';
 
   @override
-  String get dnfDescription => 'ODER der Minterme: ein UND-Term für jede Zeile, in der das Ergebnis 1 ist.';
+  String get dnfDescription =>
+      'ODER der Minterme: ein UND-Term für jede Zeile, in der das Ergebnis 1 ist.';
 
   @override
   String get dnfTitle => 'Disjunktive Normalform (DNF)';
@@ -126,7 +134,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get equivalenceError => 'Auswertungsfehler';
 
   @override
-  String get equivalentDescription => 'Beide Ausdrücke erzeugen die gleichen Wahrheitswerte für alle möglichen Eingabekombinationen.';
+  String get equivalentDescription =>
+      'Beide Ausdrücke erzeugen die gleichen Wahrheitswerte für alle möglichen Eingabekombinationen.';
 
   @override
   String get expression => 'Ausdruck';
@@ -227,13 +236,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get normalForms => 'Normalformen';
 
   @override
-  String get normalFormsAdGate => 'Sehen Sie sich ein kurzes Video an, um die Normalformen für diesen Ausdruck freizuschalten.';
+  String get normalFormsAdGate =>
+      'Sehen Sie sich ein kurzes Video an, um die Normalformen für diesen Ausdruck freizuschalten.';
 
   @override
-  String get normalFormsDescription => 'Wandeln Sie den Ausdruck in seine Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF) mithilfe der Wahrheitstabelle um.';
+  String get normalFormsDescription =>
+      'Wandeln Sie den Ausdruck in seine Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF) mithilfe der Wahrheitstabelle um.';
 
   @override
-  String get normalFormsProHint => 'Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen.';
+  String get normalFormsProHint =>
+      'Upgraden Sie auf Pro, um Normalformen sofort ohne Werbung zu sehen.';
 
   @override
   String get normalFormsTitle => 'Normalformen';
@@ -244,7 +256,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'Die Normalformkonvertierung ist auf Ausdrücke mit bis zu 5 Variablen beschränkt, um die Ausgabe lesbar zu halten.';
+  String get normalFormsTooManyVarsDesc =>
+      'Die Normalformkonvertierung ist auf Ausdrücke mit bis zu 5 Variablen beschränkt, um die Ausgabe lesbar zu halten.';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +274,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ok => 'OK';
 
   @override
-  String get onboardingDesc1 => 'Verwende die Tastatur, um beliebige logische Ausdrücke mit Variablen und Operatoren einzugeben';
+  String get onboardingDesc1 =>
+      'Verwende die Tastatur, um beliebige logische Ausdrücke mit Variablen und Operatoren einzugeben';
 
   @override
-  String get onboardingDesc2 => 'Sieh jeden Schritt der Lösung und die vollständige Wahrheitstabelle';
+  String get onboardingDesc2 =>
+      'Sieh jeden Schritt der Lösung und die vollständige Wahrheitstabelle';
 
   @override
-  String get onboardingDesc3 => 'Erstelle professionelle PDFs und teile deine Ergebnisse einfach';
+  String get onboardingDesc3 =>
+      'Erstelle professionelle PDFs und teile deine Ergebnisse einfach';
 
   @override
   String get onboardingTitle1 => 'Schreibe deinen Ausdruck';
@@ -303,7 +319,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get premiumOperator => 'Premium-Operator';
 
   @override
-  String get premiumOperatorMessage => 'Dieser erweiterte Operator erfordert das Ansehen eines Videos oder ein Upgrade auf Pro für unbegrenzten Zugriff.';
+  String get premiumOperatorMessage =>
+      'Dieser erweiterte Operator erfordert das Ansehen eines Videos oder ein Upgrade auf Pro für unbegrenzten Zugriff.';
 
   @override
   String get premiumOperatorsAccess => 'Zugriff auf alle Premium-Operatoren';
@@ -315,7 +332,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get privacyPolicy => 'Datenschutzrichtlinie';
 
   @override
-  String get proUpgradeHint => 'Upgrade auf Pro für unbegrenztes Üben mit allen Operatoren und ohne Werbung!';
+  String get proUpgradeHint =>
+      'Upgrade auf Pro für unbegrenztes Üben mit allen Operatoren und ohne Werbung!';
 
   @override
   String get propositions => 'Propositionen';
@@ -336,7 +354,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get rateTheApp => 'App bewerten';
 
   @override
-  String get ratingDialogMessage => 'Ihre Meinung ist uns sehr wichtig! Wenn Ihnen Wahrheitstabellen gefallen hat, würden wir uns freuen, wenn Sie uns eine 5-Sterne-Bewertung geben ⭐';
+  String get ratingDialogMessage =>
+      'Ihre Meinung ist uns sehr wichtig! Wenn Ihnen Wahrheitstabellen gefallen hat, würden wir uns freuen, wenn Sie uns eine 5-Sterne-Bewertung geben ⭐';
 
   @override
   String get ratingDialogTitle => 'Gefällt Ihnen die App?';
@@ -411,7 +430,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get tautology => 'Tautologie ✅';
 
   @override
-  String get tautology_description => 'Eine Tautologie ist eine Aussage oder logische Formel, die immer wahr ist, unabhängig von den Wahrheitswerten ihrer Komponenten. Mit anderen Worten, es ist ein Ausdruck, der unter jeder Interpretation oder Zuweisung von Wahrheitswerten zu seinen Variablen gilt.';
+  String get tautology_description =>
+      'Eine Tautologie ist eine Aussage oder logische Formel, die immer wahr ist, unabhängig von den Wahrheitswerten ihrer Komponenten. Mit anderen Worten, es ist ein Ausdruck, der unter jeder Interpretation oder Zuweisung von Wahrheitswerten zu seinen Variablen gilt.';
 
   @override
   String get truthValues => 'Wahrheitswerte';
@@ -426,10 +446,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get unlimitedPremiumOps => 'Unbegrenzte Premium-Operatoren';
 
   @override
-  String get unlockFullLibrary => 'Schalten Sie die vollständige Bibliothek frei!';
+  String get unlockFullLibrary =>
+      'Schalten Sie die vollständige Bibliothek frei!';
 
   @override
-  String get unlockLibraryTitle => '🎯 Schalten Sie die vollständige Bibliothek frei!';
+  String get unlockLibraryTitle =>
+      '🎯 Schalten Sie die vollständige Bibliothek frei!';
 
   @override
   String get upgradePro => 'Auf Pro upgraden';
@@ -456,7 +478,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get videoFABTooltip => 'Videoerklärung';
 
   @override
-  String get videoScreenDescription => 'Dieses Video erklärt Schritt für Schritt die Lösung dieses logischen Ausdrucks.';
+  String get videoScreenDescription =>
+      'Dieses Video erklärt Schritt für Schritt die Lösung dieses logischen Ausdrucks.';
 
   @override
   String get videoScreenTitle => 'Videoerklärung';

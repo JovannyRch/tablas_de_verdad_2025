@@ -12,7 +12,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about => 'About';
 
   @override
-  String get adNotAvailable => 'Video not available. Try later or upgrade to Pro.';
+  String get adNotAvailable =>
+      'Video not available. Try later or upgrade to Pro.';
 
   @override
   String get addedToFavorites => 'Added to favorites';
@@ -60,10 +61,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
-  String get cnfDescription => 'AND of maxterms: one OR-term for each row where the result is 0.';
+  String get cnfDescription =>
+      'AND of maxterms: one OR-term for each row where the result is 0.';
 
   @override
-  String get cnfTautology => 'No CNF exists — the expression is a tautology (always true).';
+  String get cnfTautology =>
+      'No CNF exists — the expression is a tautology (always true).';
 
   @override
   String get cnfTitle => 'Conjunctive Normal Form (CNF)';
@@ -75,19 +78,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmReset => 'Confirm Reset';
 
   @override
-  String get confirmResetDesc => 'Are you sure you want to reset all settings to their defaults?';
+  String get confirmResetDesc =>
+      'Are you sure you want to reset all settings to their defaults?';
 
   @override
   String get contingency => 'Contingency ⚠️';
 
   @override
-  String get contingency_description => 'A contingency refers to a proposition or formula that is neither a tautology nor a contradiction. In other words, it is an expression that can be true or false, depending on the circumstances or the truth values of its components.';
+  String get contingency_description =>
+      'A contingency refers to a proposition or formula that is neither a tautology nor a contradiction. In other words, it is an expression that can be true or false, depending on the circumstances or the truth values of its components.';
 
   @override
   String get contradiction => 'Contradiction ❌';
 
   @override
-  String get contradiction_description => 'A contradiction is a proposition or logical formula that is always false, regardless of the truth values of its components. In other words, it is an expression that does not hold under any interpretation or assignment of truth values to its variables.';
+  String get contradiction_description =>
+      'A contradiction is a proposition or logical formula that is always false, regardless of the truth values of its components. In other words, it is an expression that does not hold under any interpretation or assignment of truth values to its variables.';
 
   @override
   String get correctAnswer => 'Correct! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get descending => 'Descending';
 
   @override
-  String get dnfContradiction => 'No DNF exists — the expression is a contradiction (always false).';
+  String get dnfContradiction =>
+      'No DNF exists — the expression is a contradiction (always false).';
 
   @override
-  String get dnfDescription => 'OR of minterms: one AND-term for each row where the result is 1.';
+  String get dnfDescription =>
+      'OR of minterms: one AND-term for each row where the result is 1.';
 
   @override
   String get dnfTitle => 'Disjunctive Normal Form (DNF)';
@@ -126,7 +134,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get equivalenceError => 'Evaluation Error';
 
   @override
-  String get equivalentDescription => 'Both expressions produce the same truth values for all possible input combinations.';
+  String get equivalentDescription =>
+      'Both expressions produce the same truth values for all possible input combinations.';
 
   @override
   String get expression => 'Expression';
@@ -227,13 +236,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get normalForms => 'Normal Forms';
 
   @override
-  String get normalFormsAdGate => 'Watch a short video to unlock the Normal Forms for this expression.';
+  String get normalFormsAdGate =>
+      'Watch a short video to unlock the Normal Forms for this expression.';
 
   @override
-  String get normalFormsDescription => 'Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.';
+  String get normalFormsDescription =>
+      'Convert the expression into its Disjunctive Normal Form (DNF) and Conjunctive Normal Form (CNF) using the truth table.';
 
   @override
-  String get normalFormsProHint => 'Upgrade to Pro to see Normal Forms instantly without ads.';
+  String get normalFormsProHint =>
+      'Upgrade to Pro to see Normal Forms instantly without ads.';
 
   @override
   String get normalFormsTitle => 'Normal Forms';
@@ -244,7 +256,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.';
+  String get normalFormsTooManyVarsDesc =>
+      'Normal form conversion is limited to expressions with up to 5 variables to keep the output readable.';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +274,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ok => 'OK';
 
   @override
-  String get onboardingDesc1 => 'Use the keypad to enter any logical expression with variables and operators';
+  String get onboardingDesc1 =>
+      'Use the keypad to enter any logical expression with variables and operators';
 
   @override
-  String get onboardingDesc2 => 'See each step of the resolution and the complete truth table';
+  String get onboardingDesc2 =>
+      'See each step of the resolution and the complete truth table';
 
   @override
-  String get onboardingDesc3 => 'Generate professional PDFs and share your results easily';
+  String get onboardingDesc3 =>
+      'Generate professional PDFs and share your results easily';
 
   @override
   String get onboardingTitle1 => 'Write your expression';
@@ -303,7 +319,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumOperator => 'Premium Operator';
 
   @override
-  String get premiumOperatorMessage => 'This advanced operator requires watching a video or upgrading to Pro for unlimited access.';
+  String get premiumOperatorMessage =>
+      'This advanced operator requires watching a video or upgrading to Pro for unlimited access.';
 
   @override
   String get premiumOperatorsAccess => 'Access to all premium operators';
@@ -315,7 +332,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicy => 'Privacy Policy';
 
   @override
-  String get proUpgradeHint => 'Upgrade to Pro for unlimited practice with all operators and no ads!';
+  String get proUpgradeHint =>
+      'Upgrade to Pro for unlimited practice with all operators and no ads!';
 
   @override
   String get propositions => 'Propositions';
@@ -336,7 +354,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rateTheApp => 'Rate the app';
 
   @override
-  String get ratingDialogMessage => 'Your opinion is very important to us! If you enjoyed Truth Tables, we would love for you to leave us a 5-star rating ⭐';
+  String get ratingDialogMessage =>
+      'Your opinion is very important to us! If you enjoyed Truth Tables, we would love for you to leave us a 5-star rating ⭐';
 
   @override
   String get ratingDialogTitle => 'Enjoying the app?';
@@ -411,7 +430,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tautology => 'Tautology ✅';
 
   @override
-  String get tautology_description => 'A tautology is a proposition or logical formula that is always true, regardless of the truth values of its components. In other words, it is an expression that holds under any interpretation or assignment of truth values to its variables.';
+  String get tautology_description =>
+      'A tautology is a proposition or logical formula that is always true, regardless of the truth values of its components. In other words, it is an expression that holds under any interpretation or assignment of truth values to its variables.';
 
   @override
   String get truthValues => 'Truth values';
@@ -456,7 +476,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoFABTooltip => 'Video explanation';
 
   @override
-  String get videoScreenDescription => 'This video explains the step-by-step resolution of this logical expression.';
+  String get videoScreenDescription =>
+      'This video explains the step-by-step resolution of this logical expression.';
 
   @override
   String get videoScreenTitle => 'Video Explanation';

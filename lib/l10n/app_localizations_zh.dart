@@ -81,13 +81,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get contingency => '偶然式 ⚠️';
 
   @override
-  String get contingency_description => '偶然式是指既不是重言式也不是矛盾式的命题或公式。换句话说，它是一个可以为真或为假的表达式，取决于情况或其组成部分的真值。';
+  String get contingency_description =>
+      '偶然式是指既不是重言式也不是矛盾式的命题或公式。换句话说，它是一个可以为真或为假的表达式，取决于情况或其组成部分的真值。';
 
   @override
   String get contradiction => '矛盾式 ❌';
 
   @override
-  String get contradiction_description => '矛盾式是一个无论其组成部分的真值如何都始终为假的命题或逻辑公式。换句话说，它是一个在任何解释或给其变量赋真值的情况下都不成立的表达式。';
+  String get contradiction_description =>
+      '矛盾式是一个无论其组成部分的真值如何都始终为假的命题或逻辑公式。换句话说，它是一个在任何解释或给其变量赋真值的情况下都不成立的表达式。';
 
   @override
   String get correctAnswer => '正确！🎉';
@@ -411,7 +413,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tautology => '重言式 ✅';
 
   @override
-  String get tautology_description => '重言式是一个无论其组成部分的真值如何都始终为真的命题或逻辑公式。换句话说，它是一个在任何解释或给其变量赋真值的情况下都成立的表达式。';
+  String get tautology_description =>
+      '重言式是一个无论其组成部分的真值如何都始终为真的命题或逻辑公式。换句话说，它是一个在任何解释或给其变量赋真值的情况下都成立的表达式。';
 
   @override
   String get truthValues => '真值';

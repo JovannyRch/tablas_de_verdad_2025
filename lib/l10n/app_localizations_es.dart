@@ -12,7 +12,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get about => 'Acerca de';
 
   @override
-  String get adNotAvailable => 'Video no disponible. Intenta más tarde o actualiza a Pro.';
+  String get adNotAvailable =>
+      'Video no disponible. Intenta más tarde o actualiza a Pro.';
 
   @override
   String get addedToFavorites => 'Agregado a favoritos';
@@ -60,10 +61,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get close => 'Cerrar';
 
   @override
-  String get cnfDescription => 'AND de maxtérminos: un término OR por cada fila donde el resultado es 0.';
+  String get cnfDescription =>
+      'AND de maxtérminos: un término OR por cada fila donde el resultado es 0.';
 
   @override
-  String get cnfTautology => 'No existe FNC — la expresión es una tautología (siempre verdadera).';
+  String get cnfTautology =>
+      'No existe FNC — la expresión es una tautología (siempre verdadera).';
 
   @override
   String get cnfTitle => 'Forma Normal Conjuntiva (FNC)';
@@ -75,19 +78,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get confirmReset => 'Confirmar restablecimiento';
 
   @override
-  String get confirmResetDesc => '¿Estás seguro de que quieres restablecer todos los ajustes a sus valores predeterminados?';
+  String get confirmResetDesc =>
+      '¿Estás seguro de que quieres restablecer todos los ajustes a sus valores predeterminados?';
 
   @override
   String get contingency => 'Contingencia ⚠️';
 
   @override
-  String get contingency_description => 'Una contingencia se refiere a una proposición o fórmula que no es ni una tautología ni una contradicción. En otras palabras, es una expresión que puede ser verdadera o falsa, dependiendo de las circunstancias o de los valores de verdad de sus componentes.';
+  String get contingency_description =>
+      'Una contingencia se refiere a una proposición o fórmula que no es ni una tautología ni una contradicción. En otras palabras, es una expresión que puede ser verdadera o falsa, dependiendo de las circunstancias o de los valores de verdad de sus componentes.';
 
   @override
   String get contradiction => 'Contradicción ❌';
 
   @override
-  String get contradiction_description => 'Una contradicción es una proposición o fórmula lógica que siempre es falsa, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que no se cumple bajo ninguna interpretación o asignación de valores de verdad a sus variables.';
+  String get contradiction_description =>
+      'Una contradicción es una proposición o fórmula lógica que siempre es falsa, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que no se cumple bajo ninguna interpretación o asignación de valores de verdad a sus variables.';
 
   @override
   String get correctAnswer => '¡Correcto! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get descending => 'Descendente';
 
   @override
-  String get dnfContradiction => 'No existe FND — la expresión es una contradicción (siempre falsa).';
+  String get dnfContradiction =>
+      'No existe FND — la expresión es una contradicción (siempre falsa).';
 
   @override
-  String get dnfDescription => 'OR de mintérminos: un término AND por cada fila donde el resultado es 1.';
+  String get dnfDescription =>
+      'OR de mintérminos: un término AND por cada fila donde el resultado es 1.';
 
   @override
   String get dnfTitle => 'Forma Normal Disyuntiva (FND)';
@@ -126,7 +134,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get equivalenceError => 'Error de Evaluación';
 
   @override
-  String get equivalentDescription => 'Ambas expresiones producen los mismos valores de verdad para todas las combinaciones posibles.';
+  String get equivalentDescription =>
+      'Ambas expresiones producen los mismos valores de verdad para todas las combinaciones posibles.';
 
   @override
   String get expression => 'Expresión';
@@ -161,7 +170,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get fullFeatureAccess => 'Acceso completo a todas las funciones';
 
   @override
-  String get fullLibraryAccess => 'Acceso completo a la biblioteca de expresiones';
+  String get fullLibraryAccess =>
+      'Acceso completo a la biblioteca de expresiones';
 
   @override
   String get fullTable => 'Tabla completa';
@@ -227,13 +237,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get normalForms => 'Formas Normales';
 
   @override
-  String get normalFormsAdGate => 'Mira un breve video para desbloquear las Formas Normales de esta expresión.';
+  String get normalFormsAdGate =>
+      'Mira un breve video para desbloquear las Formas Normales de esta expresión.';
 
   @override
-  String get normalFormsDescription => 'Convierte la expresión a su Forma Normal Disyuntiva (FND) y Forma Normal Conjuntiva (FNC) usando la tabla de verdad.';
+  String get normalFormsDescription =>
+      'Convierte la expresión a su Forma Normal Disyuntiva (FND) y Forma Normal Conjuntiva (FNC) usando la tabla de verdad.';
 
   @override
-  String get normalFormsProHint => 'Actualiza a Pro para ver las Formas Normales al instante sin anuncios.';
+  String get normalFormsProHint =>
+      'Actualiza a Pro para ver las Formas Normales al instante sin anuncios.';
 
   @override
   String get normalFormsTitle => 'Formas Normales';
@@ -244,7 +257,8 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'La conversión a formas normales está limitada a expresiones con hasta 5 variables para mantener la salida legible.';
+  String get normalFormsTooManyVarsDesc =>
+      'La conversión a formas normales está limitada a expresiones con hasta 5 variables para mantener la salida legible.';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +275,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ok => 'Aceptar';
 
   @override
-  String get onboardingDesc1 => 'Usa el teclado para ingresar cualquier expresión lógica con variables y operadores';
+  String get onboardingDesc1 =>
+      'Usa el teclado para ingresar cualquier expresión lógica con variables y operadores';
 
   @override
-  String get onboardingDesc2 => 'Visualiza cada paso de la resolución y la tabla de verdad completa';
+  String get onboardingDesc2 =>
+      'Visualiza cada paso de la resolución y la tabla de verdad completa';
 
   @override
-  String get onboardingDesc3 => 'Genera PDFs profesionales y comparte tus resultados fácilmente';
+  String get onboardingDesc3 =>
+      'Genera PDFs profesionales y comparte tus resultados fácilmente';
 
   @override
   String get onboardingTitle1 => 'Escribe tu expresión';
@@ -303,7 +320,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get premiumOperator => 'Operador Premium';
 
   @override
-  String get premiumOperatorMessage => 'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.';
+  String get premiumOperatorMessage =>
+      'Este operador avanzado requiere ver un video o actualizar a Pro para acceso ilimitado.';
 
   @override
   String get premiumOperatorsAccess => 'Acceso a todos los operadores premium';
@@ -315,7 +333,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get privacyPolicy => 'Política de privacidad';
 
   @override
-  String get proUpgradeHint => '¡Mejora a Pro para práctica ilimitada con todos los operadores y sin anuncios!';
+  String get proUpgradeHint =>
+      '¡Mejora a Pro para práctica ilimitada con todos los operadores y sin anuncios!';
 
   @override
   String get propositions => 'Proposiciones';
@@ -336,7 +355,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get rateTheApp => 'Calificar la app';
 
   @override
-  String get ratingDialogMessage => '¡Tu opinión es muy importante para nosotros! Si te ha gustado Tablas de Verdad, nos encantaría que nos dejaras una calificación de 5 estrellas ⭐';
+  String get ratingDialogMessage =>
+      '¡Tu opinión es muy importante para nosotros! Si te ha gustado Tablas de Verdad, nos encantaría que nos dejaras una calificación de 5 estrellas ⭐';
 
   @override
   String get ratingDialogTitle => '¿Te gusta la app?';
@@ -411,7 +431,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get tautology => 'Tautología ✅';
 
   @override
-  String get tautology_description => 'Una tautología es una proposición o fórmula lógica que siempre es verdadera, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que se cumple bajo cualquier interpretación o asignación de valores de verdad a sus variables.';
+  String get tautology_description =>
+      'Una tautología es una proposición o fórmula lógica que siempre es verdadera, independientemente de los valores de verdad de sus componentes. En otras palabras, es una expresión que se cumple bajo cualquier interpretación o asignación de valores de verdad a sus variables.';
 
   @override
   String get truthValues => 'Valores de verdad';
@@ -456,7 +477,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get videoFABTooltip => 'Explicación en video';
 
   @override
-  String get videoScreenDescription => 'Este video explica paso a paso la resolución de esta expresión lógica.';
+  String get videoScreenDescription =>
+      'Este video explica paso a paso la resolución de esta expresión lógica.';
 
   @override
   String get videoScreenTitle => 'Explicación en video';

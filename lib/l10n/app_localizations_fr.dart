@@ -12,7 +12,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get about => 'À propos';
 
   @override
-  String get adNotAvailable => 'Vidéo non disponible. Réessayez plus tard ou passez à Pro.';
+  String get adNotAvailable =>
+      'Vidéo non disponible. Réessayez plus tard ou passez à Pro.';
 
   @override
   String get addedToFavorites => 'Ajouté aux favoris';
@@ -60,10 +61,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get close => 'Fermer';
 
   @override
-  String get cnfDescription => 'ET des maxtermes : un terme OU pour chaque ligne où le résultat est 0.';
+  String get cnfDescription =>
+      'ET des maxtermes : un terme OU pour chaque ligne où le résultat est 0.';
 
   @override
-  String get cnfTautology => 'Pas de FNC — l\'expression est une tautologie (toujours vraie).';
+  String get cnfTautology =>
+      'Pas de FNC — l\'expression est une tautologie (toujours vraie).';
 
   @override
   String get cnfTitle => 'Forme Normale Conjonctive (FNC)';
@@ -75,19 +78,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get confirmReset => 'Confirmer la réinitialisation';
 
   @override
-  String get confirmResetDesc => 'Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut ?';
+  String get confirmResetDesc =>
+      'Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut ?';
 
   @override
   String get contingency => 'Contingence ⚠️';
 
   @override
-  String get contingency_description => 'Une contingence fait référence à une proposition ou formule qui n\'est ni une tautologie ni une contradiction. En d\'autres termes, c\'est une expression qui peut être vraie ou fausse, selon les circonstances ou les valeurs de vérité de ses composants.';
+  String get contingency_description =>
+      'Une contingence fait référence à une proposition ou formule qui n\'est ni une tautologie ni une contradiction. En d\'autres termes, c\'est une expression qui peut être vraie ou fausse, selon les circonstances ou les valeurs de vérité de ses composants.';
 
   @override
   String get contradiction => 'Contradiction ❌';
 
   @override
-  String get contradiction_description => 'Une contradiction est une proposition ou formule logique qui est toujours fausse, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui ne tient sous aucune interprétation ou attribution de valeurs de vérité à ses variables.';
+  String get contradiction_description =>
+      'Une contradiction est une proposition ou formule logique qui est toujours fausse, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui ne tient sous aucune interprétation ou attribution de valeurs de vérité à ses variables.';
 
   @override
   String get correctAnswer => 'Correct ! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get descending => 'Descendant';
 
   @override
-  String get dnfContradiction => 'Pas de FND — l\'expression est une contradiction (toujours fausse).';
+  String get dnfContradiction =>
+      'Pas de FND — l\'expression est une contradiction (toujours fausse).';
 
   @override
-  String get dnfDescription => 'OU des mintermes : un terme ET pour chaque ligne où le résultat est 1.';
+  String get dnfDescription =>
+      'OU des mintermes : un terme ET pour chaque ligne où le résultat est 1.';
 
   @override
   String get dnfTitle => 'Forme Normale Disjonctive (FND)';
@@ -126,7 +134,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get equivalenceError => 'Erreur d\'Évaluation';
 
   @override
-  String get equivalentDescription => 'Les deux expressions produisent les mêmes valeurs de vérité pour toutes les combinaisons possibles.';
+  String get equivalentDescription =>
+      'Les deux expressions produisent les mêmes valeurs de vérité pour toutes les combinaisons possibles.';
 
   @override
   String get expression => 'Expression';
@@ -161,7 +170,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fullFeatureAccess => 'Accès complet à toutes les fonctionnalités';
 
   @override
-  String get fullLibraryAccess => 'Accès complet à la bibliothèque d\'expressions';
+  String get fullLibraryAccess =>
+      'Accès complet à la bibliothèque d\'expressions';
 
   @override
   String get fullTable => 'Table complète';
@@ -227,13 +237,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get normalForms => 'Formes Normales';
 
   @override
-  String get normalFormsAdGate => 'Regardez une courte vidéo pour débloquer les Formes Normales de cette expression.';
+  String get normalFormsAdGate =>
+      'Regardez une courte vidéo pour débloquer les Formes Normales de cette expression.';
 
   @override
-  String get normalFormsDescription => 'Convertissez l\'expression en Forme Normale Disjonctive (FND) et Forme Normale Conjonctive (FNC) à partir de la table de vérité.';
+  String get normalFormsDescription =>
+      'Convertissez l\'expression en Forme Normale Disjonctive (FND) et Forme Normale Conjonctive (FNC) à partir de la table de vérité.';
 
   @override
-  String get normalFormsProHint => 'Passez à Pro pour voir les Formes Normales instantanément sans publicités.';
+  String get normalFormsProHint =>
+      'Passez à Pro pour voir les Formes Normales instantanément sans publicités.';
 
   @override
   String get normalFormsTitle => 'Formes Normales';
@@ -244,7 +257,8 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'La conversion en formes normales est limitée aux expressions avec jusqu\'à 5 variables pour garder la sortie lisible.';
+  String get normalFormsTooManyVarsDesc =>
+      'La conversion en formes normales est limitée aux expressions avec jusqu\'à 5 variables pour garder la sortie lisible.';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +275,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ok => 'OK';
 
   @override
-  String get onboardingDesc1 => 'Utilisez le clavier pour saisir toute expression logique avec des variables et des opérateurs';
+  String get onboardingDesc1 =>
+      'Utilisez le clavier pour saisir toute expression logique avec des variables et des opérateurs';
 
   @override
-  String get onboardingDesc2 => 'Visualisez chaque étape de la résolution et la table de vérité complète';
+  String get onboardingDesc2 =>
+      'Visualisez chaque étape de la résolution et la table de vérité complète';
 
   @override
-  String get onboardingDesc3 => 'Générez des PDF professionnels et partagez vos résultats facilement';
+  String get onboardingDesc3 =>
+      'Générez des PDF professionnels et partagez vos résultats facilement';
 
   @override
   String get onboardingTitle1 => 'Écrivez votre expression';
@@ -303,7 +320,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premiumOperator => 'Opérateur Premium';
 
   @override
-  String get premiumOperatorMessage => 'Cet opérateur avancé nécessite de regarder une vidéo ou de passer à Pro pour un accès illimité.';
+  String get premiumOperatorMessage =>
+      'Cet opérateur avancé nécessite de regarder une vidéo ou de passer à Pro pour un accès illimité.';
 
   @override
   String get premiumOperatorsAccess => 'Accès à tous les opérateurs premium';
@@ -315,7 +333,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get privacyPolicy => 'Politique de confidentialité';
 
   @override
-  String get proUpgradeHint => 'Passez à Pro pour une pratique illimitée avec tous les opérateurs et sans publicités !';
+  String get proUpgradeHint =>
+      'Passez à Pro pour une pratique illimitée avec tous les opérateurs et sans publicités !';
 
   @override
   String get propositions => 'Propositions';
@@ -336,7 +355,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rateTheApp => 'Noter l\'application';
 
   @override
-  String get ratingDialogMessage => 'Votre avis est très important pour nous ! Si vous avez aimé Tables de Vérité, nous aimerions que vous nous laissiez une note de 5 étoiles ⭐';
+  String get ratingDialogMessage =>
+      'Votre avis est très important pour nous ! Si vous avez aimé Tables de Vérité, nous aimerions que vous nous laissiez une note de 5 étoiles ⭐';
 
   @override
   String get ratingDialogTitle => 'Vous aimez l\'application ?';
@@ -411,7 +431,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tautology => 'Tautologie ✅';
 
   @override
-  String get tautology_description => 'Une tautologie est une proposition ou formule logique qui est toujours vraie, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui tient sous toute interprétation ou attribution de valeurs de vérité à ses variables.';
+  String get tautology_description =>
+      'Une tautologie est une proposition ou formule logique qui est toujours vraie, indépendamment des valeurs de vérité de ses composants. En d\'autres termes, c\'est une expression qui tient sous toute interprétation ou attribution de valeurs de vérité à ses variables.';
 
   @override
   String get truthValues => 'Valeurs de vérité';
@@ -438,7 +459,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get validationMissingOperand => 'Opérande manquant';
 
   @override
-  String get validationMissingOperator => 'Opérateur manquant entre les variables';
+  String get validationMissingOperator =>
+      'Opérateur manquant entre les variables';
 
   @override
   String get validationTrailingOp => 'Expression incomplète';
@@ -456,7 +478,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get videoFABTooltip => 'Explication vidéo';
 
   @override
-  String get videoScreenDescription => 'Cette vidéo explique étape par étape la résolution de cette expression logique.';
+  String get videoScreenDescription =>
+      'Cette vidéo explique étape par étape la résolution de cette expression logique.';
 
   @override
   String get videoScreenTitle => 'Explication vidéo';

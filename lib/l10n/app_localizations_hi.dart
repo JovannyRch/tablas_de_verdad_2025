@@ -12,7 +12,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get about => 'के बारे में';
 
   @override
-  String get adNotAvailable => 'वीडियो उपलब्ध नहीं है। बाद में प्रयास करें या Pro में अपग्रेड करें।';
+  String get adNotAvailable =>
+      'वीडियो उपलब्ध नहीं है। बाद में प्रयास करें या Pro में अपग्रेड करें।';
 
   @override
   String get addedToFavorites => 'पसंदीदा में जोड़ा गया';
@@ -60,10 +61,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get close => 'बंद करें';
 
   @override
-  String get cnfDescription => 'मैक्सटर्म्स का AND: प्रत्येक पंक्ति के लिए एक OR-पद जहाँ परिणाम 0 है।';
+  String get cnfDescription =>
+      'मैक्सटर्म्स का AND: प्रत्येक पंक्ति के लिए एक OR-पद जहाँ परिणाम 0 है।';
 
   @override
-  String get cnfTautology => 'कोई CNF नहीं — अभिव्यक्ति एक पुनरुक्ति है (हमेशा सत्य)।';
+  String get cnfTautology =>
+      'कोई CNF नहीं — अभिव्यक्ति एक पुनरुक्ति है (हमेशा सत्य)।';
 
   @override
   String get cnfTitle => 'संयुग्मक सामान्य रूप (CNF)';
@@ -75,19 +78,22 @@ class AppLocalizationsHi extends AppLocalizations {
   String get confirmReset => 'रीसेट की पुष्टि करें';
 
   @override
-  String get confirmResetDesc => 'क्या आप वाकई सभी सेटिंग्स को उनके डिफ़ॉल्ट पर रीसेट करना चाहते हैं?';
+  String get confirmResetDesc =>
+      'क्या आप वाकई सभी सेटिंग्स को उनके डिफ़ॉल्ट पर रीसेट करना चाहते हैं?';
 
   @override
   String get contingency => 'आकस्मिकता ⚠️';
 
   @override
-  String get contingency_description => 'एक आकस्मिकता एक प्रस्ताव या सूत्र को संदर्भित करती है जो न तो एक टॉटोलॉजी है और न ही एक विरोधाभास। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो सत्य या असत्य हो सकती है, परिस्थितियों या इसके घटकों के सत्य मूल्यों के आधार पर।';
+  String get contingency_description =>
+      'एक आकस्मिकता एक प्रस्ताव या सूत्र को संदर्भित करती है जो न तो एक टॉटोलॉजी है और न ही एक विरोधाभास। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो सत्य या असत्य हो सकती है, परिस्थितियों या इसके घटकों के सत्य मूल्यों के आधार पर।';
 
   @override
   String get contradiction => 'विरोधाभास ❌';
 
   @override
-  String get contradiction_description => 'एक विरोधाभास एक प्रस्ताव या तार्किक सूत्र है जो हमेशा असत्य होता है, इसके घटकों के सत्य मूल्यों की परवाह किए बिना। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो इसके चर को सत्य मूल्यों की किसी भी व्याख्या या असाइनमेंट के तहत नहीं रखती है।';
+  String get contradiction_description =>
+      'एक विरोधाभास एक प्रस्ताव या तार्किक सूत्र है जो हमेशा असत्य होता है, इसके घटकों के सत्य मूल्यों की परवाह किए बिना। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो इसके चर को सत्य मूल्यों की किसी भी व्याख्या या असाइनमेंट के तहत नहीं रखती है।';
 
   @override
   String get correctAnswer => 'सही! 🎉';
@@ -102,10 +108,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get descending => 'अवरोही';
 
   @override
-  String get dnfContradiction => 'कोई DNF नहीं — अभिव्यक्ति एक विरोधाभास है (हमेशा असत्य)।';
+  String get dnfContradiction =>
+      'कोई DNF नहीं — अभिव्यक्ति एक विरोधाभास है (हमेशा असत्य)।';
 
   @override
-  String get dnfDescription => 'मिनटर्म्स का OR: प्रत्येक पंक्ति के लिए एक AND-पद जहाँ परिणाम 1 है।';
+  String get dnfDescription =>
+      'मिनटर्म्स का OR: प्रत्येक पंक्ति के लिए एक AND-पद जहाँ परिणाम 1 है।';
 
   @override
   String get dnfTitle => 'विच्छेदक सामान्य रूप (DNF)';
@@ -126,7 +134,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get equivalenceError => 'मूल्यांकन त्रुटि';
 
   @override
-  String get equivalentDescription => 'दोनों अभिव्यक्तियाँ सभी संभव इनपुट संयोजनों के लिए समान सत्य मान उत्पन्न करती हैं।';
+  String get equivalentDescription =>
+      'दोनों अभिव्यक्तियाँ सभी संभव इनपुट संयोजनों के लिए समान सत्य मान उत्पन्न करती हैं।';
 
   @override
   String get expression => 'अभिव्यक्ति';
@@ -227,13 +236,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get normalForms => 'सामान्य रूप';
 
   @override
-  String get normalFormsAdGate => 'इस अभिव्यक्ति के सामान्य रूपों को अनलॉक करने के लिए एक छोटा वीडियो देखें।';
+  String get normalFormsAdGate =>
+      'इस अभिव्यक्ति के सामान्य रूपों को अनलॉक करने के लिए एक छोटा वीडियो देखें।';
 
   @override
-  String get normalFormsDescription => 'सत्य तालिका का उपयोग करके अभिव्यक्ति को उसके विच्छेदक सामान्य रूप (DNF) और संयुग्मक सामान्य रूप (CNF) में बदलें।';
+  String get normalFormsDescription =>
+      'सत्य तालिका का उपयोग करके अभिव्यक्ति को उसके विच्छेदक सामान्य रूप (DNF) और संयुग्मक सामान्य रूप (CNF) में बदलें।';
 
   @override
-  String get normalFormsProHint => 'विज्ञापनों के बिना सामान्य रूप तुरंत देखने के लिए Pro में अपग्रेड करें।';
+  String get normalFormsProHint =>
+      'विज्ञापनों के बिना सामान्य रूप तुरंत देखने के लिए Pro में अपग्रेड करें।';
 
   @override
   String get normalFormsTitle => 'सामान्य रूप';
@@ -244,7 +256,8 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => 'सामान्य रूप रूपांतरण आउटपुट को पठनीय रखने के लिए 5 चर तक सीमित है।';
+  String get normalFormsTooManyVarsDesc =>
+      'सामान्य रूप रूपांतरण आउटपुट को पठनीय रखने के लिए 5 चर तक सीमित है।';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -261,13 +274,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get ok => 'ठीक है';
 
   @override
-  String get onboardingDesc1 => 'चर और ऑपरेटरों के साथ कोई भी तार्किक अभिव्यक्ति दर्ज करने के लिए कीपैड का उपयोग करें';
+  String get onboardingDesc1 =>
+      'चर और ऑपरेटरों के साथ कोई भी तार्किक अभिव्यक्ति दर्ज करने के लिए कीपैड का उपयोग करें';
 
   @override
-  String get onboardingDesc2 => 'समाधान के प्रत्येक चरण और पूर्ण सत्य तालिका को देखें';
+  String get onboardingDesc2 =>
+      'समाधान के प्रत्येक चरण और पूर्ण सत्य तालिका को देखें';
 
   @override
-  String get onboardingDesc3 => 'पेशेवर PDF बनाएं और अपने परिणाम आसानी से साझा करें';
+  String get onboardingDesc3 =>
+      'पेशेवर PDF बनाएं और अपने परिणाम आसानी से साझा करें';
 
   @override
   String get onboardingTitle1 => 'अपनी अभिव्यक्ति लिखें';
@@ -303,7 +319,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get premiumOperator => 'प्रीमियम ऑपरेटर';
 
   @override
-  String get premiumOperatorMessage => 'इस उन्नत ऑपरेटर के लिए एक वीडियो देखना या असीमित पहुंच के लिए Pro में अपग्रेड करना आवश्यक है।';
+  String get premiumOperatorMessage =>
+      'इस उन्नत ऑपरेटर के लिए एक वीडियो देखना या असीमित पहुंच के लिए Pro में अपग्रेड करना आवश्यक है।';
 
   @override
   String get premiumOperatorsAccess => 'सभी प्रीमियम ऑपरेटरों तक पहुंच';
@@ -315,7 +332,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get privacyPolicy => 'गोपनीयता नीति';
 
   @override
-  String get proUpgradeHint => 'सभी ऑपरेटरों और बिना विज्ञापनों के असीमित अभ्यास के लिए Pro में अपग्रेड करें!';
+  String get proUpgradeHint =>
+      'सभी ऑपरेटरों और बिना विज्ञापनों के असीमित अभ्यास के लिए Pro में अपग्रेड करें!';
 
   @override
   String get propositions => 'प्रस्ताव';
@@ -336,7 +354,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get rateTheApp => 'ऐप को रेटिंग दें';
 
   @override
-  String get ratingDialogMessage => 'आपकी राय हमारे लिए बहुत महत्वपूर्ण है! यदि आपको सत्य तालिका पसंद आई, तो हम चाहेंगे कि आप हमें 5-स्टार रेटिंग दें ⭐';
+  String get ratingDialogMessage =>
+      'आपकी राय हमारे लिए बहुत महत्वपूर्ण है! यदि आपको सत्य तालिका पसंद आई, तो हम चाहेंगे कि आप हमें 5-स्टार रेटिंग दें ⭐';
 
   @override
   String get ratingDialogTitle => 'ऐप पसंद आया?';
@@ -411,7 +430,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get tautology => 'टॉटोलॉजी ✅';
 
   @override
-  String get tautology_description => 'एक टॉटोलॉजी एक प्रस्ताव या तार्किक सूत्र है जो हमेशा सत्य होता है, इसके घटकों के सत्य मूल्यों की परवाह किए बिना। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो इसके चर को सत्य मूल्यों की किसी भी व्याख्या या असाइनमेंट के तहत रखती है।';
+  String get tautology_description =>
+      'एक टॉटोलॉजी एक प्रस्ताव या तार्किक सूत्र है जो हमेशा सत्य होता है, इसके घटकों के सत्य मूल्यों की परवाह किए बिना। दूसरे शब्दों में, यह एक अभिव्यक्ति है जो इसके चर को सत्य मूल्यों की किसी भी व्याख्या या असाइनमेंट के तहत रखती है।';
 
   @override
   String get truthValues => 'सत्य मान';
@@ -456,7 +476,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get videoFABTooltip => 'वीडियो स्पष्टीकरण';
 
   @override
-  String get videoScreenDescription => 'यह वीडियो इस तार्किक अभिव्यक्ति के समाधान को चरण-दर-चरण समझाता है।';
+  String get videoScreenDescription =>
+      'यह वीडियो इस तार्किक अभिव्यक्ति के समाधान को चरण-दर-चरण समझाता है।';
 
   @override
   String get videoScreenTitle => 'वीडियो स्पष्टीकरण';

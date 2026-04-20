@@ -81,13 +81,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get contingency => '偶発的 ⚠️';
 
   @override
-  String get contingency_description => '偶発的とは、恒真式でも矛盾式でもない命題または式を指します。言い換えれば、状況またはその構成要素の真理値に応じて、真または偽になり得る表現です。';
+  String get contingency_description =>
+      '偶発的とは、恒真式でも矛盾式でもない命題または式を指します。言い換えれば、状況またはその構成要素の真理値に応じて、真または偽になり得る表現です。';
 
   @override
   String get contradiction => '矛盾 ❌';
 
   @override
-  String get contradiction_description => '矛盾とは、構成要素の真理値に関係なく常に偽である命題または論理式です。言い換えれば、変数への真理値の解釈または割り当てのいかなる場合でも成立しない表現です。';
+  String get contradiction_description =>
+      '矛盾とは、構成要素の真理値に関係なく常に偽である命題または論理式です。言い換えれば、変数への真理値の解釈または割り当てのいかなる場合でも成立しない表現です。';
 
   @override
   String get correctAnswer => '正解！🎉';
@@ -230,7 +232,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get normalFormsAdGate => 'この式の標準形をアンロックするには、短い動画を視聴してください。';
 
   @override
-  String get normalFormsDescription => '真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。';
+  String get normalFormsDescription =>
+      '真理値表を使用して、式を選言標準形 (DNF) と連言標準形 (CNF) に変換します。';
 
   @override
   String get normalFormsProHint => 'Proにアップグレードすると、広告なしで標準形を即座に表示できます。';
@@ -244,7 +247,8 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get normalFormsTooManyVarsDesc => '標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。';
+  String get normalFormsTooManyVarsDesc =>
+      '標準形変換は出力を読みやすく保つため、5変数以下の式に制限されています。';
 
   @override
   String notEquivalentDescription(Object differing, Object pct, Object total) {
@@ -303,7 +307,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get premiumOperator => 'プレミアム演算子';
 
   @override
-  String get premiumOperatorMessage => 'この高度な演算子は、ビデオを視聴するか、無制限アクセスのためにプロ版にアップグレードする必要があります。';
+  String get premiumOperatorMessage =>
+      'この高度な演算子は、ビデオを視聴するか、無制限アクセスのためにプロ版にアップグレードする必要があります。';
 
   @override
   String get premiumOperatorsAccess => 'すべてのプレミアム演算子へのアクセス';
@@ -336,7 +341,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get rateTheApp => 'アプリを評価';
 
   @override
-  String get ratingDialogMessage => 'あなたの意見は私たちにとって非常に重要です！真理値表を気に入っていただけた場合は、5つ星の評価を残していただければ幸いです ⭐';
+  String get ratingDialogMessage =>
+      'あなたの意見は私たちにとって非常に重要です！真理値表を気に入っていただけた場合は、5つ星の評価を残していただければ幸いです ⭐';
 
   @override
   String get ratingDialogTitle => 'アプリを楽しんでいますか？';
@@ -411,7 +417,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tautology => '恒真式 ✅';
 
   @override
-  String get tautology_description => '恒真式とは、構成要素の真理値に関係なく常に真である命題または論理式です。言い換えれば、変数への真理値の解釈または割り当てのいかなる場合でも成立する表現です。';
+  String get tautology_description =>
+      '恒真式とは、構成要素の真理値に関係なく常に真である命題または論理式です。言い換えれば、変数への真理値の解釈または割り当てのいかなる場合でも成立する表現です。';
 
   @override
   String get truthValues => '真理値';
