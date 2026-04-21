@@ -13,6 +13,23 @@ fi
 
 clear
 
+find_emulator_serial_for_avd() {
+  local avd_name="$1"
+  local serial
+  local running_avd
+
+  while IFS= read -r serial; do
+    [[ -z "$serial" ]] && continue
+    running_avd=$(adb -s "$serial" emu avd name 2>/dev/null | head -n 1 | tr -d '\r')
+    if [[ "$running_avd" == "$avd_name" ]]; then
+      echo "$serial"
+      return 0
+    fi
+  done < <(adb devices | awk '/^emulator-[0-9]+[[:space:]]+device$/ {print $1}')
+
+  return 1
+}
+
 gum style \
   --border normal \
   --margin "1 2" \
@@ -80,7 +97,7 @@ if [[ "$SELECTED" == 🤖* ]]; then
 
   gum confirm "¿Iniciar emulador y correr la app?" || exit 0
 
-  RUNNING=$(adb devices | grep emulator | grep -v "offline")
+  RUNNING=$(find_emulator_serial_for_avd "$AVD")
 
   if [[ -z "$RUNNING" ]]; then
     gum style --foreground 14 "🚀 Iniciando emulador..."
@@ -97,7 +114,17 @@ if [[ "$SELECTED" == 🤖* ]]; then
     gum style --foreground 10 "✅ Emulador ya estaba corriendo"
   fi
 
-  DEVICE_FLAG=""
+  SERIAL=$(find_emulator_serial_for_avd "$AVD")
+  if [[ -z "$SERIAL" ]]; then
+    SERIAL=$(adb devices | awk '/^emulator-[0-9]+[[:space:]]+device$/ {print $1; exit}')
+  fi
+
+  if [[ -z "$SERIAL" ]]; then
+    gum style --foreground 1 "❌ No pude detectar el serial del emulador."
+    exit 1
+  fi
+
+  DEVICE_FLAG="-d $SERIAL"
 else
   # Extraer serial del dispositivo físico
   SERIAL=$(echo "$SELECTED" | sed 's/.*(\(.*\))/\1/')
@@ -112,6 +139,7 @@ echo ""
 CMD="flutter run $DEVICE_FLAG --flavor $FLAVOR --dart-define=FLAVOR=$FLAVOR"
 gum style --foreground 14 "🧾 Ejecutando:"
 gum style --foreground 250 "$CMD"
+gum style --foreground 250 "Hot reload: presiona 'r' | Hot restart: presiona 'R' | Salir: presiona 'q'"
 echo ""
 
 eval $CMD

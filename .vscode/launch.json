@@ -6,14 +6,14 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": ["--flavor", "es"]
+      "args": ["--flavor", "es", "--dart-define=FLAVOR=es"]
     },
     {
       "name": "Flutter (EN - English)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": ["--flavor", "en"]
+      "args": ["--flavor", "en", "--dart-define=FLAVOR=en"]
     }
   ]
 }

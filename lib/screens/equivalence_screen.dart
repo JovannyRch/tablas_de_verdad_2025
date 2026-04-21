@@ -35,6 +35,7 @@ class _EquivalenceScreenState extends State<EquivalenceScreen> {
 
   EquivalenceResult? _result;
   bool _isComputing = false;
+  bool _keypadVisible = true;
 
   @override
   void initState() {
@@ -113,6 +114,7 @@ class _EquivalenceScreenState extends State<EquivalenceScreen> {
     setState(() {
       _result = result;
       _isComputing = false;
+      _keypadVisible = false;
     });
   }
 
@@ -193,7 +195,7 @@ class _EquivalenceScreenState extends State<EquivalenceScreen> {
                     validation: _validationA,
                     isActive: _activeIsA,
                     onTap: () {
-                      setState(() => _activeIsA = true);
+                      setState(() { _activeIsA = true; _keypadVisible = true; });
                       _focusNodeA.requestFocus();
                     },
                   ),
@@ -222,7 +224,7 @@ class _EquivalenceScreenState extends State<EquivalenceScreen> {
                     validation: _validationB,
                     isActive: !_activeIsA,
                     onTap: () {
-                      setState(() => _activeIsA = false);
+                      setState(() { _activeIsA = false; _keypadVisible = true; });
                       _focusNodeB.requestFocus();
                     },
                   ),
@@ -272,22 +274,32 @@ class _EquivalenceScreenState extends State<EquivalenceScreen> {
           ),
 
           // ─── Keypad ───
-          Expanded(
-            child: TruthKeypad(
-              onTap: (key) {
-                final piece =
-                    _case == Case.lower ? key.toLowerCase() : key.toUpperCase();
-                _insertText(piece);
-              },
-              onBackspace: _backspace,
-              onClear: _clearActive,
-              onToggleAa:
-                  () => setState(() {
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 280),
+            curve: Curves.easeInOut,
+            height: _keypadVisible
+                ? MediaQuery.of(context).size.height * 0.42
+                : 0,
+            child: ClipRect(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.42,
+                child: TruthKeypad(
+                  onTap: (key) {
+                    final piece = _case == Case.lower
+                        ? key.toLowerCase()
+                        : key.toUpperCase();
+                    _insertText(piece);
+                  },
+                  onBackspace: _backspace,
+                  onClear: _clearActive,
+                  onToggleAa: () => setState(() {
                     _case = _case == Case.lower ? Case.upper : Case.lower;
                   }),
-              onEvaluate: _canCheck ? _runCheck : () {},
-              calculatorCase: _case,
-              hideActionButtons: true,
+                  onEvaluate: _canCheck ? _runCheck : () {},
+                  calculatorCase: _case,
+                  hideActionButtons: true,
+                ),
+              ),
             ),
           ),
         ],

@@ -89,6 +89,7 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
 
   ArgumentResult? _result;
   bool _isComputing = false;
+  bool _keypadVisible = true;
 
   @override
   void initState() {
@@ -207,6 +208,7 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
     setState(() {
       _result = result;
       _isComputing = false;
+      _keypadVisible = false;
     });
   }
 
@@ -278,7 +280,7 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                         isActive: _activeIndex == i,
                         isDark: isDark,
                         onTap: () {
-                          setState(() => _activeIndex = i);
+                          setState(() { _activeIndex = i; _keypadVisible = true; });
                           _premiseFocusNodes[i].requestFocus();
                         },
                         onRemove: _premiseControllers.length > 1
@@ -324,7 +326,7 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                     isDark: isDark,
                     isConclusion: true,
                     onTap: () {
-                      setState(() => _activeIndex = -1);
+                      setState(() { _activeIndex = -1; _keypadVisible = true; });
                       _conclusionFocusNode.requestFocus();
                     },
                   ),
@@ -361,20 +363,32 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
           ),
 
           // ── Keypad ────────────────────────────────────────
-          Expanded(
-            child: TruthKeypad(
-              onTap: (key) {
-                final piece = _case == Case.lower ? key.toLowerCase() : key.toUpperCase();
-                _insertText(piece);
-              },
-              onBackspace: _backspace,
-              onClear: _clearActive,
-              onEvaluate: _canValidate ? _runValidation : () {},
-              onToggleAa: () => setState(() {
-                _case = _case == Case.lower ? Case.upper : Case.lower;
-              }),
-              calculatorCase: _case,
-              hideActionButtons: true,
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 280),
+            curve: Curves.easeInOut,
+            height: _keypadVisible
+                ? MediaQuery.of(context).size.height * 0.42
+                : 0,
+            child: ClipRect(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.42,
+                child: TruthKeypad(
+                  onTap: (key) {
+                    final piece = _case == Case.lower
+                        ? key.toLowerCase()
+                        : key.toUpperCase();
+                    _insertText(piece);
+                  },
+                  onBackspace: _backspace,
+                  onClear: _clearActive,
+                  onEvaluate: _canValidate ? _runValidation : () {},
+                  onToggleAa: () => setState(() {
+                    _case = _case == Case.lower ? Case.upper : Case.lower;
+                  }),
+                  calculatorCase: _case,
+                  hideActionButtons: true,
+                ),
+              ),
             ),
           ),
         ],
