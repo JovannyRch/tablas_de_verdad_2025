@@ -1,6 +1,7 @@
 final IS_TESTING =
     false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
+const DISCORD_URL = "https://discord.gg/ZUSfz8aZXP";
 
 const Map<String, String> esSettings = {
   "id": "com.jovannyrch.tablasdeverdad",

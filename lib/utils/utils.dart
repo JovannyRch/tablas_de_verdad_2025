@@ -69,9 +69,12 @@ String getRandomExpression() {
   return expressions[randomIndex];
 }
 
-Future<void> visit(String link) async {
+Future<void> visit(
+  String link, {
+  LaunchMode mode = LaunchMode.externalApplication,
+}) async {
   final url = Uri.parse(link);
-  if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-    throw Exception('Could not launch $url');
+  if (!await launchUrl(url, mode: mode)) {
+    await launchUrl(url, mode: LaunchMode.platformDefault);
   }
 }

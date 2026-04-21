@@ -481,4 +481,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get shareExpression => '分享表达式';
+
+  @override
+  String get discordCommunity => 'Discord 社区';
 }

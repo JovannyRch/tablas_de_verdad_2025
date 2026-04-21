@@ -291,17 +291,19 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder:
           (_) => Container(
-            padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+            padding: EdgeInsets.fromLTRB(24, 8, 24, MediaQuery.of(context).padding.bottom + 24),
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF1E1E2E) : Colors.white,
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(28),
               ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
               children: [
                 // Drag handle
                 Container(
@@ -392,6 +394,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
               ],
             ),
           ),
+        ),
     );
   }
 

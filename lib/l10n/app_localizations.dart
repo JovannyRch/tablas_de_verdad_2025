@@ -1043,6 +1043,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Compartir expresión'**
   String get shareExpression;
+
+  /// No description provided for @discordCommunity.
+  ///
+  /// In es, this message translates to:
+  /// **'Comunidad en Discord'**
+  String get discordCommunity;
 }
 
 class _AppLocalizationsDelegate

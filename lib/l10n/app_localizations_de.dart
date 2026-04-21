@@ -501,4 +501,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get shareExpression => 'Ausdruck teilen';
+
+  @override
+  String get discordCommunity => 'Discord-Community';
 }

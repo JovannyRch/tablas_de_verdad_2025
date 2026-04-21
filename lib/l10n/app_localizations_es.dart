@@ -500,4 +500,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get shareExpression => 'Compartir expresión';
+
+  @override
+  String get discordCommunity => 'Comunidad en Discord';
 }

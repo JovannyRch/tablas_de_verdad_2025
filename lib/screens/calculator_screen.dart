@@ -11,6 +11,7 @@ import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
 import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
+import 'package:tablas_de_verdad_2025/sheets/discord_promo_sheet.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
@@ -408,6 +409,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       final shouldShow = await RatingHelper.shouldShowRatingDialog();
       if (shouldShow && context.mounted) {
         showRatingDialog(context);
+      }
+    }
+
+    // Mostrar promo de Discord tras la 5ta evaluación (una sola vez)
+    if (context.mounted) {
+      final showDiscord = await shouldShowDiscordPromo(_settings.operationsCount);
+      if (showDiscord && context.mounted) {
+        showDiscordPromoSheet(context);
       }
     }
   }

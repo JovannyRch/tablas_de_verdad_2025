@@ -181,5 +181,6 @@
   "whatTypeIsThis": "What type is this expression?",
   "wrongAnswer": "Incorrect. Keep trying!",
   "yourStats": "Your stats",
-  "youtubeChannel": "YouTube Channel"
+  "youtubeChannel": "YouTube Channel",
+  "discordCommunity": "Discord Community"
 }

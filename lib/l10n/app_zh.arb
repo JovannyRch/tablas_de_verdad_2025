@@ -161,5 +161,6 @@
   "whatTypeIsThis": "这个表达式是什么类型？",
   "wrongAnswer": "不正确。继续尝试！",
   "yourStats": "你的统计",
-  "youtubeChannel": "YouTube 频道"
+  "youtubeChannel": "YouTube 频道",
+  "discordCommunity": "Discord 社区"
 }

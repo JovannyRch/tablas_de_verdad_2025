@@ -485,4 +485,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shareExpression => '式を共有';
+
+  @override
+  String get discordCommunity => 'Discordコミュニティ';
 }

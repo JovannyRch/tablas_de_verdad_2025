@@ -499,4 +499,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get shareExpression => 'अभिव्यक्ति साझा करें';
+
+  @override
+  String get discordCommunity => 'Discord समुदाय';
 }

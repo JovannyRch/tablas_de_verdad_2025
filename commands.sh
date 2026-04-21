@@ -58,15 +58,60 @@ if [[ "$ACTION" == *"Run"* ]]; then
   gum spin --spinner dot --title "Ejecutando app..." -- $CMD
 
 else
+  # Leer versión actual del pubspec.yaml
+  CURRENT_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+  VERSION_NAME=$(echo "$CURRENT_VERSION" | cut -d'+' -f1)
+  MAJOR=$(echo "$VERSION_NAME" | cut -d'.' -f1)
+  MINOR=$(echo "$VERSION_NAME" | cut -d'.' -f2)
+  PATCH=$(echo "$VERSION_NAME" | cut -d'.' -f3)
+
+  echo ""
+  gum style --foreground 14 "📦 Versión actual:"
+  gum style --foreground 250 "  $CURRENT_VERSION"
+  echo ""
+
+  BUMP=$(gum choose \
+    "patch  ($MAJOR.$MINOR.$PATCH → $MAJOR.$MINOR.$((PATCH + 1)))" \
+    "minor  ($MAJOR.$MINOR.$PATCH → $MAJOR.$((MINOR + 1)).0)" \
+    "major  ($MAJOR.$MINOR.$PATCH → $((MAJOR + 1)).0.0)" \
+    "no incrementar" \
+    --header "¿Incrementar versión?")
+
+  [[ -z "$BUMP" ]] && exit 0
+
+  if [[ "$BUMP" == no* ]]; then
+    NEW_VERSION="$CURRENT_VERSION"
+  else
+    if [[ "$BUMP" == patch* ]]; then
+      NEW_MAJOR=$MAJOR; NEW_MINOR=$MINOR; NEW_PATCH=$((PATCH + 1))
+    elif [[ "$BUMP" == minor* ]]; then
+      NEW_MAJOR=$MAJOR; NEW_MINOR=$((MINOR + 1)); NEW_PATCH=0
+    else
+      NEW_MAJOR=$((MAJOR + 1)); NEW_MINOR=0; NEW_PATCH=0
+    fi
+
+    NEW_BUILD=$((NEW_MAJOR * 10000 + NEW_MINOR * 1000 + NEW_PATCH))
+    NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH+$NEW_BUILD"
+
+    gum style --foreground 10 "✔ Nueva versión: $NEW_VERSION"
+    echo ""
+
+    gum confirm "¿Actualizar pubspec.yaml a $NEW_VERSION?" || exit 0
+
+    sed -i '' "s/^version: .*/version: $NEW_VERSION/" pubspec.yaml
+    gum style --foreground 10 "✅ pubspec.yaml actualizado"
+    echo ""
+  fi
+
   CMD="flutter build appbundle --flavor $FLAVOR --dart-define=FLAVOR=$FLAVOR"
 
-  gum style --foreground 14 "🧾 Comando ejecutado:"
+  gum style --foreground 14 "🧾 Comando a ejecutar:"
   gum style --foreground 250 "$CMD"
   echo ""
 
   gum confirm "¿Generar AppBundle?" || exit 0
 
-  gum spin --spinner dot --title "Generando AppBundle..." -- $CMD
+  gum spin --spinner dot --title "Generando AppBundle $NEW_VERSION..." -- $CMD
 
   echo ""
   gum style --foreground 10 "✅ AppBundle generado"

@@ -12,6 +12,7 @@ import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -110,6 +111,14 @@ class AppDrawer extends StatelessWidget {
                   iconColor: Colors.redAccent,
                   onTap: () {
                     visit(YOUTUBE_URL);
+                  },
+                ),
+                _DrawerTile(
+                  icon: FontAwesomeIcons.discord,
+                  title: t.discordCommunity,
+                  iconColor: const Color(0xFF5865F2),
+                  onTap: () {
+                    visit(DISCORD_URL, mode: LaunchMode.platformDefault);
                   },
                 ),
                 const Padding(
