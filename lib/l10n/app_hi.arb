@@ -162,5 +162,17 @@
   "wrongAnswer": "गलत। कोशिश करते रहें!",
   "yourStats": "आपके आँकड़े",
   "youtubeChannel": "YouTube चैनल",
-  "discordCommunity": "Discord समुदाय"
+  "discordCommunity": "Discord समुदाय",
+  "argumentValidator": "तर्क सत्यापक",
+  "premise": "आधार",
+  "addPremise": "आधार जोड़ें",
+  "removePremise": "हटाएं",
+  "conclusionLabel": "निष्कर्ष",
+  "validateArgument": "तर्क सत्यापित करें",
+  "validArgument": "वैध तर्क ✅",
+  "invalidArgument": "अमान्य तर्क ❌",
+  "validArgumentDesc": "सभी संयोजनों में जहाँ आधार सत्य हैं, निष्कर्ष भी सत्य है। तर्क तार्किक रूप से वैध है।",
+  "invalidArgumentDesc": "कम से कम एक संयोजन है जहाँ सभी आधार सत्य हैं लेकिन निष्कर्ष असत्य है।",
+  "counterexamples": "प्रतिउदाहरण",
+  "argumentHint": "तार्किक अभिव्यक्ति दर्ज करें"
 }

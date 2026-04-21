@@ -503,4 +503,42 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Сообщество в Discord';
+
+  @override
+  String get argumentValidator => 'Валидатор Аргументов';
+
+  @override
+  String get premise => 'Посылка';
+
+  @override
+  String get addPremise => 'Добавить посылку';
+
+  @override
+  String get removePremise => 'Удалить';
+
+  @override
+  String get conclusionLabel => 'Заключение';
+
+  @override
+  String get validateArgument => 'Проверить аргумент';
+
+  @override
+  String get validArgument => 'Аргумент верный ✅';
+
+  @override
+  String get invalidArgument => 'Аргумент неверный ❌';
+
+  @override
+  String get validArgumentDesc =>
+      'Во всех комбинациях, где посылки истинны, заключение также истинно. Аргумент логически верен.';
+
+  @override
+  String get invalidArgumentDesc =>
+      'Существует хотя бы одна комбинация, где все посылки истинны, но заключение ложно.';
+
+  @override
+  String get counterexamples => 'Контрпримеры';
+
+  @override
+  String get argumentHint => 'Введите логическое выражение';
 }

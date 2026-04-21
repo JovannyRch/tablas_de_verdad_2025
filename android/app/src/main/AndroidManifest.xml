@@ -33,7 +33,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="https"
-              android:host="tablas-de-verdad.vercel.app"
+              android:host="www.tablasdeverdad.app"
               android:pathPrefix="/calculadora" />
       </intent-filter>
     </activity>

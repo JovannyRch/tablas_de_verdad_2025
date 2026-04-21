@@ -484,4 +484,40 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Discord 社区';
+
+  @override
+  String get argumentValidator => '论证验证器';
+
+  @override
+  String get premise => '前提';
+
+  @override
+  String get addPremise => '添加前提';
+
+  @override
+  String get removePremise => '删除';
+
+  @override
+  String get conclusionLabel => '结论';
+
+  @override
+  String get validateArgument => '验证论证';
+
+  @override
+  String get validArgument => '有效论证 ✅';
+
+  @override
+  String get invalidArgument => '无效论证 ❌';
+
+  @override
+  String get validArgumentDesc => '在所有前提为真的组合中，结论也为真。论证在逻辑上是有效的。';
+
+  @override
+  String get invalidArgumentDesc => '至少存在一种组合，其中所有前提为真，但结论为假。';
+
+  @override
+  String get counterexamples => '反例';
+
+  @override
+  String get argumentHint => '输入逻辑表达式';
 }

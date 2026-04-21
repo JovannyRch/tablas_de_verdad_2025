@@ -141,7 +141,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
               final expression = expr;
               final encoded = Uri.encodeComponent(expression);
               final link =
-                  'https://tablas-de-verdad.vercel.app/calculadora?expression=$encoded';
+                  'https://www.tablasdeverdad.app/calculadora?expression=$encoded';
               SharePlus.instance.share(ShareParams(text: link));
               Analytics.instance.logEvent('expression_shared');
             },

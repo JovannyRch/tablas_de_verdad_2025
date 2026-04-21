@@ -504,4 +504,42 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Discord-Community';
+
+  @override
+  String get argumentValidator => 'Argument-Validator';
+
+  @override
+  String get premise => 'Prämisse';
+
+  @override
+  String get addPremise => 'Prämisse hinzufügen';
+
+  @override
+  String get removePremise => 'Entfernen';
+
+  @override
+  String get conclusionLabel => 'Schlussfolgerung';
+
+  @override
+  String get validateArgument => 'Argument validieren';
+
+  @override
+  String get validArgument => 'Gültiges Argument ✅';
+
+  @override
+  String get invalidArgument => 'Ungültiges Argument ❌';
+
+  @override
+  String get validArgumentDesc =>
+      'In allen Kombinationen, in denen die Prämissen wahr sind, ist auch die Schlussfolgerung wahr. Das Argument ist logisch gültig.';
+
+  @override
+  String get invalidArgumentDesc =>
+      'Es gibt mindestens eine Kombination, in der alle Prämissen wahr sind, die Schlussfolgerung jedoch falsch ist.';
+
+  @override
+  String get counterexamples => 'Gegenbeispiele';
+
+  @override
+  String get argumentHint => 'Logischen Ausdruck eingeben';
 }

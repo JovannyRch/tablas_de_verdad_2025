@@ -6,6 +6,7 @@ class Routes {
   static const String exercises = '/exercises';
   static const String practice = '/practice';
   static const String equivalence = '/equivalence';
+  static const String argumentValidator = '/argument-validator';
   static const String history = '/history';
   /*  static const String login = '/login';
   static const String register = '/register';

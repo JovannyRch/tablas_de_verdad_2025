@@ -162,5 +162,17 @@
   "yourStats": "Ваша статистика",
   "youtubeChannel": "YouTube канал",
   "shareExpression": "Поделиться выражением",
-  "discordCommunity": "Сообщество в Discord"
+  "discordCommunity": "Сообщество в Discord",
+  "argumentValidator": "Валидатор Аргументов",
+  "premise": "Посылка",
+  "addPremise": "Добавить посылку",
+  "removePremise": "Удалить",
+  "conclusionLabel": "Заключение",
+  "validateArgument": "Проверить аргумент",
+  "validArgument": "Аргумент верный ✅",
+  "invalidArgument": "Аргумент неверный ❌",
+  "validArgumentDesc": "Во всех комбинациях, где посылки истинны, заключение также истинно. Аргумент логически верен.",
+  "invalidArgumentDesc": "Существует хотя бы одна комбинация, где все посылки истинны, но заключение ложно.",
+  "counterexamples": "Контрпримеры",
+  "argumentHint": "Введите логическое выражение"
 }

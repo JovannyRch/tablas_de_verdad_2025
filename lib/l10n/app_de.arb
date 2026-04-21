@@ -162,5 +162,17 @@
   "yourStats": "Deine Statistiken",
   "youtubeChannel": "YouTube-Kanal",
   "shareExpression": "Ausdruck teilen",
-  "discordCommunity": "Discord-Community"
+  "discordCommunity": "Discord-Community",
+  "argumentValidator": "Argument-Validator",
+  "premise": "Prämisse",
+  "addPremise": "Prämisse hinzufügen",
+  "removePremise": "Entfernen",
+  "conclusionLabel": "Schlussfolgerung",
+  "validateArgument": "Argument validieren",
+  "validArgument": "Gültiges Argument ✅",
+  "invalidArgument": "Ungültiges Argument ❌",
+  "validArgumentDesc": "In allen Kombinationen, in denen die Prämissen wahr sind, ist auch die Schlussfolgerung wahr. Das Argument ist logisch gültig.",
+  "invalidArgumentDesc": "Es gibt mindestens eine Kombination, in der alle Prämissen wahr sind, die Schlussfolgerung jedoch falsch ist.",
+  "counterexamples": "Gegenbeispiele",
+  "argumentHint": "Logischen Ausdruck eingeben"
 }

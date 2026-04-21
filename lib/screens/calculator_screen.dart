@@ -298,7 +298,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     final encoded = Uri.encodeComponent(expression);
     final link =
-        'https://tablas-de-verdad.vercel.app/calculadora?expression=$encoded';
+        'https://www.tablasdeverdad.app/calculadora?expression=$encoded';
 
     SharePlus.instance.share(ShareParams(text: link));
 

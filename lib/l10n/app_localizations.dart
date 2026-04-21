@@ -1049,6 +1049,78 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Comunidad en Discord'**
   String get discordCommunity;
+
+  /// No description provided for @argumentValidator.
+  ///
+  /// In es, this message translates to:
+  /// **'Validador de Argumentos'**
+  String get argumentValidator;
+
+  /// No description provided for @premise.
+  ///
+  /// In es, this message translates to:
+  /// **'Premisa'**
+  String get premise;
+
+  /// No description provided for @addPremise.
+  ///
+  /// In es, this message translates to:
+  /// **'Agregar premisa'**
+  String get addPremise;
+
+  /// No description provided for @removePremise.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar'**
+  String get removePremise;
+
+  /// No description provided for @conclusionLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Conclusión'**
+  String get conclusionLabel;
+
+  /// No description provided for @validateArgument.
+  ///
+  /// In es, this message translates to:
+  /// **'Validar argumento'**
+  String get validateArgument;
+
+  /// No description provided for @validArgument.
+  ///
+  /// In es, this message translates to:
+  /// **'Argumento válido ✅'**
+  String get validArgument;
+
+  /// No description provided for @invalidArgument.
+  ///
+  /// In es, this message translates to:
+  /// **'Argumento inválido ❌'**
+  String get invalidArgument;
+
+  /// No description provided for @validArgumentDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'En todas las combinaciones donde las premisas son verdaderas, la conclusión también lo es. El argumento es lógicamente válido.'**
+  String get validArgumentDesc;
+
+  /// No description provided for @invalidArgumentDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Existe al menos una combinación donde todas las premisas son verdaderas pero la conclusión es falsa.'**
+  String get invalidArgumentDesc;
+
+  /// No description provided for @counterexamples.
+  ///
+  /// In es, this message translates to:
+  /// **'Contraejemplos'**
+  String get counterexamples;
+
+  /// No description provided for @argumentHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresa una expresión lógica'**
+  String get argumentHint;
 }
 
 class _AppLocalizationsDelegate

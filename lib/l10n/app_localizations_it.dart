@@ -502,4 +502,42 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Comunità Discord';
+
+  @override
+  String get argumentValidator => 'Validatore di Argomenti';
+
+  @override
+  String get premise => 'Premessa';
+
+  @override
+  String get addPremise => 'Aggiungi premessa';
+
+  @override
+  String get removePremise => 'Rimuovi';
+
+  @override
+  String get conclusionLabel => 'Conclusione';
+
+  @override
+  String get validateArgument => 'Valida argomento';
+
+  @override
+  String get validArgument => 'Argomento valido ✅';
+
+  @override
+  String get invalidArgument => 'Argomento non valido ❌';
+
+  @override
+  String get validArgumentDesc =>
+      'In tutte le combinazioni in cui le premesse sono vere, anche la conclusione è vera. L\'argomento è logicamente valido.';
+
+  @override
+  String get invalidArgumentDesc =>
+      'Esiste almeno una combinazione in cui tutte le premesse sono vere ma la conclusione è falsa.';
+
+  @override
+  String get counterexamples => 'Controesempi';
+
+  @override
+  String get argumentHint => 'Inserisci un\'espressione logica';
 }

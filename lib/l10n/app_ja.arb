@@ -162,5 +162,17 @@
   "yourStats": "あなたの統計",
   "youtubeChannel": "YouTubeチャンネル",
   "shareExpression": "式を共有",
-  "discordCommunity": "Discordコミュニティ"
+  "discordCommunity": "Discordコミュニティ",
+  "argumentValidator": "論証バリデーター",
+  "premise": "前提",
+  "addPremise": "前提を追加",
+  "removePremise": "削除",
+  "conclusionLabel": "結論",
+  "validateArgument": "論証を検証",
+  "validArgument": "有効な論証 ✅",
+  "invalidArgument": "無効な論証 ❌",
+  "validArgumentDesc": "前提が真であるすべての組み合わせで、結論も真です。論証は論理的に有効です。",
+  "invalidArgumentDesc": "すべての前提が真であるにもかかわらず、結論が偽である組み合わせが少なくとも1つ存在します。",
+  "counterexamples": "反例",
+  "argumentHint": "論理式を入力してください"
 }

@@ -488,4 +488,41 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Discordコミュニティ';
+
+  @override
+  String get argumentValidator => '論証バリデーター';
+
+  @override
+  String get premise => '前提';
+
+  @override
+  String get addPremise => '前提を追加';
+
+  @override
+  String get removePremise => '削除';
+
+  @override
+  String get conclusionLabel => '結論';
+
+  @override
+  String get validateArgument => '論証を検証';
+
+  @override
+  String get validArgument => '有効な論証 ✅';
+
+  @override
+  String get invalidArgument => '無効な論証 ❌';
+
+  @override
+  String get validArgumentDesc => '前提が真であるすべての組み合わせで、結論も真です。論証は論理的に有効です。';
+
+  @override
+  String get invalidArgumentDesc =>
+      'すべての前提が真であるにもかかわらず、結論が偽である組み合わせが少なくとも1つ存在します。';
+
+  @override
+  String get counterexamples => '反例';
+
+  @override
+  String get argumentHint => '論理式を入力してください';
 }

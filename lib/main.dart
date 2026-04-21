@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/screens/expression_library_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/equivalence_screen.dart';
+import 'package:tablas_de_verdad_2025/screens/argument_validator_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/practice_mode_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/privacy_policy_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
@@ -142,6 +143,7 @@ class _TruthTableAppState extends State<TruthTableApp> {
         Routes.library: (context) => const ExpressionLibraryScreen(),
         Routes.practice: (context) => const PracticeModeScreen(),
         Routes.equivalence: (context) => const EquivalenceScreen(),
+        Routes.argumentValidator: (context) => const ArgumentValidatorScreen(),
         Routes.privacy: (context) => PrivacyPolicyScreen(),
       },
     );

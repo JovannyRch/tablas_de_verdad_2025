@@ -182,5 +182,17 @@
   "wrongAnswer": "Incorrect. Keep trying!",
   "yourStats": "Your stats",
   "youtubeChannel": "YouTube Channel",
-  "discordCommunity": "Discord Community"
+  "discordCommunity": "Discord Community",
+  "argumentValidator": "Argument Validator",
+  "premise": "Premise",
+  "addPremise": "Add premise",
+  "removePremise": "Remove",
+  "conclusionLabel": "Conclusion",
+  "validateArgument": "Validate argument",
+  "validArgument": "Valid Argument ✅",
+  "invalidArgument": "Invalid Argument ❌",
+  "validArgumentDesc": "In all combinations where the premises are true, the conclusion is also true. The argument is logically valid.",
+  "invalidArgumentDesc": "There is at least one combination where all premises are true but the conclusion is false.",
+  "counterexamples": "Counterexamples",
+  "argumentHint": "Enter a logical expression"
 }

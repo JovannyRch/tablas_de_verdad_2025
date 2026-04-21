@@ -162,5 +162,17 @@
   "wrongAnswer": "不正确。继续尝试！",
   "yourStats": "你的统计",
   "youtubeChannel": "YouTube 频道",
-  "discordCommunity": "Discord 社区"
+  "discordCommunity": "Discord 社区",
+  "argumentValidator": "论证验证器",
+  "premise": "前提",
+  "addPremise": "添加前提",
+  "removePremise": "删除",
+  "conclusionLabel": "结论",
+  "validateArgument": "验证论证",
+  "validArgument": "有效论证 ✅",
+  "invalidArgument": "无效论证 ❌",
+  "validArgumentDesc": "在所有前提为真的组合中，结论也为真。论证在逻辑上是有效的。",
+  "invalidArgumentDesc": "至少存在一种组合，其中所有前提为真，但结论为假。",
+  "counterexamples": "反例",
+  "argumentHint": "输入逻辑表达式"
 }

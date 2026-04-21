@@ -162,5 +162,17 @@
   "wrongAnswer": "Sbagliato. Continua a provare!",
   "yourStats": "Le tue statistiche",
   "youtubeChannel": "Canale YouTube",
-  "discordCommunity": "Comunità Discord"
+  "discordCommunity": "Comunità Discord",
+  "argumentValidator": "Validatore di Argomenti",
+  "premise": "Premessa",
+  "addPremise": "Aggiungi premessa",
+  "removePremise": "Rimuovi",
+  "conclusionLabel": "Conclusione",
+  "validateArgument": "Valida argomento",
+  "validArgument": "Argomento valido ✅",
+  "invalidArgument": "Argomento non valido ❌",
+  "validArgumentDesc": "In tutte le combinazioni in cui le premesse sono vere, anche la conclusione è vera. L'argomento è logicamente valido.",
+  "invalidArgumentDesc": "Esiste almeno una combinazione in cui tutte le premesse sono vere ma la conclusione è falsa.",
+  "counterexamples": "Controesempi",
+  "argumentHint": "Inserisci un'espressione logica"
 }

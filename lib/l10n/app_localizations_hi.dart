@@ -502,4 +502,42 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get discordCommunity => 'Discord समुदाय';
+
+  @override
+  String get argumentValidator => 'तर्क सत्यापक';
+
+  @override
+  String get premise => 'आधार';
+
+  @override
+  String get addPremise => 'आधार जोड़ें';
+
+  @override
+  String get removePremise => 'हटाएं';
+
+  @override
+  String get conclusionLabel => 'निष्कर्ष';
+
+  @override
+  String get validateArgument => 'तर्क सत्यापित करें';
+
+  @override
+  String get validArgument => 'वैध तर्क ✅';
+
+  @override
+  String get invalidArgument => 'अमान्य तर्क ❌';
+
+  @override
+  String get validArgumentDesc =>
+      'सभी संयोजनों में जहाँ आधार सत्य हैं, निष्कर्ष भी सत्य है। तर्क तार्किक रूप से वैध है।';
+
+  @override
+  String get invalidArgumentDesc =>
+      'कम से कम एक संयोजन है जहाँ सभी आधार सत्य हैं लेकिन निष्कर्ष असत्य है।';
+
+  @override
+  String get counterexamples => 'प्रतिउदाहरण';
+
+  @override
+  String get argumentHint => 'तार्किक अभिव्यक्ति दर्ज करें';
 }

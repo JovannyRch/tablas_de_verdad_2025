@@ -162,5 +162,17 @@
   "wrongAnswer": "Incorrect. Continuez !",
   "yourStats": "Vos statistiques",
   "youtubeChannel": "Chaîne YouTube",
-  "discordCommunity": "Communauté Discord"
+  "discordCommunity": "Communauté Discord",
+  "argumentValidator": "Validateur d'Arguments",
+  "premise": "Prémisse",
+  "addPremise": "Ajouter une prémisse",
+  "removePremise": "Supprimer",
+  "conclusionLabel": "Conclusion",
+  "validateArgument": "Valider l'argument",
+  "validArgument": "Argument valide ✅",
+  "invalidArgument": "Argument invalide ❌",
+  "validArgumentDesc": "Dans toutes les combinaisons où les prémisses sont vraies, la conclusion l'est aussi. L'argument est logiquement valide.",
+  "invalidArgumentDesc": "Il existe au moins une combinaison où toutes les prémisses sont vraies mais la conclusion est fausse.",
+  "counterexamples": "Contre-exemples",
+  "argumentHint": "Entrez une expression logique"
 }

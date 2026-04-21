@@ -162,5 +162,17 @@
   "yourStats": "Suas estatísticas",
   "youtubeChannel": "Canal do YouTube",
   "shareExpression": "Compartilhar expressão",
-  "discordCommunity": "Comunidade no Discord"
+  "discordCommunity": "Comunidade no Discord",
+  "argumentValidator": "Validador de Argumentos",
+  "premise": "Premissa",
+  "addPremise": "Adicionar premissa",
+  "removePremise": "Remover",
+  "conclusionLabel": "Conclusão",
+  "validateArgument": "Validar argumento",
+  "validArgument": "Argumento válido ✅",
+  "invalidArgument": "Argumento inválido ❌",
+  "validArgumentDesc": "Em todas as combinações onde as premissas são verdadeiras, a conclusão também é. O argumento é logicamente válido.",
+  "invalidArgumentDesc": "Existe pelo menos uma combinação onde todas as premissas são verdadeiras mas a conclusão é falsa.",
+  "counterexamples": "Contraexemplos",
+  "argumentHint": "Insira uma expressão lógica"
 }

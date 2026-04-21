@@ -106,6 +106,15 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
                 _DrawerTile(
+                  icon: Icons.account_tree_rounded,
+                  title: t.argumentValidator,
+                  iconColor: const Color(0xFF9C27B0),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, Routes.argumentValidator);
+                  },
+                ),
+                _DrawerTile(
                   icon: FontAwesomeIcons.youtube,
                   title: t.youtubeChannel,
                   iconColor: Colors.redAccent,
