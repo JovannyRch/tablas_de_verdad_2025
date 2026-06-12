@@ -563,4 +563,91 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get karnaughConstant => 'この関数は定数です。作成するグループはありません。';
+
+  @override
+  String get simplificationTab => '簡略化';
+
+  @override
+  String get simplificationTitle => 'ステップごとの簡略化';
+
+  @override
+  String get simplificationDescription =>
+      '命題代数の法則を適用して式をより簡単な形に簡略化します。交換法則と結合法則は暗黙的に適用されます。';
+
+  @override
+  String get simplificationAdGate => '短い動画を見ると、この式のステップごとの簡略化のロックを解除できます。';
+
+  @override
+  String get simplificationOriginal => '元の式';
+
+  @override
+  String get simplificationResult => '結果';
+
+  @override
+  String get simplificationAlreadySimple => '式はすでに最も簡単な形です。';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count ステップ';
+  }
+
+  @override
+  String get lawConditional => '含意の定義';
+
+  @override
+  String get lawBiconditional => '双条件の定義';
+
+  @override
+  String get lawConverse => '逆含意';
+
+  @override
+  String get lawXorDefinition => 'XORの定義';
+
+  @override
+  String get lawNandDefinition => 'NANDの定義';
+
+  @override
+  String get lawNorDefinition => 'NORの定義';
+
+  @override
+  String get lawNegatedConditional => '含意の否定';
+
+  @override
+  String get lawNegatedConverse => '逆含意の否定';
+
+  @override
+  String get lawNegatedBiconditional => '双条件の否定';
+
+  @override
+  String get lawTautologyOperator => 'トートロジー演算子';
+
+  @override
+  String get lawContradictionOperator => '矛盾演算子';
+
+  @override
+  String get lawDoubleNegation => '二重否定';
+
+  @override
+  String get lawDeMorgan => 'ド・モルガンの法則';
+
+  @override
+  String get lawNegationOfConstant => '定数の否定';
+
+  @override
+  String get lawIdempotence => 'べき等律';
+
+  @override
+  String get lawIdentity => '同一律';
+
+  @override
+  String get lawDomination => '支配律';
+
+  @override
+  String get lawComplement => '補元律';
+
+  @override
+  String get lawAbsorption => '吸収律';
+
+  @override
+  String get lawFactorization => '分配律（因数分解）';
 }

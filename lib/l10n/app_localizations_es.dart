@@ -583,4 +583,93 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get karnaughConstant =>
       'La función es constante: no hay grupos que formar.';
+
+  @override
+  String get simplificationTab => 'Simplificar';
+
+  @override
+  String get simplificationTitle => 'Simplificación paso a paso';
+
+  @override
+  String get simplificationDescription =>
+      'Aplica las leyes del álgebra proposicional para reducir la expresión a una forma más simple. La conmutatividad y la asociatividad se aplican implícitamente.';
+
+  @override
+  String get simplificationAdGate =>
+      'Mira un breve video para desbloquear la simplificación paso a paso de esta expresión.';
+
+  @override
+  String get simplificationOriginal => 'Expresión original';
+
+  @override
+  String get simplificationResult => 'Resultado';
+
+  @override
+  String get simplificationAlreadySimple =>
+      'La expresión ya está en su forma más simple.';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count pasos';
+  }
+
+  @override
+  String get lawConditional => 'Ley del condicional';
+
+  @override
+  String get lawBiconditional => 'Ley del bicondicional';
+
+  @override
+  String get lawConverse => 'Condicional inverso';
+
+  @override
+  String get lawXorDefinition => 'Definición de XOR';
+
+  @override
+  String get lawNandDefinition => 'Definición de NAND';
+
+  @override
+  String get lawNorDefinition => 'Definición de NOR';
+
+  @override
+  String get lawNegatedConditional => 'Negación del condicional';
+
+  @override
+  String get lawNegatedConverse => 'Negación del condicional inverso';
+
+  @override
+  String get lawNegatedBiconditional => 'Negación del bicondicional';
+
+  @override
+  String get lawTautologyOperator => 'Operador tautología';
+
+  @override
+  String get lawContradictionOperator => 'Operador contradicción';
+
+  @override
+  String get lawDoubleNegation => 'Doble negación';
+
+  @override
+  String get lawDeMorgan => 'Leyes de De Morgan';
+
+  @override
+  String get lawNegationOfConstant => 'Negación de constante';
+
+  @override
+  String get lawIdempotence => 'Idempotencia';
+
+  @override
+  String get lawIdentity => 'Identidad';
+
+  @override
+  String get lawDomination => 'Dominación';
+
+  @override
+  String get lawComplement => 'Complemento';
+
+  @override
+  String get lawAbsorption => 'Absorción';
+
+  @override
+  String get lawFactorization => 'Distributiva (factorización)';
 }

@@ -584,4 +584,93 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get karnaughConstant =>
       'फ़ंक्शन स्थिर है: बनाने के लिए कोई समूह नहीं है।';
+
+  @override
+  String get simplificationTab => 'सरल करें';
+
+  @override
+  String get simplificationTitle => 'चरण-दर-चरण सरलीकरण';
+
+  @override
+  String get simplificationDescription =>
+      'अभिव्यक्ति को सरल रूप में लाने के लिए प्रतिज्ञप्ति बीजगणित के नियम लागू करता है। क्रमविनिमेयता और साहचर्यता स्वतः लागू होती हैं।';
+
+  @override
+  String get simplificationAdGate =>
+      'इस अभिव्यक्ति का चरण-दर-चरण सरलीकरण अनलॉक करने के लिए एक छोटा वीडियो देखें।';
+
+  @override
+  String get simplificationOriginal => 'मूल अभिव्यक्ति';
+
+  @override
+  String get simplificationResult => 'परिणाम';
+
+  @override
+  String get simplificationAlreadySimple =>
+      'अभिव्यक्ति पहले से ही अपने सरलतम रूप में है।';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count चरण';
+  }
+
+  @override
+  String get lawConditional => 'सशर्त नियम';
+
+  @override
+  String get lawBiconditional => 'द्विसशर्त नियम';
+
+  @override
+  String get lawConverse => 'विलोम सशर्त';
+
+  @override
+  String get lawXorDefinition => 'XOR की परिभाषा';
+
+  @override
+  String get lawNandDefinition => 'NAND की परिभाषा';
+
+  @override
+  String get lawNorDefinition => 'NOR की परिभाषा';
+
+  @override
+  String get lawNegatedConditional => 'सशर्त का निषेध';
+
+  @override
+  String get lawNegatedConverse => 'विलोम सशर्त का निषेध';
+
+  @override
+  String get lawNegatedBiconditional => 'द्विसशर्त का निषेध';
+
+  @override
+  String get lawTautologyOperator => 'तत्त्वसत्य संकारक';
+
+  @override
+  String get lawContradictionOperator => 'विरोधाभास संकारक';
+
+  @override
+  String get lawDoubleNegation => 'दोहरा निषेध';
+
+  @override
+  String get lawDeMorgan => 'डी मॉर्गन का नियम';
+
+  @override
+  String get lawNegationOfConstant => 'स्थिरांक का निषेध';
+
+  @override
+  String get lawIdempotence => 'समघात नियम';
+
+  @override
+  String get lawIdentity => 'तत्समक नियम';
+
+  @override
+  String get lawDomination => 'प्रभुत्व नियम';
+
+  @override
+  String get lawComplement => 'पूरक नियम';
+
+  @override
+  String get lawAbsorption => 'अवशोषण नियम';
+
+  @override
+  String get lawFactorization => 'वितरण (गुणनखंडन)';
 }

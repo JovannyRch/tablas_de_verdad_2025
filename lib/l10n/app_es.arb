@@ -193,5 +193,40 @@
         "type": "int"
       }
     }
+  },
+  "simplificationTab": "Simplificar",
+  "simplificationTitle": "Simplificación paso a paso",
+  "simplificationDescription": "Aplica las leyes del álgebra proposicional para reducir la expresión a una forma más simple. La conmutatividad y la asociatividad se aplican implícitamente.",
+  "simplificationAdGate": "Mira un breve video para desbloquear la simplificación paso a paso de esta expresión.",
+  "simplificationOriginal": "Expresión original",
+  "simplificationResult": "Resultado",
+  "simplificationAlreadySimple": "La expresión ya está en su forma más simple.",
+  "simplificationStepCount": "{count} pasos",
+  "lawConditional": "Ley del condicional",
+  "lawBiconditional": "Ley del bicondicional",
+  "lawConverse": "Condicional inverso",
+  "lawXorDefinition": "Definición de XOR",
+  "lawNandDefinition": "Definición de NAND",
+  "lawNorDefinition": "Definición de NOR",
+  "lawNegatedConditional": "Negación del condicional",
+  "lawNegatedConverse": "Negación del condicional inverso",
+  "lawNegatedBiconditional": "Negación del bicondicional",
+  "lawTautologyOperator": "Operador tautología",
+  "lawContradictionOperator": "Operador contradicción",
+  "lawDoubleNegation": "Doble negación",
+  "lawDeMorgan": "Leyes de De Morgan",
+  "lawNegationOfConstant": "Negación de constante",
+  "lawIdempotence": "Idempotencia",
+  "lawIdentity": "Identidad",
+  "lawDomination": "Dominación",
+  "lawComplement": "Complemento",
+  "lawAbsorption": "Absorción",
+  "lawFactorization": "Distributiva (factorización)",
+  "@simplificationStepCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

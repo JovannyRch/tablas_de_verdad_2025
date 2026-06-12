@@ -558,4 +558,90 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get karnaughConstant => '该函数为常量：无需分组。';
+
+  @override
+  String get simplificationTab => '化简';
+
+  @override
+  String get simplificationTitle => '逐步化简';
+
+  @override
+  String get simplificationDescription => '应用命题代数定律将表达式化简为更简单的形式。交换律和结合律会隐式应用。';
+
+  @override
+  String get simplificationAdGate => '观看一段短视频即可解锁此表达式的逐步化简。';
+
+  @override
+  String get simplificationOriginal => '原始表达式';
+
+  @override
+  String get simplificationResult => '结果';
+
+  @override
+  String get simplificationAlreadySimple => '该表达式已是最简形式。';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count 步';
+  }
+
+  @override
+  String get lawConditional => '蕴含定义';
+
+  @override
+  String get lawBiconditional => '双条件定义';
+
+  @override
+  String get lawConverse => '逆蕴含';
+
+  @override
+  String get lawXorDefinition => '异或定义';
+
+  @override
+  String get lawNandDefinition => '与非定义';
+
+  @override
+  String get lawNorDefinition => '或非定义';
+
+  @override
+  String get lawNegatedConditional => '蕴含的否定';
+
+  @override
+  String get lawNegatedConverse => '逆蕴含的否定';
+
+  @override
+  String get lawNegatedBiconditional => '双条件的否定';
+
+  @override
+  String get lawTautologyOperator => '永真算子';
+
+  @override
+  String get lawContradictionOperator => '矛盾算子';
+
+  @override
+  String get lawDoubleNegation => '双重否定';
+
+  @override
+  String get lawDeMorgan => '德摩根定律';
+
+  @override
+  String get lawNegationOfConstant => '常量取反';
+
+  @override
+  String get lawIdempotence => '幂等律';
+
+  @override
+  String get lawIdentity => '同一律';
+
+  @override
+  String get lawDomination => '支配律';
+
+  @override
+  String get lawComplement => '互补律';
+
+  @override
+  String get lawAbsorption => '吸收律';
+
+  @override
+  String get lawFactorization => '分配律（提取公因子）';
 }

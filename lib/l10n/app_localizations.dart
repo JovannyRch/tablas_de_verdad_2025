@@ -1193,6 +1193,174 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'La función es constante: no hay grupos que formar.'**
   String get karnaughConstant;
+
+  /// No description provided for @simplificationTab.
+  ///
+  /// In es, this message translates to:
+  /// **'Simplificar'**
+  String get simplificationTab;
+
+  /// No description provided for @simplificationTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Simplificación paso a paso'**
+  String get simplificationTitle;
+
+  /// No description provided for @simplificationDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Aplica las leyes del álgebra proposicional para reducir la expresión a una forma más simple. La conmutatividad y la asociatividad se aplican implícitamente.'**
+  String get simplificationDescription;
+
+  /// No description provided for @simplificationAdGate.
+  ///
+  /// In es, this message translates to:
+  /// **'Mira un breve video para desbloquear la simplificación paso a paso de esta expresión.'**
+  String get simplificationAdGate;
+
+  /// No description provided for @simplificationOriginal.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresión original'**
+  String get simplificationOriginal;
+
+  /// No description provided for @simplificationResult.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultado'**
+  String get simplificationResult;
+
+  /// No description provided for @simplificationAlreadySimple.
+  ///
+  /// In es, this message translates to:
+  /// **'La expresión ya está en su forma más simple.'**
+  String get simplificationAlreadySimple;
+
+  /// No description provided for @simplificationStepCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} pasos'**
+  String simplificationStepCount(int count);
+
+  /// No description provided for @lawConditional.
+  ///
+  /// In es, this message translates to:
+  /// **'Ley del condicional'**
+  String get lawConditional;
+
+  /// No description provided for @lawBiconditional.
+  ///
+  /// In es, this message translates to:
+  /// **'Ley del bicondicional'**
+  String get lawBiconditional;
+
+  /// No description provided for @lawConverse.
+  ///
+  /// In es, this message translates to:
+  /// **'Condicional inverso'**
+  String get lawConverse;
+
+  /// No description provided for @lawXorDefinition.
+  ///
+  /// In es, this message translates to:
+  /// **'Definición de XOR'**
+  String get lawXorDefinition;
+
+  /// No description provided for @lawNandDefinition.
+  ///
+  /// In es, this message translates to:
+  /// **'Definición de NAND'**
+  String get lawNandDefinition;
+
+  /// No description provided for @lawNorDefinition.
+  ///
+  /// In es, this message translates to:
+  /// **'Definición de NOR'**
+  String get lawNorDefinition;
+
+  /// No description provided for @lawNegatedConditional.
+  ///
+  /// In es, this message translates to:
+  /// **'Negación del condicional'**
+  String get lawNegatedConditional;
+
+  /// No description provided for @lawNegatedConverse.
+  ///
+  /// In es, this message translates to:
+  /// **'Negación del condicional inverso'**
+  String get lawNegatedConverse;
+
+  /// No description provided for @lawNegatedBiconditional.
+  ///
+  /// In es, this message translates to:
+  /// **'Negación del bicondicional'**
+  String get lawNegatedBiconditional;
+
+  /// No description provided for @lawTautologyOperator.
+  ///
+  /// In es, this message translates to:
+  /// **'Operador tautología'**
+  String get lawTautologyOperator;
+
+  /// No description provided for @lawContradictionOperator.
+  ///
+  /// In es, this message translates to:
+  /// **'Operador contradicción'**
+  String get lawContradictionOperator;
+
+  /// No description provided for @lawDoubleNegation.
+  ///
+  /// In es, this message translates to:
+  /// **'Doble negación'**
+  String get lawDoubleNegation;
+
+  /// No description provided for @lawDeMorgan.
+  ///
+  /// In es, this message translates to:
+  /// **'Leyes de De Morgan'**
+  String get lawDeMorgan;
+
+  /// No description provided for @lawNegationOfConstant.
+  ///
+  /// In es, this message translates to:
+  /// **'Negación de constante'**
+  String get lawNegationOfConstant;
+
+  /// No description provided for @lawIdempotence.
+  ///
+  /// In es, this message translates to:
+  /// **'Idempotencia'**
+  String get lawIdempotence;
+
+  /// No description provided for @lawIdentity.
+  ///
+  /// In es, this message translates to:
+  /// **'Identidad'**
+  String get lawIdentity;
+
+  /// No description provided for @lawDomination.
+  ///
+  /// In es, this message translates to:
+  /// **'Dominación'**
+  String get lawDomination;
+
+  /// No description provided for @lawComplement.
+  ///
+  /// In es, this message translates to:
+  /// **'Complemento'**
+  String get lawComplement;
+
+  /// No description provided for @lawAbsorption.
+  ///
+  /// In es, this message translates to:
+  /// **'Absorción'**
+  String get lawAbsorption;
+
+  /// No description provided for @lawFactorization.
+  ///
+  /// In es, this message translates to:
+  /// **'Distributiva (factorización)'**
+  String get lawFactorization;
 }
 
 class _AppLocalizationsDelegate

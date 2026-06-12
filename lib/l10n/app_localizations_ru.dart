@@ -585,4 +585,93 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get karnaughConstant =>
       'Функция константна: группы формировать не нужно.';
+
+  @override
+  String get simplificationTab => 'Упростить';
+
+  @override
+  String get simplificationTitle => 'Пошаговое упрощение';
+
+  @override
+  String get simplificationDescription =>
+      'Применяет законы алгебры высказываний, чтобы привести выражение к более простой форме. Коммутативность и ассоциативность применяются неявно.';
+
+  @override
+  String get simplificationAdGate =>
+      'Посмотрите короткое видео, чтобы разблокировать пошаговое упрощение этого выражения.';
+
+  @override
+  String get simplificationOriginal => 'Исходное выражение';
+
+  @override
+  String get simplificationResult => 'Результат';
+
+  @override
+  String get simplificationAlreadySimple =>
+      'Выражение уже находится в простейшей форме.';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count шагов';
+  }
+
+  @override
+  String get lawConditional => 'Закон импликации';
+
+  @override
+  String get lawBiconditional => 'Закон эквиваленции';
+
+  @override
+  String get lawConverse => 'Обратная импликация';
+
+  @override
+  String get lawXorDefinition => 'Определение XOR';
+
+  @override
+  String get lawNandDefinition => 'Определение NAND';
+
+  @override
+  String get lawNorDefinition => 'Определение NOR';
+
+  @override
+  String get lawNegatedConditional => 'Отрицание импликации';
+
+  @override
+  String get lawNegatedConverse => 'Отрицание обратной импликации';
+
+  @override
+  String get lawNegatedBiconditional => 'Отрицание эквиваленции';
+
+  @override
+  String get lawTautologyOperator => 'Оператор тавтологии';
+
+  @override
+  String get lawContradictionOperator => 'Оператор противоречия';
+
+  @override
+  String get lawDoubleNegation => 'Двойное отрицание';
+
+  @override
+  String get lawDeMorgan => 'Закон де Моргана';
+
+  @override
+  String get lawNegationOfConstant => 'Отрицание константы';
+
+  @override
+  String get lawIdempotence => 'Идемпотентность';
+
+  @override
+  String get lawIdentity => 'Тождество';
+
+  @override
+  String get lawDomination => 'Доминирование';
+
+  @override
+  String get lawComplement => 'Дополнение';
+
+  @override
+  String get lawAbsorption => 'Поглощение';
+
+  @override
+  String get lawFactorization => 'Дистрибутивность (вынесение за скобки)';
 }

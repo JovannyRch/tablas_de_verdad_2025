@@ -16,6 +16,7 @@ import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
 import 'package:tablas_de_verdad_2025/utils/normal_form_converter.dart';
 import 'package:tablas_de_verdad_2025/class/karnaugh_map.dart';
+import 'package:tablas_de_verdad_2025/class/logic_simplifier.dart';
 import 'package:tablas_de_verdad_2025/widget/karnaugh_map_view.dart';
 import 'package:tablas_de_verdad_2025/widget/theory_card.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _checkFavoriteStatus();
   }
 
@@ -208,6 +209,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
             tabs: [
               Tab(text: _localization.steps),
               Tab(text: _localization.fullTable),
+              Tab(text: _localization.simplificationTab),
               Tab(text: _localization.normalForms),
               Tab(text: _localization.karnaughTab),
             ],
@@ -233,7 +235,12 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   child: _FinalTableWidget(truthTable: widget.truthTable),
                 ),
-                // Tab 3: Normal Forms (FND / FNC)
+                 // Tab 3: Step-by-step simplification with laws
+                SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                  child: _SimplificationTab(truthTable: widget.truthTable),
+                ),
+                // Tab 4: Normal Forms (FND / FNC)
                 SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   child: _NormalFormsTab(
@@ -241,7 +248,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                     expression: widget.expression,
                   ),
                 ),
-                // Tab 4: Karnaugh map
+                // Tab 5: Karnaugh map
                 SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   child: _KarnaughTab(truthTable: widget.truthTable),
@@ -1657,5 +1664,324 @@ class _KarnaughTabState extends State<_KarnaughTab> {
     }
 
     return SelectableText.rich(TextSpan(style: baseStyle, children: spans));
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tab 5 — Step-by-step simplification with logical laws
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Shows the algebraic simplification of the expression, one law per step
+/// (De Morgan, absorption, complement, …), ending in the simplest form
+/// the rewrite engine can reach.
+///
+/// Free users see an interstitial ad the first time they open this tab.
+class _SimplificationTab extends StatefulWidget {
+  final TruthTable truthTable;
+
+  const _SimplificationTab({required this.truthTable});
+
+  @override
+  State<_SimplificationTab> createState() => _SimplificationTabState();
+}
+
+class _SimplificationTabState extends State<_SimplificationTab> {
+  SimplificationResult? _result;
+  bool _adShown = false;
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      _result = LogicSimplifier.simplifyPostfix(widget.truthTable.postfix);
+      Analytics.instance.logEvent('simplification_viewed');
+    } on FormatException {
+      _result = null;
+    }
+  }
+
+  String _lawName(AppLocalizations t, SimplificationLaw law) {
+    switch (law) {
+      case SimplificationLaw.conditional:
+        return t.lawConditional;
+      case SimplificationLaw.biconditional:
+        return t.lawBiconditional;
+      case SimplificationLaw.converse:
+        return t.lawConverse;
+      case SimplificationLaw.xorDefinition:
+        return t.lawXorDefinition;
+      case SimplificationLaw.nandDefinition:
+        return t.lawNandDefinition;
+      case SimplificationLaw.norDefinition:
+        return t.lawNorDefinition;
+      case SimplificationLaw.negatedConditional:
+        return t.lawNegatedConditional;
+      case SimplificationLaw.negatedConverse:
+        return t.lawNegatedConverse;
+      case SimplificationLaw.negatedBiconditional:
+        return t.lawNegatedBiconditional;
+      case SimplificationLaw.tautologyOperator:
+        return t.lawTautologyOperator;
+      case SimplificationLaw.contradictionOperator:
+        return t.lawContradictionOperator;
+      case SimplificationLaw.doubleNegation:
+        return t.lawDoubleNegation;
+      case SimplificationLaw.deMorgan:
+        return t.lawDeMorgan;
+      case SimplificationLaw.negationOfConstant:
+        return t.lawNegationOfConstant;
+      case SimplificationLaw.idempotence:
+        return t.lawIdempotence;
+      case SimplificationLaw.identity:
+        return t.lawIdentity;
+      case SimplificationLaw.domination:
+        return t.lawDomination;
+      case SimplificationLaw.complement:
+        return t.lawComplement;
+      case SimplificationLaw.absorption:
+        return t.lawAbsorption;
+      case SimplificationLaw.factorization:
+        return t.lawFactorization;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    final settings = context.watch<Settings>();
+    final isDark = settings.isDarkMode(context);
+    final result = _result;
+
+    if (result == null) {
+      return _NormalFormInfoCard(
+        icon: Icons.warning_amber_rounded,
+        color: Colors.amber,
+        title: t.simplificationTitle,
+        subtitle: t.equivalenceError,
+        isDark: isDark,
+      );
+    }
+
+    // ─── Ad gate for free users ───
+    if (!settings.isProVersion && !_adShown) {
+      return _InterstitialAdGate(
+        title: t.simplificationTitle,
+        message: t.simplificationAdGate,
+        onUnlocked: () => setState(() => _adShown = true),
+      );
+    }
+
+    final monoStyle = TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Courier',
+      height: 1.5,
+      color: isDark ? Colors.white : Colors.black87,
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // ─ Header explanation ─
+        _NormalFormInfoCard(
+          icon: Icons.functions_rounded,
+          color: kSeedColor,
+          title: t.simplificationTitle,
+          subtitle: t.simplificationDescription,
+          isDark: isDark,
+        ),
+        const SizedBox(height: 16),
+
+        // ─ Original expression ─
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.04) : Colors.grey[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color:
+                  isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.08),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      t.simplificationOriginal,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: isDark ? Colors.white38 : Colors.black38,
+                      ),
+                    ),
+                  ),
+                  if (result.steps.isNotEmpty)
+                    Text(
+                      t.simplificationStepCount(result.steps.length),
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: isDark ? Colors.white38 : Colors.black38,
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              SelectableText(result.original, style: monoStyle),
+            ],
+          ),
+        ),
+
+        // ─ Already simplified notice ─
+        if (result.alreadySimplified) ...[
+          const SizedBox(height: 16),
+          _NormalFormInfoCard(
+            icon: Icons.check_circle_outline_rounded,
+            color: const Color(0xFF4CAF50),
+            title: t.simplificationResult,
+            subtitle: t.simplificationAlreadySimple,
+            isDark: isDark,
+          ),
+        ],
+
+        // ─ Steps ─
+        ...result.steps.asMap().entries.map((entry) {
+          final index = entry.key;
+          final step = entry.value;
+          return Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.grey[900] : Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color:
+                      isDark
+                          ? Colors.white10
+                          : Colors.black.withValues(alpha: 0.06),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 22,
+                        height: 22,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: kSeedColor.withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          '${index + 1}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            color: kSeedColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _lawName(t, step.law),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: isDark ? Colors.white : Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  // Local transformation: what was rewritten
+                  Text(
+                    '${step.localBefore}  →  ${step.localAfter}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Courier',
+                      color: isDark ? Colors.white54 : Colors.black45,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SelectableText(step.expression, style: monoStyle),
+                ],
+              ),
+            ),
+          );
+        }),
+
+        // ─ Final result ─
+        if (!result.alreadySimplified) ...[
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: const Color(0xFF4CAF50).withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xFF4CAF50).withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  t.simplificationResult,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF4CAF50),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                SelectableText(
+                  result.result,
+                  style: monoStyle.copyWith(fontSize: 17),
+                ),
+              ],
+            ),
+          ),
+        ],
+
+        const SizedBox(height: 16),
+
+        // ─ Pro hint for free users ─
+        if (!settings.isProVersion)
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: kSeedColor.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: kSeedColor.withValues(alpha: 0.2)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.star_rounded, color: kSeedColor, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    t.normalFormsProHint,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark ? Colors.white70 : Colors.black54,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
   }
 }

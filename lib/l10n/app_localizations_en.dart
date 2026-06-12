@@ -582,4 +582,93 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get karnaughConstant =>
       'The function is constant: there are no groups to form.';
+
+  @override
+  String get simplificationTab => 'Simplify';
+
+  @override
+  String get simplificationTitle => 'Step-by-step simplification';
+
+  @override
+  String get simplificationDescription =>
+      'Applies the laws of propositional algebra to reduce the expression to a simpler form. Commutativity and associativity are applied implicitly.';
+
+  @override
+  String get simplificationAdGate =>
+      'Watch a short video to unlock the step-by-step simplification of this expression.';
+
+  @override
+  String get simplificationOriginal => 'Original expression';
+
+  @override
+  String get simplificationResult => 'Result';
+
+  @override
+  String get simplificationAlreadySimple =>
+      'The expression is already in its simplest form.';
+
+  @override
+  String simplificationStepCount(int count) {
+    return '$count steps';
+  }
+
+  @override
+  String get lawConditional => 'Material implication';
+
+  @override
+  String get lawBiconditional => 'Biconditional definition';
+
+  @override
+  String get lawConverse => 'Converse implication';
+
+  @override
+  String get lawXorDefinition => 'XOR definition';
+
+  @override
+  String get lawNandDefinition => 'NAND definition';
+
+  @override
+  String get lawNorDefinition => 'NOR definition';
+
+  @override
+  String get lawNegatedConditional => 'Negated conditional';
+
+  @override
+  String get lawNegatedConverse => 'Negated converse';
+
+  @override
+  String get lawNegatedBiconditional => 'Negated biconditional';
+
+  @override
+  String get lawTautologyOperator => 'Tautology operator';
+
+  @override
+  String get lawContradictionOperator => 'Contradiction operator';
+
+  @override
+  String get lawDoubleNegation => 'Double negation';
+
+  @override
+  String get lawDeMorgan => 'De Morgan\'s law';
+
+  @override
+  String get lawNegationOfConstant => 'Negation of a constant';
+
+  @override
+  String get lawIdempotence => 'Idempotence';
+
+  @override
+  String get lawIdentity => 'Identity';
+
+  @override
+  String get lawDomination => 'Domination';
+
+  @override
+  String get lawComplement => 'Complement';
+
+  @override
+  String get lawAbsorption => 'Absorption';
+
+  @override
+  String get lawFactorization => 'Distributivity (factoring)';
 }
