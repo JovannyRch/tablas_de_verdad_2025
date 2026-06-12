@@ -541,4 +541,46 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get argumentHint => 'Ingresa una expresión lógica';
+
+  @override
+  String get karnaughTab => 'Karnaugh';
+
+  @override
+  String get karnaughTitle => 'Mapa de Karnaugh';
+
+  @override
+  String get karnaughDescription =>
+      'Agrupa celdas adyacentes en potencias de 2 para obtener la expresión booleana mínima de la función.';
+
+  @override
+  String get karnaughUnsupportedVars => 'Disponible para 2 a 4 variables';
+
+  @override
+  String get karnaughUnsupportedVarsDesc =>
+      'El mapa de Karnaugh se muestra para expresiones con 2, 3 o 4 variables (sin constantes).';
+
+  @override
+  String get karnaughAdGate =>
+      'Mira un breve video para desbloquear el mapa de Karnaugh de esta expresión.';
+
+  @override
+  String get karnaughSopDescription => 'SOP: agrupa los 1 (suma de productos)';
+
+  @override
+  String get karnaughPosDescription => 'POS: agrupa los 0 (producto de sumas)';
+
+  @override
+  String get karnaughMinimizedExpression => 'Expresión minimizada';
+
+  @override
+  String get karnaughGroupsTitle => 'Grupos';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count celdas';
+  }
+
+  @override
+  String get karnaughConstant =>
+      'La función es constante: no hay grupos que formar.';
 }

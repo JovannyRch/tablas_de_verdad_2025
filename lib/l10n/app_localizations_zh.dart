@@ -520,4 +520,42 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get argumentHint => '输入逻辑表达式';
+
+  @override
+  String get karnaughTab => '卡诺图';
+
+  @override
+  String get karnaughTitle => '卡诺图';
+
+  @override
+  String get karnaughDescription => '将相邻单元格按 2 的幂分组，以获得函数的最简布尔表达式。';
+
+  @override
+  String get karnaughUnsupportedVars => '适用于 2 至 4 个变量';
+
+  @override
+  String get karnaughUnsupportedVarsDesc => '卡诺图适用于含 2、3 或 4 个变量的表达式（不含常量）。';
+
+  @override
+  String get karnaughAdGate => '观看一段短视频即可解锁此表达式的卡诺图。';
+
+  @override
+  String get karnaughSopDescription => 'SOP：对 1 分组（积之和）';
+
+  @override
+  String get karnaughPosDescription => 'POS：对 0 分组（和之积）';
+
+  @override
+  String get karnaughMinimizedExpression => '最简表达式';
+
+  @override
+  String get karnaughGroupsTitle => '分组';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count 个单元格';
+  }
+
+  @override
+  String get karnaughConstant => '该函数为常量：无需分组。';
 }

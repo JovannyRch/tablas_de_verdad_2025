@@ -174,5 +174,17 @@
   "validArgumentDesc": "In allen Kombinationen, in denen die Prämissen wahr sind, ist auch die Schlussfolgerung wahr. Das Argument ist logisch gültig.",
   "invalidArgumentDesc": "Es gibt mindestens eine Kombination, in der alle Prämissen wahr sind, die Schlussfolgerung jedoch falsch ist.",
   "counterexamples": "Gegenbeispiele",
-  "argumentHint": "Logischen Ausdruck eingeben"
+  "argumentHint": "Logischen Ausdruck eingeben",
+  "karnaughTab": "Karnaugh",
+  "karnaughTitle": "Karnaugh-Diagramm",
+  "karnaughDescription": "Gruppiere benachbarte Zellen in Zweierpotenzen, um den minimalen booleschen Ausdruck der Funktion zu erhalten.",
+  "karnaughUnsupportedVars": "Verfügbar für 2 bis 4 Variablen",
+  "karnaughUnsupportedVarsDesc": "Das Karnaugh-Diagramm wird für Ausdrücke mit 2, 3 oder 4 Variablen angezeigt (ohne Konstanten).",
+  "karnaughAdGate": "Sieh dir ein kurzes Video an, um das Karnaugh-Diagramm dieses Ausdrucks freizuschalten.",
+  "karnaughSopDescription": "SOP: gruppiert die 1en (Summe von Produkten)",
+  "karnaughPosDescription": "POS: gruppiert die 0en (Produkt von Summen)",
+  "karnaughMinimizedExpression": "Minimierter Ausdruck",
+  "karnaughGroupsTitle": "Gruppen",
+  "karnaughGroupCells": "{count} Zellen",
+  "karnaughConstant": "Die Funktion ist konstant: Es gibt keine Gruppen zu bilden."
 }

@@ -174,5 +174,17 @@
   "validArgumentDesc": "In tutte le combinazioni in cui le premesse sono vere, anche la conclusione è vera. L'argomento è logicamente valido.",
   "invalidArgumentDesc": "Esiste almeno una combinazione in cui tutte le premesse sono vere ma la conclusione è falsa.",
   "counterexamples": "Controesempi",
-  "argumentHint": "Inserisci un'espressione logica"
+  "argumentHint": "Inserisci un'espressione logica",
+  "karnaughTab": "Karnaugh",
+  "karnaughTitle": "Mappa di Karnaugh",
+  "karnaughDescription": "Raggruppa le celle adiacenti in potenze di 2 per ottenere l'espressione booleana minima della funzione.",
+  "karnaughUnsupportedVars": "Disponibile per 2-4 variabili",
+  "karnaughUnsupportedVarsDesc": "La mappa di Karnaugh è mostrata per espressioni con 2, 3 o 4 variabili (senza costanti).",
+  "karnaughAdGate": "Guarda un breve video per sbloccare la mappa di Karnaugh di questa espressione.",
+  "karnaughSopDescription": "SOP: raggruppa gli 1 (somma di prodotti)",
+  "karnaughPosDescription": "POS: raggruppa gli 0 (prodotto di somme)",
+  "karnaughMinimizedExpression": "Espressione minimizzata",
+  "karnaughGroupsTitle": "Gruppi",
+  "karnaughGroupCells": "{count} celle",
+  "karnaughConstant": "La funzione è costante: non ci sono gruppi da formare."
 }

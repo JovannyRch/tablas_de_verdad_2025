@@ -540,4 +540,48 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get argumentHint => 'तार्किक अभिव्यक्ति दर्ज करें';
+
+  @override
+  String get karnaughTab => 'कार्नो';
+
+  @override
+  String get karnaughTitle => 'कार्नो मानचित्र (K-Map)';
+
+  @override
+  String get karnaughDescription =>
+      'फ़ंक्शन की न्यूनतम बूलियन अभिव्यक्ति पाने के लिए आसन्न सेलों को 2 की घातों में समूहित करें।';
+
+  @override
+  String get karnaughUnsupportedVars => '2 से 4 चर के लिए उपलब्ध';
+
+  @override
+  String get karnaughUnsupportedVarsDesc =>
+      'कार्नो मानचित्र 2, 3 या 4 चर वाली अभिव्यक्तियों के लिए दिखाया जाता है (स्थिरांक के बिना)।';
+
+  @override
+  String get karnaughAdGate =>
+      'इस अभिव्यक्ति का कार्नो मानचित्र अनलॉक करने के लिए एक छोटा वीडियो देखें।';
+
+  @override
+  String get karnaughSopDescription =>
+      'SOP: 1 को समूहित करता है (गुणनफलों का योग)';
+
+  @override
+  String get karnaughPosDescription =>
+      'POS: 0 को समूहित करता है (योगों का गुणनफल)';
+
+  @override
+  String get karnaughMinimizedExpression => 'न्यूनतम अभिव्यक्ति';
+
+  @override
+  String get karnaughGroupsTitle => 'समूह';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count सेल';
+  }
+
+  @override
+  String get karnaughConstant =>
+      'फ़ंक्शन स्थिर है: बनाने के लिए कोई समूह नहीं है।';
 }

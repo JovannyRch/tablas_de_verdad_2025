@@ -174,5 +174,17 @@
   "validArgumentDesc": "在所有前提为真的组合中，结论也为真。论证在逻辑上是有效的。",
   "invalidArgumentDesc": "至少存在一种组合，其中所有前提为真，但结论为假。",
   "counterexamples": "反例",
-  "argumentHint": "输入逻辑表达式"
+  "argumentHint": "输入逻辑表达式",
+  "karnaughTab": "卡诺图",
+  "karnaughTitle": "卡诺图",
+  "karnaughDescription": "将相邻单元格按 2 的幂分组，以获得函数的最简布尔表达式。",
+  "karnaughUnsupportedVars": "适用于 2 至 4 个变量",
+  "karnaughUnsupportedVarsDesc": "卡诺图适用于含 2、3 或 4 个变量的表达式（不含常量）。",
+  "karnaughAdGate": "观看一段短视频即可解锁此表达式的卡诺图。",
+  "karnaughSopDescription": "SOP：对 1 分组（积之和）",
+  "karnaughPosDescription": "POS：对 0 分组（和之积）",
+  "karnaughMinimizedExpression": "最简表达式",
+  "karnaughGroupsTitle": "分组",
+  "karnaughGroupCells": "{count} 个单元格",
+  "karnaughConstant": "该函数为常量：无需分组。"
 }

@@ -541,4 +541,48 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get argumentHint => 'Введите логическое выражение';
+
+  @override
+  String get karnaughTab => 'Карно';
+
+  @override
+  String get karnaughTitle => 'Карта Карно';
+
+  @override
+  String get karnaughDescription =>
+      'Группируйте соседние ячейки по степеням двойки, чтобы получить минимальное булево выражение функции.';
+
+  @override
+  String get karnaughUnsupportedVars => 'Доступно для 2–4 переменных';
+
+  @override
+  String get karnaughUnsupportedVarsDesc =>
+      'Карта Карно отображается для выражений с 2, 3 или 4 переменными (без констант).';
+
+  @override
+  String get karnaughAdGate =>
+      'Посмотрите короткое видео, чтобы разблокировать карту Карно для этого выражения.';
+
+  @override
+  String get karnaughSopDescription =>
+      'SOP: группирует единицы (сумма произведений)';
+
+  @override
+  String get karnaughPosDescription =>
+      'POS: группирует нули (произведение сумм)';
+
+  @override
+  String get karnaughMinimizedExpression => 'Минимизированное выражение';
+
+  @override
+  String get karnaughGroupsTitle => 'Группы';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count ячеек';
+  }
+
+  @override
+  String get karnaughConstant =>
+      'Функция константна: группы формировать не нужно.';
 }

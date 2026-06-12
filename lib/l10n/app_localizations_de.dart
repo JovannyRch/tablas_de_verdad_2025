@@ -542,4 +542,48 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get argumentHint => 'Logischen Ausdruck eingeben';
+
+  @override
+  String get karnaughTab => 'Karnaugh';
+
+  @override
+  String get karnaughTitle => 'Karnaugh-Diagramm';
+
+  @override
+  String get karnaughDescription =>
+      'Gruppiere benachbarte Zellen in Zweierpotenzen, um den minimalen booleschen Ausdruck der Funktion zu erhalten.';
+
+  @override
+  String get karnaughUnsupportedVars => 'Verfügbar für 2 bis 4 Variablen';
+
+  @override
+  String get karnaughUnsupportedVarsDesc =>
+      'Das Karnaugh-Diagramm wird für Ausdrücke mit 2, 3 oder 4 Variablen angezeigt (ohne Konstanten).';
+
+  @override
+  String get karnaughAdGate =>
+      'Sieh dir ein kurzes Video an, um das Karnaugh-Diagramm dieses Ausdrucks freizuschalten.';
+
+  @override
+  String get karnaughSopDescription =>
+      'SOP: gruppiert die 1en (Summe von Produkten)';
+
+  @override
+  String get karnaughPosDescription =>
+      'POS: gruppiert die 0en (Produkt von Summen)';
+
+  @override
+  String get karnaughMinimizedExpression => 'Minimierter Ausdruck';
+
+  @override
+  String get karnaughGroupsTitle => 'Gruppen';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count Zellen';
+  }
+
+  @override
+  String get karnaughConstant =>
+      'Die Funktion ist konstant: Es gibt keine Gruppen zu bilden.';
 }

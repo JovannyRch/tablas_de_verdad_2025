@@ -15,6 +15,8 @@ import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
 import 'package:tablas_de_verdad_2025/utils/normal_form_converter.dart';
+import 'package:tablas_de_verdad_2025/class/karnaugh_map.dart';
+import 'package:tablas_de_verdad_2025/widget/karnaugh_map_view.dart';
 import 'package:tablas_de_verdad_2025/widget/theory_card.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
@@ -72,7 +74,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     _checkFavoriteStatus();
   }
 
@@ -201,10 +203,13 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
             labelColor: kSeedColor,
             unselectedLabelColor: isDark ? Colors.white54 : Colors.black54,
             indicatorColor: kSeedColor,
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: _localization.steps),
               Tab(text: _localization.fullTable),
               Tab(text: _localization.normalForms),
+              Tab(text: _localization.karnaughTab),
             ],
           ),
           // Tab content
@@ -235,6 +240,11 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                     truthTable: widget.truthTable,
                     expression: widget.expression,
                   ),
+                ),
+                // Tab 4: Karnaugh map
+                SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                  child: _KarnaughTab(truthTable: widget.truthTable),
                 ),
               ],
             ),
@@ -877,7 +887,9 @@ class _NormalFormsTabState extends State<_NormalFormsTab> {
 
     // ─── Ad gate for free users ───
     if (!settings.isProVersion && !_adShown) {
-      return _NormalFormAdGate(
+      return _InterstitialAdGate(
+        title: t.normalFormsTitle,
+        message: t.normalFormsAdGate,
         onUnlocked: () => setState(() => _adShown = true),
       );
     }
@@ -1217,18 +1229,25 @@ class _NormalFormInfoCard extends StatelessWidget {
   }
 }
 
-/// Ad gate shown to non-Pro users before revealing normal forms.
-/// Shows an interstitial ad when the user taps the unlock button.
-class _NormalFormAdGate extends StatefulWidget {
+/// Ad gate shown to non-Pro users before revealing a premium tab
+/// (normal forms, Karnaugh map). Shows an interstitial ad when the user
+/// taps the unlock button.
+class _InterstitialAdGate extends StatefulWidget {
+  final String title;
+  final String message;
   final VoidCallback onUnlocked;
 
-  const _NormalFormAdGate({required this.onUnlocked});
+  const _InterstitialAdGate({
+    required this.title,
+    required this.message,
+    required this.onUnlocked,
+  });
 
   @override
-  State<_NormalFormAdGate> createState() => _NormalFormAdGateState();
+  State<_InterstitialAdGate> createState() => _InterstitialAdGateState();
 }
 
-class _NormalFormAdGateState extends State<_NormalFormAdGate> {
+class _InterstitialAdGateState extends State<_InterstitialAdGate> {
   bool _loading = false;
 
   Future<void> _watchAdAndUnlock() async {
@@ -1300,7 +1319,7 @@ class _NormalFormAdGateState extends State<_NormalFormAdGate> {
             ),
             const SizedBox(height: 20),
             Text(
-              t.normalFormsTitle,
+              widget.title,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
@@ -1311,7 +1330,7 @@ class _NormalFormAdGateState extends State<_NormalFormAdGate> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Text(
-                t.normalFormsAdGate,
+                widget.message,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -1350,5 +1369,293 @@ class _NormalFormAdGateState extends State<_NormalFormAdGate> {
         ),
       ),
     );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tab 4 — Karnaugh map
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Shows the Karnaugh map with the minimal SOP / POS grouping highlighted,
+/// plus the minimized expression and a legend of the groups.
+///
+/// Free users see an interstitial ad the first time they open this tab.
+class _KarnaughTab extends StatefulWidget {
+  final TruthTable truthTable;
+
+  const _KarnaughTab({required this.truthTable});
+
+  @override
+  State<_KarnaughTab> createState() => _KarnaughTabState();
+}
+
+class _KarnaughTabState extends State<_KarnaughTab> {
+  KarnaughForm _form = KarnaughForm.sop;
+  KarnaughResult? _sop;
+  KarnaughResult? _pos;
+  bool _adShown = false;
+  bool _supported = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final tt = widget.truthTable;
+    final vars = tt.variables;
+    _supported =
+        vars.length >= kMinKarnaughVariables &&
+        vars.length <= kMaxKarnaughVariables &&
+        !vars.contains('0') &&
+        !vars.contains('1');
+
+    if (_supported) {
+      final minterms = <int>{
+        for (final row in tt.table)
+          if (row.result == '1') row.index,
+      };
+      _sop = KarnaughSolver.solve(
+        variables: vars,
+        minterms: minterms,
+        form: KarnaughForm.sop,
+      );
+      _pos = KarnaughSolver.solve(
+        variables: vars,
+        minterms: minterms,
+        form: KarnaughForm.pos,
+      );
+      Analytics.instance.logEvent('karnaugh_map_viewed');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    final settings = context.watch<Settings>();
+    final isDark = settings.isDarkMode(context);
+
+    // ─── Unsupported variable count guard ───
+    if (!_supported) {
+      return _NormalFormInfoCard(
+        icon: Icons.warning_amber_rounded,
+        color: Colors.amber,
+        title: t.karnaughUnsupportedVars,
+        subtitle: t.karnaughUnsupportedVarsDesc,
+        isDark: isDark,
+      );
+    }
+
+    // ─── Ad gate for free users ───
+    if (!settings.isProVersion && !_adShown) {
+      return _InterstitialAdGate(
+        title: t.karnaughTitle,
+        message: t.karnaughAdGate,
+        onUnlocked: () => setState(() => _adShown = true),
+      );
+    }
+
+    final result = _form == KarnaughForm.sop ? _sop! : _pos!;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // ─ Header explanation ─
+        _NormalFormInfoCard(
+          icon: Icons.grid_on_rounded,
+          color: kSeedColor,
+          title: t.karnaughTitle,
+          subtitle: t.karnaughDescription,
+          isDark: isDark,
+        ),
+        const SizedBox(height: 16),
+
+        // ─ SOP / POS toggle ─
+        Center(
+          child: SegmentedButton<KarnaughForm>(
+            segments: const [
+              ButtonSegment(value: KarnaughForm.sop, label: Text('SOP')),
+              ButtonSegment(value: KarnaughForm.pos, label: Text('POS')),
+            ],
+            selected: {_form},
+            onSelectionChanged:
+                (selection) => setState(() => _form = selection.first),
+          ),
+        ),
+        const SizedBox(height: 6),
+        Center(
+          child: Text(
+            _form == KarnaughForm.sop
+                ? t.karnaughSopDescription
+                : t.karnaughPosDescription,
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.white54 : Colors.black45,
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // ─ The map ─
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: isDark ? Colors.grey[900] : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color:
+                  isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.06),
+            ),
+          ),
+          child: KarnaughMapView(result: result, isDark: isDark),
+        ),
+        const SizedBox(height: 16),
+
+        // ─ Minimized expression ─
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.04) : Colors.grey[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: kSeedColor.withValues(alpha: 0.2)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                t.karnaughMinimizedExpression,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? Colors.white38 : Colors.black38,
+                ),
+              ),
+              const SizedBox(height: 6),
+              _buildExpression(result, isDark),
+            ],
+          ),
+        ),
+
+        // ─ Group legend ─
+        if (result.groups.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(
+            t.karnaughGroupsTitle,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: isDark ? Colors.white70 : Colors.black54,
+            ),
+          ),
+          const SizedBox(height: 8),
+          ...result.groups.asMap().entries.map((entry) {
+            final color = karnaughGroupColor(entry.key);
+            final group = entry.value;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Row(
+                children: [
+                  Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.15),
+                      border: Border.all(color: color, width: 2),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      group.term,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Courier',
+                        color: isDark ? Colors.white : Colors.black87,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    t.karnaughGroupCells(group.cells.length),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: isDark ? Colors.white38 : Colors.black38,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ] else ...[
+          const SizedBox(height: 12),
+          Text(
+            t.karnaughConstant,
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.white54 : Colors.black45,
+            ),
+          ),
+        ],
+
+        const SizedBox(height: 16),
+
+        // ─ Pro hint for free users ─
+        if (!settings.isProVersion)
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: kSeedColor.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: kSeedColor.withValues(alpha: 0.2)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.star_rounded, color: kSeedColor, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    t.normalFormsProHint,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark ? Colors.white70 : Colors.black54,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Minimized expression with each term tinted in its group color.
+  Widget _buildExpression(KarnaughResult result, bool isDark) {
+    final baseStyle = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Courier',
+      height: 1.6,
+      color: isDark ? Colors.white : Colors.black87,
+    );
+
+    if (result.groups.isEmpty) {
+      return SelectableText(result.expression, style: baseStyle);
+    }
+
+    final separator = result.form == KarnaughForm.sop ? ' ∨ ' : ' ∧ ';
+    final spans = <TextSpan>[];
+    for (int i = 0; i < result.groups.length; i++) {
+      spans.add(
+        TextSpan(
+          text: result.groups[i].term,
+          style: TextStyle(color: karnaughGroupColor(i)),
+        ),
+      );
+      if (i < result.groups.length - 1) {
+        spans.add(TextSpan(text: separator));
+      }
+    }
+
+    return SelectableText.rich(TextSpan(style: baseStyle, children: spans));
   }
 }

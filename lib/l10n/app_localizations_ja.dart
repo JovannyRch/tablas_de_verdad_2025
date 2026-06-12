@@ -525,4 +525,42 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get argumentHint => '論理式を入力してください';
+
+  @override
+  String get karnaughTab => 'カルノー図';
+
+  @override
+  String get karnaughTitle => 'カルノー図';
+
+  @override
+  String get karnaughDescription => '隣接するセルを2のべき乗でグループ化し、関数の最簡ブール式を求めます。';
+
+  @override
+  String get karnaughUnsupportedVars => '2〜4変数で利用可能';
+
+  @override
+  String get karnaughUnsupportedVarsDesc => 'カルノー図は2、3、4変数の式（定数なし）で表示されます。';
+
+  @override
+  String get karnaughAdGate => '短い動画を見ると、この式のカルノー図のロックを解除できます。';
+
+  @override
+  String get karnaughSopDescription => 'SOP：1をグループ化（積和形）';
+
+  @override
+  String get karnaughPosDescription => 'POS：0をグループ化（和積形）';
+
+  @override
+  String get karnaughMinimizedExpression => '最簡式';
+
+  @override
+  String get karnaughGroupsTitle => 'グループ';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count セル';
+  }
+
+  @override
+  String get karnaughConstant => 'この関数は定数です。作成するグループはありません。';
 }

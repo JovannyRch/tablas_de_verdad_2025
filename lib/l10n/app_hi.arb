@@ -174,5 +174,17 @@
   "validArgumentDesc": "सभी संयोजनों में जहाँ आधार सत्य हैं, निष्कर्ष भी सत्य है। तर्क तार्किक रूप से वैध है।",
   "invalidArgumentDesc": "कम से कम एक संयोजन है जहाँ सभी आधार सत्य हैं लेकिन निष्कर्ष असत्य है।",
   "counterexamples": "प्रतिउदाहरण",
-  "argumentHint": "तार्किक अभिव्यक्ति दर्ज करें"
+  "argumentHint": "तार्किक अभिव्यक्ति दर्ज करें",
+  "karnaughTab": "कार्नो",
+  "karnaughTitle": "कार्नो मानचित्र (K-Map)",
+  "karnaughDescription": "फ़ंक्शन की न्यूनतम बूलियन अभिव्यक्ति पाने के लिए आसन्न सेलों को 2 की घातों में समूहित करें।",
+  "karnaughUnsupportedVars": "2 से 4 चर के लिए उपलब्ध",
+  "karnaughUnsupportedVarsDesc": "कार्नो मानचित्र 2, 3 या 4 चर वाली अभिव्यक्तियों के लिए दिखाया जाता है (स्थिरांक के बिना)।",
+  "karnaughAdGate": "इस अभिव्यक्ति का कार्नो मानचित्र अनलॉक करने के लिए एक छोटा वीडियो देखें।",
+  "karnaughSopDescription": "SOP: 1 को समूहित करता है (गुणनफलों का योग)",
+  "karnaughPosDescription": "POS: 0 को समूहित करता है (योगों का गुणनफल)",
+  "karnaughMinimizedExpression": "न्यूनतम अभिव्यक्ति",
+  "karnaughGroupsTitle": "समूह",
+  "karnaughGroupCells": "{count} सेल",
+  "karnaughConstant": "फ़ंक्शन स्थिर है: बनाने के लिए कोई समूह नहीं है।"
 }

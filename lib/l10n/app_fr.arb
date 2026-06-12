@@ -174,5 +174,17 @@
   "validArgumentDesc": "Dans toutes les combinaisons où les prémisses sont vraies, la conclusion l'est aussi. L'argument est logiquement valide.",
   "invalidArgumentDesc": "Il existe au moins une combinaison où toutes les prémisses sont vraies mais la conclusion est fausse.",
   "counterexamples": "Contre-exemples",
-  "argumentHint": "Entrez une expression logique"
+  "argumentHint": "Entrez une expression logique",
+  "karnaughTab": "Karnaugh",
+  "karnaughTitle": "Tableau de Karnaugh",
+  "karnaughDescription": "Regroupez les cellules adjacentes en puissances de 2 pour obtenir l'expression booléenne minimale de la fonction.",
+  "karnaughUnsupportedVars": "Disponible pour 2 à 4 variables",
+  "karnaughUnsupportedVarsDesc": "Le tableau de Karnaugh est affiché pour les expressions de 2, 3 ou 4 variables (sans constantes).",
+  "karnaughAdGate": "Regardez une courte vidéo pour débloquer le tableau de Karnaugh de cette expression.",
+  "karnaughSopDescription": "SOP : regroupe les 1 (somme de produits)",
+  "karnaughPosDescription": "POS : regroupe les 0 (produit de sommes)",
+  "karnaughMinimizedExpression": "Expression minimisée",
+  "karnaughGroupsTitle": "Groupes",
+  "karnaughGroupCells": "{count} cellules",
+  "karnaughConstant": "La fonction est constante : aucun groupe à former."
 }

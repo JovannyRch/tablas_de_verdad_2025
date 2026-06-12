@@ -174,5 +174,17 @@
   "validArgumentDesc": "前提が真であるすべての組み合わせで、結論も真です。論証は論理的に有効です。",
   "invalidArgumentDesc": "すべての前提が真であるにもかかわらず、結論が偽である組み合わせが少なくとも1つ存在します。",
   "counterexamples": "反例",
-  "argumentHint": "論理式を入力してください"
+  "argumentHint": "論理式を入力してください",
+  "karnaughTab": "カルノー図",
+  "karnaughTitle": "カルノー図",
+  "karnaughDescription": "隣接するセルを2のべき乗でグループ化し、関数の最簡ブール式を求めます。",
+  "karnaughUnsupportedVars": "2〜4変数で利用可能",
+  "karnaughUnsupportedVarsDesc": "カルノー図は2、3、4変数の式（定数なし）で表示されます。",
+  "karnaughAdGate": "短い動画を見ると、この式のカルノー図のロックを解除できます。",
+  "karnaughSopDescription": "SOP：1をグループ化（積和形）",
+  "karnaughPosDescription": "POS：0をグループ化（和積形）",
+  "karnaughMinimizedExpression": "最簡式",
+  "karnaughGroupsTitle": "グループ",
+  "karnaughGroupCells": "{count} セル",
+  "karnaughConstant": "この関数は定数です。作成するグループはありません。"
 }

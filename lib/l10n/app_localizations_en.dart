@@ -540,4 +540,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get argumentHint => 'Enter a logical expression';
+
+  @override
+  String get karnaughTab => 'Karnaugh';
+
+  @override
+  String get karnaughTitle => 'Karnaugh map';
+
+  @override
+  String get karnaughDescription =>
+      'Group adjacent cells in powers of 2 to obtain the minimal Boolean expression of the function.';
+
+  @override
+  String get karnaughUnsupportedVars => 'Available for 2 to 4 variables';
+
+  @override
+  String get karnaughUnsupportedVarsDesc =>
+      'The Karnaugh map is shown for expressions with 2, 3 or 4 variables (without constants).';
+
+  @override
+  String get karnaughAdGate =>
+      'Watch a short video to unlock the Karnaugh map for this expression.';
+
+  @override
+  String get karnaughSopDescription => 'SOP: groups the 1s (sum of products)';
+
+  @override
+  String get karnaughPosDescription => 'POS: groups the 0s (product of sums)';
+
+  @override
+  String get karnaughMinimizedExpression => 'Minimized expression';
+
+  @override
+  String get karnaughGroupsTitle => 'Groups';
+
+  @override
+  String karnaughGroupCells(int count) {
+    return '$count cells';
+  }
+
+  @override
+  String get karnaughConstant =>
+      'The function is constant: there are no groups to form.';
 }

@@ -1121,6 +1121,78 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Ingresa una expresión lógica'**
   String get argumentHint;
+
+  /// No description provided for @karnaughTab.
+  ///
+  /// In es, this message translates to:
+  /// **'Karnaugh'**
+  String get karnaughTab;
+
+  /// No description provided for @karnaughTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapa de Karnaugh'**
+  String get karnaughTitle;
+
+  /// No description provided for @karnaughDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Agrupa celdas adyacentes en potencias de 2 para obtener la expresión booleana mínima de la función.'**
+  String get karnaughDescription;
+
+  /// No description provided for @karnaughUnsupportedVars.
+  ///
+  /// In es, this message translates to:
+  /// **'Disponible para 2 a 4 variables'**
+  String get karnaughUnsupportedVars;
+
+  /// No description provided for @karnaughUnsupportedVarsDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'El mapa de Karnaugh se muestra para expresiones con 2, 3 o 4 variables (sin constantes).'**
+  String get karnaughUnsupportedVarsDesc;
+
+  /// No description provided for @karnaughAdGate.
+  ///
+  /// In es, this message translates to:
+  /// **'Mira un breve video para desbloquear el mapa de Karnaugh de esta expresión.'**
+  String get karnaughAdGate;
+
+  /// No description provided for @karnaughSopDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'SOP: agrupa los 1 (suma de productos)'**
+  String get karnaughSopDescription;
+
+  /// No description provided for @karnaughPosDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'POS: agrupa los 0 (producto de sumas)'**
+  String get karnaughPosDescription;
+
+  /// No description provided for @karnaughMinimizedExpression.
+  ///
+  /// In es, this message translates to:
+  /// **'Expresión minimizada'**
+  String get karnaughMinimizedExpression;
+
+  /// No description provided for @karnaughGroupsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Grupos'**
+  String get karnaughGroupsTitle;
+
+  /// No description provided for @karnaughGroupCells.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} celdas'**
+  String karnaughGroupCells(int count);
+
+  /// No description provided for @karnaughConstant.
+  ///
+  /// In es, this message translates to:
+  /// **'La función es constante: no hay grupos que formar.'**
+  String get karnaughConstant;
 }
 
 class _AppLocalizationsDelegate

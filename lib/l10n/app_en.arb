@@ -194,5 +194,17 @@
   "validArgumentDesc": "In all combinations where the premises are true, the conclusion is also true. The argument is logically valid.",
   "invalidArgumentDesc": "There is at least one combination where all premises are true but the conclusion is false.",
   "counterexamples": "Counterexamples",
-  "argumentHint": "Enter a logical expression"
+  "argumentHint": "Enter a logical expression",
+  "karnaughTab": "Karnaugh",
+  "karnaughTitle": "Karnaugh map",
+  "karnaughDescription": "Group adjacent cells in powers of 2 to obtain the minimal Boolean expression of the function.",
+  "karnaughUnsupportedVars": "Available for 2 to 4 variables",
+  "karnaughUnsupportedVarsDesc": "The Karnaugh map is shown for expressions with 2, 3 or 4 variables (without constants).",
+  "karnaughAdGate": "Watch a short video to unlock the Karnaugh map for this expression.",
+  "karnaughSopDescription": "SOP: groups the 1s (sum of products)",
+  "karnaughPosDescription": "POS: groups the 0s (product of sums)",
+  "karnaughMinimizedExpression": "Minimized expression",
+  "karnaughGroupsTitle": "Groups",
+  "karnaughGroupCells": "{count} cells",
+  "karnaughConstant": "The function is constant: there are no groups to form."
 }

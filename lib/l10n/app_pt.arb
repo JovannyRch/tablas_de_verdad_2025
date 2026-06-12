@@ -174,5 +174,17 @@
   "validArgumentDesc": "Em todas as combinações onde as premissas são verdadeiras, a conclusão também é. O argumento é logicamente válido.",
   "invalidArgumentDesc": "Existe pelo menos uma combinação onde todas as premissas são verdadeiras mas a conclusão é falsa.",
   "counterexamples": "Contraexemplos",
-  "argumentHint": "Insira uma expressão lógica"
+  "argumentHint": "Insira uma expressão lógica",
+  "karnaughTab": "Karnaugh",
+  "karnaughTitle": "Mapa de Karnaugh",
+  "karnaughDescription": "Agrupe células adjacentes em potências de 2 para obter a expressão booleana mínima da função.",
+  "karnaughUnsupportedVars": "Disponível para 2 a 4 variáveis",
+  "karnaughUnsupportedVarsDesc": "O mapa de Karnaugh é exibido para expressões com 2, 3 ou 4 variáveis (sem constantes).",
+  "karnaughAdGate": "Assista a um vídeo curto para desbloquear o mapa de Karnaugh desta expressão.",
+  "karnaughSopDescription": "SOP: agrupa os 1 (soma de produtos)",
+  "karnaughPosDescription": "POS: agrupa os 0 (produto de somas)",
+  "karnaughMinimizedExpression": "Expressão minimizada",
+  "karnaughGroupsTitle": "Grupos",
+  "karnaughGroupCells": "{count} células",
+  "karnaughConstant": "A função é constante: não há grupos para formar."
 }
