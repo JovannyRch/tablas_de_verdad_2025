@@ -101,8 +101,8 @@ class TruthTable {
     for (StepProcess step in steps) {
       headers.add(
         step.isSingleVariable
-            ? "${step.operator.value}${step.variable1}"
-            : "${step.variable1} ${step.operator.value} ${step.variable2}",
+            ? "${step.operator.value}${StepProcess.displayOperand(step.variable1)}"
+            : "${StepProcess.displayOperand(step.variable1)} ${step.operator.value} ${StepProcess.displayOperand(step.variable2)}",
       );
     }
 

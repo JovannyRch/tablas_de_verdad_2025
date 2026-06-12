@@ -554,8 +554,8 @@ class _StepTile extends StatelessWidget {
 
   Widget _buildSubTitle() {
     final op = step.stepProcess.operator.value;
-    final v1 = step.stepProcess.variable1;
-    final v2 = step.stepProcess.variable2;
+    final v1 = StepProcess.displayOperand(step.stepProcess.variable1);
+    final v2 = StepProcess.displayOperand(step.stepProcess.variable2);
 
     return Padding(
       padding: const EdgeInsets.only(top: 4),

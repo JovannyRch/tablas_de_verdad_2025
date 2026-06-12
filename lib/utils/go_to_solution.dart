@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
@@ -38,8 +39,8 @@ Future<void> goToResult(
         return TruthTableStep(
           title:
               step.isSingleVariable
-                  ? "${step.variable1} ${step.variable1}"
-                  : " ${step.variable1} ${step.operator.value} ${step.variable2}",
+                  ? "${step.operator.value}${StepProcess.displayOperand(step.variable1)}"
+                  : " ${StepProcess.displayOperand(step.variable1)} ${step.operator.value} ${StepProcess.displayOperand(step.variable2)}",
           headers: [...columnKeys, t.result],
           rows: rows,
           stepProcess: step,
