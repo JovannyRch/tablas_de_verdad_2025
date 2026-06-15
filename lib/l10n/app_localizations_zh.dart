@@ -678,4 +678,30 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get hapticFeedback => '触觉反馈';
+
+  @override
+  String get classifyMode => '分类';
+
+  @override
+  String get fillTableMode => '填写表格';
+
+  @override
+  String get practiceType => '练习类型';
+
+  @override
+  String get fillTableInstruction => '点击每行最后一列的真值。';
+
+  @override
+  String get verifyAnswers => '检查答案';
+
+  @override
+  String get tablesCompleted => '表格';
+
+  @override
+  String get accuracy => '准确率';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total 个单元格正确';
+  }
 }

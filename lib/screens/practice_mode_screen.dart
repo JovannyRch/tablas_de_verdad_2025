@@ -3,7 +3,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/quiz_model.dart';
+import 'package:tablas_de_verdad_2025/screens/fill_table_screen.dart';
 import 'package:tablas_de_verdad_2025/screens/quiz_screen.dart';
+
+/// The two practice modes: classify an expression, or complete its table.
+enum PracticeType { classify, fillTable }
 
 class PracticeModeScreen extends StatefulWidget {
   const PracticeModeScreen({super.key});
@@ -13,9 +17,17 @@ class PracticeModeScreen extends StatefulWidget {
 }
 
 class _PracticeModeScreenState extends State<PracticeModeScreen> {
+  PracticeType _type = PracticeType.classify;
+
+  // Classify (quiz) stats.
   int _totalQuizzes = 0;
   int _bestStreak = 0;
   int _totalCorrect = 0;
+
+  // Fill-the-table stats.
+  int _fillTables = 0;
+  int _fillCorrect = 0;
+  int _fillTotal = 0;
 
   @override
   void initState() {
@@ -30,14 +42,23 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
         _totalQuizzes = prefs.getInt('quiz_total_quizzes') ?? 0;
         _bestStreak = prefs.getInt('quiz_best_streak') ?? 0;
         _totalCorrect = prefs.getInt('quiz_total_correct') ?? 0;
+        _fillTables = prefs.getInt('fill_tables_completed') ?? 0;
+        _fillCorrect = prefs.getInt('fill_cells_correct') ?? 0;
+        _fillTotal = prefs.getInt('fill_cells_total') ?? 0;
       });
     }
   }
 
-  void _startQuiz(QuizDifficulty difficulty) async {
+  void _start(QuizDifficulty difficulty) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => QuizScreen(difficulty: difficulty)),
+      MaterialPageRoute(
+        builder:
+            (_) =>
+                _type == PracticeType.classify
+                    ? QuizScreen(difficulty: difficulty)
+                    : FillTableScreen(difficulty: difficulty),
+      ),
     );
     _loadStats(); // Refresh stats after returning
   }
@@ -54,14 +75,46 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Stats summary ──
-            _StatsCard(
-              totalQuizzes: _totalQuizzes,
-              bestStreak: _bestStreak,
-              totalCorrect: _totalCorrect,
-              isDark: isDark,
-              t: t,
+            // ── Mode selector ──
+            Text(
+              t.practiceType,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: isDark ? Colors.white : Colors.black87,
+              ),
             ),
+            const SizedBox(height: 12),
+            SegmentedButton<PracticeType>(
+              style: SegmentedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                selectedBackgroundColor: kSeedColor.withValues(alpha: 0.12),
+                selectedForegroundColor: kSeedColor,
+                side: BorderSide(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
+                ),
+              ),
+              segments: [
+                ButtonSegment(
+                  value: PracticeType.classify,
+                  label: Text(t.classifyMode),
+                  icon: const Icon(Icons.category_outlined),
+                ),
+                ButtonSegment(
+                  value: PracticeType.fillTable,
+                  label: Text(t.fillTableMode),
+                  icon: const Icon(Icons.grid_on_outlined),
+                ),
+              ],
+              selected: {_type},
+              onSelectionChanged: (s) => setState(() => _type = s.first),
+            ),
+            const SizedBox(height: 24),
+
+            // ── Stats summary (mode-aware) ──
+            _StatsCard(items: _statsItems(t), isDark: isDark, t: t),
             const SizedBox(height: 28),
 
             // ── Difficulty selection ──
@@ -81,7 +134,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
               icon: Icons.sentiment_satisfied_rounded,
               color: const Color(0xFF4CAF50),
               isDark: isDark,
-              onTap: () => _startQuiz(QuizDifficulty.easy),
+              onTap: () => _start(QuizDifficulty.easy),
             ),
             const SizedBox(height: 12),
             _DifficultyCard(
@@ -90,7 +143,7 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
               icon: Icons.psychology_rounded,
               color: kSeedColor,
               isDark: isDark,
-              onTap: () => _startQuiz(QuizDifficulty.medium),
+              onTap: () => _start(QuizDifficulty.medium),
             ),
             const SizedBox(height: 12),
             _DifficultyCard(
@@ -99,28 +152,85 @@ class _PracticeModeScreenState extends State<PracticeModeScreen> {
               icon: Icons.local_fire_department_rounded,
               color: const Color(0xFFE53935),
               isDark: isDark,
-              onTap: () => _startQuiz(QuizDifficulty.hard),
+              onTap: () => _start(QuizDifficulty.hard),
             ),
           ],
         ),
       ),
     );
   }
+
+  List<_StatData> _statsItems(AppLocalizations t) {
+    if (_type == PracticeType.classify) {
+      return [
+        _StatData(
+          icon: Icons.quiz_rounded,
+          value: '$_totalQuizzes',
+          label: t.quizzesPlayed,
+          color: kSeedColor,
+        ),
+        _StatData(
+          icon: Icons.local_fire_department_rounded,
+          value: '$_bestStreak',
+          label: t.bestStreak,
+          color: const Color(0xFFE53935),
+        ),
+        _StatData(
+          icon: Icons.check_circle_rounded,
+          value: '$_totalCorrect',
+          label: t.correctAnswers,
+          color: const Color(0xFF4CAF50),
+        ),
+      ];
+    }
+    final accuracy =
+        _fillTotal == 0 ? 0 : ((_fillCorrect / _fillTotal) * 100).round();
+    return [
+      _StatData(
+        icon: Icons.grid_on_rounded,
+        value: '$_fillTables',
+        label: t.tablesCompleted,
+        color: kSeedColor,
+      ),
+      _StatData(
+        icon: Icons.percent_rounded,
+        value: '$accuracy%',
+        label: t.accuracy,
+        color: const Color(0xFF4CAF50),
+      ),
+      _StatData(
+        icon: Icons.check_circle_rounded,
+        value: '$_fillCorrect',
+        label: t.correctAnswers,
+        color: const Color(0xFF2196F3),
+      ),
+    ];
+  }
+}
+
+/// One metric shown in the stats card.
+class _StatData {
+  final IconData icon;
+  final String value;
+  final String label;
+  final Color color;
+  const _StatData({
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.color,
+  });
 }
 
 // ── Stats card ──────────────────────────────────────────────
 
 class _StatsCard extends StatelessWidget {
-  final int totalQuizzes;
-  final int bestStreak;
-  final int totalCorrect;
+  final List<_StatData> items;
   final bool isDark;
   final AppLocalizations t;
 
   const _StatsCard({
-    required this.totalQuizzes,
-    required this.bestStreak,
-    required this.totalCorrect,
+    required this.items,
     required this.isDark,
     required this.t,
   });
@@ -165,27 +275,14 @@ class _StatsCard extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              _StatItem(
-                icon: Icons.quiz_rounded,
-                value: '$totalQuizzes',
-                label: t.quizzesPlayed,
-                color: kSeedColor,
-                isDark: isDark,
-              ),
-              _StatItem(
-                icon: Icons.local_fire_department_rounded,
-                value: '$bestStreak',
-                label: t.bestStreak,
-                color: const Color(0xFFE53935),
-                isDark: isDark,
-              ),
-              _StatItem(
-                icon: Icons.check_circle_rounded,
-                value: '$totalCorrect',
-                label: t.correctAnswers,
-                color: const Color(0xFF4CAF50),
-                isDark: isDark,
-              ),
+              for (final item in items)
+                _StatItem(
+                  icon: item.icon,
+                  value: item.value,
+                  label: item.label,
+                  color: item.color,
+                  isDark: isDark,
+                ),
             ],
           ),
         ],
@@ -269,9 +366,14 @@ class _DifficultyCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? color.withValues(alpha: 0.1) : color.withValues(alpha: 0.06),
+            color:
+                isDark
+                    ? color.withValues(alpha: 0.1)
+                    : color.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: color.withValues(alpha: isDark ? 0.3 : 0.15)),
+            border: Border.all(
+              color: color.withValues(alpha: isDark ? 0.3 : 0.15),
+            ),
           ),
           child: Row(
             children: [

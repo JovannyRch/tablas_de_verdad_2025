@@ -706,4 +706,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get hapticFeedback => 'Vibración al pulsar';
+
+  @override
+  String get classifyMode => 'Clasificar';
+
+  @override
+  String get fillTableMode => 'Completar la tabla';
+
+  @override
+  String get practiceType => 'Tipo de práctica';
+
+  @override
+  String get fillTableInstruction =>
+      'Toca el valor de verdad de la última columna en cada fila.';
+
+  @override
+  String get verifyAnswers => 'Verificar';
+
+  @override
+  String get tablesCompleted => 'Tablas';
+
+  @override
+  String get accuracy => 'Precisión';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total celdas correctas';
+  }
 }

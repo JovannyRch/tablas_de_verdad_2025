@@ -224,5 +224,13 @@
   "a11yKarnaughMap": "{count} समूहों वाला कर्नॉ मानचित्र",
   "a11yKarnaughGroup": "समूह {number}: {term}, {count} सेल",
   "example": "उदाहरण",
-  "hapticFeedback": "स्पर्श प्रतिक्रिया"
+  "hapticFeedback": "स्पर्श प्रतिक्रिया",
+  "classifyMode": "वर्गीकृत करें",
+  "fillTableMode": "तालिका भरें",
+  "practiceType": "अभ्यास प्रकार",
+  "fillTableInstruction": "हर पंक्ति में अंतिम स्तंभ का सत्य मान चुनें।",
+  "verifyAnswers": "जाँचें",
+  "tablesCompleted": "तालिकाएँ",
+  "accuracy": "सटीकता",
+  "cellsCorrectOfTotal": "{correct}/{total} सेल सही"
 }

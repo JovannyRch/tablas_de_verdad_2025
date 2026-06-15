@@ -708,4 +708,31 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get hapticFeedback => 'Виброотклик';
+
+  @override
+  String get classifyMode => 'Классифицировать';
+
+  @override
+  String get fillTableMode => 'Заполнить таблицу';
+
+  @override
+  String get practiceType => 'Тип практики';
+
+  @override
+  String get fillTableInstruction =>
+      'Выберите истинностное значение последнего столбца в каждой строке.';
+
+  @override
+  String get verifyAnswers => 'Проверить';
+
+  @override
+  String get tablesCompleted => 'Таблицы';
+
+  @override
+  String get accuracy => 'Точность';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total ячеек верно';
+  }
 }

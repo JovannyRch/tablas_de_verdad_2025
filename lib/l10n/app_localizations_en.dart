@@ -705,4 +705,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hapticFeedback => 'Haptic feedback';
+
+  @override
+  String get classifyMode => 'Classify';
+
+  @override
+  String get fillTableMode => 'Fill the table';
+
+  @override
+  String get practiceType => 'Practice type';
+
+  @override
+  String get fillTableInstruction =>
+      'Tap the truth value of the final column in each row.';
+
+  @override
+  String get verifyAnswers => 'Check answers';
+
+  @override
+  String get tablesCompleted => 'Tables';
+
+  @override
+  String get accuracy => 'Accuracy';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total cells correct';
+  }
 }

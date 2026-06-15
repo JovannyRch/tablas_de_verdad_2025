@@ -1421,6 +1421,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Vibración al pulsar'**
   String get hapticFeedback;
+
+  /// No description provided for @classifyMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Clasificar'**
+  String get classifyMode;
+
+  /// No description provided for @fillTableMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Completar la tabla'**
+  String get fillTableMode;
+
+  /// No description provided for @practiceType.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo de práctica'**
+  String get practiceType;
+
+  /// No description provided for @fillTableInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Toca el valor de verdad de la última columna en cada fila.'**
+  String get fillTableInstruction;
+
+  /// No description provided for @verifyAnswers.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificar'**
+  String get verifyAnswers;
+
+  /// No description provided for @tablesCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Tablas'**
+  String get tablesCompleted;
+
+  /// No description provided for @accuracy.
+  ///
+  /// In es, this message translates to:
+  /// **'Precisión'**
+  String get accuracy;
+
+  /// No description provided for @cellsCorrectOfTotal.
+  ///
+  /// In es, this message translates to:
+  /// **'{correct}/{total} celdas correctas'**
+  String cellsCorrectOfTotal(int correct, int total);
 }
 
 class _AppLocalizationsDelegate

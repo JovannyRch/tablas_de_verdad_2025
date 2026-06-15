@@ -244,5 +244,13 @@
   "a11yKarnaughMap": "Karnaugh map with {count} groups",
   "a11yKarnaughGroup": "Group {number}: {term}, {count} cells",
   "example": "Example",
-  "hapticFeedback": "Haptic feedback"
+  "hapticFeedback": "Haptic feedback",
+  "classifyMode": "Classify",
+  "fillTableMode": "Fill the table",
+  "practiceType": "Practice type",
+  "fillTableInstruction": "Tap the truth value of the final column in each row.",
+  "verifyAnswers": "Check answers",
+  "tablesCompleted": "Tables",
+  "accuracy": "Accuracy",
+  "cellsCorrectOfTotal": "{correct}/{total} cells correct"
 }

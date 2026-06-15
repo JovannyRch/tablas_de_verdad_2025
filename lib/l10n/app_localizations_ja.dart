@@ -684,4 +684,30 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get hapticFeedback => '触覚フィードバック';
+
+  @override
+  String get classifyMode => '分類';
+
+  @override
+  String get fillTableMode => '表を完成';
+
+  @override
+  String get practiceType => '練習タイプ';
+
+  @override
+  String get fillTableInstruction => '各行の最終列の真理値をタップしてください。';
+
+  @override
+  String get verifyAnswers => '答え合わせ';
+
+  @override
+  String get tablesCompleted => '表';
+
+  @override
+  String get accuracy => '正確度';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total セル正解';
+  }
 }

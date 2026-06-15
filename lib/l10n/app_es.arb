@@ -258,5 +258,23 @@
     }
   },
   "example": "Ejemplo",
-  "hapticFeedback": "Vibración al pulsar"
+  "hapticFeedback": "Vibración al pulsar",
+  "classifyMode": "Clasificar",
+  "fillTableMode": "Completar la tabla",
+  "practiceType": "Tipo de práctica",
+  "fillTableInstruction": "Toca el valor de verdad de la última columna en cada fila.",
+  "verifyAnswers": "Verificar",
+  "tablesCompleted": "Tablas",
+  "accuracy": "Precisión",
+  "cellsCorrectOfTotal": "{correct}/{total} celdas correctas",
+  "@cellsCorrectOfTotal": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

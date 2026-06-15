@@ -110,8 +110,9 @@ lib/
 │   ├── truth_table_result_screen.dart   # 5 tabs
 │   ├── equivalence_screen.dart
 │   ├── argument_validator_screen.dart
-│   ├── quiz_screen.dart
-│   ├── practice_mode_screen.dart
+│   ├── quiz_screen.dart            # Práctica: clasificar (tautología/…)
+│   ├── practice_mode_screen.dart   # Landing: selector de modo + stats
+│   ├── fill_table_screen.dart      # Práctica: completar la tabla
 │   ├── expression_library_screen.dart
 │   ├── settings_screen.dart
 │   ├── onboarding_screen.dart
@@ -121,6 +122,8 @@ lib/
 │   ├── analytics.dart         # Firebase Analytics + contadores locales
 │   ├── equivalence_checker.dart
 │   ├── expression_validator.dart
+│   ├── fill_table_builder.dart # Puzzle "completar la tabla" (puro)
+│   ├── keypad_input.dart       # Inserción de teclado + paréntesis inteligentes
 │   ├── generate_pdf.dart      # PDF: tabla + metadatos
 │   ├── go_to_solution.dart    # Construye TruthTableResultScreen
 │   └── show_pro_version_dialog.dart
@@ -204,8 +207,9 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 | `logic_simplifier_test.dart` | 24 | 20 leyes + soundness |
 | `step_parenthesization_test.dart` | 8 | wrapOperand / displayOperand |
 | `keypad_input_test.dart` | 7 | Paréntesis inteligentes + inserción |
+| `fill_table_builder_test.dart` | 5 | Puzzle "completar la tabla" |
 
-**Total: 130 tests** — ejecutar con `flutter test`
+**Total: 135 tests** — ejecutar con `flutter test`
 
 ---
 

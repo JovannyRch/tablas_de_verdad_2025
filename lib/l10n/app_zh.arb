@@ -224,5 +224,13 @@
   "a11yKarnaughMap": "包含 {count} 个分组的卡诺图",
   "a11yKarnaughGroup": "分组 {number}：{term}，{count} 个单元格",
   "example": "示例",
-  "hapticFeedback": "触觉反馈"
+  "hapticFeedback": "触觉反馈",
+  "classifyMode": "分类",
+  "fillTableMode": "填写表格",
+  "practiceType": "练习类型",
+  "fillTableInstruction": "点击每行最后一列的真值。",
+  "verifyAnswers": "检查答案",
+  "tablesCompleted": "表格",
+  "accuracy": "准确率",
+  "cellsCorrectOfTotal": "{correct}/{total} 个单元格正确"
 }

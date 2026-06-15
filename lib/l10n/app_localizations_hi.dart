@@ -707,4 +707,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get hapticFeedback => 'स्पर्श प्रतिक्रिया';
+
+  @override
+  String get classifyMode => 'वर्गीकृत करें';
+
+  @override
+  String get fillTableMode => 'तालिका भरें';
+
+  @override
+  String get practiceType => 'अभ्यास प्रकार';
+
+  @override
+  String get fillTableInstruction =>
+      'हर पंक्ति में अंतिम स्तंभ का सत्य मान चुनें।';
+
+  @override
+  String get verifyAnswers => 'जाँचें';
+
+  @override
+  String get tablesCompleted => 'तालिकाएँ';
+
+  @override
+  String get accuracy => 'सटीकता';
+
+  @override
+  String cellsCorrectOfTotal(int correct, int total) {
+    return '$correct/$total सेल सही';
+  }
 }

@@ -224,5 +224,13 @@
   "a11yKarnaughMap": "Mappa di Karnaugh con {count} gruppi",
   "a11yKarnaughGroup": "Gruppo {number}: {term}, {count} celle",
   "example": "Esempio",
-  "hapticFeedback": "Feedback aptico"
+  "hapticFeedback": "Feedback aptico",
+  "classifyMode": "Classifica",
+  "fillTableMode": "Completa la tabella",
+  "practiceType": "Tipo di pratica",
+  "fillTableInstruction": "Tocca il valore di verità dell'ultima colonna in ogni riga.",
+  "verifyAnswers": "Verifica",
+  "tablesCompleted": "Tabelle",
+  "accuracy": "Precisione",
+  "cellsCorrectOfTotal": "{correct}/{total} celle corrette"
 }

@@ -224,5 +224,13 @@
   "a11yKarnaughMap": "{count}個のグループを持つカルノー図",
   "a11yKarnaughGroup": "グループ{number}：{term}、{count}セル",
   "example": "例",
-  "hapticFeedback": "触覚フィードバック"
+  "hapticFeedback": "触覚フィードバック",
+  "classifyMode": "分類",
+  "fillTableMode": "表を完成",
+  "practiceType": "練習タイプ",
+  "fillTableInstruction": "各行の最終列の真理値をタップしてください。",
+  "verifyAnswers": "答え合わせ",
+  "tablesCompleted": "表",
+  "accuracy": "正確度",
+  "cellsCorrectOfTotal": "{correct}/{total} セル正解"
 }

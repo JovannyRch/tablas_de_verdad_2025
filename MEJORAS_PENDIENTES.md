@@ -22,7 +22,7 @@
 - Karnaugh y Simplificación están cubiertas por tests, pero falta validación visual en emulador/dispositivo real (grupos con wrap, dark mode, expresiones de 4 variables, pantallas pequeñas).
 - **Acción**: `flutter run --flavor es`, probar `(p⇒q)∧(q⇒p)`, `(A∧B)∨(A∧¬B)∨(¬A∧C)`, una tautología y una contradicción, en claro y oscuro.
 
-### 3. Actualizar el PDF con las features nuevas
+### 3. ✅ Actualizar el PDF con las features nuevas
 - El PDF (`lib/utils/generate_pdf.dart`) solo exporta la tabla. El estudiante quiere entregar la tarea completa.
 - **Acción**: secciones opcionales en el PDF: formas normales, expresión minimizada (K-map) y pasos de simplificación con sus leyes. Es contenido premium natural (gate Pro para el PDF extendido).
 
@@ -87,9 +87,12 @@
 
 ## 🟢 P3 — Features nuevas (orden de impacto sugerido)
 
-### 16. Práctica: modo "Completar la tabla"
-- Ya diseñado en `PROPUESTA_PRACTICA.md` (Opción 2). Pedagógicamente superior al quiz de clasificación: el alumno construye la tabla celda por celda con feedback inmediato.
-- Reusa: motor `TruthTable`, framework del quiz, persistencia de stats existente.
+### 16. ✅ Práctica: modo "Completar la tabla"
+- Implementada la Opción 2 (variante "solo columna final" como MVP): el alumno marca el valor de verdad de la última columna en cada fila, con verificación y feedback verde/rojo por celda.
+- `lib/screens/practice_mode_screen.dart`: selector de modo (`SegmentedButton`: Clasificar / Completar la tabla) y stats card consciente del modo. `lib/screens/fill_table_screen.dart`: sesión de 5 expresiones, progreso, verificación y pantalla de resultados (% de celdas correctas).
+- Reusa: motor `TruthTable`, banco de expresiones `QuizBank`, niveles `QuizDifficulty`, formato V/F (`getCellValue`), Analytics. Stats propios en SharedPreferences (`fill_tables_completed`, `fill_cells_correct`, `fill_cells_total`).
+- Lógica de construcción del puzzle extraída a `lib/utils/fill_table_builder.dart` (puro) con 5 tests. Nota: se detectó que `TruthTable` requiere input sin espacios (el quiz lo enmascaraba con su try/catch + fallback); fill-table sanea espacios antes de evaluar.
+- 8 claves l10n nuevas ×10 idiomas.
 
 ### 17. Visualizador de circuitos lógicos
 - La app RN hermana ya lo tiene resuelto (`components/circuit/`: gates SVG, layout, `sceneToSvg.ts`) — portar a Flutter con CustomPaint.

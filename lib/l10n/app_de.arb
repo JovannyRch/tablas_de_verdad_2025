@@ -224,5 +224,13 @@
   "a11yKarnaughMap": "Karnaugh-Diagramm mit {count} Gruppen",
   "a11yKarnaughGroup": "Gruppe {number}: {term}, {count} Zellen",
   "example": "Beispiel",
-  "hapticFeedback": "Haptisches Feedback"
+  "hapticFeedback": "Haptisches Feedback",
+  "classifyMode": "Klassifizieren",
+  "fillTableMode": "Tabelle ausfüllen",
+  "practiceType": "Übungsart",
+  "fillTableInstruction": "Tippe in jeder Zeile auf den Wahrheitswert der letzten Spalte.",
+  "verifyAnswers": "Überprüfen",
+  "tablesCompleted": "Tabellen",
+  "accuracy": "Genauigkeit",
+  "cellsCorrectOfTotal": "{correct}/{total} Zellen richtig"
 }
