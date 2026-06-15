@@ -4,10 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:tablas_de_verdad_2025/class/karnaugh_map.dart';
+import 'package:tablas_de_verdad_2025/class/logic_simplifier.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
+import 'package:tablas_de_verdad_2025/utils/normal_form_converter.dart';
 
 Future<Uint8List> loadFont() async {
   // Usar DejaVuSans que tiene mejor soporte para símbolos lógicos
@@ -67,8 +70,9 @@ List<List<String>> getTable(TruthTable t, String language) {
 
 Future<PDFDocument> generatePdfWithTable(
   TruthTable t,
-  AppLocalizations translations,
-) async {
+  AppLocalizations translations, {
+  bool isPro = false,
+}) async {
   final pdf = pw.Document();
   final String language = t.language;
   final fontData = await loadFont();
@@ -83,6 +87,33 @@ Future<PDFDocument> generatePdfWithTable(
   final now = DateTime.now();
   final dateFormatted =
       '${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}';
+
+  // Pro sections — computed once, used in build list
+  NormalFormResult? normalForms;
+  KarnaughResult? karnaughSop;
+  SimplificationResult? simplification;
+
+  if (isPro) {
+    normalForms = NormalFormConverter.convert(t);
+
+    final vars = t.variables;
+    final hasConstantVars = vars.contains('0') || vars.contains('1');
+    if (!hasConstantVars &&
+        vars.length >= kMinKarnaughVariables &&
+        vars.length <= kMaxKarnaughVariables) {
+      final minterms = {
+        for (final row in t.table)
+          if (row.result == '1') row.index,
+      };
+      karnaughSop = KarnaughSolver.solve(
+        variables: vars,
+        minterms: minterms,
+        form: KarnaughForm.sop,
+      );
+    }
+
+    simplification = LogicSimplifier.simplifyPostfix(t.postfix);
+  }
 
   pdf.addPage(
     pw.MultiPage(
@@ -215,6 +246,20 @@ Future<PDFDocument> generatePdfWithTable(
             ),
             pw.SizedBox(height: 25),
             _buildPdfTable(context, finalTable, ttf),
+
+            // ── Pro sections ──────────────────────────────────────
+            if (isPro && normalForms != null)
+              ..._buildNormalFormsSection(normalForms, translations, ttf),
+
+            if (isPro && karnaughSop != null)
+              ..._buildKarnaughSection(karnaughSop, translations, ttf),
+
+            if (isPro && simplification != null)
+              ..._buildSimplificationSection(
+                simplification,
+                translations,
+                ttf,
+              ),
           ],
     ),
   );
@@ -227,6 +272,318 @@ Future<PDFDocument> generatePdfWithTable(
   await file.writeAsBytes(output);
 
   return PDFDocument.fromFile(file);
+}
+
+// ── Normal Forms section ─────────────────────────────────────────────────────
+
+List<pw.Widget> _buildNormalFormsSection(
+  NormalFormResult nf,
+  AppLocalizations t,
+  pw.Font ttf,
+) {
+  if (nf.tooManyVariables) return [];
+
+  final mintermLabel =
+      nf.mintermIndices.isEmpty
+          ? '—'
+          : 'Σm(${nf.mintermIndices.join(', ')})';
+  final maxtermLabel =
+      nf.maxtermIndices.isEmpty
+          ? '—'
+          : 'ΠM(${nf.maxtermIndices.join(', ')})';
+
+  return [
+    pw.SizedBox(height: 30),
+    _sectionHeader(t.normalForms, ttf),
+    pw.SizedBox(height: 10),
+    pw.Container(
+      padding: const pw.EdgeInsets.all(12),
+      decoration: pw.BoxDecoration(
+        border: pw.Border.all(color: PdfColors.grey300),
+        borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+      ),
+      child: pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          _infoRow('${t.minterms}', mintermLabel, ttf),
+          pw.SizedBox(height: 4),
+          _infoRow('Maxterms', maxtermLabel, ttf),
+          pw.SizedBox(height: 10),
+          pw.Divider(thickness: 0.5, color: PdfColors.grey300),
+          pw.SizedBox(height: 10),
+          _expressionBlock(
+            t.dnfTitle,
+            nf.dnf ?? t.dnfContradiction,
+            ttf,
+            nf.dnf == null,
+          ),
+          pw.SizedBox(height: 10),
+          _expressionBlock(
+            t.cnfTitle,
+            nf.cnf ?? t.cnfTautology,
+            ttf,
+            nf.cnf == null,
+          ),
+        ],
+      ),
+    ),
+  ];
+}
+
+// ── Karnaugh section ─────────────────────────────────────────────────────────
+
+List<pw.Widget> _buildKarnaughSection(
+  KarnaughResult karnaugh,
+  AppLocalizations t,
+  pw.Font ttf,
+) {
+  return [
+    pw.SizedBox(height: 30),
+    _sectionHeader(t.karnaughTitle, ttf),
+    pw.SizedBox(height: 10),
+    pw.Container(
+      padding: const pw.EdgeInsets.all(12),
+      decoration: pw.BoxDecoration(
+        border: pw.Border.all(color: PdfColors.grey300),
+        borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+      ),
+      child: pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          _expressionBlock(
+            t.karnaughMinimizedExpression,
+            karnaugh.expression,
+            ttf,
+            false,
+          ),
+        ],
+      ),
+    ),
+  ];
+}
+
+// ── Simplification section ───────────────────────────────────────────────────
+
+List<pw.Widget> _buildSimplificationSection(
+  SimplificationResult result,
+  AppLocalizations t,
+  pw.Font ttf,
+) {
+  final widgets = <pw.Widget>[
+    pw.SizedBox(height: 30),
+    _sectionHeader(t.simplificationTitle, ttf),
+    pw.SizedBox(height: 10),
+  ];
+
+  if (result.alreadySimplified) {
+    widgets.add(
+      pw.Container(
+        padding: const pw.EdgeInsets.all(12),
+        decoration: pw.BoxDecoration(
+          color: PdfColors.green50,
+          border: pw.Border.all(color: PdfColors.green200),
+          borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+        ),
+        child: pw.Row(
+          children: [
+            pw.Text(
+              '✓  ',
+              style: pw.TextStyle(
+                font: ttf,
+                fontSize: 11,
+                color: PdfColors.green800,
+              ),
+            ),
+            pw.Expanded(
+              child: pw.Text(
+                '${t.simplificationResult}: ${t.simplificationAlreadySimple}',
+                style: pw.TextStyle(
+                  font: ttf,
+                  fontSize: 11,
+                  color: PdfColors.green800,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    return widgets;
+  }
+
+  widgets.add(
+    pw.Text(
+      t.simplificationStepCount(result.steps.length),
+      style: pw.TextStyle(
+        font: ttf,
+        fontSize: 10,
+        color: PdfColors.grey600,
+      ),
+    ),
+  );
+  widgets.add(pw.SizedBox(height: 8));
+
+  for (int i = 0; i < result.steps.length; i++) {
+    final step = result.steps[i];
+    final lawName = _lawName(t, step.law);
+
+    widgets.add(
+      pw.Container(
+        margin: const pw.EdgeInsets.only(bottom: 8),
+        padding: const pw.EdgeInsets.all(10),
+        decoration: pw.BoxDecoration(
+          border: pw.Border.all(color: PdfColors.grey300),
+          borderRadius: const pw.BorderRadius.all(pw.Radius.circular(6)),
+        ),
+        child: pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Row(
+              children: [
+                pw.Container(
+                  padding: const pw.EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: const pw.BoxDecoration(
+                    color: PdfColors.blueGrey100,
+                    borderRadius: pw.BorderRadius.all(pw.Radius.circular(4)),
+                  ),
+                  child: pw.Text(
+                    '${i + 1}',
+                    style: pw.TextStyle(
+                      font: ttf,
+                      fontSize: 9,
+                      fontWeight: pw.FontWeight.bold,
+                      color: PdfColors.blueGrey800,
+                    ),
+                  ),
+                ),
+                pw.SizedBox(width: 6),
+                pw.Text(
+                  lawName,
+                  style: pw.TextStyle(
+                    font: ttf,
+                    fontSize: 10,
+                    fontWeight: pw.FontWeight.bold,
+                    color: PdfColors.blueGrey700,
+                  ),
+                ),
+              ],
+            ),
+            pw.SizedBox(height: 6),
+            pw.Text(
+              '${step.localBefore}  ≡  ${step.localAfter}',
+              style: pw.TextStyle(
+                font: ttf,
+                fontSize: 10,
+                color: PdfColors.grey700,
+              ),
+            ),
+            pw.SizedBox(height: 4),
+            pw.Container(
+              padding: const pw.EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 4,
+              ),
+              decoration: const pw.BoxDecoration(
+                color: PdfColors.grey50,
+              ),
+              child: pw.Text(
+                step.expression,
+                style: pw.TextStyle(
+                  font: ttf,
+                  fontSize: 11,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Final result
+  widgets.add(
+    pw.Container(
+      padding: const pw.EdgeInsets.all(10),
+      decoration: pw.BoxDecoration(
+        color: PdfColors.blue50,
+        border: pw.Border.all(color: PdfColors.blue200),
+        borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+      ),
+      child: _infoRow(t.simplificationResult, result.result, ttf,
+          isResult: true),
+    ),
+  );
+
+  return widgets;
+}
+
+// ── Shared helpers ───────────────────────────────────────────────────────────
+
+pw.Widget _sectionHeader(String title, pw.Font ttf) {
+  return pw.Container(
+    width: double.infinity,
+    padding: const pw.EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    decoration: const pw.BoxDecoration(
+      color: PdfColors.blueGrey800,
+      borderRadius: pw.BorderRadius.all(pw.Radius.circular(6)),
+    ),
+    child: pw.Text(
+      title,
+      style: pw.TextStyle(
+        font: ttf,
+        fontSize: 13,
+        fontWeight: pw.FontWeight.bold,
+        color: PdfColors.white,
+      ),
+    ),
+  );
+}
+
+pw.Widget _expressionBlock(
+  String label,
+  String expression,
+  pw.Font ttf,
+  bool isNull,
+) {
+  return pw.Column(
+    crossAxisAlignment: pw.CrossAxisAlignment.start,
+    children: [
+      pw.Text(
+        label,
+        style: pw.TextStyle(
+          font: ttf,
+          fontSize: 10,
+          fontWeight: pw.FontWeight.bold,
+          color: PdfColors.blueGrey700,
+        ),
+      ),
+      pw.SizedBox(height: 4),
+      pw.Container(
+        width: double.infinity,
+        padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        decoration: pw.BoxDecoration(
+          color: isNull ? PdfColors.amber50 : PdfColors.grey50,
+          border: pw.Border.all(
+            color: isNull ? PdfColors.amber200 : PdfColors.grey200,
+          ),
+          borderRadius: const pw.BorderRadius.all(pw.Radius.circular(4)),
+        ),
+        child: pw.Text(
+          expression,
+          style: pw.TextStyle(
+            font: ttf,
+            fontSize: 11,
+            color: isNull ? PdfColors.amber900 : PdfColors.black,
+            fontStyle: isNull ? pw.FontStyle.italic : pw.FontStyle.normal,
+          ),
+        ),
+      ),
+    ],
+  );
 }
 
 pw.Widget _infoRow(
@@ -303,4 +660,49 @@ pw.Widget _buildPdfTable(
           : const pw.BoxDecoration();
     },
   );
+}
+
+String _lawName(AppLocalizations t, SimplificationLaw law) {
+  switch (law) {
+    case SimplificationLaw.conditional:
+      return t.lawConditional;
+    case SimplificationLaw.biconditional:
+      return t.lawBiconditional;
+    case SimplificationLaw.converse:
+      return t.lawConverse;
+    case SimplificationLaw.xorDefinition:
+      return t.lawXorDefinition;
+    case SimplificationLaw.nandDefinition:
+      return t.lawNandDefinition;
+    case SimplificationLaw.norDefinition:
+      return t.lawNorDefinition;
+    case SimplificationLaw.negatedConditional:
+      return t.lawNegatedConditional;
+    case SimplificationLaw.negatedConverse:
+      return t.lawNegatedConverse;
+    case SimplificationLaw.negatedBiconditional:
+      return t.lawNegatedBiconditional;
+    case SimplificationLaw.tautologyOperator:
+      return t.lawTautologyOperator;
+    case SimplificationLaw.contradictionOperator:
+      return t.lawContradictionOperator;
+    case SimplificationLaw.doubleNegation:
+      return t.lawDoubleNegation;
+    case SimplificationLaw.deMorgan:
+      return t.lawDeMorgan;
+    case SimplificationLaw.negationOfConstant:
+      return t.lawNegationOfConstant;
+    case SimplificationLaw.idempotence:
+      return t.lawIdempotence;
+    case SimplificationLaw.identity:
+      return t.lawIdentity;
+    case SimplificationLaw.domination:
+      return t.lawDomination;
+    case SimplificationLaw.complement:
+      return t.lawComplement;
+    case SimplificationLaw.absorption:
+      return t.lawAbsorption;
+    case SimplificationLaw.factorization:
+      return t.lawFactorization;
+  }
 }

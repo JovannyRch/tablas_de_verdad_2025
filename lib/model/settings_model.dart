@@ -12,10 +12,7 @@ enum MintermOrder { asc, desc }
 enum KeypadMode { advanced, simple }
 
 class Settings extends ChangeNotifier {
-  Locale locale =
-      APP_ID == "com.jovannyrch.tablasdeverdad"
-          ? const Locale('es')
-          : const Locale('en');
+  Locale locale = const Locale('es');
   ThemeMode themeMode = ThemeMode.system;
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
@@ -234,10 +231,6 @@ class Settings extends ChangeNotifier {
   }
 
   String defaultLocale() {
-    if (APP_ID == "com.jovannyrch.tablasdeverdad") {
-      return 'es';
-    } else {
-      return 'en';
-    }
+    return 'es';
   }
 }

@@ -2,18 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Flutter (ES - Español)",
+      "name": "Flutter (Debug)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "debug",
-      "args": ["--flavor", "es", "--dart-define=FLAVOR=es"]
-    },
-    {
-      "name": "Flutter (EN - English)",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "debug",
-      "args": ["--flavor", "en", "--dart-define=FLAVOR=en"]
+      "flutterMode": "debug"
     }
   ]
 }

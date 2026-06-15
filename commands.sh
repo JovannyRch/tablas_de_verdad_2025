@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ==========================
-# Flutter Flavor Runner Pro
+# Flutter Runner
 # macOS + gum
 # ==========================
 
@@ -19,22 +19,10 @@ gum style \
   --margin "1 2" \
   --padding "1 2" \
   --border-foreground 212 \
-  "🚀 Flutter Flavor Runner\nTablas de Verdad"
+  "🚀 Flutter Runner\nTablas de Verdad"
 
-# Idioma
-LANGUAGE=$(gum choose \
-  "🇲🇽 Español (es)" \
-  "🇺🇸 English (en)")
-
-if [[ "$LANGUAGE" == *"es"* ]]; then
-  FLAVOR="es"
-  PACKAGE="com.jovannyrch.tablasdeverdad"
-  OUTPUT_DIR="build/app/outputs/bundle/esRelease"
-else
-  FLAVOR="en"
-  PACKAGE="com.jovannyrch.tablasdeverdad.en"
-  OUTPUT_DIR="build/app/outputs/bundle/enRelease"
-fi
+PACKAGE="com.jovannyrch.tablasdeverdad"
+OUTPUT_DIR="build/app/outputs/bundle/release"
 
 # Acción
 ACTION=$(gum choose \
@@ -42,12 +30,11 @@ ACTION=$(gum choose \
   "📦 Build AppBundle (Play Console)")
 
 echo ""
-gum style --foreground 10 "✔ Flavor: $FLAVOR"
 gum style --foreground 10 "✔ Package: $PACKAGE"
 echo ""
 
 if [[ "$ACTION" == *"Run"* ]]; then
-  CMD="flutter run --flavor $FLAVOR"
+  CMD="flutter run"
 
   gum style --foreground 14 "🧾 Comando a ejecutar:"
   gum style --foreground 250 "$CMD"
@@ -103,7 +90,7 @@ else
     echo ""
   fi
 
-  CMD="flutter build appbundle --flavor $FLAVOR --dart-define=FLAVOR=$FLAVOR"
+  CMD="flutter build appbundle"
 
   gum style --foreground 14 "🧾 Comando a ejecutar:"
   gum style --foreground 250 "$CMD"
