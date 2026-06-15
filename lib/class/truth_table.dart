@@ -3,8 +3,78 @@ import 'dart:math';
 import 'package:tablas_de_verdad_2025/class/operator.dart';
 import 'package:tablas_de_verdad_2025/class/row_table.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
-import 'package:tablas_de_verdad_2025/const/translations.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+
+// ── Parser error messages (all 10 supported locales) ─────────────────────────
+
+const _kCloseParenthesis = {
+  'es': 'Error de sintaxis: falta cerrar el paréntesis',
+  'en': 'Syntax error: unclosed parenthesis',
+  'pt': 'Erro de sintaxe: parêntese não fechado',
+  'fr': 'Erreur de syntaxe : parenthèse non fermée',
+  'de': 'Syntaxfehler: Klammer nicht geschlossen',
+  'hi': 'वाक्यविन्यास त्रुटि: कोष्ठक बंद नहीं है',
+  'ru': 'Синтаксическая ошибка: скобка не закрыта',
+  'it': 'Errore di sintassi: parentesi non chiusa',
+  'zh': '语法错误：括号未闭合',
+  'ja': '構文エラー：括弧が閉じられていません',
+};
+
+const _kUncompletedParenthesis = {
+  'es': 'Error de paréntesis: cierre sin apertura correspondiente',
+  'en': 'Parenthesis error: no matching open bracket',
+  'pt': 'Erro de parêntese: fechamento sem abertura correspondente',
+  'fr': 'Erreur de parenthèse : fermeture sans ouverture correspondante',
+  'de': 'Klammerfehler: schließende Klammer ohne öffnende',
+  'hi': 'कोष्ठक त्रुटि: खुले कोष्ठक के बिना बंद कोष्ठक',
+  'ru': 'Ошибка скобок: закрывающая без открывающей',
+  'it': 'Errore di parentesi: chiusura senza apertura',
+  'zh': '括号错误：无对应开括号',
+  'ja': '括弧エラー：対応する開き括弧がありません',
+};
+
+const _kRequired2Operands = {
+  'es': 'requiere 2 operandos',
+  'en': 'requires 2 operands',
+  'pt': 'requer 2 operandos',
+  'fr': 'nécessite 2 opérandes',
+  'de': 'benötigt 2 Operanden',
+  'hi': '2 संकार्य आवश्यक हैं',
+  'ru': 'требует 2 операнда',
+  'it': 'richiede 2 operandi',
+  'zh': '需要2个操作数',
+  'ja': '2つのオペランドが必要です',
+};
+
+const _kRequired1Operand = {
+  'es': 'requiere 1 operando',
+  'en': 'requires 1 operand',
+  'pt': 'requer 1 operando',
+  'fr': 'nécessite 1 opérande',
+  'de': 'benötigt 1 Operanden',
+  'hi': '1 संकार्य आवश्यक है',
+  'ru': 'требует 1 операнд',
+  'it': 'richiede 1 operando',
+  'zh': '需要1个操作数',
+  'ja': '1つのオペランドが必要です',
+};
+
+const _kSyntaxError = {
+  'es': 'Error de sintaxis',
+  'en': 'Syntax error',
+  'pt': 'Erro de sintaxe',
+  'fr': 'Erreur de syntaxe',
+  'de': 'Syntaxfehler',
+  'hi': 'वाक्यविन्यास त्रुटि',
+  'ru': 'Синтаксическая ошибка',
+  'it': 'Errore di sintassi',
+  'zh': '语法错误',
+  'ja': '構文エラー',
+};
+
+/// Returns the localized string for [lang], falling back to English.
+String _errorMsg(Map<String, String> map, String lang) =>
+    map[lang] ?? map['en']!;
 
 enum TruthTableType { tautology, contradiction, contingency }
 
@@ -338,7 +408,7 @@ class TruthTable {
         opStack.add(token);
       } else if (token == ")") {
         if (opStack.isEmpty) {
-          errorMessage = UNCOMPLETED_PARENTHESIS[language]!;
+          errorMessage = _errorMsg(_kUncompletedParenthesis, language);
           return '';
         }
         String topToken = opStack.removeLast();
@@ -347,7 +417,7 @@ class TruthTable {
           postfixList.add(topToken);
 
           if (opStack.isEmpty) {
-            errorMessage = UNCOMPLETED_PARENTHESIS[language]!;
+            errorMessage = _errorMsg(_kUncompletedParenthesis, language);
             return '';
           }
 
@@ -365,7 +435,7 @@ class TruthTable {
     while (opStack.isNotEmpty) {
       String last = opStack.removeLast();
       if (last == "(") {
-        errorMessage = CLOSE_PARENTHESIS[language]!;
+        errorMessage = _errorMsg(_kCloseParenthesis, language);
         return '';
       }
       postfixList.add(last);
@@ -380,9 +450,9 @@ class TruthTable {
       if (isOperator(c)) {
         if (pila.isEmpty) {
           if (required2Operators(c)) {
-            errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
+            errorMessage = "$c: ${_errorMsg(_kRequired2Operands, language)}";
           } else {
-            errorMessage = "$c: ${REQUIRED_1_OPERATORS[language]}";
+            errorMessage = "$c: ${_errorMsg(_kRequired1Operand, language)}";
           }
           return false;
         }
@@ -390,7 +460,7 @@ class TruthTable {
         String resultado = '';
         if (required2Operators(c)) {
           if (pila.isEmpty) {
-            errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
+            errorMessage = "$c: ${_errorMsg(_kRequired2Operands, language)}";
             return false;
           }
           pila.removeLast();
@@ -406,7 +476,7 @@ class TruthTable {
     if (pila.length == 1) {
       return true;
     } else {
-      errorMessage = SINTAXIS_ERROR[language]!;
+      errorMessage = _errorMsg(_kSyntaxError, language);
       return false;
     }
   }

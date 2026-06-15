@@ -49,10 +49,9 @@
 - `main.dart`: `Firebase.initializeApp()` + `FlutterError.onError` + `PlatformDispatcher.instance.onError` → Crashlytics; envuelto en try-catch (la app funciona aunque Firebase no esté configurado).
 - `analytics.dart`: implementación reemplazada con Firebase Analytics (fire-and-forget, nunca crashea). `getStats()` sigue retornando contadores locales para la pantalla de ajustes. Cero cambios en call-sites.
 
-### 9. Limpieza de legacy
-- `lib/const/translations.dart`: mapa de traducciones legacy que convive con los `.arb`; los mensajes de error de `TruthTable` (`UNCOMPLETED_PARENTHESIS`, etc.) todavía dependen de él y solo cubren es/en — los otros 8 idiomas reciben errores en otro idioma.
-  - **Acción**: mover los mensajes de error del parser a los `.arb` (el `language` ya llega a `TruthTable`).
-- `CONTEXTO_APP.md` está desactualizado (dice 2 idiomas, versión 4.0.8, 3 pestañas). Actualizarlo o regenerarlo — es el documento que usa la IA/colaboradores para entender el proyecto.
+### 9. ✅ Limpieza de legacy
+- `lib/const/translations.dart` eliminado. Los 5 mapas de mensajes de error del parser migrados a constantes privadas en `truth_table.dart` cubriendo los 10 idiomas con fallback a inglés.
+- `CONTEXTO_APP.md` actualizado: v4.0.25, 10 idiomas, 5 pestañas, Firebase, CI, 121 tests, estructura real de directorios.
 
 ---
 
