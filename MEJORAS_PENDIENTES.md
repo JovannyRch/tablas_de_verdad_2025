@@ -38,16 +38,16 @@
 - Corregidos ambos `must_be_immutable`: `PrivacyPolicyScreen.controller` → `final`; `ExpressionCard.t/_settings` → variables locales en `build()`.
 - `flutter analyze` sale con **0 warnings, 0 errors** (solo `info` de naming conventions legacy y prints de debug).
 
-### 6. Tests del motor principal (`TruthTable`)
-- El motor nuevo (Karnaugh, simplificador) tiene tests; el motor original sigue sin cobertura directa: parser infijo→postfijo, errores de sintaxis, los 18 operadores, constantes 0/1, mayúsculas/minúsculas.
-- **Acción**: `test/truth_table_test.dart` con tabla de casos (expresión → tipo + filas esperadas). El validador de argumentos y el comparador de equivalencias también merecen tests (son lógica pura).
+### 6. ✅ Tests del motor principal (`TruthTable`)
+- `test/truth_table_test.dart`: 68 tests, 11 grupos. Cubren clasificación, variables y filas, los 3 aliases de NOT, los 16 operadores binarios (cada uno con counter1s verificado), constantes 0/1, 4 errores de sintaxis, consistencia de columnas, precedencia de operadores, `EquivalenceChecker` (7 casos incluyendo cross-variable y error) y `ExpressionValidator` (13 casos). Total suite: **121 tests**.
 
 ### 7. ✅ CI con GitHub Actions
 - `.github/workflows/ci.yml`: `flutter analyze --no-fatal-infos` + `flutter test` en cada push/PR a `main`. Flutter 3.41.8 pinned, caché de pub habilitado.
 
-### 8. Crashlytics + Firebase Analytics reales
-- `lib/utils/analytics.dart` ya está diseñado para el swap (contadores locales en SharedPreferences, call-sites listos). Hoy no hay visibilidad de crashes ni embudos de conversión Pro en producción.
-- **Acción**: agregar `firebase_crashlytics` + `firebase_analytics`, reemplazar el interior de cada método de `Analytics`. Los call-sites no se tocan.
+### 8. ✅ Crashlytics + Firebase Analytics reales
+- `firebase_core ^3.6.0`, `firebase_analytics ^11.3.0`, `firebase_crashlytics ^4.1.0` añadidos.
+- `main.dart`: `Firebase.initializeApp()` + `FlutterError.onError` + `PlatformDispatcher.instance.onError` → Crashlytics; envuelto en try-catch (la app funciona aunque Firebase no esté configurado).
+- `analytics.dart`: implementación reemplazada con Firebase Analytics (fire-and-forget, nunca crashea). `getStats()` sigue retornando contadores locales para la pantalla de ajustes. Cero cambios en call-sites.
 
 ### 9. Limpieza de legacy
 - `lib/const/translations.dart`: mapa de traducciones legacy que convive con los `.arb`; los mensajes de error de `TruthTable` (`UNCOMPLETED_PARENTHESIS`, etc.) todavía dependen de él y solo cubren es/en — los otros 8 idiomas reciben errores en otro idioma.

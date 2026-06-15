@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/const/routes.dart';
@@ -23,6 +27,9 @@ import 'package:tablas_de_verdad_2025/screens/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await _initFirebase();
+
   final settings = Settings();
   await settings.load();
   MobileAds.instance.initialize();
@@ -45,6 +52,27 @@ void main() async {
       ),
     ),
   );
+}
+
+Future<void> _initFirebase() async {
+  try {
+    await Firebase.initializeApp();
+
+    // Pass Flutter framework errors to Crashlytics.
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    // Pass uncaught asynchronous errors (Platform exceptions, isolate errors).
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+
+    Analytics.instance.markFirebaseReady();
+  } catch (e, stack) {
+    // Firebase not configured or google-services.json missing — app still works,
+    // just without remote analytics/crash reporting.
+    debugPrint('Firebase init skipped: $e\n$stack');
+  }
 }
 
 /// Extracts the `expression` query parameter from a deep link URI.
