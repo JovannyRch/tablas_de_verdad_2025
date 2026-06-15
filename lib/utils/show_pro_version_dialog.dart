@@ -152,7 +152,7 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 20,
                   offset: const Offset(0, -5),
                 ),
@@ -171,7 +171,7 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          const Color(0xFFFFD700).withOpacity(0.12),
+                          const Color(0xFFFFD700).withValues(alpha: 0.12),
                           Colors.transparent,
                         ],
                       ),
@@ -188,7 +188,7 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          const Color(0xFF8E2DE2).withOpacity(0.08),
+                          const Color(0xFF8E2DE2).withValues(alpha: 0.08),
                           Colors.transparent,
                         ],
                       ),
@@ -225,7 +225,7 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF4A00E0).withOpacity(0.3),
+                              color: const Color(0xFF4A00E0).withValues(alpha: 0.3),
                               blurRadius: 20,
                               offset: const Offset(0, 8),
                             ),
@@ -270,13 +270,13 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                         decoration: BoxDecoration(
                           color:
                               isDark
-                                  ? Colors.white.withOpacity(0.05)
+                                  ? Colors.white.withValues(alpha: 0.05)
                                   : const Color(0xFFF8F9FA),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color:
                                 isDark
-                                    ? Colors.white.withOpacity(0.1)
+                                    ? Colors.white.withValues(alpha: 0.1)
                                     : Colors.black12,
                           ),
                         ),
@@ -314,10 +314,10 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                           vertical: 12,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFC107).withOpacity(0.1),
+                          color: const Color(0xFFFFC107).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: const Color(0xFFFFC107).withOpacity(0.2),
+                            color: const Color(0xFFFFC107).withValues(alpha: 0.2),
                           ),
                         ),
                         child: Row(
@@ -351,10 +351,10 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                           padding: const EdgeInsets.all(12),
                           margin: const EdgeInsets.only(bottom: 16),
                           decoration: BoxDecoration(
-                            color: Colors.redAccent.withOpacity(0.1),
+                            color: Colors.redAccent.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: Colors.redAccent.withOpacity(0.2),
+                              color: Colors.redAccent.withValues(alpha: 0.2),
                             ),
                           ),
                           child: Text(
@@ -381,7 +381,7 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF4A00E0).withOpacity(0.3),
+                                color: const Color(0xFF4A00E0).withValues(alpha: 0.3),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),

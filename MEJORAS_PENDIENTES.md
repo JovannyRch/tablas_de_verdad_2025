@@ -30,22 +30,20 @@
 
 ## 🟠 P1 — Deuda técnica (rápida y de alto retorno)
 
-### 4. Migración `withOpacity` → `withValues`
-- ~240 avisos de deprecación en el analyzer (`flutter analyze`). Mecánico y seguro.
-- **Acción**: `withOpacity(x)` → `withValues(alpha: x)` en todo `lib/`. Un commit aislado.
+### 4. ✅ Migración `withOpacity` → `withValues`
+- 156 reemplazos en 20 archivos. `flutter analyze` sin warnings de deprecación.
 
-### 5. Limpieza de warnings reales
-- Imports sin usar: `lib/dialogs/history_dialog.dart:4-6`, `lib/screens/video_screen.dart:4`, `lib/widget/expression_card.dart:8-9`.
-- `must_be_immutable`: `PrivacyPolicyScreen.controller` y `ExpressionCard.t/_settings` guardan estado en widgets inmutables — mover a `State` o pasarlos en `build`.
-- `lib/widget/pro_icon.dart:8`: tipo privado expuesto en API pública.
+### 5. ✅ Limpieza de warnings reales
+- Eliminados todos los `unused_import` (`history_dialog`, `video_screen`, `expression_card`, `go_to_solution`, `settings_model`).
+- Corregidos ambos `must_be_immutable`: `PrivacyPolicyScreen.controller` → `final`; `ExpressionCard.t/_settings` → variables locales en `build()`.
+- `flutter analyze` sale con **0 warnings, 0 errors** (solo `info` de naming conventions legacy y prints de debug).
 
 ### 6. Tests del motor principal (`TruthTable`)
 - El motor nuevo (Karnaugh, simplificador) tiene tests; el motor original sigue sin cobertura directa: parser infijo→postfijo, errores de sintaxis, los 18 operadores, constantes 0/1, mayúsculas/minúsculas.
 - **Acción**: `test/truth_table_test.dart` con tabla de casos (expresión → tipo + filas esperadas). El validador de argumentos y el comparador de equivalencias también merecen tests (son lógica pura).
 
-### 7. CI con GitHub Actions
-- No hay pipeline; ahora que hay 53+ tests, vale la pena protegerlos.
-- **Acción**: workflow simple en cada push/PR: `flutter analyze --no-fatal-infos` + `flutter test`. ~20 líneas de YAML.
+### 7. ✅ CI con GitHub Actions
+- `.github/workflows/ci.yml`: `flutter analyze --no-fatal-infos` + `flutter test` en cada push/PR a `main`. Flutter 3.41.8 pinned, caché de pub habilitado.
 
 ### 8. Crashlytics + Firebase Analytics reales
 - `lib/utils/analytics.dart` ya está diseñado para el swap (contadores locales en SharedPreferences, call-sites listos). Hoy no hay visibilidad de crashes ni embudos de conversión Pro en producción.

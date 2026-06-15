@@ -447,7 +447,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
         color: isDark ? Colors.grey[900] : Colors.grey[100],
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+          color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
         ),
       ),
       child: Column(
@@ -492,10 +492,10 @@ class _StepTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey[850]?.withOpacity(0.5) : Colors.white,
+        color: isDark ? Colors.grey[850]?.withValues(alpha: 0.5) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+          color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
         ),
       ),
       child: ExpansionTile(
@@ -505,7 +505,7 @@ class _StepTile extends StatelessWidget {
         collapsedShape: const RoundedRectangleBorder(side: BorderSide.none),
         leading: CircleAvatar(
           radius: 12,
-          backgroundColor: kSeedColor.withOpacity(0.1),
+          backgroundColor: kSeedColor.withValues(alpha: 0.1),
           child: Text(
             '$index',
             style: const TextStyle(
@@ -627,11 +627,11 @@ class _TruthTableDataTable extends StatelessWidget {
       columnSpacing: 24,
       headingRowColor: WidgetStateProperty.all(
         isDark
-            ? Colors.white.withOpacity(0.05)
-            : Colors.black.withOpacity(0.02),
+            ? Colors.white.withValues(alpha: 0.05)
+            : Colors.black.withValues(alpha: 0.02),
       ),
       border: TableBorder.all(
-        color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+        color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
         width: 1,
         borderRadius: BorderRadius.circular(8),
       ),
@@ -731,9 +731,9 @@ class _FinalResultBanner extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: baseColor.withOpacity(isDark ? 0.15 : 0.1),
+        color: baseColor.withValues(alpha: isDark ? 0.15 : 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: baseColor.withOpacity(0.3)),
+        border: Border.all(color: baseColor.withValues(alpha: 0.3)),
       ),
       child: Material(
         color: Colors.transparent,
@@ -747,7 +747,7 @@ class _FinalResultBanner extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: baseColor.withOpacity(0.2),
+                    color: baseColor.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(icon, color: baseColor, size: 28),
@@ -814,17 +814,17 @@ class _FinalTableWidget extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey[850]?.withOpacity(0.5) : Colors.white,
+        color: isDark ? Colors.grey[850]?.withValues(alpha: 0.5) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.08),
+          color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.08),
         ),
         boxShadow:
             isDark
                 ? []
                 : [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),

@@ -27,7 +27,7 @@ Future<void> showRatingDialog(BuildContext context) async {
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -48,8 +48,8 @@ Future<void> showRatingDialog(BuildContext context) async {
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           colors: [
-                            Colors.amber.withOpacity(0.15),
-                            Colors.orange.withOpacity(0.05),
+                            Colors.amber.withValues(alpha: 0.15),
+                            Colors.orange.withValues(alpha: 0.05),
                           ],
                         ),
                       ),
@@ -73,7 +73,7 @@ Future<void> showRatingDialog(BuildContext context) async {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFFF8C00).withOpacity(0.3),
+                                color: const Color(0xFFFF8C00).withValues(alpha: 0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -140,7 +140,7 @@ Future<void> showRatingDialog(BuildContext context) async {
                                   BoxShadow(
                                     color: const Color(
                                       0xFFFF8C00,
-                                    ).withOpacity(0.3),
+                                    ).withValues(alpha: 0.3),
                                     blurRadius: 12,
                                     offset: const Offset(0, 4),
                                   ),

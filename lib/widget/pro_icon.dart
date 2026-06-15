@@ -59,7 +59,7 @@ class _ProIconButtonState extends State<ProIconButton>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.6),
+                      color: Colors.deepPurple.withValues(alpha: 0.6),
                       blurRadius: 8,
                       spreadRadius: 1,
                     ),
@@ -79,7 +79,7 @@ class _ProIconButtonState extends State<ProIconButton>
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),

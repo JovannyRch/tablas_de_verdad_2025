@@ -549,9 +549,9 @@ class _ResultCard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: color.withOpacity(0.3)),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
           child: Column(
             children: [
@@ -598,7 +598,7 @@ class _ResultCard extends StatelessWidget {
           const SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
-              color: isDark ? Colors.white.withOpacity(0.04) : Colors.grey[50],
+              color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.grey[50],
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark ? Colors.white12 : Colors.black12,

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/db/database.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
-import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
-import 'package:provider/provider.dart';
 
 class HistoryDialog extends StatefulWidget {
   const HistoryDialog({super.key});
@@ -90,7 +87,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                       color:
                           isDark
                               ? Colors.white10
-                              : Colors.black.withOpacity(0.05),
+                              : Colors.black.withValues(alpha: 0.05),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -141,7 +138,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                       filled: true,
                       fillColor:
                           isDark
-                              ? Colors.white.withOpacity(0.05)
+                              ? Colors.white.withValues(alpha: 0.05)
                               : Colors.grey[100],
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -187,7 +184,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                     horizontal: 20,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.redAccent.withOpacity(0.9),
+                                    color: Colors.redAccent.withValues(alpha: 0.9),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: const Icon(
@@ -210,14 +207,14 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                       decoration: BoxDecoration(
                                         color:
                                             isDark
-                                                ? Colors.white.withOpacity(0.05)
+                                                ? Colors.white.withValues(alpha: 0.05)
                                                 : Colors.grey[100],
                                         borderRadius: BorderRadius.circular(16),
                                         border: Border.all(
                                           color:
                                               isDark
                                                   ? Colors.white10
-                                                  : Colors.black.withOpacity(
+                                                  : Colors.black.withValues(alpha: 
                                                     0.05,
                                                   ),
                                         ),

@@ -40,7 +40,7 @@ class GhostTextEditingController extends TextEditingController {
           text: ghostText,
           style: style?.copyWith(
             color:
-                style.color?.withOpacity(0.3) ?? Colors.grey.withOpacity(0.3),
+                style.color?.withValues(alpha: 0.3) ?? Colors.grey.withValues(alpha: 0.3),
           ),
         ),
       );

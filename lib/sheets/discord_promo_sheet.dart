@@ -48,7 +48,7 @@ class _DiscordPromoSheet extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.3),
+              color: Colors.grey.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -56,7 +56,7 @@ class _DiscordPromoSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF5865F2).withOpacity(0.12),
+              color: const Color(0xFF5865F2).withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: const FaIcon(

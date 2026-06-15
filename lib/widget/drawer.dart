@@ -184,7 +184,7 @@ class AppDrawer extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kSeedColor, kSeedColor.withOpacity(0.8)],
+          colors: [kSeedColor, kSeedColor.withValues(alpha: 0.8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -197,7 +197,7 @@ class AppDrawer extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -218,7 +218,7 @@ class AppDrawer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 4,
                         offset: const Offset(0, 2),
                       ),
@@ -254,7 +254,7 @@ class AppDrawer extends StatelessWidget {
                 version,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white.withOpacity(0.6),
+                  color: Colors.white.withValues(alpha: 0.6),
                   fontWeight: FontWeight.w500,
                 ),
               );
@@ -281,7 +281,7 @@ class AppDrawer extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.amber.withOpacity(0.3),
+            color: Colors.amber.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -320,7 +320,7 @@ class AppDrawer extends StatelessWidget {
                       Text(
                         t.fullFeatureAccess,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
                         ),
@@ -376,7 +376,7 @@ class _DrawerTile extends StatelessWidget {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white.withOpacity(0.9) : Colors.black87,
+            color: isDark ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
             letterSpacing: -0.2,
           ),
         ),

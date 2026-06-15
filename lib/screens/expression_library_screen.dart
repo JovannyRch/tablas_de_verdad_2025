@@ -156,7 +156,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
         color: Theme.of(context).scaffoldBackgroundColor,
         border: Border(
           bottom: BorderSide(
-            color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
           ),
         ),
       ),
@@ -221,17 +221,17 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
       label: Text(label),
       selected: isSelected,
       onSelected: (_) => _onFilterSelected(value),
-      selectedColor: color.withOpacity(0.2),
+      selectedColor: color.withValues(alpha: 0.2),
       checkmarkColor: color,
       labelStyle: TextStyle(
         color:
             isSelected
                 ? color
-                : (isDark ? Colors.white60 : Colors.black.withOpacity(0.6)),
+                : (isDark ? Colors.white60 : Colors.black.withValues(alpha: 0.6)),
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         fontSize: 13,
       ),
-      backgroundColor: isDark ? Colors.white.withOpacity(0.05) : Colors.white,
+      backgroundColor: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
@@ -255,7 +255,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
             Icon(
               Icons.search_off_outlined,
               size: 64,
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 16),
             Text(
@@ -313,7 +313,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF3B82F6).withOpacity(0.3),
+            color: const Color(0xFF3B82F6).withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -327,7 +327,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
             top: -20,
             child: CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.white.withOpacity(0.1),
+              backgroundColor: Colors.white.withValues(alpha: 0.1),
             ),
           ),
           Padding(
@@ -337,7 +337,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -362,7 +362,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
                   t.expressionsRemaining(remainingCount),
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,

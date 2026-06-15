@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class VideoScreen extends StatefulWidget {
   final String videoUrl;

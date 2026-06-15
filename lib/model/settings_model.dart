@@ -2,7 +2,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tablas_de_verdad_2025/const/translations.dart';
 import 'package:tablas_de_verdad_2025/service/purchase_service.dart';
 
 enum TruthFormat { vf, binary } // V/F  o  1/0

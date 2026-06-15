@@ -229,7 +229,7 @@ class _QuizScreenState extends State<QuizScreen>
                         Icon(
                           Icons.check_circle_rounded,
                           size: 16,
-                          color: const Color(0xFF4CAF50).withOpacity(0.7),
+                          color: const Color(0xFF4CAF50).withValues(alpha: 0.7),
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -270,7 +270,7 @@ class _QuizScreenState extends State<QuizScreen>
                           color:
                               isDark
                                   ? Colors.white12
-                                  : Colors.black.withOpacity(0.06),
+                                  : Colors.black.withValues(alpha: 0.06),
                         ),
                       ),
                       child: Text(
@@ -396,20 +396,20 @@ class _AnswerButton extends StatelessWidget {
     Color textColor;
 
     if (!answered) {
-      bgColor = isDark ? Colors.white.withOpacity(0.05) : Colors.grey[50]!;
-      borderColor = isDark ? Colors.white12 : Colors.black.withOpacity(0.08);
+      bgColor = isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[50]!;
+      borderColor = isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.08);
       textColor = isDark ? Colors.white : Colors.black87;
     } else if (index == correctAnswer) {
-      bgColor = const Color(0xFF4CAF50).withOpacity(0.12);
-      borderColor = const Color(0xFF4CAF50).withOpacity(0.4);
+      bgColor = const Color(0xFF4CAF50).withValues(alpha: 0.12);
+      borderColor = const Color(0xFF4CAF50).withValues(alpha: 0.4);
       textColor = const Color(0xFF2E7D32);
     } else if (index == selectedAnswer) {
-      bgColor = const Color(0xFFE53935).withOpacity(0.12);
-      borderColor = const Color(0xFFE53935).withOpacity(0.4);
+      bgColor = const Color(0xFFE53935).withValues(alpha: 0.12);
+      borderColor = const Color(0xFFE53935).withValues(alpha: 0.4);
       textColor = const Color(0xFFC62828);
     } else {
-      bgColor = isDark ? Colors.white.withOpacity(0.03) : Colors.grey[100]!;
-      borderColor = isDark ? Colors.white10 : Colors.black.withOpacity(0.04);
+      bgColor = isDark ? Colors.white.withValues(alpha: 0.03) : Colors.grey[100]!;
+      borderColor = isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.04);
       textColor = isDark ? Colors.white38 : Colors.black26;
     }
 
@@ -480,9 +480,9 @@ class _FeedbackBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [

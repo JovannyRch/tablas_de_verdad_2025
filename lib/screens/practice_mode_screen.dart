@@ -141,11 +141,11 @@ class _StatsCard extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isDark ? Colors.white10 : Colors.black.withOpacity(0.06),
+          color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.06),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.3 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.06),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -269,9 +269,9 @@ class _DifficultyCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? color.withOpacity(0.1) : color.withOpacity(0.06),
+            color: isDark ? color.withValues(alpha: 0.1) : color.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: color.withOpacity(isDark ? 0.3 : 0.15)),
+            border: Border.all(color: color.withValues(alpha: isDark ? 0.3 : 0.15)),
           ),
           child: Row(
             children: [
@@ -279,7 +279,7 @@ class _DifficultyCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 26),

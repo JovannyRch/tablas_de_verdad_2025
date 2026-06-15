@@ -182,7 +182,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -452,7 +452,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         height: 64,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: const Color(0xFF4A00E0).withOpacity(0.1),
+                          color: const Color(0xFF4A00E0).withValues(alpha: 0.1),
                         ),
                         child: const Icon(
                           Icons.lock_outline_rounded,
@@ -490,7 +490,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF4CAF50).withOpacity(0.1),
+                            color: const Color(0xFF4CAF50).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(

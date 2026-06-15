@@ -5,18 +5,14 @@ import 'package:tablas_de_verdad_2025/model/list_response.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
-import 'package:tablas_de_verdad_2025/screens/video_screen.dart';
-import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
 
 class ExpressionCard extends StatelessWidget {
   final Expression expression;
-  late AppLocalizations t;
-  late Settings _settings;
   final bool showAds;
 
-  ExpressionCard({super.key, required this.expression, required this.showAds});
+  const ExpressionCard({super.key, required this.expression, required this.showAds});
 
   void _handleTap(BuildContext context) {
     Navigator.pushReplacementNamed(
@@ -28,11 +24,11 @@ class ExpressionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    t = AppLocalizations.of(context)!;
-    _settings = context.watch<Settings>();
+    final t = AppLocalizations.of(context)!;
+    final settings = context.watch<Settings>();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final typeData = _getTypeData(expression.type, isDark);
+    final typeData = _getTypeData(expression.type, isDark, t);
 
     var card = GestureDetector(
       onTap: () => _handleTap(context),
@@ -42,11 +38,11 @@ class ExpressionCard extends StatelessWidget {
           color: isDark ? Colors.grey[900] : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isDark ? Colors.white10 : Colors.black.withOpacity(0.05),
+            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.3 : 0.03),
+              color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.03),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -74,7 +70,7 @@ class ExpressionCard extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: typeData.color.withOpacity(0.1),
+                                color: typeData.color.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -123,7 +119,7 @@ class ExpressionCard extends StatelessWidget {
                                     color:
                                         isDark
                                             ? Colors.white10
-                                            : Colors.black.withOpacity(0.1),
+                                            : Colors.black.withValues(alpha: 0.1),
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -164,7 +160,7 @@ class ExpressionCard extends StatelessWidget {
       ),
     );
 
-    if (showAds && !_settings.isProVersion) {
+    if (showAds && !settings.isProVersion) {
       return Column(
         children: [card, const SizedBox(height: 16), BannerAdWidget()],
       );
@@ -173,7 +169,7 @@ class ExpressionCard extends StatelessWidget {
     }
   }
 
-  _TypeData _getTypeData(String? type, bool isDark) {
+  _TypeData _getTypeData(String? type, bool isDark, AppLocalizations t) {
     switch (type) {
       case "TAUTOLOGY":
         return _TypeData(t.tautology, Colors.green);

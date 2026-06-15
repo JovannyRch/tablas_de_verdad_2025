@@ -270,7 +270,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                 selected
                     ? [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
+                        color: Colors.black.withValues(alpha: 0.08),
                         blurRadius: 2,
                         offset: const Offset(0, 1),
                       ),
@@ -337,8 +337,8 @@ class _Key extends StatelessWidget {
         case KeyKind.operator:
           bg =
               isDark
-                  ? scheme.primaryContainer.withOpacity(0.3)
-                  : scheme.primaryContainer.withOpacity(0.1);
+                  ? scheme.primaryContainer.withValues(alpha: 0.3)
+                  : scheme.primaryContainer.withValues(alpha: 0.1);
           fg = isDark ? Colors.orange[300]! : kSeedColor;
           fontSize = 22;
           break;
@@ -366,7 +366,7 @@ class _Key extends StatelessWidget {
                     ? []
                     : [
                       BoxShadow(
-                        color: Colors.black.withOpacity(
+                        color: Colors.black.withValues(alpha: 
                           isEvaluate ? 0.12 : 0.05,
                         ),
                         blurRadius: isEvaluate ? 8 : 4,
@@ -403,8 +403,8 @@ class _Key extends StatelessWidget {
                     size: 8,
                     color:
                         isDark
-                            ? Colors.purple[300]!.withOpacity(0.7)
-                            : Colors.purple.withOpacity(0.5),
+                            ? Colors.purple[300]!.withValues(alpha: 0.7)
+                            : Colors.purple.withValues(alpha: 0.5),
                   ),
                 ),
             ],

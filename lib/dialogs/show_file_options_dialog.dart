@@ -25,7 +25,7 @@ Future<void> showFileOptionsDialog(
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -46,8 +46,8 @@ Future<void> showFileOptionsDialog(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           colors: [
-                            Colors.blueAccent.withOpacity(0.15),
-                            Colors.cyan.withOpacity(0.05),
+                            Colors.blueAccent.withValues(alpha: 0.15),
+                            Colors.cyan.withValues(alpha: 0.05),
                           ],
                         ),
                       ),
@@ -71,7 +71,7 @@ Future<void> showFileOptionsDialog(
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00BCD4).withOpacity(0.3),
+                                color: const Color(0xFF00BCD4).withValues(alpha: 0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -186,10 +186,10 @@ class _FileOptionItem extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color:
-              isDark ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FA),
+              isDark ? Colors.white.withValues(alpha: 0.05) : const Color(0xFFF8F9FA),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isDark ? Colors.white.withOpacity(0.1) : Colors.black12,
+            color: isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black12,
           ),
         ),
         child: Row(
@@ -197,7 +197,7 @@ class _FileOptionItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 24),

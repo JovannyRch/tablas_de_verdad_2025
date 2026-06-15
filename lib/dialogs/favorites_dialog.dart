@@ -65,7 +65,7 @@ class _FavoritesDialogState extends State<FavoritesDialog> {
                       color:
                           isDark
                               ? Colors.white10
-                              : Colors.black.withOpacity(0.05),
+                              : Colors.black.withValues(alpha: 0.05),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -95,7 +95,7 @@ class _FavoritesDialogState extends State<FavoritesDialog> {
                       alignment: Alignment.centerRight,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: Colors.redAccent.withOpacity(0.9),
+                        color: Colors.redAccent.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Icon(
@@ -116,14 +116,14 @@ class _FavoritesDialogState extends State<FavoritesDialog> {
                           decoration: BoxDecoration(
                             color:
                                 isDark
-                                    ? Colors.white.withOpacity(0.05)
+                                    ? Colors.white.withValues(alpha: 0.05)
                                     : Colors.grey[100],
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color:
                                   isDark
                                       ? Colors.white10
-                                      : Colors.black.withOpacity(0.05),
+                                      : Colors.black.withValues(alpha: 0.05),
                             ),
                           ),
                           child: Row(
@@ -131,7 +131,7 @@ class _FavoritesDialogState extends State<FavoritesDialog> {
                               Icon(
                                 Icons.favorite_rounded,
                                 size: 16,
-                                color: Colors.redAccent.withOpacity(0.6),
+                                color: Colors.redAccent.withValues(alpha: 0.6),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
