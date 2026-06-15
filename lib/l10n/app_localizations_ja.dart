@@ -678,4 +678,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String a11yKarnaughGroup(int number, String term, int count) {
     return 'グループ$number：$term、$countセル';
   }
+
+  @override
+  String get example => '例';
+
+  @override
+  String get hapticFeedback => '触覚フィードバック';
 }

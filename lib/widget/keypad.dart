@@ -4,7 +4,9 @@ import 'package:tablas_de_verdad_2025/class/operator.dart';
 import 'package:tablas_de_verdad_2025/const/calculator.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
+import 'package:tablas_de_verdad_2025/widget/theory_card.dart';
 import 'package:provider/provider.dart';
 
 enum KeyKind { operand, operator, action }
@@ -93,6 +95,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
             label: widget.calculatorCase == Case.lower ? c : c.toUpperCase(),
             kind: KeyKind.operand,
             onTap: () => widget.onTap(c),
+            hapticsEnabled: settings.hapticsEnabled,
           ),
         ),
         ...operators.map(
@@ -103,6 +106,8 @@ class _TruthKeypadState extends State<TruthKeypad> {
             isPremium: !settings.isProVersion && kPremiumOperators.contains(o),
             tooltip: _operatorBySymbol[o]?.getLocalizedName(locale),
             semanticLabel: opSemantic(o),
+            hapticsEnabled: settings.hapticsEnabled,
+            onLongPress: () => _showOperatorTheory(context, o),
           ),
         ),
       ];
@@ -119,6 +124,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                             : c.toUpperCase(),
                     kind: KeyKind.operand,
                     onTap: () => widget.onTap(c),
+                    hapticsEnabled: settings.hapticsEnabled,
                   ),
                 )
                 .toList();
@@ -134,6 +140,8 @@ class _TruthKeypadState extends State<TruthKeypad> {
                         !settings.isProVersion && kPremiumOperators.contains(o),
                     tooltip: _operatorBySymbol[o]?.getLocalizedName(locale),
                     semanticLabel: opSemantic(o),
+                    hapticsEnabled: settings.hapticsEnabled,
+                    onLongPress: () => _showOperatorTheory(context, o),
                   ),
                 )
                 .toList();
@@ -198,6 +206,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       colorOverride: Colors.redAccent,
                       onTap: widget.onClear,
                       semanticLabel: t?.clear_all,
+                      hapticsEnabled: settings.hapticsEnabled,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -207,6 +216,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       kind: KeyKind.action,
                       onTap: widget.onBackspace,
                       semanticLabel: t?.a11yBackspace,
+                      hapticsEnabled: settings.hapticsEnabled,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -216,6 +226,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       kind: KeyKind.action,
                       onTap: widget.onToggleAa,
                       semanticLabel: t?.a11yToggleCase,
+                      hapticsEnabled: settings.hapticsEnabled,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -228,6 +239,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       onTap: widget.onEvaluate,
                       isEvaluate: true,
                       semanticLabel: t?.a11yEvaluate,
+                      hapticsEnabled: settings.hapticsEnabled,
                     ),
                   ),
                 ],
@@ -235,6 +247,46 @@ class _TruthKeypadState extends State<TruthKeypad> {
             ),
           ),
       ],
+    );
+  }
+
+  /// Long-press on an operator: show its name, mini truth table and an
+  /// example in a dialog. No-op for symbols without theory (parentheses, etc.).
+  void _showOperatorTheory(BuildContext context, String symbol) {
+    final op = _operatorBySymbol[symbol];
+    if (op == null) return;
+    final locale = AppLocalizations.of(context)?.localeName ?? 'en';
+    final theory = OperatorTheory.forOperator(op, locale);
+    if (theory == null) return;
+
+    if (context.read<Settings>().hapticsEnabled) {
+      HapticFeedback.selectionClick();
+    }
+
+    showDialog<void>(
+      context: context,
+      builder: (ctx) {
+        final isDark = Theme.of(ctx).brightness == Brightness.dark;
+        return Dialog(
+          backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 28,
+            vertical: 24,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: TheoryCard(
+                theory: theory,
+                operatorName: op.getLocalizedName(locale),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -327,6 +379,12 @@ class _Key extends StatelessWidget {
   /// and action icons (⌫, =), so those pass an explicit, localized label.
   final String? semanticLabel;
 
+  /// Optional long-press handler (operators use it to show their theory).
+  final VoidCallback? onLongPress;
+
+  /// When false, key presses produce no haptic feedback.
+  final bool hapticsEnabled;
+
   const _Key({
     required this.label,
     required this.kind,
@@ -336,7 +394,23 @@ class _Key extends StatelessWidget {
     this.isEvaluate = false,
     this.tooltip,
     this.semanticLabel,
+    this.onLongPress,
+    this.hapticsEnabled = true,
   });
+
+  /// Tactile feedback differentiated by key role: a subtle selection click for
+  /// input keys, a light tap for editing actions, and a firmer medium impact to
+  /// confirm evaluation.
+  void _fireHaptic() {
+    if (!hapticsEnabled) return;
+    if (isEvaluate) {
+      HapticFeedback.mediumImpact();
+    } else if (kind == KeyKind.action) {
+      HapticFeedback.lightImpact();
+    } else {
+      HapticFeedback.selectionClick();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -376,9 +450,10 @@ class _Key extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          HapticFeedback.lightImpact();
+          _fireHaptic();
           onTap();
         },
+        onLongPress: onLongPress,
         borderRadius: BorderRadius.circular(12),
         child: Ink(
           decoration: BoxDecoration(

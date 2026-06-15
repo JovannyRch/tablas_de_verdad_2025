@@ -702,4 +702,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String a11yKarnaughGroup(int number, String term, int count) {
     return 'Группа $number: $term, $count ячеек';
   }
+
+  @override
+  String get example => 'Пример';
+
+  @override
+  String get hapticFeedback => 'Виброотклик';
 }

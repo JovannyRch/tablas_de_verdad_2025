@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
 
 /// A compact, expandable theory card that explains a logical operator.
@@ -81,7 +82,7 @@ class TheoryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Example',
+                      AppLocalizations.of(context)?.example ?? 'Example',
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w700,

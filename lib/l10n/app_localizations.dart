@@ -1409,6 +1409,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Grupo {number}: {term}, {count} celdas'**
   String a11yKarnaughGroup(int number, String term, int count);
+
+  /// No description provided for @example.
+  ///
+  /// In es, this message translates to:
+  /// **'Ejemplo'**
+  String get example;
+
+  /// No description provided for @hapticFeedback.
+  ///
+  /// In es, this message translates to:
+  /// **'Vibración al pulsar'**
+  String get hapticFeedback;
 }
 
 class _AppLocalizationsDelegate

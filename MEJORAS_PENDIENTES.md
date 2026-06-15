@@ -64,10 +64,10 @@
 ### 11. Espaciado consistente en columnas intermedias
 - Tras el fix de paréntesis, los encabezados compuestos quedan uniformes, pero conviene revisar visualmente expresiones muy largas (4+ variables con anidación): el header de la última columna puede desbordar. Considerar `Tooltip` con la expresión completa o fuente más chica a partir de N caracteres.
 
-### 12. Teclado (keypad)
-- Haptics al pulsar (la app RN de K-maps ya tiene `utils/haptics.ts` como referencia).
-- Long-press en un operador → tooltip con nombre y tabla de verdad mini (ya existe `operator_theory.dart` con ese contenido).
-- Paréntesis inteligentes: al pulsar `(` con texto seleccionado, envolver la selección.
+### 12. ✅ Teclado (keypad)
+- Haptics diferenciados por tipo de tecla: `selectionClick` para entrada (operandos/operadores), `lightImpact` para acciones (AC/⌫/Aa), `mediumImpact` para evaluar (=). Toggle en Ajustes (`hapticsEnabled`, persistido; default on) — clave l10n `hapticFeedback` ×10.
+- Long-press en un operador → diálogo con `TheoryCard` (nombre localizado + mini tabla de verdad + ejemplo), reutilizando `OperatorTheory`. Paréntesis/llaves sin teoría no hacen nada. Se localizó "Example" (clave `example` ×10).
+- Paréntesis inteligentes: pulsar `(` con texto seleccionado envuelve la selección (`p∧q` → `(p∧q)`), cursor tras `)`. Lógica extraída a `lib/utils/keypad_input.dart` (puro) con 7 tests.
 
 ### 13. Historial y favoritos
 - Mostrar el **tipo** (tautología/contradicción/contingencia) como chip de color en cada item del historial (ya se calculó una vez; persistirlo en la tabla SQLite).

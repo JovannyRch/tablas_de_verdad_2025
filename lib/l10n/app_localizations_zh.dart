@@ -672,4 +672,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String a11yKarnaughGroup(int number, String term, int count) {
     return '分组 $number：$term，$count 个单元格';
   }
+
+  @override
+  String get example => '示例';
+
+  @override
+  String get hapticFeedback => '触觉反馈';
 }

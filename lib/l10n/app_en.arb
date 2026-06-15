@@ -242,5 +242,7 @@
   "a11yToggleCase": "Toggle case",
   "a11yEvaluate": "Calculate",
   "a11yKarnaughMap": "Karnaugh map with {count} groups",
-  "a11yKarnaughGroup": "Group {number}: {term}, {count} cells"
+  "a11yKarnaughGroup": "Group {number}: {term}, {count} cells",
+  "example": "Example",
+  "hapticFeedback": "Haptic feedback"
 }

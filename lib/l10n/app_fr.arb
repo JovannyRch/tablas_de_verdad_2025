@@ -222,5 +222,7 @@
   "a11yToggleCase": "Majuscules/minuscules",
   "a11yEvaluate": "Calculer",
   "a11yKarnaughMap": "Carte de Karnaugh avec {count} groupes",
-  "a11yKarnaughGroup": "Groupe {number} : {term}, {count} cellules"
+  "a11yKarnaughGroup": "Groupe {number} : {term}, {count} cellules",
+  "example": "Exemple",
+  "hapticFeedback": "Retour haptique"
 }

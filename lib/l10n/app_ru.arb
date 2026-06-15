@@ -222,5 +222,7 @@
   "a11yToggleCase": "Регистр букв",
   "a11yEvaluate": "Вычислить",
   "a11yKarnaughMap": "Карта Карно с {count} группами",
-  "a11yKarnaughGroup": "Группа {number}: {term}, {count} ячеек"
+  "a11yKarnaughGroup": "Группа {number}: {term}, {count} ячеек",
+  "example": "Пример",
+  "hapticFeedback": "Виброотклик"
 }

@@ -256,5 +256,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "example": "Ejemplo",
+  "hapticFeedback": "Vibración al pulsar"
 }

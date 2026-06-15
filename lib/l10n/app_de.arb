@@ -222,5 +222,7 @@
   "a11yToggleCase": "Groß-/Kleinschreibung",
   "a11yEvaluate": "Berechnen",
   "a11yKarnaughMap": "Karnaugh-Diagramm mit {count} Gruppen",
-  "a11yKarnaughGroup": "Gruppe {number}: {term}, {count} Zellen"
+  "a11yKarnaughGroup": "Gruppe {number}: {term}, {count} Zellen",
+  "example": "Beispiel",
+  "hapticFeedback": "Haptisches Feedback"
 }

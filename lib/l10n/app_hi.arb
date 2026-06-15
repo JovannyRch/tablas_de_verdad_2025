@@ -222,5 +222,7 @@
   "a11yToggleCase": "केस बदलें",
   "a11yEvaluate": "गणना करें",
   "a11yKarnaughMap": "{count} समूहों वाला कर्नॉ मानचित्र",
-  "a11yKarnaughGroup": "समूह {number}: {term}, {count} सेल"
+  "a11yKarnaughGroup": "समूह {number}: {term}, {count} सेल",
+  "example": "उदाहरण",
+  "hapticFeedback": "स्पर्श प्रतिक्रिया"
 }

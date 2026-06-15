@@ -145,6 +145,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                 ),
               ),
+              const Divider(indent: 16, endIndent: 16, height: 1),
+              _SettingTile(
+                icon: Icons.vibration_outlined,
+                title: t.hapticFeedback,
+                trailing: Switch.adaptive(
+                  value: s.hapticsEnabled,
+                  onChanged:
+                      (val) =>
+                          context.read<Settings>().update(hapticsEnabled: val),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -411,7 +422,9 @@ class _SettingTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(

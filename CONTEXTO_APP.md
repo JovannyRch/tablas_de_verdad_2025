@@ -189,7 +189,7 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 ```
 
 ### SharedPreferences
-- `locale`, `themeMode`, `truthFormat`, `mintermOrder`, `keypadMode`, `isProVersion`
+- `locale`, `themeMode`, `truthFormat`, `mintermOrder`, `keypadMode`, `hapticsEnabled`, `isProVersion`
 - `stat_*`: contadores locales de Analytics
 
 ---
@@ -203,8 +203,9 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 | `karnaugh_map_view_test.dart` | 5 | Renderizado del mapa + semántica a11y |
 | `logic_simplifier_test.dart` | 24 | 20 leyes + soundness |
 | `step_parenthesization_test.dart` | 8 | wrapOperand / displayOperand |
+| `keypad_input_test.dart` | 7 | Paréntesis inteligentes + inserción |
 
-**Total: 123 tests** — ejecutar con `flutter test`
+**Total: 130 tests** — ejecutar con `flutter test`
 
 ---
 

@@ -703,4 +703,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String a11yKarnaughGroup(int number, String term, int count) {
     return 'Groupe $number : $term, $count cellules';
   }
+
+  @override
+  String get example => 'Exemple';
+
+  @override
+  String get hapticFeedback => 'Retour haptique';
 }

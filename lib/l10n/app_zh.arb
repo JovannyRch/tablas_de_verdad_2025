@@ -222,5 +222,7 @@
   "a11yToggleCase": "切换大小写",
   "a11yEvaluate": "计算",
   "a11yKarnaughMap": "包含 {count} 个分组的卡诺图",
-  "a11yKarnaughGroup": "分组 {number}：{term}，{count} 个单元格"
+  "a11yKarnaughGroup": "分组 {number}：{term}，{count} 个单元格",
+  "example": "示例",
+  "hapticFeedback": "触觉反馈"
 }

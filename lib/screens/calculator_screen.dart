@@ -22,6 +22,7 @@ import 'package:tablas_de_verdad_2025/utils/rewarded_ad_helper.dart';
 
 import 'package:tablas_de_verdad_2025/utils/ghost_text_controller.dart';
 import 'package:tablas_de_verdad_2025/utils/expression_validator.dart';
+import 'package:tablas_de_verdad_2025/utils/keypad_input.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -308,20 +309,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void _insert(String txt) {
     if (!_focusNode.hasFocus) _focusNode.requestFocus();
 
-    final oldText = _controller.text;
-    var sel = _controller.selection;
-
-    if (!sel.isValid || sel.start < 0 || sel.end < 0) {
-      sel = TextSelection.collapsed(offset: oldText.length);
-    }
-
-    final piece = _case == Case.lower ? txt.toLowerCase() : txt.toUpperCase();
-
-    final newText = oldText.replaceRange(sel.start, sel.end, piece);
-
-    _controller.value = TextEditingValue(
-      text: newText,
-      selection: TextSelection.collapsed(offset: sel.start + piece.length),
+    _controller.value = KeypadInput.insert(
+      text: _controller.text,
+      selection: _controller.selection,
+      rawPiece: txt,
+      keyboardCase: _case,
     );
   }
 
@@ -414,7 +406,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     // Mostrar promo de Discord tras la 5ta evaluación (una sola vez)
     if (context.mounted) {
-      final showDiscord = await shouldShowDiscordPromo(_settings.operationsCount);
+      final showDiscord = await shouldShowDiscordPromo(
+        _settings.operationsCount,
+      );
       if (showDiscord && context.mounted) {
         showDiscordPromoSheet(context);
       }
@@ -490,7 +484,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF4CAF50).withValues(alpha: 0.1),
+                            color: const Color(
+                              0xFF4CAF50,
+                            ).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(

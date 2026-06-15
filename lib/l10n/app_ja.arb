@@ -222,5 +222,7 @@
   "a11yToggleCase": "大文字小文字切替",
   "a11yEvaluate": "計算",
   "a11yKarnaughMap": "{count}個のグループを持つカルノー図",
-  "a11yKarnaughGroup": "グループ{number}：{term}、{count}セル"
+  "a11yKarnaughGroup": "グループ{number}：{term}、{count}セル",
+  "example": "例",
+  "hapticFeedback": "触覚フィードバック"
 }

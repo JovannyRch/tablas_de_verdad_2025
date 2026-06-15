@@ -16,6 +16,7 @@ class Settings extends ChangeNotifier {
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
   KeypadMode keypadMode = KeypadMode.advanced;
+  bool hapticsEnabled = true;
   bool isProVersion = false;
   int operationsCount = 0;
   int adFrequency =
@@ -44,6 +45,7 @@ class Settings extends ChangeNotifier {
     themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? 0];
     truthFormat = TruthFormat.values[prefs.getInt('truthFormat') ?? 0];
     mintermOrder = MintermOrder.values[prefs.getInt('mintermOrder') ?? 0];
+    hapticsEnabled = prefs.getBool('hapticsEnabled') ?? true;
 
     // Restaurar operationsCount persistido
     operationsCount = prefs.getInt('operationsCount') ?? 0;
@@ -82,6 +84,7 @@ class Settings extends ChangeNotifier {
     TruthFormat? truthFormat,
     MintermOrder? mintermOrder,
     KeypadMode? keypadMode,
+    bool? hapticsEnabled,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     if (locale != null) {
@@ -104,6 +107,10 @@ class Settings extends ChangeNotifier {
     if (keypadMode != null) {
       this.keypadMode = keypadMode;
       prefs.setInt('keypadMode', keypadMode.index);
+    }
+    if (hapticsEnabled != null) {
+      this.hapticsEnabled = hapticsEnabled;
+      prefs.setBool('hapticsEnabled', hapticsEnabled);
     }
     notifyListeners();
   }
