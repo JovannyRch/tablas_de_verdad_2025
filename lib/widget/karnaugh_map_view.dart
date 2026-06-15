@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/class/karnaugh_map.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 
 /// Distinct colors assigned to Karnaugh groups (and their legend entries).
 const List<Color> kKarnaughGroupColors = [
@@ -23,12 +24,34 @@ class KarnaughMapView extends StatelessWidget {
   final KarnaughResult result;
   final bool isDark;
 
-  const KarnaughMapView({super.key, required this.result, required this.isDark});
+  const KarnaughMapView({
+    super.key,
+    required this.result,
+    required this.isDark,
+  });
 
   @override
   Widget build(BuildContext context) {
     const labelSize = 36.0;
     final targetValue = result.form == KarnaughForm.sop ? 1 : 0;
+    final t = AppLocalizations.of(context);
+
+    // The colored group overlay is a CustomPaint — invisible to screen
+    // readers. Describe each implicant (term + size) so the minimal cover is
+    // conveyed without sight. Constant functions have no groups.
+    String? groupsSemantics;
+    if (t != null) {
+      if (result.groups.isEmpty) {
+        groupsSemantics = t.karnaughConstant;
+      } else {
+        final parts = <String>[t.a11yKarnaughMap(result.groups.length)];
+        for (int i = 0; i < result.groups.length; i++) {
+          final g = result.groups[i];
+          parts.add(t.a11yKarnaughGroup(i + 1, g.term, g.cells.length));
+        }
+        groupsSemantics = parts.join('. ');
+      }
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -105,11 +128,15 @@ class KarnaughMapView extends StatelessWidget {
                   top: labelSize,
                   width: gridWidth,
                   height: gridHeight,
-                  child: IgnorePointer(
-                    child: CustomPaint(
-                      painter: _GroupPainter(
-                        result: result,
-                        cellSize: cellSize,
+                  child: Semantics(
+                    container: true,
+                    label: groupsSemantics,
+                    child: IgnorePointer(
+                      child: CustomPaint(
+                        painter: _GroupPainter(
+                          result: result,
+                          cellSize: cellSize,
+                        ),
                       ),
                     ),
                   ),
@@ -208,14 +235,12 @@ class _GroupPainter extends CustomPainter {
       final color = karnaughGroupColor(i);
       final inset = (3.0 + i * 3.0).clamp(3.0, cellSize / 2 - 6);
 
-      final rowFragments = _fragments(
-        {for (final cell in group.cells) cell.row},
-        result.rowCount,
-      );
-      final colFragments = _fragments(
-        {for (final cell in group.cells) cell.col},
-        result.colCount,
-      );
+      final rowFragments = _fragments({
+        for (final cell in group.cells) cell.row,
+      }, result.rowCount);
+      final colFragments = _fragments({
+        for (final cell in group.cells) cell.col,
+      }, result.colCount);
 
       final fill =
           Paint()

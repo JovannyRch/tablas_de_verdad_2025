@@ -74,9 +74,11 @@
 - Estado vacío con ilustración/CTA en historial y favoritos.
 - Swipe para borrar items.
 
-### 14. Accesibilidad
-- `Semantics` en el teclado y el mapa de Karnaugh (hoy el CustomPaint es invisible para lectores de pantalla — describir grupos: "Grupo 1: A y no B, 4 celdas").
-- Verificar contraste de `kLabelColor` sobre fondos claros y escalado de fuente del sistema (los headers de tabla con `fontSize` fijo).
+### 14. ✅ Accesibilidad
+- `Semantics` en el teclado: cada tecla anuncia una etiqueta hablada (operadores → nombre localizado + "premium" si está gateado; acciones AC/⌫/Aa/= con claves `a11y*`). Vía `Text(semanticsLabel:)` para no perder la acción de tap del `InkWell`.
+- `Semantics` en el mapa de Karnaugh: el overlay `CustomPaint` (antes invisible) ahora describe la cobertura mínima — "Karnaugh map with N groups. Group 1: ¬A ∧ C, 4 cells" (`a11yKarnaughMap`/`a11yKarnaughGroup`, 10 idiomas); funciones constantes usan `karnaughConstant`. +2 tests de semántica.
+- Contraste: `kLabelColor` subido de `black54` a `0xA6000000` (~65%) para pasar AA sobre las superficies crema.
+- Escalado de fuente: el `DataTable` denso (alturas fijas 40/44) ahora acota el `textScaler` a 1.5× con `MediaQuery.withClampedTextScaling` para evitar recortes.
 
 ### 15. Tablet / landscape
 - En tablets la calculadora estira el keypad sin límite. `maxWidth` en el contenido + layout de dos paneles en landscape (entrada izquierda, resultado derecha) es factible con la estructura actual.

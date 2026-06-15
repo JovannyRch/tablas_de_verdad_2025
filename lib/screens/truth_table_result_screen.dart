@@ -235,7 +235,7 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   child: _FinalTableWidget(truthTable: widget.truthTable),
                 ),
-                 // Tab 3: Step-by-step simplification with laws
+                // Tab 3: Step-by-step simplification with laws
                 SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   child: _SimplificationTab(truthTable: widget.truthTable),
@@ -311,7 +311,12 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
       isScrollControlled: true,
       builder:
           (_) => Container(
-            padding: EdgeInsets.fromLTRB(24, 8, 24, MediaQuery.of(context).padding.bottom + 24),
+            padding: EdgeInsets.fromLTRB(
+              24,
+              8,
+              24,
+              MediaQuery.of(context).padding.bottom + 24,
+            ),
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF1E1E2E) : Colors.white,
               borderRadius: const BorderRadius.vertical(
@@ -321,97 +326,97 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-              children: [
-                // Drag handle
-                Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    color: isDark ? Colors.white24 : Colors.black12,
-                    borderRadius: BorderRadius.circular(2),
+                children: [
+                  // Drag handle
+                  Container(
+                    width: 40,
+                    height: 4,
+                    margin: const EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: isDark ? Colors.white24 : Colors.black12,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
-                ),
-                // Icon
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: baseColor.withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
+                  // Icon
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: baseColor.withValues(alpha: 0.12),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, color: baseColor, size: 36),
                   ),
-                  child: Icon(icon, color: baseColor, size: 36),
-                ),
-                const SizedBox(height: 16),
-                // Title
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800,
-                    color: isDark ? Colors.white : Colors.black87,
+                  const SizedBox(height: 16),
+                  // Title
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                // Expression
-                Text(
-                  widget.expression ?? widget.truthTable.infix,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Courier',
-                    color: baseColor,
+                  const SizedBox(height: 4),
+                  // Expression
+                  Text(
+                    widget.expression ?? widget.truthTable.infix,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Courier',
+                      color: baseColor,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                // Description
-                Text(
-                  description,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 1.6,
-                    color: isDark ? Colors.white60 : Colors.black54,
+                  const SizedBox(height: 16),
+                  // Description
+                  Text(
+                    description,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 1.6,
+                      color: isDark ? Colors.white60 : Colors.black54,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                // Stats row
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
+                  const SizedBox(height: 16),
+                  // Stats row
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isDark
+                              ? Colors.white.withValues(alpha: 0.05)
+                              : Colors.grey[50],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _statChip(
+                          _localization.propositions,
+                          '${widget.truthTable.variables.length}',
+                          isDark,
+                        ),
+                        _statChip(
+                          _localization.numberOfRows,
+                          '${widget.truthTable.totalRows}',
+                          isDark,
+                        ),
+                        _statChip(
+                          _localization.steps,
+                          '${widget.steps.length}',
+                          isDark,
+                        ),
+                      ],
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color:
-                        isDark
-                            ? Colors.white.withValues(alpha: 0.05)
-                            : Colors.grey[50],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _statChip(
-                        _localization.propositions,
-                        '${widget.truthTable.variables.length}',
-                        isDark,
-                      ),
-                      _statChip(
-                        _localization.numberOfRows,
-                        '${widget.truthTable.totalRows}',
-                        isDark,
-                      ),
-                      _statChip(
-                        _localization.steps,
-                        '${widget.steps.length}',
-                        isDark,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
     );
   }
 
@@ -619,67 +624,75 @@ class _TruthTableDataTable extends StatelessWidget {
     final localization = AppLocalizations.of(context)!;
     final lastCol = headers.length - 1;
 
-    return DataTable(
-      headingRowHeight: 44,
-      dataRowMinHeight: 32,
-      dataRowMaxHeight: 40,
-      horizontalMargin: 12,
-      columnSpacing: 24,
-      headingRowColor: WidgetStateProperty.all(
-        isDark
-            ? Colors.white.withValues(alpha: 0.05)
-            : Colors.black.withValues(alpha: 0.02),
-      ),
-      border: TableBorder.all(
-        color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
-        width: 1,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      columns: [
-        for (int i = 0; i < headers.length; i++)
-          DataColumn(
-            label: Expanded(
-              child: Text(
-                headers[i],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                  color:
-                      (highlightLastColumn && i == lastCol) ? kSeedColor : null,
+    // Rows/heading have fixed heights (40/44), so unbounded system font scaling
+    // clips cell text. Honor scaling up to 1.5× — beyond that the dense grid
+    // breaks; the user can still zoom the screen for more.
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: 1.5,
+      child: DataTable(
+        headingRowHeight: 44,
+        dataRowMinHeight: 32,
+        dataRowMaxHeight: 40,
+        horizontalMargin: 12,
+        columnSpacing: 24,
+        headingRowColor: WidgetStateProperty.all(
+          isDark
+              ? Colors.white.withValues(alpha: 0.05)
+              : Colors.black.withValues(alpha: 0.02),
+        ),
+        border: TableBorder.all(
+          color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
+          width: 1,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        columns: [
+          for (int i = 0; i < headers.length; i++)
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  headers[i],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                    color:
+                        (highlightLastColumn && i == lastCol)
+                            ? kSeedColor
+                            : null,
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
-      rows: [
-        for (final row in rows)
-          DataRow(
-            cells: [
-              for (int i = 0; i < row.length; i++)
-                DataCell(
-                  Center(
-                    child: Text(
-                      getCellValue(
-                        localization.localeName,
-                        settings.truthFormat,
-                        row[i],
-                      ),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight:
-                            (highlightLastColumn && i == lastCol)
-                                ? FontWeight.w700
-                                : FontWeight.w500,
-                        color: _getCellColor(row[i], isDark),
+        ],
+        rows: [
+          for (final row in rows)
+            DataRow(
+              cells: [
+                for (int i = 0; i < row.length; i++)
+                  DataCell(
+                    Center(
+                      child: Text(
+                        getCellValue(
+                          localization.localeName,
+                          settings.truthFormat,
+                          row[i],
+                        ),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight:
+                              (highlightLastColumn && i == lastCol)
+                                  ? FontWeight.w700
+                                  : FontWeight.w500,
+                          color: _getCellColor(row[i], isDark),
+                        ),
                       ),
                     ),
                   ),
-                ),
-            ],
-          ),
-      ],
+              ],
+            ),
+        ],
+      ),
     );
   }
 
@@ -1508,7 +1521,9 @@ class _KarnaughTabState extends State<_KarnaughTab> {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color:
-                  isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.06),
+                  isDark
+                      ? Colors.white10
+                      : Colors.black.withValues(alpha: 0.06),
             ),
           ),
           child: KarnaughMapView(result: result, isDark: isDark),
@@ -1802,7 +1817,9 @@ class _SimplificationTabState extends State<_SimplificationTab> {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color:
-                  isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.08),
+                  isDark
+                      ? Colors.white10
+                      : Colors.black.withValues(alpha: 0.08),
             ),
           ),
           child: Column(

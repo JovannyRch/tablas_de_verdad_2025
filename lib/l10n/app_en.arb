@@ -237,5 +237,10 @@
   "lawFactorization": "Distributivity (factoring)",
   "instagramPromoTitle": "Follow me on Instagram!",
   "instagramPromoButton": "Follow on Instagram",
-  "instagramPromoLater": "Maybe later"
+  "instagramPromoLater": "Maybe later",
+  "a11yBackspace": "Delete",
+  "a11yToggleCase": "Toggle case",
+  "a11yEvaluate": "Calculate",
+  "a11yKarnaughMap": "Karnaugh map with {count} groups",
+  "a11yKarnaughGroup": "Group {number}: {term}, {count} cells"
 }

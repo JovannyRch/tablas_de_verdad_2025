@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tablas_de_verdad_2025/class/karnaugh_map.dart';
+import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
 import 'package:tablas_de_verdad_2025/widget/karnaugh_map_view.dart';
 
 void main() {
   Future<void> pumpMap(WidgetTester tester, KarnaughResult result) async {
     await tester.pumpWidget(
       MaterialApp(
+        home: Scaffold(
+          body: KarnaughMapView(result: result, isDark: false),
+        ),
+      ),
+    );
+  }
+
+  Future<void> pumpLocalizedMap(
+    WidgetTester tester,
+    KarnaughResult result,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        locale: const Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: KarnaughMapView(result: result, isDark: false),
         ),
@@ -64,5 +81,45 @@ void main() {
     await pumpMap(tester, result);
     expect(result.isConstant, true);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('exposes the minimal cover to screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+
+    // minterms 2,3 over [A,B] -> both have A=1 -> single group, term "A".
+    final result = KarnaughSolver.solve(
+      variables: ['A', 'B'],
+      minterms: {2, 3},
+      form: KarnaughForm.sop,
+    );
+    await pumpLocalizedMap(tester, result);
+
+    expect(
+      find.bySemanticsLabel(
+        'Karnaugh map with 1 groups. Group 1: A, 2 cells',
+      ),
+      findsOneWidget,
+    );
+
+    handle.dispose();
+  });
+
+  testWidgets('describes a constant map for screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+
+    final result = KarnaughSolver.solve(
+      variables: ['A', 'B', 'C'],
+      minterms: {0, 1, 2, 3, 4, 5, 6, 7},
+      form: KarnaughForm.sop,
+    );
+    await pumpLocalizedMap(tester, result);
+
+    expect(result.groups, isEmpty);
+    expect(
+      find.bySemanticsLabel(RegExp('constant', caseSensitive: false)),
+      findsOneWidget,
+    );
+
+    handle.dispose();
   });
 }

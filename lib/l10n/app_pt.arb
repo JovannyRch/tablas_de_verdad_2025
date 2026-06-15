@@ -217,5 +217,10 @@
   "lawFactorization": "Distributiva (fatoração)",
   "instagramPromoTitle": "Siga-me no Instagram!",
   "instagramPromoButton": "Seguir no Instagram",
-  "instagramPromoLater": "Talvez mais tarde"
+  "instagramPromoLater": "Talvez mais tarde",
+  "a11yBackspace": "Apagar",
+  "a11yToggleCase": "Alternar maiúsculas",
+  "a11yEvaluate": "Calcular",
+  "a11yKarnaughMap": "Mapa de Karnaugh com {count} grupos",
+  "a11yKarnaughGroup": "Grupo {number}: {term}, {count} células"
 }

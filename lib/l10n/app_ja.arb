@@ -217,5 +217,10 @@
   "lawFactorization": "分配律（因数分解）",
   "instagramPromoTitle": "Instagramでフォローしてください！",
   "instagramPromoButton": "Instagramでフォロー",
-  "instagramPromoLater": "後で"
+  "instagramPromoLater": "後で",
+  "a11yBackspace": "削除",
+  "a11yToggleCase": "大文字小文字切替",
+  "a11yEvaluate": "計算",
+  "a11yKarnaughMap": "{count}個のグループを持つカルノー図",
+  "a11yKarnaughGroup": "グループ{number}：{term}、{count}セル"
 }

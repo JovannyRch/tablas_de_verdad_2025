@@ -200,11 +200,11 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 |---|---|---|
 | `truth_table_test.dart` | 68 | Motor TruthTable, EquivalenceChecker, ExpressionValidator |
 | `karnaugh_map_test.dart` | 17 | Quine–McCluskey, layout, grupos |
-| `karnaugh_map_view_test.dart` | 3 (×17 subtests) | Renderizado del mapa |
+| `karnaugh_map_view_test.dart` | 5 | Renderizado del mapa + semántica a11y |
 | `logic_simplifier_test.dart` | 24 | 20 leyes + soundness |
 | `step_parenthesization_test.dart` | 8 | wrapOperand / displayOperand |
 
-**Total: 121 tests** — ejecutar con `flutter test`
+**Total: 123 tests** — ejecutar con `flutter test`
 
 ---
 

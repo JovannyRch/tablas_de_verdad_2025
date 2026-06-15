@@ -217,5 +217,10 @@
   "lawFactorization": "Distributivität (Ausklammern)",
   "instagramPromoTitle": "Folge mir auf Instagram!",
   "instagramPromoButton": "Auf Instagram folgen",
-  "instagramPromoLater": "Vielleicht später"
+  "instagramPromoLater": "Vielleicht später",
+  "a11yBackspace": "Löschen",
+  "a11yToggleCase": "Groß-/Kleinschreibung",
+  "a11yEvaluate": "Berechnen",
+  "a11yKarnaughMap": "Karnaugh-Diagramm mit {count} Gruppen",
+  "a11yKarnaughGroup": "Gruppe {number}: {term}, {count} Zellen"
 }

@@ -231,5 +231,30 @@
   },
   "instagramPromoTitle": "¡Sígueme en Instagram!",
   "instagramPromoButton": "Seguir en Instagram",
-  "instagramPromoLater": "Quizás más tarde"
+  "instagramPromoLater": "Quizás más tarde",
+  "a11yBackspace": "Borrar",
+  "a11yToggleCase": "Mayúsculas o minúsculas",
+  "a11yEvaluate": "Calcular",
+  "a11yKarnaughMap": "Mapa de Karnaugh con {count} grupos",
+  "a11yKarnaughGroup": "Grupo {number}: {term}, {count} celdas",
+  "@a11yKarnaughMap": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@a11yKarnaughGroup": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "term": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -217,5 +217,10 @@
   "lawFactorization": "वितरण (गुणनखंडन)",
   "instagramPromoTitle": "Instagram पर फॉलो करें!",
   "instagramPromoButton": "Instagram पर फॉलो करें",
-  "instagramPromoLater": "शायद बाद में"
+  "instagramPromoLater": "शायद बाद में",
+  "a11yBackspace": "मिटाएँ",
+  "a11yToggleCase": "केस बदलें",
+  "a11yEvaluate": "गणना करें",
+  "a11yKarnaughMap": "{count} समूहों वाला कर्नॉ मानचित्र",
+  "a11yKarnaughGroup": "समूह {number}: {term}, {count} सेल"
 }

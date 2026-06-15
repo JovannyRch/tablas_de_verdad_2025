@@ -4,7 +4,10 @@ const kSeedColor = Color(0xFFFF942B); // color principal
 const kMainColorLight = Color(0xFFF0E5DA);
 const kSecondaryColor = Color(0xFFFBE6D1);
 const kDisableColor = Color(0xFFFDF6E4);
-const kLabelColor = Colors.black54;
+// ~65% black instead of black54 (54%): black54 drops below the WCAG AA 4.5:1
+// contrast ratio over the app's cream surfaces (kMainColorLight / kSecondaryColor);
+// 0xA6 clears it on both white and cream while staying visually subdued.
+const kLabelColor = Color(0xA6000000);
 const kLabelColorDark = Colors.grey;
 
 final lightTheme = ThemeData(

@@ -653,4 +653,23 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get instagramPromoLater => '也许以后';
+
+  @override
+  String get a11yBackspace => '删除';
+
+  @override
+  String get a11yToggleCase => '切换大小写';
+
+  @override
+  String get a11yEvaluate => '计算';
+
+  @override
+  String a11yKarnaughMap(int count) {
+    return '包含 $count 个分组的卡诺图';
+  }
+
+  @override
+  String a11yKarnaughGroup(int number, String term, int count) {
+    return '分组 $number：$term，$count 个单元格';
+  }
 }

@@ -217,5 +217,10 @@
   "lawFactorization": "分配律（提取公因子）",
   "instagramPromoTitle": "在 Instagram 上关注我！",
   "instagramPromoButton": "在 Instagram 上关注",
-  "instagramPromoLater": "也许以后"
+  "instagramPromoLater": "也许以后",
+  "a11yBackspace": "删除",
+  "a11yToggleCase": "切换大小写",
+  "a11yEvaluate": "计算",
+  "a11yKarnaughMap": "包含 {count} 个分组的卡诺图",
+  "a11yKarnaughGroup": "分组 {number}：{term}，{count} 个单元格"
 }

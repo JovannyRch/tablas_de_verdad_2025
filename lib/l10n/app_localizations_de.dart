@@ -684,4 +684,23 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get instagramPromoLater => 'Vielleicht später';
+
+  @override
+  String get a11yBackspace => 'Löschen';
+
+  @override
+  String get a11yToggleCase => 'Groß-/Kleinschreibung';
+
+  @override
+  String get a11yEvaluate => 'Berechnen';
+
+  @override
+  String a11yKarnaughMap(int count) {
+    return 'Karnaugh-Diagramm mit $count Gruppen';
+  }
+
+  @override
+  String a11yKarnaughGroup(int number, String term, int count) {
+    return 'Gruppe $number: $term, $count Zellen';
+  }
 }

@@ -659,4 +659,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get instagramPromoLater => '後で';
+
+  @override
+  String get a11yBackspace => '削除';
+
+  @override
+  String get a11yToggleCase => '大文字小文字切替';
+
+  @override
+  String get a11yEvaluate => '計算';
+
+  @override
+  String a11yKarnaughMap(int count) {
+    return '$count個のグループを持つカルノー図';
+  }
+
+  @override
+  String a11yKarnaughGroup(int number, String term, int count) {
+    return 'グループ$number：$term、$countセル';
+  }
 }

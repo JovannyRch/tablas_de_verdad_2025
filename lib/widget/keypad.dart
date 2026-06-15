@@ -65,11 +65,22 @@ class _TruthKeypadState extends State<TruthKeypad> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    final locale = AppLocalizations.of(context)?.localeName ?? 'en';
+    final t = AppLocalizations.of(context);
+    final locale = t?.localeName ?? 'en';
     final isAdvanced = settings.keypadMode != KeypadMode.simple;
 
     final letters = isAdvanced ? kLettersAdvanced : kLettersSimple;
     final operators = kOperatorsAdvanced;
+
+    // Spoken label for an operator key: its localized name, plus a "premium"
+    // hint when the operator is gated. Returns null for unknown symbols, in
+    // which case the glyph itself is read.
+    String? opSemantic(String o) {
+      final name = _operatorBySymbol[o]?.getLocalizedName(locale);
+      if (name == null) return null;
+      final premium = !settings.isProVersion && kPremiumOperators.contains(o);
+      return (premium && t != null) ? '$name, ${t.premiumOperator}' : name;
+    }
 
     // Build buttons for the current view
     List<_Key> currentButtons;
@@ -91,6 +102,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
             onTap: () => widget.onTap(o),
             isPremium: !settings.isProVersion && kPremiumOperators.contains(o),
             tooltip: _operatorBySymbol[o]?.getLocalizedName(locale),
+            semanticLabel: opSemantic(o),
           ),
         ),
       ];
@@ -121,6 +133,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                     isPremium:
                         !settings.isProVersion && kPremiumOperators.contains(o),
                     tooltip: _operatorBySymbol[o]?.getLocalizedName(locale),
+                    semanticLabel: opSemantic(o),
                   ),
                 )
                 .toList();
@@ -184,6 +197,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       kind: KeyKind.action,
                       colorOverride: Colors.redAccent,
                       onTap: widget.onClear,
+                      semanticLabel: t?.clear_all,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -192,6 +206,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       label: '⌫',
                       kind: KeyKind.action,
                       onTap: widget.onBackspace,
+                      semanticLabel: t?.a11yBackspace,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -200,6 +215,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       label: 'Aa',
                       kind: KeyKind.action,
                       onTap: widget.onToggleAa,
+                      semanticLabel: t?.a11yToggleCase,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -211,6 +227,7 @@ class _TruthKeypadState extends State<TruthKeypad> {
                       colorOverride: kSeedColor,
                       onTap: widget.onEvaluate,
                       isEvaluate: true,
+                      semanticLabel: t?.a11yEvaluate,
                     ),
                   ),
                 ],
@@ -305,6 +322,11 @@ class _Key extends StatelessWidget {
   final bool isEvaluate;
   final String? tooltip;
 
+  /// Spoken label for screen readers. Falls back to [label] when null, which
+  /// is fine for letters/digits but unhelpful for symbol glyphs (operators)
+  /// and action icons (⌫, =), so those pass an explicit, localized label.
+  final String? semanticLabel;
+
   const _Key({
     required this.label,
     required this.kind,
@@ -313,6 +335,7 @@ class _Key extends StatelessWidget {
     this.isPremium = false,
     this.isEvaluate = false,
     this.tooltip,
+    this.semanticLabel,
   });
 
   @override
@@ -366,8 +389,8 @@ class _Key extends StatelessWidget {
                     ? []
                     : [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 
-                          isEvaluate ? 0.12 : 0.05,
+                        color: Colors.black.withValues(
+                          alpha: isEvaluate ? 0.12 : 0.05,
                         ),
                         blurRadius: isEvaluate ? 8 : 4,
                         offset: const Offset(0, 2),
@@ -383,6 +406,7 @@ class _Key extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
                       label,
+                      semanticsLabel: semanticLabel,
                       style: TextStyle(
                         fontSize: fontSize,
                         fontWeight:

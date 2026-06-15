@@ -682,4 +682,23 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get instagramPromoLater => 'शायद बाद में';
+
+  @override
+  String get a11yBackspace => 'मिटाएँ';
+
+  @override
+  String get a11yToggleCase => 'केस बदलें';
+
+  @override
+  String get a11yEvaluate => 'गणना करें';
+
+  @override
+  String a11yKarnaughMap(int count) {
+    return '$count समूहों वाला कर्नॉ मानचित्र';
+  }
+
+  @override
+  String a11yKarnaughGroup(int number, String term, int count) {
+    return 'समूह $number: $term, $count सेल';
+  }
 }

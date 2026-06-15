@@ -1379,6 +1379,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Quizás más tarde'**
   String get instagramPromoLater;
+
+  /// No description provided for @a11yBackspace.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar'**
+  String get a11yBackspace;
+
+  /// No description provided for @a11yToggleCase.
+  ///
+  /// In es, this message translates to:
+  /// **'Mayúsculas o minúsculas'**
+  String get a11yToggleCase;
+
+  /// No description provided for @a11yEvaluate.
+  ///
+  /// In es, this message translates to:
+  /// **'Calcular'**
+  String get a11yEvaluate;
+
+  /// No description provided for @a11yKarnaughMap.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapa de Karnaugh con {count} grupos'**
+  String a11yKarnaughMap(int count);
+
+  /// No description provided for @a11yKarnaughGroup.
+  ///
+  /// In es, this message translates to:
+  /// **'Grupo {number}: {term}, {count} celdas'**
+  String a11yKarnaughGroup(int number, String term, int count);
 }
 
 class _AppLocalizationsDelegate

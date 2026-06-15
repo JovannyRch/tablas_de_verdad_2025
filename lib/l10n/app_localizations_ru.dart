@@ -683,4 +683,23 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get instagramPromoLater => 'Может быть позже';
+
+  @override
+  String get a11yBackspace => 'Удалить';
+
+  @override
+  String get a11yToggleCase => 'Регистр букв';
+
+  @override
+  String get a11yEvaluate => 'Вычислить';
+
+  @override
+  String a11yKarnaughMap(int count) {
+    return 'Карта Карно с $count группами';
+  }
+
+  @override
+  String a11yKarnaughGroup(int number, String term, int count) {
+    return 'Группа $number: $term, $count ячеек';
+  }
 }

@@ -217,5 +217,10 @@
   "lawFactorization": "Дистрибутивность (вынесение за скобки)",
   "instagramPromoTitle": "Подпишитесь в Instagram!",
   "instagramPromoButton": "Подписаться в Instagram",
-  "instagramPromoLater": "Может быть позже"
+  "instagramPromoLater": "Может быть позже",
+  "a11yBackspace": "Удалить",
+  "a11yToggleCase": "Регистр букв",
+  "a11yEvaluate": "Вычислить",
+  "a11yKarnaughMap": "Карта Карно с {count} группами",
+  "a11yKarnaughGroup": "Группа {number}: {term}, {count} ячеек"
 }
