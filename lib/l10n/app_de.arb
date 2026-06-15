@@ -162,7 +162,7 @@
   "yourStats": "Deine Statistiken",
   "youtubeChannel": "YouTube-Kanal",
   "shareExpression": "Ausdruck teilen",
-  "discordCommunity": "Discord-Community",
+  "instagramFollow": "Dem Entwickler folgen",
   "argumentValidator": "Argument-Validator",
   "premise": "Prämisse",
   "addPremise": "Prämisse hinzufügen",
@@ -214,5 +214,8 @@
   "lawDomination": "Dominanz",
   "lawComplement": "Komplement",
   "lawAbsorption": "Absorption",
-  "lawFactorization": "Distributivität (Ausklammern)"
+  "lawFactorization": "Distributivität (Ausklammern)",
+  "instagramPromoTitle": "Folge mir auf Instagram!",
+  "instagramPromoButton": "Auf Instagram folgen",
+  "instagramPromoLater": "Vielleicht später"
 }

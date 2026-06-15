@@ -123,11 +123,11 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
                 _DrawerTile(
-                  icon: FontAwesomeIcons.discord,
-                  title: t.discordCommunity,
-                  iconColor: const Color(0xFF5865F2),
+                  icon: FontAwesomeIcons.instagram,
+                  title: t.instagramFollow,
+                  iconColor: const Color(0xFFE1306C),
                   onTap: () {
-                    visit(DISCORD_URL, mode: LaunchMode.platformDefault);
+                    visit(INSTAGRAM_URL, mode: LaunchMode.platformDefault);
                   },
                 ),
                 const Padding(

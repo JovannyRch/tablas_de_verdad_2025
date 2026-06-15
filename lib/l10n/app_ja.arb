@@ -162,7 +162,7 @@
   "yourStats": "あなたの統計",
   "youtubeChannel": "YouTubeチャンネル",
   "shareExpression": "式を共有",
-  "discordCommunity": "Discordコミュニティ",
+  "instagramFollow": "開発者をフォロー",
   "argumentValidator": "論証バリデーター",
   "premise": "前提",
   "addPremise": "前提を追加",
@@ -214,5 +214,8 @@
   "lawDomination": "支配律",
   "lawComplement": "補元律",
   "lawAbsorption": "吸収律",
-  "lawFactorization": "分配律（因数分解）"
+  "lawFactorization": "分配律（因数分解）",
+  "instagramPromoTitle": "Instagramでフォローしてください！",
+  "instagramPromoButton": "Instagramでフォロー",
+  "instagramPromoLater": "後で"
 }

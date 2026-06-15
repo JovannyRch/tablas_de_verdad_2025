@@ -162,7 +162,7 @@
   "yourStats": "Tus estadísticas",
   "youtubeChannel": "Canal de YouTube",
   "shareExpression": "Compartir expresión",
-  "discordCommunity": "Comunidad en Discord",
+  "instagramFollow": "Seguir al desarrollador",
   "argumentValidator": "Validador de Argumentos",
   "premise": "Premisa",
   "addPremise": "Agregar premisa",
@@ -228,5 +228,8 @@
         "type": "int"
       }
     }
-  }
+  },
+  "instagramPromoTitle": "¡Sígueme en Instagram!",
+  "instagramPromoButton": "Seguir en Instagram",
+  "instagramPromoLater": "Quizás más tarde"
 }

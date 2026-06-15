@@ -162,7 +162,7 @@
   "wrongAnswer": "Incorrect. Continuez !",
   "yourStats": "Vos statistiques",
   "youtubeChannel": "Chaîne YouTube",
-  "discordCommunity": "Communauté Discord",
+  "instagramFollow": "Suivre le développeur",
   "argumentValidator": "Validateur d'Arguments",
   "premise": "Prémisse",
   "addPremise": "Ajouter une prémisse",
@@ -214,5 +214,8 @@
   "lawDomination": "Domination",
   "lawComplement": "Complément",
   "lawAbsorption": "Absorption",
-  "lawFactorization": "Distributivité (factorisation)"
+  "lawFactorization": "Distributivité (factorisation)",
+  "instagramPromoTitle": "Suivez-moi sur Instagram !",
+  "instagramPromoButton": "Suivre sur Instagram",
+  "instagramPromoLater": "Peut-être plus tard"
 }

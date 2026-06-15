@@ -182,7 +182,7 @@
   "wrongAnswer": "Incorrect. Keep trying!",
   "yourStats": "Your stats",
   "youtubeChannel": "YouTube Channel",
-  "discordCommunity": "Discord Community",
+  "instagramFollow": "Follow the developer",
   "argumentValidator": "Argument Validator",
   "premise": "Premise",
   "addPremise": "Add premise",
@@ -234,5 +234,8 @@
   "lawDomination": "Domination",
   "lawComplement": "Complement",
   "lawAbsorption": "Absorption",
-  "lawFactorization": "Distributivity (factoring)"
+  "lawFactorization": "Distributivity (factoring)",
+  "instagramPromoTitle": "Follow me on Instagram!",
+  "instagramPromoButton": "Follow on Instagram",
+  "instagramPromoLater": "Maybe later"
 }

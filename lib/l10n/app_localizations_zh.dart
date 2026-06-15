@@ -483,7 +483,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareExpression => '分享表达式';
 
   @override
-  String get discordCommunity => 'Discord 社区';
+  String get instagramFollow => '关注开发者';
 
   @override
   String get argumentValidator => '论证验证器';
@@ -644,4 +644,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get lawFactorization => '分配律（提取公因子）';
+
+  @override
+  String get instagramPromoTitle => '在 Instagram 上关注我！';
+
+  @override
+  String get instagramPromoButton => '在 Instagram 上关注';
+
+  @override
+  String get instagramPromoLater => '也许以后';
 }

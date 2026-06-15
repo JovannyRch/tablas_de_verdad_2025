@@ -1044,11 +1044,11 @@ abstract class AppLocalizations {
   /// **'Compartir expresión'**
   String get shareExpression;
 
-  /// No description provided for @discordCommunity.
+  /// No description provided for @instagramFollow.
   ///
   /// In es, this message translates to:
-  /// **'Comunidad en Discord'**
-  String get discordCommunity;
+  /// **'Seguir al desarrollador'**
+  String get instagramFollow;
 
   /// No description provided for @argumentValidator.
   ///
@@ -1361,6 +1361,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Distributiva (factorización)'**
   String get lawFactorization;
+
+  /// No description provided for @instagramPromoTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Sígueme en Instagram!'**
+  String get instagramPromoTitle;
+
+  /// No description provided for @instagramPromoButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguir en Instagram'**
+  String get instagramPromoButton;
+
+  /// No description provided for @instagramPromoLater.
+  ///
+  /// In es, this message translates to:
+  /// **'Quizás más tarde'**
+  String get instagramPromoLater;
 }
 
 class _AppLocalizationsDelegate

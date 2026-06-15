@@ -487,7 +487,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareExpression => '式を共有';
 
   @override
-  String get discordCommunity => 'Discordコミュニティ';
+  String get instagramFollow => '開発者をフォロー';
 
   @override
   String get argumentValidator => '論証バリデーター';
@@ -650,4 +650,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get lawFactorization => '分配律（因数分解）';
+
+  @override
+  String get instagramPromoTitle => 'Instagramでフォローしてください！';
+
+  @override
+  String get instagramPromoButton => 'Instagramでフォロー';
+
+  @override
+  String get instagramPromoLater => '後で';
 }

@@ -501,7 +501,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareExpression => 'Share expression';
 
   @override
-  String get discordCommunity => 'Discord Community';
+  String get instagramFollow => 'Follow the developer';
 
   @override
   String get argumentValidator => 'Argument Validator';
@@ -671,4 +671,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lawFactorization => 'Distributivity (factoring)';
+
+  @override
+  String get instagramPromoTitle => 'Follow me on Instagram!';
+
+  @override
+  String get instagramPromoButton => 'Follow on Instagram';
+
+  @override
+  String get instagramPromoLater => 'Maybe later';
 }

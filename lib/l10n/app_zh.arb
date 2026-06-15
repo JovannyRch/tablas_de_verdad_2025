@@ -162,7 +162,7 @@
   "wrongAnswer": "不正确。继续尝试！",
   "yourStats": "你的统计",
   "youtubeChannel": "YouTube 频道",
-  "discordCommunity": "Discord 社区",
+  "instagramFollow": "关注开发者",
   "argumentValidator": "论证验证器",
   "premise": "前提",
   "addPremise": "添加前提",
@@ -214,5 +214,8 @@
   "lawDomination": "支配律",
   "lawComplement": "互补律",
   "lawAbsorption": "吸收律",
-  "lawFactorization": "分配律（提取公因子）"
+  "lawFactorization": "分配律（提取公因子）",
+  "instagramPromoTitle": "在 Instagram 上关注我！",
+  "instagramPromoButton": "在 Instagram 上关注",
+  "instagramPromoLater": "也许以后"
 }

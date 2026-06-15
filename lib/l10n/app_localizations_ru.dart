@@ -502,7 +502,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareExpression => 'Поделиться выражением';
 
   @override
-  String get discordCommunity => 'Сообщество в Discord';
+  String get instagramFollow => 'Подписаться на разработчика';
 
   @override
   String get argumentValidator => 'Валидатор Аргументов';
@@ -674,4 +674,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get lawFactorization => 'Дистрибутивность (вынесение за скобки)';
+
+  @override
+  String get instagramPromoTitle => 'Подпишитесь в Instagram!';
+
+  @override
+  String get instagramPromoButton => 'Подписаться в Instagram';
+
+  @override
+  String get instagramPromoLater => 'Может быть позже';
 }

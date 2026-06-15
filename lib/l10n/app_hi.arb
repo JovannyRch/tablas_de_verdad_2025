@@ -162,7 +162,7 @@
   "wrongAnswer": "गलत। कोशिश करते रहें!",
   "yourStats": "आपके आँकड़े",
   "youtubeChannel": "YouTube चैनल",
-  "discordCommunity": "Discord समुदाय",
+  "instagramFollow": "डेवलपर को फॉलो करें",
   "argumentValidator": "तर्क सत्यापक",
   "premise": "आधार",
   "addPremise": "आधार जोड़ें",
@@ -214,5 +214,8 @@
   "lawDomination": "प्रभुत्व नियम",
   "lawComplement": "पूरक नियम",
   "lawAbsorption": "अवशोषण नियम",
-  "lawFactorization": "वितरण (गुणनखंडन)"
+  "lawFactorization": "वितरण (गुणनखंडन)",
+  "instagramPromoTitle": "Instagram पर फॉलो करें!",
+  "instagramPromoButton": "Instagram पर फॉलो करें",
+  "instagramPromoLater": "शायद बाद में"
 }

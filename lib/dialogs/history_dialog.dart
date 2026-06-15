@@ -263,7 +263,9 @@ class _HistoryDialogState extends State<HistoryDialog> {
           onPressed: () async {
             await clearHistory();
             _searchController.clear();
-            setState(() => _future = getHistory());
+            setState(() {
+              _future = getHistory();
+            });
           },
           style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
           child: Text(t.clear_all),

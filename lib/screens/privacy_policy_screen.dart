@@ -17,7 +17,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           ),
         )
         ..loadRequest(
-          Uri.parse('https://jovannyrch.github.io/politicas/tablas_de_verdad'),
+          Uri.parse('https://jovasoft.vercel.app/politicas/tablas-de-verdad'),
         );
 
   @override

@@ -1,7 +1,7 @@
 final IS_TESTING =
     false; // ⚠️ true = Test Ads | false = Anuncios reales de producción
 const YOUTUBE_URL = "https://www.youtube.com/@tablasdeverdades";
-const DISCORD_URL = "https://discord.gg/ZUSfz8aZXP";
+const INSTAGRAM_URL = "https://www.instagram.com/jovanny.rch";
 
 const String? APP_ID = "com.jovannyrch.tablasdeverdad";
 const String? APP_NAME = "Tablas de Verdad";

@@ -162,7 +162,7 @@
   "yourStats": "Ваша статистика",
   "youtubeChannel": "YouTube канал",
   "shareExpression": "Поделиться выражением",
-  "discordCommunity": "Сообщество в Discord",
+  "instagramFollow": "Подписаться на разработчика",
   "argumentValidator": "Валидатор Аргументов",
   "premise": "Посылка",
   "addPremise": "Добавить посылку",
@@ -214,5 +214,8 @@
   "lawDomination": "Доминирование",
   "lawComplement": "Дополнение",
   "lawAbsorption": "Поглощение",
-  "lawFactorization": "Дистрибутивность (вынесение за скобки)"
+  "lawFactorization": "Дистрибутивность (вынесение за скобки)",
+  "instagramPromoTitle": "Подпишитесь в Instagram!",
+  "instagramPromoButton": "Подписаться в Instagram",
+  "instagramPromoLater": "Может быть позже"
 }
