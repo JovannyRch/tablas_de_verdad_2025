@@ -72,9 +72,40 @@ const _kSyntaxError = {
   'ja': '構文エラー',
 };
 
+const _kInvalidCharacter = {
+  'es': 'Carácter no válido en la expresión',
+  'en': 'Invalid character in the expression',
+  'pt': 'Caractere inválido na expressão',
+  'fr': 'Caractère non valide dans l\'expression',
+  'de': 'Ungültiges Zeichen im Ausdruck',
+  'hi': 'अभिव्यक्ति में अमान्य वर्ण',
+  'ru': 'Недопустимый символ в выражении',
+  'it': 'Carattere non valido nell\'espressione',
+  'zh': '表达式中有无效字符',
+  'ja': '式に無効な文字があります',
+};
+
+const _kTooManyVariables = {
+  'es': 'Demasiadas variables (máximo {max})',
+  'en': 'Too many variables (maximum {max})',
+  'pt': 'Muitas variáveis (máximo {max})',
+  'fr': 'Trop de variables (maximum {max})',
+  'de': 'Zu viele Variablen (maximal {max})',
+  'hi': 'बहुत अधिक चर (अधिकतम {max})',
+  'ru': 'Слишком много переменных (максимум {max})',
+  'it': 'Troppe variabili (massimo {max})',
+  'zh': '变量过多（最多 {max} 个）',
+  'ja': '変数が多すぎます（最大 {max}）',
+};
+
 /// Returns the localized string for [lang], falling back to English.
 String _errorMsg(Map<String, String> map, String lang) =>
     map[lang] ?? map['en']!;
+
+/// Upper bound on distinct variables. The table has 2^n rows, so this caps it
+/// at 1024 — already huge to read, and keeps the UI/web from freezing on
+/// pathological input.
+const int kMaxTruthTableVariables = 10;
 
 enum TruthTableType { tautology, contradiction, contingency }
 
@@ -147,15 +178,22 @@ class TruthTable {
   }
 
   void formatInput() {
+    // Drop all whitespace first: the parser is char-by-char and a space has no
+    // priority, so "p ∧ q" would otherwise throw. (The calculator strips
+    // spaces in the UI, but other callers — quiz, web paste — do not.)
+    infix = infix.replaceAll(RegExp(r'\s+'), '');
     infix = infix.replaceAll('[', '(');
     infix = infix.replaceAll(']', ')');
     infix = infix.replaceAll('{', '(');
     infix = infix.replaceAll('}', ')');
   }
 
+  /// Returns false (with [errorMessage] set) when parsing fails, so [makeAll]
+  /// keeps the specific message instead of letting the structural check
+  /// overwrite it with a generic syntax error.
   bool convertInfixToPostix() {
     postfix = infixToPostfix(infix);
-    return true;
+    return errorMessage.isEmpty;
   }
 
   void createColumnsForVariables() {
@@ -191,10 +229,16 @@ class TruthTable {
   }
 
   void makeAll() {
-    if (convertInfixToPostix()) {
-      if (checkIfIsCorrectlyFormed()) {
-        calculate();
-      }
+    if (!convertInfixToPostix()) return; // parse error: specific message set
+    if (variables.length > kMaxTruthTableVariables) {
+      errorMessage = _errorMsg(
+        _kTooManyVariables,
+        language,
+      ).replaceAll('{max}', '$kMaxTruthTableVariables');
+      return;
+    }
+    if (checkIfIsCorrectlyFormed()) {
+      calculate();
     }
   }
 
@@ -334,14 +378,6 @@ class TruthTable {
     return 1;
   }
 
-  int tautologia(int a, int b) {
-    return 1;
-  }
-
-  int contradiccion(int a, int b) {
-    return 0;
-  }
-
   int or(int a, int b) {
     if (a == 1 || b == 1) return 1;
     return 0;
@@ -364,10 +400,6 @@ class TruthTable {
 
   int nand(int a, int b) {
     return not(and(a, b));
-  }
-
-  int xnor(int a, int b) {
-    return not(xor(a, b));
   }
 
   int nor(int a, int b) {
@@ -424,6 +456,13 @@ class TruthTable {
           topToken = opStack.removeLast();
         }
       } else {
+        // Operator token. Anything not in `priorities` is an unknown character
+        // (stray punctuation, an unsupported digit, an emoji, …) — fail with a
+        // friendly message instead of a null-check crash.
+        if (!priorities.containsKey(token)) {
+          errorMessage = _errorMsg(_kInvalidCharacter, language);
+          return '';
+        }
         while (opStack.isNotEmpty &&
             priorities[opStack.last]! > priorities[token]!) {
           postfixList.add(opStack.removeLast());

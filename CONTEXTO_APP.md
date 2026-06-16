@@ -201,7 +201,7 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 
 | Archivo | Tests | Qué cubre |
 |---|---|---|
-| `truth_table_test.dart` | 68 | Motor TruthTable, EquivalenceChecker, ExpressionValidator |
+| `truth_table_test.dart` | 75 | Motor TruthTable, EquivalenceChecker, ExpressionValidator, robustez |
 | `karnaugh_map_test.dart` | 17 | Quine–McCluskey, layout, grupos |
 | `karnaugh_map_view_test.dart` | 5 | Renderizado del mapa + semántica a11y |
 | `logic_simplifier_test.dart` | 24 | 20 leyes + soundness |
@@ -210,7 +210,7 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 | `fill_table_builder_test.dart` | 5 | Puzzle "completar la tabla" |
 | `rating_helper_test.dart` | 6 | Gating del review por momento de éxito |
 
-**Total: 141 tests** — ejecutar con `flutter test`
+**Total: 148 tests** — ejecutar con `flutter test`
 
 ---
 

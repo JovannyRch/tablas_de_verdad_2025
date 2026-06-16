@@ -150,6 +150,24 @@
 
 ---
 
+## 🔧 Motor de tablas de verdad (auditoría pre-web)
+
+### 28. Robustez y deuda técnica del motor (`truth_table.dart`)
+- ✅ **P0 — Robustez** (blindaje para input arbitrario de web):
+  - `formatInput()` ahora **elimina todo whitespace** (antes `"p ∧ q"` lanzaba excepción en el parser; el calculador lo enmascaraba quitando espacios y el quiz con try/catch).
+  - **Caracteres inválidos** (dígitos 2-9, puntuación, emojis) → error amigable `_kInvalidCharacter` en vez de *null-check crash* en `infixToPostfix`.
+  - **Tope de variables** `kMaxTruthTableVariables = 10` (≤1024 filas) → error `_kTooManyVariables` en vez de congelar/OOM con 2^n.
+  - `convertInfixToPostix()` devuelve `errorMessage.isEmpty` → los errores específicos de parseo ya **no los pisa** el chequeo estructural genérico.
+  - +7 tests de robustez (75 en `truth_table_test.dart`). 2 claves de error nuevas ×10 (privadas en el motor).
+- ⏳ **P1 — Deuda técnica (pendiente, requiere visto bueno):**
+  - **Estado estático mutable** en `StepProcess` (`currentIndex`/`labelIndex`) compartido entre instancias → pasarlo a estado de instancia.
+  - Acoplamiento de dos pasadas vía `statesSteps` (índices posicionales en `evaluation()`) → simplificar a una sola pasada.
+  - Código muerto: `tautologia()`, `contradiccion()`, `xnor()`; campo `format` sin uso en el motor.
+  - `makeAll()` `void` → considerar `bool`/getter `hasError` para API más limpia de cara a web.
+- 🟡 **P2 — Rendimiento (menor):** hoistear `columns.keys.toList().sublist(...)` fuera del bucle por fila; evitar `replaceAll` + re-split por fila (precompilar postfix a tokens).
+
+---
+
 ## 📋 Orden sugerido de ejecución
 
 | # | Item | Esfuerzo | Impacto |

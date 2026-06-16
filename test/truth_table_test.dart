@@ -15,13 +15,13 @@ TruthTable build(String expr) {
 }
 
 ValidationResult validateExpr(String expr) => ExpressionValidator.validate(
-      expr,
-      validationMsgUnmatched: 'unmatched',
-      validationMsgMissingOperand: 'operand',
-      validationMsgMissingOperator: 'operator',
-      validationMsgTrailingOp: 'trailing',
-      validationMsgValid: 'ok',
-    );
+  expr,
+  validationMsgUnmatched: 'unmatched',
+  validationMsgMissingOperand: 'operand',
+  validationMsgMissingOperator: 'operator',
+  validationMsgTrailingOp: 'trailing',
+  validationMsgValid: 'ok',
+);
 
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -123,20 +123,20 @@ void main() {
   group('binary operators – truth tables', () {
     final cases = [
       // (expression, counter1s)
-      ('p∧q',  1), // AND:                1,0,0,0
-      ('p&q',  1), // AND alias:          same
-      ('p∨q',  3), // OR:                 1,1,1,0
-      ('p|q',  3), // OR alias:           same
-      ('p⊕q',  2), // XOR:                0,1,1,0
-      ('p⊻q',  2), // XOR alias:          same
-      ('p↓q',  1), // NOR = ¬(p∨q):       0,0,0,1
-      ('p⊼q',  3), // NAND = ¬(p∧q):      0,1,1,1
-      ('p⇒q',  3), // conditional:        1,0,1,1  (false iff p=1,q=0)
-      ('p⇔q',  2), // biconditional:      1,0,0,1  (true iff p=q)
-      ('p￩q',  3), // anticonditional:    1,1,0,1  (false iff p=0,q=1)
-      ('p⇏q',  1), // ¬(p⇒q):             0,1,0,0
-      ('p⇍q',  1), // ¬(p￩q):             0,0,1,0
-      ('p⇎q',  2), // ¬(p⇔q) = XOR:       0,1,1,0
+      ('p∧q', 1), // AND:                1,0,0,0
+      ('p&q', 1), // AND alias:          same
+      ('p∨q', 3), // OR:                 1,1,1,0
+      ('p|q', 3), // OR alias:           same
+      ('p⊕q', 2), // XOR:                0,1,1,0
+      ('p⊻q', 2), // XOR alias:          same
+      ('p↓q', 1), // NOR = ¬(p∨q):       0,0,0,1
+      ('p⊼q', 3), // NAND = ¬(p∧q):      0,1,1,1
+      ('p⇒q', 3), // conditional:        1,0,1,1  (false iff p=1,q=0)
+      ('p⇔q', 2), // biconditional:      1,0,0,1  (true iff p=q)
+      ('p￩q', 3), // anticonditional:    1,1,0,1  (false iff p=0,q=1)
+      ('p⇏q', 1), // ¬(p⇒q):             0,1,0,0
+      ('p⇍q', 1), // ¬(p￩q):             0,0,1,0
+      ('p⇎q', 2), // ¬(p⇔q) = XOR:       0,1,1,0
     ];
 
     for (final (expr, ones) in cases) {
@@ -218,6 +218,60 @@ void main() {
     });
   });
 
+  // ── 6b. Robustness against arbitrary input ────────────────────────────────
+
+  group('TruthTable robustness', () {
+    test('whitespace is ignored, not crashed on', () {
+      final tt = build('p ∧ q');
+      expect(tt.errorMessage, isEmpty);
+      expect(tt.totalRows, 4);
+      expect(tt.counter1s, 1); // p∧q true only when both true
+    });
+
+    test('tabs and newlines are also stripped', () {
+      final tt = build('p\t∨\nq');
+      expect(tt.errorMessage, isEmpty);
+      expect(tt.counter1s, 3);
+    });
+
+    test('invalid character → friendly error, no exception', () {
+      final tt = build('p % q');
+      expect(tt.errorMessage, isNotEmpty);
+      expect(tt.finalTable, isEmpty);
+    });
+
+    test('unsupported digit is rejected without crashing', () {
+      final tt = build('p ∧ 2');
+      expect(tt.errorMessage, isNotEmpty);
+      expect(tt.finalTable, isEmpty);
+    });
+
+    test('specific parse error survives (not clobbered by syntax error)', () {
+      final tt = build('(p∧q'); // unclosed parenthesis
+      expect(tt.errorMessage, isNotEmpty);
+      expect(tt.finalTable, isEmpty);
+    });
+
+    test('exactly $kMaxTruthTableVariables variables is allowed', () {
+      // a..j = 10 distinct variables
+      final expr = 'a∧b∧c∧d∧e∧f∧g∧h∧i∧j';
+      final tt = build(expr);
+      expect(tt.errorMessage, isEmpty);
+      expect(tt.variables.length, kMaxTruthTableVariables);
+      expect(tt.totalRows, 1024);
+    });
+
+    test(
+      'more than $kMaxTruthTableVariables variables → capped with error',
+      () {
+        final expr = 'a∧b∧c∧d∧e∧f∧g∧h∧i∧j∧k'; // 11 variables
+        final tt = build(expr);
+        expect(tt.errorMessage, isNotEmpty);
+        expect(tt.finalTable, isEmpty);
+      },
+    );
+  });
+
   // ── 7. Column consistency ─────────────────────────────────────────────────
 
   group('TruthTable column consistency', () {
@@ -227,10 +281,16 @@ void main() {
       for (final step in tt.steps) {
         final col = tt.columns[step.toString()];
         expect(col, isNotNull, reason: 'column missing for ${step.toString()}');
-        expect(col!.length, tt.totalRows,
-            reason: '${step.toString()} column has wrong length');
-        expect(col.every((v) => v == '0' || v == '1'), isTrue,
-            reason: '${step.toString()} contains non-binary value');
+        expect(
+          col!.length,
+          tt.totalRows,
+          reason: '${step.toString()} column has wrong length',
+        );
+        expect(
+          col.every((v) => v == '0' || v == '1'),
+          isTrue,
+          reason: '${step.toString()} contains non-binary value',
+        );
       }
     });
 
@@ -248,8 +308,11 @@ void main() {
       final tt = build('(p∧q)∨¬r');
       final headerLen = tt.finalTable.first.length;
       for (int i = 1; i < tt.finalTable.length; i++) {
-        expect(tt.finalTable[i].length, headerLen,
-            reason: 'row $i has wrong width');
+        expect(
+          tt.finalTable[i].length,
+          headerLen,
+          reason: 'row $i has wrong width',
+        );
       }
     });
   });
@@ -269,8 +332,7 @@ void main() {
       // ¬(1∧0) = ¬0 = 1 ← different!
       final tt = build('¬p∧q');
       // counter1s should be 1 (only p=0,q=1 gives 1 for (¬p)∧q)
-      expect(tt.counter1s, 1,
-          reason: '¬p∧q should mean (¬p)∧q, not ¬(p∧q)');
+      expect(tt.counter1s, 1, reason: '¬p∧q should mean (¬p)∧q, not ¬(p∧q)');
     });
 
     test('∧ binds tighter than ∨: p∨q∧r = p∨(q∧r)', () {
@@ -299,14 +361,17 @@ void main() {
     });
 
     test('p⇒q ≡ ¬p∨q (conditional definition)', () {
-      final r =
-          EquivalenceChecker.check('p⇒q', '¬p∨q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p⇒q', '¬p∨q', 'en', TruthFormat.vf);
       expect(r.isEquivalent, isTrue);
     });
 
     test('¬(p∧q) ≡ ¬p∨¬q (De Morgan)', () {
-      final r =
-          EquivalenceChecker.check('¬(p∧q)', '¬p∨¬q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check(
+        '¬(p∧q)',
+        '¬p∨¬q',
+        'en',
+        TruthFormat.vf,
+      );
       expect(r.isEquivalent, isTrue);
     });
 
@@ -323,14 +388,12 @@ void main() {
     });
 
     test('cross-variable: p ≡ p∧(q∨¬q) (padding)', () {
-      final r =
-          EquivalenceChecker.check('p', 'p∧(q∨¬q)', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p', 'p∧(q∨¬q)', 'en', TruthFormat.vf);
       expect(r.isEquivalent, isTrue);
     });
 
     test('parse error is reported in result', () {
-      final r =
-          EquivalenceChecker.check('p∧', 'p∧q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p∧', 'p∧q', 'en', TruthFormat.vf);
       expect(r.hasError, isTrue);
       expect(r.isEquivalent, isFalse);
     });
