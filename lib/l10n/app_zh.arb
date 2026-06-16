@@ -232,5 +232,8 @@
   "verifyAnswers": "检查答案",
   "tablesCompleted": "表格",
   "accuracy": "准确率",
-  "cellsCorrectOfTotal": "{correct}/{total} 个单元格正确"
+  "cellsCorrectOfTotal": "{correct}/{total} 个单元格正确",
+  "proKarnaughBenefit": "卡诺图，无广告",
+  "proSimplificationBenefit": "逐步化简，即时呈现",
+  "proNormalFormsBenefit": "范式（DNF/CNF）即时生成"
 }

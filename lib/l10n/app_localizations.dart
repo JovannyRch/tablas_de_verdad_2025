@@ -1469,6 +1469,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'{correct}/{total} celdas correctas'**
   String cellsCorrectOfTotal(int correct, int total);
+
+  /// No description provided for @proKarnaughBenefit.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapas de Karnaugh sin anuncios'**
+  String get proKarnaughBenefit;
+
+  /// No description provided for @proSimplificationBenefit.
+  ///
+  /// In es, this message translates to:
+  /// **'Simplificación paso a paso al instante'**
+  String get proSimplificationBenefit;
+
+  /// No description provided for @proNormalFormsBenefit.
+  ///
+  /// In es, this message translates to:
+  /// **'Formas normales (FND/FNC) sin esperas'**
+  String get proNormalFormsBenefit;
 }
 
 class _AppLocalizationsDelegate

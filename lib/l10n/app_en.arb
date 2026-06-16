@@ -252,5 +252,8 @@
   "verifyAnswers": "Check answers",
   "tablesCompleted": "Tables",
   "accuracy": "Accuracy",
-  "cellsCorrectOfTotal": "{correct}/{total} cells correct"
+  "cellsCorrectOfTotal": "{correct}/{total} cells correct",
+  "proKarnaughBenefit": "Karnaugh maps without ads",
+  "proSimplificationBenefit": "Step-by-step simplification, instantly",
+  "proNormalFormsBenefit": "Normal forms (DNF/CNF) instantly"
 }

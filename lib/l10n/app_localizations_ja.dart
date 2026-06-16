@@ -710,4 +710,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String cellsCorrectOfTotal(int correct, int total) {
     return '$correct/$total セル正解';
   }
+
+  @override
+  String get proKarnaughBenefit => '広告なしのカルノー図';
+
+  @override
+  String get proSimplificationBenefit => 'ステップごとの簡略化を即座に';
+
+  @override
+  String get proNormalFormsBenefit => '標準形（DNF/CNF）を即座に';
 }

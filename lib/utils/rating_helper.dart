@@ -50,6 +50,30 @@ class RatingHelper {
     return count >= calculationsBeforePrompt;
   }
 
+  /// Verifica si podemos pedir review en un "momento de éxito" (primer K-map
+  /// visto / primera simplificación con reducción), independiente del contador
+  /// de cálculos. Sigue respetando ya-calificó, nunca-preguntar y el cooldown
+  /// de [daysBeforeAskingAgain] días.
+  static Future<bool> shouldShowOnMilestone() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final hasRated = prefs.getBool(_keyHasRated) ?? false;
+    final neverAsk = prefs.getBool(_keyNeverAskAgain) ?? false;
+    if (hasRated || neverAsk) return false;
+
+    final lastPromptTimestamp = prefs.getInt(_keyLastPromptDate) ?? 0;
+    if (lastPromptTimestamp > 0) {
+      final lastPrompt = DateTime.fromMillisecondsSinceEpoch(
+        lastPromptTimestamp,
+      );
+      if (DateTime.now().difference(lastPrompt).inDays <
+          daysBeforeAskingAgain) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /// Marca que el usuario ya calificó la app
   static Future<void> markAsRated() async {
     final prefs = await SharedPreferences.getInstance();

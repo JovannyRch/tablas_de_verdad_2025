@@ -734,4 +734,14 @@ class AppLocalizationsIt extends AppLocalizations {
   String cellsCorrectOfTotal(int correct, int total) {
     return '$correct/$total celle corrette';
   }
+
+  @override
+  String get proKarnaughBenefit => 'Mappe di Karnaugh senza pubblicità';
+
+  @override
+  String get proSimplificationBenefit =>
+      'Semplificazione passo passo istantanea';
+
+  @override
+  String get proNormalFormsBenefit => 'Forme normali (FND/FNC) istantanee';
 }

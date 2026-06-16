@@ -232,5 +232,8 @@
   "verifyAnswers": "जाँचें",
   "tablesCompleted": "तालिकाएँ",
   "accuracy": "सटीकता",
-  "cellsCorrectOfTotal": "{correct}/{total} सेल सही"
+  "cellsCorrectOfTotal": "{correct}/{total} सेल सही",
+  "proKarnaughBenefit": "बिना विज्ञापन कर्नॉ मानचित्र",
+  "proSimplificationBenefit": "चरण-दर-चरण सरलीकरण तुरंत",
+  "proNormalFormsBenefit": "सामान्य रूप (DNF/CNF) तुरंत"
 }

@@ -232,5 +232,8 @@
   "verifyAnswers": "Проверить",
   "tablesCompleted": "Таблицы",
   "accuracy": "Точность",
-  "cellsCorrectOfTotal": "{correct}/{total} ячеек верно"
+  "cellsCorrectOfTotal": "{correct}/{total} ячеек верно",
+  "proKarnaughBenefit": "Карты Карно без рекламы",
+  "proSimplificationBenefit": "Пошаговое упрощение мгновенно",
+  "proNormalFormsBenefit": "Нормальные формы (ДНФ/КНФ) мгновенно"
 }

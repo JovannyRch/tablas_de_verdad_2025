@@ -225,7 +225,9 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF4A00E0).withValues(alpha: 0.3),
+                              color: const Color(
+                                0xFF4A00E0,
+                              ).withValues(alpha: 0.3),
                               blurRadius: 20,
                               offset: const Offset(0, 8),
                             ),
@@ -282,21 +284,34 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                         ),
                         child: Column(
                           children: [
+                            // Headline differentiators: the advanced tools that
+                            // are ad-gated for free users and instant for Pro.
                             BenefitItem(
-                              icon: Icons.block_rounded,
-                              text: t.noAds,
+                              icon: Icons.grid_on_rounded,
+                              text: t.proKarnaughBenefit,
+                              highlight: true,
+                            ),
+                            BenefitItem(
+                              icon: Icons.auto_fix_high_rounded,
+                              text: t.proSimplificationBenefit,
+                              highlight: true,
+                            ),
+                            BenefitItem(
+                              icon: Icons.functions_rounded,
+                              text: t.proNormalFormsBenefit,
+                              highlight: true,
                             ),
                             BenefitItem(
                               icon: Icons.all_inclusive_rounded,
                               text: t.unlimitedPremiumOps,
                             ),
                             BenefitItem(
-                              icon: Icons.library_books_rounded,
-                              text: t.fullLibraryAccess,
+                              icon: Icons.block_rounded,
+                              text: t.noAds,
                             ),
                             BenefitItem(
-                              icon: Icons.support_agent_rounded,
-                              text: t.premiumSupport,
+                              icon: Icons.library_books_rounded,
+                              text: t.fullLibraryAccess,
                             ),
                             BenefitItem(
                               icon: Icons.favorite_rounded,
@@ -317,7 +332,9 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                           color: const Color(0xFFFFC107).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: const Color(0xFFFFC107).withValues(alpha: 0.2),
+                            color: const Color(
+                              0xFFFFC107,
+                            ).withValues(alpha: 0.2),
                           ),
                         ),
                         child: Row(
@@ -381,7 +398,9 @@ class _ProPaywallSheetState extends State<_ProPaywallSheet> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF4A00E0).withValues(alpha: 0.3),
+                                color: const Color(
+                                  0xFF4A00E0,
+                                ).withValues(alpha: 0.3),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),

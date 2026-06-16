@@ -232,5 +232,8 @@
   "verifyAnswers": "答え合わせ",
   "tablesCompleted": "表",
   "accuracy": "正確度",
-  "cellsCorrectOfTotal": "{correct}/{total} セル正解"
+  "cellsCorrectOfTotal": "{correct}/{total} セル正解",
+  "proKarnaughBenefit": "広告なしのカルノー図",
+  "proSimplificationBenefit": "ステップごとの簡略化を即座に",
+  "proNormalFormsBenefit": "標準形（DNF/CNF）を即座に"
 }

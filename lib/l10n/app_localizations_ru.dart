@@ -735,4 +735,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String cellsCorrectOfTotal(int correct, int total) {
     return '$correct/$total ячеек верно';
   }
+
+  @override
+  String get proKarnaughBenefit => 'Карты Карно без рекламы';
+
+  @override
+  String get proSimplificationBenefit => 'Пошаговое упрощение мгновенно';
+
+  @override
+  String get proNormalFormsBenefit => 'Нормальные формы (ДНФ/КНФ) мгновенно';
 }

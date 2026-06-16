@@ -704,4 +704,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String cellsCorrectOfTotal(int correct, int total) {
     return '$correct/$total 个单元格正确';
   }
+
+  @override
+  String get proKarnaughBenefit => '卡诺图，无广告';
+
+  @override
+  String get proSimplificationBenefit => '逐步化简，即时呈现';
+
+  @override
+  String get proNormalFormsBenefit => '范式（DNF/CNF）即时生成';
 }

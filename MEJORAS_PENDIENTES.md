@@ -139,11 +139,14 @@
 - "Mapa de Karnaugh" y "simplificación con leyes lógicas" son **keywords de búsqueda** que ahora la app realmente tiene. Actualizar título corto/descripción/screenshots en ambos flavors (`PLAY_STORE_DESCRIPTIONS.md`).
 
 ### 26. Revisar la propuesta Pro
-- Pro ahora desbloquea mucho más que "sin anuncios" (K-maps, simplificación, formas normales sin gates). El paywall (`show_pro_version_dialog.dart`) debería listar estos beneficios explícitamente.
-- Evaluar suscripción vs compra única cuando exista la versión web (sync multiplataforma como beneficio de suscripción).
+- ✅ **Paywall actualizado** (`show_pro_version_dialog.dart`): ahora lidera con los 3 diferenciadores reales —Mapas de Karnaugh, Simplificación paso a paso y Formas normales sin anuncios/al instante— resaltados (naranja de marca, negrita) vía `BenefitItem(highlight: true)`, seguidos de operadores premium ilimitados, sin anuncios, biblioteca completa y apoyo al desarrollador. Se quitó "Soporte Premium" del paywall (claim vago; la clave sigue en el drawer). 3 claves l10n nuevas ×10.
+- ⏳ **Suscripción vs compra única**: pendiente, atarlo a la versión web (#21). Recomendación: mantener la **compra única** en móvil (es lo que ya funciona y conversiona bien para una utilidad), e introducir una suscripción **solo si** la web añade valor recurrente real (sync multiplataforma, historial en la nube). No migrar el modelo móvil actual.
 
-### 27. Timing del in-app review
-- Pedir review justo después de un momento de éxito (primera simplificación completada / primer K-map visto) en vez de por contador de operaciones.
+### 27. ✅ Timing del in-app review
+- El review ya **no se pide por contador de cálculos**. Se quitaron los prompts de `_evaluate`/`_evaluateAfterReward` en `calculator_screen.dart`.
+- Ahora se pide en un **momento de éxito** dentro de `TruthTableResultScreen`: al ver el **Mapa de Karnaugh** o al obtener una **simplificación con reducción real** (`result.steps.isNotEmpty`). Helper `scheduleMilestoneRating()` con delay de 1.2s (post-frame, `context.mounted`) para separarlo del intersticial que un usuario free acaba de cerrar.
+- `RatingHelper.shouldShowOnMilestone()`: misma lógica de cooldown/ya-calificó/nunca-preguntar pero **sin** el requisito de N cálculos. 6 tests en `rating_helper_test.dart`.
+- Nota: los métodos por contador (`shouldShowRatingDialog`/`incrementCalculationCount`) quedan en `RatingHelper` sin uso por si se quieren como fallback; el botón manual "Calificar la app" del drawer sigue igual.
 
 ---
 

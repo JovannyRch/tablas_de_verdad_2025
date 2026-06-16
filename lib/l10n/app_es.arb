@@ -276,5 +276,8 @@
         "type": "int"
       }
     }
-  }
+  },
+  "proKarnaughBenefit": "Mapas de Karnaugh sin anuncios",
+  "proSimplificationBenefit": "Simplificación paso a paso al instante",
+  "proNormalFormsBenefit": "Formas normales (FND/FNC) sin esperas"
 }

@@ -232,5 +232,8 @@
   "verifyAnswers": "Vérifier",
   "tablesCompleted": "Tableaux",
   "accuracy": "Précision",
-  "cellsCorrectOfTotal": "{correct}/{total} cellules correctes"
+  "cellsCorrectOfTotal": "{correct}/{total} cellules correctes",
+  "proKarnaughBenefit": "Tableaux de Karnaugh sans publicité",
+  "proSimplificationBenefit": "Simplification pas à pas instantanée",
+  "proNormalFormsBenefit": "Formes normales (FND/FNC) instantanément"
 }

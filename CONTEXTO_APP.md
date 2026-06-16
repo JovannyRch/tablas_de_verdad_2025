@@ -208,8 +208,9 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 | `step_parenthesization_test.dart` | 8 | wrapOperand / displayOperand |
 | `keypad_input_test.dart` | 7 | Paréntesis inteligentes + inserción |
 | `fill_table_builder_test.dart` | 5 | Puzzle "completar la tabla" |
+| `rating_helper_test.dart` | 6 | Gating del review por momento de éxito |
 
-**Total: 135 tests** — ejecutar con `flutter test`
+**Total: 141 tests** — ejecutar con `flutter test`
 
 ---
 

@@ -12,6 +12,8 @@ import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/ad_mob_service.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_pdf_viewer.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
+import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
+import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:tablas_de_verdad_2025/model/operator_theory.dart';
 import 'package:tablas_de_verdad_2025/utils/normal_form_converter.dart';
@@ -1392,6 +1394,21 @@ class _InterstitialAdGateState extends State<_InterstitialAdGate> {
   }
 }
 
+/// Requests an in-app review a beat after a "success moment" (first Karnaugh
+/// map viewed / first real simplification), gated by the rated/never/cooldown
+/// rules in [RatingHelper]. The short delay lets the result settle on screen
+/// (and separates it from any interstitial a free user just dismissed) before
+/// the prompt appears.
+void scheduleMilestoneRating(BuildContext context) {
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    await Future<void>.delayed(const Duration(milliseconds: 1200));
+    if (!context.mounted) return;
+    if (await RatingHelper.shouldShowOnMilestone() && context.mounted) {
+      showRatingDialog(context);
+    }
+  });
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Tab 4 — Karnaugh map
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1415,6 +1432,7 @@ class _KarnaughTabState extends State<_KarnaughTab> {
   KarnaughResult? _pos;
   bool _adShown = false;
   bool _supported = false;
+  bool _ratingScheduled = false;
 
   @override
   void initState() {
@@ -1470,6 +1488,12 @@ class _KarnaughTabState extends State<_KarnaughTab> {
         message: t.karnaughAdGate,
         onUnlocked: () => setState(() => _adShown = true),
       );
+    }
+
+    // Success moment: the map is now on screen — maybe ask for a review.
+    if (!_ratingScheduled) {
+      _ratingScheduled = true;
+      scheduleMilestoneRating(context);
     }
 
     final result = _form == KarnaughForm.sop ? _sop! : _pos!;
@@ -1703,6 +1727,7 @@ class _SimplificationTab extends StatefulWidget {
 class _SimplificationTabState extends State<_SimplificationTab> {
   SimplificationResult? _result;
   bool _adShown = false;
+  bool _ratingScheduled = false;
 
   @override
   void initState() {
@@ -1784,6 +1809,12 @@ class _SimplificationTabState extends State<_SimplificationTab> {
         message: t.simplificationAdGate,
         onUnlocked: () => setState(() => _adShown = true),
       );
+    }
+
+    // Success moment: only when the simplification actually reduced something.
+    if (!_ratingScheduled && result.steps.isNotEmpty) {
+      _ratingScheduled = true;
+      scheduleMilestoneRating(context);
     }
 
     final monoStyle = TextStyle(

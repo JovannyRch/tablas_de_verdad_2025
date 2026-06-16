@@ -9,8 +9,6 @@ import 'package:tablas_de_verdad_2025/utils/go_to_solution.dart';
 import 'package:tablas_de_verdad_2025/utils/show_pro_version_dialog.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
-import 'package:tablas_de_verdad_2025/utils/rating_helper.dart';
-import 'package:tablas_de_verdad_2025/utils/show_rating_dialog.dart';
 import 'package:tablas_de_verdad_2025/sheets/discord_promo_sheet.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/widget/banner_ad_widget.dart';
@@ -384,9 +382,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     // Analytics: track calculation
     Analytics.instance.logExpressionCalculated(expression);
 
-    // Incrementar contador para el sistema de rating
-    await RatingHelper.incrementCalculationCount();
-
     // Navegar a resultados y esperar a que el usuario regrese
     await goToResult(context, expression, _localization, _settings.truthFormat);
 
@@ -396,13 +391,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _settings.markFullscreenAdShown();
     }
 
-    // Verificar si debemos mostrar el diálogo de calificación
-    if (context.mounted) {
-      final shouldShow = await RatingHelper.shouldShowRatingDialog();
-      if (shouldShow && context.mounted) {
-        showRatingDialog(context);
-      }
-    }
+    // El review ya no se pide por contador de cálculos: se pide en un momento
+    // de éxito (primer K-map / primera simplificación) — ver TruthTableResultScreen.
 
     // Mostrar promo de Discord tras la 5ta evaluación (una sola vez)
     if (context.mounted) {
@@ -601,7 +591,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
 
     await _settings.incrementOperationsCount();
-    await RatingHelper.incrementCalculationCount();
 
     await goToResult(context, expression, _localization, _settings.truthFormat);
 
@@ -611,11 +600,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _settings.markFullscreenAdShown();
     }
 
-    if (context.mounted) {
-      final shouldShow = await RatingHelper.shouldShowRatingDialog();
-      if (shouldShow && context.mounted) {
-        showRatingDialog(context);
-      }
-    }
+    // El review se pide en un momento de éxito dentro del resultado, no aquí.
   }
 }
