@@ -5,10 +5,11 @@ import 'package:tablas_de_verdad_2025/class/logic_simplifier.dart';
 bool equivalent(String a, String b) {
   final nodeA = LogicSimplifier.parse(a);
   final nodeB = LogicSimplifier.parse(b);
-  final vars = {
-    ...LogicSimplifier.variablesOf(nodeA),
-    ...LogicSimplifier.variablesOf(nodeB),
-  }.toList();
+  final vars =
+      {
+        ...LogicSimplifier.variablesOf(nodeA),
+        ...LogicSimplifier.variablesOf(nodeB),
+      }.toList();
 
   for (int mask = 0; mask < (1 << vars.length); mask++) {
     final assignment = {
@@ -142,7 +143,10 @@ void main() {
     test('(A∧B)∨(A∧¬B) reduces to A', () {
       final r = LogicSimplifier.simplify('(A∧B)∨(A∧¬B)');
       expect(r.result, 'A');
-      expect(r.steps.map((s) => s.law), contains(SimplificationLaw.factorization));
+      expect(
+        r.steps.map((s) => s.law),
+        contains(SimplificationLaw.factorization),
+      );
       expect(r.steps.map((s) => s.law), contains(SimplificationLaw.complement));
     });
 

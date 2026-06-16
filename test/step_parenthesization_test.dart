@@ -1,10 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 
 TruthTable build(String expression) {
-  final tt = TruthTable(expression, 'en', TruthFormat.vf);
+  final tt = TruthTable(expression, 'en');
   tt.makeAll();
   return tt;
 }
@@ -29,10 +28,13 @@ void main() {
   group('final table headers keep parentheses', () {
     test('(p⇒q)∧(q⇒p) composes its operands with parentheses', () {
       final tt = build('(p⇒q)∧(q⇒p)');
-      expect(
-        tt.finalTable[0],
-        ['p', 'q', 'p ⇒ q', 'q ⇒ p', '(p ⇒ q) ∧ (q ⇒ p)'],
-      );
+      expect(tt.finalTable[0], [
+        'p',
+        'q',
+        'p ⇒ q',
+        'q ⇒ p',
+        '(p ⇒ q) ∧ (q ⇒ p)',
+      ]);
     });
 
     test('negation of a compound is shown as ¬(p ∧ q)', () {

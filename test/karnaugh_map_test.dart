@@ -6,8 +6,7 @@ void main() {
     List<String> vars,
     Set<int> minterms, {
     KarnaughForm form = KarnaughForm.sop,
-  }) =>
-      KarnaughSolver.solve(variables: vars, minterms: minterms, form: form);
+  }) => KarnaughSolver.solve(variables: vars, minterms: minterms, form: form);
 
   Set<String> patterns(KarnaughResult r) =>
       r.groups.map((g) => g.pattern).toSet();
@@ -50,10 +49,7 @@ void main() {
 
     test('rejects unsupported variable counts', () {
       expect(() => solve(['A'], {1}), throwsArgumentError);
-      expect(
-        () => solve(['A', 'B', 'C', 'D', 'E'], {1}),
-        throwsArgumentError,
-      );
+      expect(() => solve(['A', 'B', 'C', 'D', 'E'], {1}), throwsArgumentError);
     });
   });
 

@@ -53,7 +53,6 @@ class _FillTableScreenState extends State<FillTableScreen> {
   }
 
   void _buildPuzzles() {
-    final settings = context.read<Settings>();
     final locale = AppLocalizations.of(context)!.localeName;
     final questions = QuizBank.getQuestions(
       widget.difficulty,
@@ -63,11 +62,7 @@ class _FillTableScreenState extends State<FillTableScreen> {
     final built = <_Puzzle>[];
     for (final q in questions) {
       try {
-        final tt = TruthTable(
-          q.expression.replaceAll(' ', ''),
-          locale,
-          settings.truthFormat,
-        );
+        final tt = TruthTable(q.expression.replaceAll(' ', ''), locale);
         tt.makeAll();
         final puzzle = FillTableBuilder.fromTruthTable(tt);
         if (puzzle != null) built.add(_Puzzle(puzzle, q.expression));

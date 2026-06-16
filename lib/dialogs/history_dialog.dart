@@ -184,7 +184,9 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                     horizontal: 20,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.redAccent.withValues(alpha: 0.9),
+                                    color: Colors.redAccent.withValues(
+                                      alpha: 0.9,
+                                    ),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: const Icon(
@@ -207,15 +209,17 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                       decoration: BoxDecoration(
                                         color:
                                             isDark
-                                                ? Colors.white.withValues(alpha: 0.05)
+                                                ? Colors.white.withValues(
+                                                  alpha: 0.05,
+                                                )
                                                 : Colors.grey[100],
                                         borderRadius: BorderRadius.circular(16),
                                         border: Border.all(
                                           color:
                                               isDark
                                                   ? Colors.white10
-                                                  : Colors.black.withValues(alpha: 
-                                                    0.05,
+                                                  : Colors.black.withValues(
+                                                    alpha: 0.05,
                                                   ),
                                         ),
                                       ),

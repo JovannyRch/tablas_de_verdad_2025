@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:tablas_de_verdad_2025/class/operator.dart';
 import 'package:tablas_de_verdad_2025/class/row_table.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 
 // ── Parser error messages (all 10 supported locales) ─────────────────────────
 
@@ -119,7 +118,6 @@ class TruthTable {
   static const int contingencyId = 2;
 
   final String language;
-  final TruthFormat format;
 
   int counter1s = 0;
   int counters0s = 0;
@@ -135,7 +133,9 @@ class TruthTable {
   List<String> xorOpers = [Operators.XOR.value, Operators.XOR2.value];
   String errorMessage = "";
 
-  List<int> statesSteps = [];
+  /// Column key of the whole expression (the postfix root): a variable name
+  /// when there are no operators, otherwise the outermost step's `toString()`.
+  String rootKey = '';
 
   int index0InVariables = -1;
   int index1InVariables = -1;
@@ -172,7 +172,7 @@ class TruthTable {
   String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01";
   TruthTableType tipo = TruthTableType.contingency;
 
-  TruthTable(this.infix, this.language, this.format) {
+  TruthTable(this.infix, this.language) {
     initialInfix = infix;
     formatInput();
   }
@@ -228,18 +228,27 @@ class TruthTable {
     }
   }
 
-  void makeAll() {
-    if (!convertInfixToPostix()) return; // parse error: specific message set
+  /// True when parsing/validation failed (and [errorMessage] is set).
+  bool get hasError => errorMessage.isNotEmpty;
+
+  /// True when the table was built successfully and is ready to read.
+  bool get isValid => errorMessage.isEmpty && finalTable.isNotEmpty;
+
+  /// Parses, validates and builds the table. Returns whether it succeeded;
+  /// on failure [errorMessage] holds a localized reason and the table fields
+  /// stay empty.
+  bool makeAll() {
+    if (!convertInfixToPostix()) return false; // parse error: message set
     if (variables.length > kMaxTruthTableVariables) {
       errorMessage = _errorMsg(
         _kTooManyVariables,
         language,
       ).replaceAll('{max}', '$kMaxTruthTableVariables');
-      return;
+      return false;
     }
-    if (checkIfIsCorrectlyFormed()) {
-      calculate();
-    }
+    if (!checkIfIsCorrectlyFormed()) return false;
+    calculate();
+    return true;
   }
 
   void calculate() {
@@ -249,31 +258,27 @@ class TruthTable {
     variables.sort();
     createColumnsForVariables();
 
-    StepProcess.currentIndex = variables.length - 1;
-    StepProcess.labelIndex = 0;
-    //Get steps
     getSteps(postfix);
 
     if (variables.contains("0")) {
       index0InVariables = variables.indexOf("0");
     }
-
     if (variables.contains("1")) {
       index1InVariables = variables.indexOf("1");
     }
 
-    int totalCombinations = pow(2, variables.length).toInt();
-    int sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
+    final totalCombinations = pow(2, variables.length).toInt();
+    final sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
     totalRows = totalCombinations;
     for (int i = totalCombinations - 1; i >= 0; i--) {
-      String combination = i.toRadixString(2);
-      combination = formatCombination(combination, sizeOfCombinations);
-      String combinationInPostfix = varSubstitutions(postfix, combination);
-      int result = evaluation(combinationInPostfix);
+      final combination = formatCombination(
+        i.toRadixString(2),
+        sizeOfCombinations,
+      );
+      final result = _evaluateRow(combination);
       table.add(
         RowTable(index: i, combination: combination, result: "$result"),
       );
-
       if (result == 1) {
         counter1s++;
       } else {
@@ -318,59 +323,61 @@ class TruthTable {
     return combination;
   }
 
-  int evaluation(combination) {
-    List<String> stack = [];
-    List<String> stepsKeys = columns.keys.toList().sublist(variables.length);
+  /// Evaluates every sub-expression for a single row and returns the value of
+  /// the whole expression.
+  ///
+  /// [combination] is a string of '0'/'1', one digit per variable in
+  /// [variables] order. Variables are seeded into a value map; then each step
+  /// (already in dependency order, children before parents) is evaluated by
+  /// looking up its operands — which are either variable names or earlier
+  /// steps' `toString()` keys. Each value is appended to its column. Identical
+  /// sub-expressions share one column and are written once (the map dedups).
+  int _evaluateRow(String combination) {
+    final values = <String, int>{};
 
-    int counterSteps = 0;
-    for (String c in combination.split("")) {
-      if ("01".contains(c)) {
-        stack.add(c);
-      } else {
-        int resultado = 0;
-        int a, b;
-        a = int.parse(stack.removeLast());
-        if (notOpers.contains(c)) {
-          resultado = not(a);
-        } else {
-          b = int.parse(stack.removeLast());
-          if (orOpers.contains(c)) {
-            resultado = or(b, a);
-          } else if (andOpers.contains(c)) {
-            resultado = and(b, a);
-          } else if (c == Operators.CODICIONAL.value) {
-            resultado = condicional(b, a);
-          } else if (c == Operators.BICODICIONAL.value) {
-            resultado = bicondicional(b, a);
-          } else if (c == Operators.NOR.value) {
-            resultado = nor(b, a);
-          } else if (c == Operators.NAND.value) {
-            resultado = nand(b, a);
-          } else if (xorOpers.contains(c)) {
-            resultado = xor(b, a);
-          } else if (c == Operators.ANTICODICIONAL.value) {
-            resultado = replicador(b, a);
-          } else if (c == Operators.NOT_CONDITIONAL.value) {
-            resultado = not(condicional(b, a));
-          } else if (c == Operators.NOT_CONDITIONAL_INVERSE.value) {
-            resultado = not(replicador(b, a));
-          } else if (c == Operators.NOT_BICONDITIONAL.value) {
-            resultado = not(bicondicional(b, a));
-          } else if (c == Operators.TAUTOLOGY.value) {
-            resultado = 1;
-          } else if (c == Operators.CONTRADICTION.value) {
-            resultado = 0;
-          }
-        }
-        stack.add("$resultado");
-        if (columns.containsKey(stepsKeys[statesSteps[counterSteps] - 1])) {
-          columns[stepsKeys[statesSteps[counterSteps] - 1]]?.add("$resultado");
-          counterSteps++;
-        }
-      }
+    for (int i = 0; i < variables.length; i++) {
+      final v = int.parse(combination[i]);
+      values[variables[i]] = v;
+      columns[variables[i]]!.add('$v');
     }
 
-    return int.parse(stack.last);
+    for (final step in steps) {
+      final left = values[step.variable1]!;
+      final result =
+          step.isSingleVariable
+              ? not(left)
+              : _applyBinary(step.operator, left, values[step.variable2]!);
+      values[step.toString()] = result;
+      columns[step.toString()]!.add('$result');
+    }
+
+    return values[rootKey] ?? 0;
+  }
+
+  /// Applies a binary [op] to its [left] and [right] operand values. Mirrors
+  /// the operand order used when building steps (variable1 = left).
+  int _applyBinary(Operator op, int left, int right) {
+    final v = op.value;
+    if (orOpers.contains(v)) return or(left, right);
+    if (andOpers.contains(v)) return and(left, right);
+    if (xorOpers.contains(v)) return xor(left, right);
+    if (v == Operators.CODICIONAL.value) return condicional(left, right);
+    if (v == Operators.BICODICIONAL.value) return bicondicional(left, right);
+    if (v == Operators.NOR.value) return nor(left, right);
+    if (v == Operators.NAND.value) return nand(left, right);
+    if (v == Operators.ANTICODICIONAL.value) return replicador(left, right);
+    if (v == Operators.NOT_CONDITIONAL.value) {
+      return not(condicional(left, right));
+    }
+    if (v == Operators.NOT_CONDITIONAL_INVERSE.value) {
+      return not(replicador(left, right));
+    }
+    if (v == Operators.NOT_BICONDITIONAL.value) {
+      return not(bicondicional(left, right));
+    }
+    if (v == Operators.TAUTOLOGY.value) return 1;
+    if (v == Operators.CONTRADICTION.value) return 0;
+    return 0; // unreachable for validated operators
   }
 
   int replicador(int a, int b) {
@@ -414,16 +421,6 @@ class TruthTable {
   int bicondicional(int a, int b) {
     if (a == b) return 1;
     return 0;
-  }
-
-  String varSubstitutions(String postfix, String combination) {
-    for (int i = 0; i < variables.length; i++) {
-      String val = combination[i];
-      String variable = variables[i];
-      columns[variable]?.add(val);
-      postfix = postfix.replaceAll(variable, val);
-    }
-    return postfix;
   }
 
   String infixToPostfix(String infix) {
@@ -547,22 +544,19 @@ class TruthTable {
     return null;
   }
 
-  int _checkCanAddStep(StepProcess step) {
-    for (StepProcess s in steps) {
-      if (s.toString() == step.toString()) return s.index;
+  bool _stepExists(StepProcess step) {
+    for (final s in steps) {
+      if (s.toString() == step.toString()) return true;
     }
-    return -1;
+    return false;
   }
 
+  /// Registers a distinct sub-expression as a column. Identical
+  /// sub-expressions (same `toString()`) share a single column.
   void _addStep(StepProcess step) {
-    int index = _checkCanAddStep(step);
-    if (index == -1) {
+    if (!_stepExists(step)) {
       columns[step.toString()] = [];
       steps.add(step);
-      statesSteps.add(step.index);
-    } else {
-      statesSteps.add(index);
-      StepProcess.backStep();
     }
   }
 
@@ -622,5 +616,8 @@ class TruthTable {
         stack.add(s.toString());
       }
     }
+    // The lone remaining token is the whole expression's column key (a step's
+    // toString, or a bare variable/constant when there are no operators).
+    rootKey = stack.isNotEmpty ? stack.last : '';
   }
 }

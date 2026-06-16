@@ -1,5 +1,4 @@
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 
 /// Result of comparing two logical expressions for equivalence.
 class EquivalenceResult {
@@ -53,15 +52,10 @@ class EquivalenceChecker {
   ///
   /// Returns an [EquivalenceResult] that contains the two truth tables, the
   /// equivalence verdict, and any differing rows.
-  static EquivalenceResult check(
-    String exprA,
-    String exprB,
-    String language,
-    TruthFormat format,
-  ) {
+  static EquivalenceResult check(String exprA, String exprB, String language) {
     // Build two truth tables
-    final ttA = TruthTable(exprA, language, format);
-    final ttB = TruthTable(exprB, language, format);
+    final ttA = TruthTable(exprA, language);
+    final ttB = TruthTable(exprB, language);
 
     // Run full pipeline on both
     ttA.makeAll();
@@ -102,8 +96,8 @@ class EquivalenceChecker {
       final paddedA = _padExpression(exprA, ttA.variables, sortedVars);
       final paddedB = _padExpression(exprB, ttB.variables, sortedVars);
 
-      finalA = TruthTable(paddedA, language, format);
-      finalB = TruthTable(paddedB, language, format);
+      finalA = TruthTable(paddedA, language);
+      finalB = TruthTable(paddedB, language);
       finalA.makeAll();
       finalB.makeAll();
 

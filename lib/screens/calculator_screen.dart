@@ -383,7 +383,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     Analytics.instance.logExpressionCalculated(expression);
 
     // Navegar a resultados y esperar a que el usuario regrese
-    await goToResult(context, expression, _localization, _settings.truthFormat);
+    await goToResult(context, expression, _localization);
 
     // Mostrar ad intersticial al regresar (pausa natural, menos invasivo)
     if (_settings.shouldShowInterstitialAd()) {
@@ -592,7 +592,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     await _settings.incrementOperationsCount();
 
-    await goToResult(context, expression, _localization, _settings.truthFormat);
+    await goToResult(context, expression, _localization);
 
     // Intersticial al regresar, respetando cooldown
     if (_settings.shouldShowInterstitialAd()) {

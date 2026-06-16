@@ -55,14 +55,9 @@ class _QuizScreenState extends State<QuizScreen>
 
   /// Verify answer using the real TruthTable engine
   int _getCorrectAnswer(QuizQuestion question) {
-    final settings = context.read<Settings>();
     final t = AppLocalizations.of(context)!;
     try {
-      final tt = TruthTable(
-        question.expression,
-        t.localeName,
-        settings.truthFormat,
-      );
+      final tt = TruthTable(question.expression, t.localeName);
       tt.makeAll();
       if (tt.tipo == TruthTableType.tautology) return 1;
       if (tt.tipo == TruthTableType.contradiction) return 0;
@@ -396,8 +391,10 @@ class _AnswerButton extends StatelessWidget {
     Color textColor;
 
     if (!answered) {
-      bgColor = isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[50]!;
-      borderColor = isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.08);
+      bgColor =
+          isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[50]!;
+      borderColor =
+          isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.08);
       textColor = isDark ? Colors.white : Colors.black87;
     } else if (index == correctAnswer) {
       bgColor = const Color(0xFF4CAF50).withValues(alpha: 0.12);
@@ -408,8 +405,10 @@ class _AnswerButton extends StatelessWidget {
       borderColor = const Color(0xFFE53935).withValues(alpha: 0.4);
       textColor = const Color(0xFFC62828);
     } else {
-      bgColor = isDark ? Colors.white.withValues(alpha: 0.03) : Colors.grey[100]!;
-      borderColor = isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.04);
+      bgColor =
+          isDark ? Colors.white.withValues(alpha: 0.03) : Colors.grey[100]!;
+      borderColor =
+          isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.04);
       textColor = isDark ? Colors.white38 : Colors.black26;
     }
 

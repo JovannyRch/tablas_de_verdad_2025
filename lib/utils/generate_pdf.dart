@@ -9,6 +9,7 @@ import 'package:tablas_de_verdad_2025/class/logic_simplifier.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/l10n/app_localizations.dart';
+import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/get_cell_value.dart';
 import 'package:tablas_de_verdad_2025/utils/normal_form_converter.dart';
 
@@ -49,7 +50,7 @@ String getType(AppLocalizations t, TruthTableType type) {
   }
 }
 
-List<List<String>> getTable(TruthTable t, String language) {
+List<List<String>> getTable(TruthTable t, String language, TruthFormat format) {
   List<List<String>> table = [];
 
   for (int i = 0; i < t.finalTable.length; i++) {
@@ -59,7 +60,7 @@ List<List<String>> getTable(TruthTable t, String language) {
       String cellValue =
           i == 0
               ? t.finalTable[i][j]
-              : getCellValue(language, t.format, t.finalTable[i][j]);
+              : getCellValue(language, format, t.finalTable[i][j]);
       row.add(cellValue);
     }
     table.add(row);
@@ -72,6 +73,7 @@ Future<PDFDocument> generatePdfWithTable(
   TruthTable t,
   AppLocalizations translations, {
   bool isPro = false,
+  required TruthFormat format,
 }) async {
   final pdf = pw.Document();
   final String language = t.language;
@@ -82,7 +84,7 @@ Future<PDFDocument> generatePdfWithTable(
   final Uint8List logoBytes = data.buffer.asUint8List();
 
   final type = getType(translations, t.tipo);
-  final finalTable = getTable(t, language);
+  final finalTable = getTable(t, language, format);
 
   final now = DateTime.now();
   final dateFormatted =
@@ -255,11 +257,7 @@ Future<PDFDocument> generatePdfWithTable(
               ..._buildKarnaughSection(karnaughSop, translations, ttf),
 
             if (isPro && simplification != null)
-              ..._buildSimplificationSection(
-                simplification,
-                translations,
-                ttf,
-              ),
+              ..._buildSimplificationSection(simplification, translations, ttf),
           ],
     ),
   );
@@ -284,13 +282,9 @@ List<pw.Widget> _buildNormalFormsSection(
   if (nf.tooManyVariables) return [];
 
   final mintermLabel =
-      nf.mintermIndices.isEmpty
-          ? '—'
-          : 'Σm(${nf.mintermIndices.join(', ')})';
+      nf.mintermIndices.isEmpty ? '—' : 'Σm(${nf.mintermIndices.join(', ')})';
   final maxtermLabel =
-      nf.maxtermIndices.isEmpty
-          ? '—'
-          : 'ΠM(${nf.maxtermIndices.join(', ')})';
+      nf.maxtermIndices.isEmpty ? '—' : 'ΠM(${nf.maxtermIndices.join(', ')})';
 
   return [
     pw.SizedBox(height: 30),
@@ -414,11 +408,7 @@ List<pw.Widget> _buildSimplificationSection(
   widgets.add(
     pw.Text(
       t.simplificationStepCount(result.steps.length),
-      style: pw.TextStyle(
-        font: ttf,
-        fontSize: 10,
-        color: PdfColors.grey600,
-      ),
+      style: pw.TextStyle(font: ttf, fontSize: 10, color: PdfColors.grey600),
     ),
   );
   widgets.add(pw.SizedBox(height: 8));
@@ -486,9 +476,7 @@ List<pw.Widget> _buildSimplificationSection(
                 horizontal: 8,
                 vertical: 4,
               ),
-              decoration: const pw.BoxDecoration(
-                color: PdfColors.grey50,
-              ),
+              decoration: const pw.BoxDecoration(color: PdfColors.grey50),
               child: pw.Text(
                 step.expression,
                 style: pw.TextStyle(
@@ -513,8 +501,12 @@ List<pw.Widget> _buildSimplificationSection(
         border: pw.Border.all(color: PdfColors.blue200),
         borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
       ),
-      child: _infoRow(t.simplificationResult, result.result, ttf,
-          isResult: true),
+      child: _infoRow(
+        t.simplificationResult,
+        result.result,
+        ttf,
+        isResult: true,
+      ),
     ),
   );
 

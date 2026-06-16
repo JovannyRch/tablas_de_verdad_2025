@@ -156,7 +156,8 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
         color: Theme.of(context).scaffoldBackgroundColor,
         border: Border(
           bottom: BorderSide(
-            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
+            color:
+                isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
           ),
         ),
       ),
@@ -227,11 +228,14 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
         color:
             isSelected
                 ? color
-                : (isDark ? Colors.white60 : Colors.black.withValues(alpha: 0.6)),
+                : (isDark
+                    ? Colors.white60
+                    : Colors.black.withValues(alpha: 0.6)),
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         fontSize: 13,
       ),
-      backgroundColor: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white,
+      backgroundColor:
+          isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(

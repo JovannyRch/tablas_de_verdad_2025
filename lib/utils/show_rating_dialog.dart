@@ -73,7 +73,9 @@ Future<void> showRatingDialog(BuildContext context) async {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFFF8C00).withValues(alpha: 0.3),
+                                color: const Color(
+                                  0xFFFF8C00,
+                                ).withValues(alpha: 0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),

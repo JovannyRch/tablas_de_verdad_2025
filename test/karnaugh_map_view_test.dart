@@ -8,9 +8,7 @@ void main() {
   Future<void> pumpMap(WidgetTester tester, KarnaughResult result) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          body: KarnaughMapView(result: result, isDark: false),
-        ),
+        home: Scaffold(body: KarnaughMapView(result: result, isDark: false)),
       ),
     );
   }
@@ -24,9 +22,7 @@ void main() {
         locale: const Locale('en'),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(
-          body: KarnaughMapView(result: result, isDark: false),
-        ),
+        home: Scaffold(body: KarnaughMapView(result: result, isDark: false)),
       ),
     );
   }
@@ -95,9 +91,7 @@ void main() {
     await pumpLocalizedMap(tester, result);
 
     expect(
-      find.bySemanticsLabel(
-        'Karnaugh map with 1 groups. Group 1: A, 2 cells',
-      ),
+      find.bySemanticsLabel('Karnaugh map with 1 groups. Group 1: A, 2 cells'),
       findsOneWidget,
     );
 

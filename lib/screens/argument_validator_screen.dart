@@ -29,17 +29,20 @@ ArgumentResult _validateArgument(
   List<String> premises,
   String conclusion,
   String language,
-  TruthFormat format,
 ) {
   // Build: (P1)∧(P2)∧...∧(Pn)⇒(C)
   final premisesJoined = premises.map((p) => '($p)').join('∧');
   final combined = '($premisesJoined)⇒($conclusion)';
 
-  final tt = TruthTable(combined, language, format);
+  final tt = TruthTable(combined, language);
   tt.makeAll();
 
   if (tt.tipo == TruthTableType.tautology) {
-    return ArgumentResult(isValid: true, variables: tt.variables, counterexamples: []);
+    return ArgumentResult(
+      isValid: true,
+      variables: tt.variables,
+      counterexamples: [],
+    );
   }
 
   // Find counterexamples: rows where combined result = "0"
@@ -65,7 +68,8 @@ class ArgumentValidatorScreen extends StatefulWidget {
   const ArgumentValidatorScreen({super.key});
 
   @override
-  State<ArgumentValidatorScreen> createState() => _ArgumentValidatorScreenState();
+  State<ArgumentValidatorScreen> createState() =>
+      _ArgumentValidatorScreenState();
 }
 
 class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
@@ -85,7 +89,9 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
     const ValidationResult(ValidationStatus.empty),
     const ValidationResult(ValidationStatus.empty),
   ];
-  ValidationResult _conclusionValidation = const ValidationResult(ValidationStatus.empty);
+  ValidationResult _conclusionValidation = const ValidationResult(
+    ValidationStatus.empty,
+  );
 
   ArgumentResult? _result;
   bool _isComputing = false;
@@ -97,7 +103,8 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
     for (int i = 0; i < _premiseFocusNodes.length; i++) {
       final idx = i;
       _premiseFocusNodes[idx].addListener(() {
-        if (_premiseFocusNodes[idx].hasFocus) setState(() => _activeIndex = idx);
+        if (_premiseFocusNodes[idx].hasFocus)
+          setState(() => _activeIndex = idx);
       });
       _premiseControllers[idx].addListener(() => _validatePremise(idx));
     }
@@ -202,7 +209,6 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
       premises,
       conclusion,
       settings.locale.languageCode,
-      settings.truthFormat,
     );
 
     setState(() {
@@ -214,7 +220,8 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
 
   GhostTextEditingController get _activeController {
     if (_activeIndex == -1) return _conclusionController;
-    if (_activeIndex < _premiseControllers.length) return _premiseControllers[_activeIndex];
+    if (_activeIndex < _premiseControllers.length)
+      return _premiseControllers[_activeIndex];
     return _conclusionController;
   }
 
@@ -230,7 +237,9 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
       );
     } else {
       controller.text = base + text;
-      controller.selection = TextSelection.collapsed(offset: controller.text.length);
+      controller.selection = TextSelection.collapsed(
+        offset: controller.text.length,
+      );
     }
   }
 
@@ -247,7 +256,9 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
       );
     } else if (base.isNotEmpty) {
       controller.text = base.substring(0, base.length - 1);
-      controller.selection = TextSelection.collapsed(offset: controller.text.length);
+      controller.selection = TextSelection.collapsed(
+        offset: controller.text.length,
+      );
     }
   }
 
@@ -280,12 +291,16 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                         isActive: _activeIndex == i,
                         isDark: isDark,
                         onTap: () {
-                          setState(() { _activeIndex = i; _keypadVisible = true; });
+                          setState(() {
+                            _activeIndex = i;
+                            _keypadVisible = true;
+                          });
                           _premiseFocusNodes[i].requestFocus();
                         },
-                        onRemove: _premiseControllers.length > 1
-                            ? () => _removePremise(i)
-                            : null,
+                        onRemove:
+                            _premiseControllers.length > 1
+                                ? () => _removePremise(i)
+                                : null,
                         removeLabel: t.removePremise,
                       ),
                     );
@@ -296,7 +311,10 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                     alignment: Alignment.centerLeft,
                     child: TextButton.icon(
                       onPressed: _addPremise,
-                      icon: const Icon(Icons.add_circle_outline_rounded, size: 18),
+                      icon: const Icon(
+                        Icons.add_circle_outline_rounded,
+                        size: 18,
+                      ),
                       label: Text(t.addPremise),
                       style: TextButton.styleFrom(foregroundColor: kSeedColor),
                     ),
@@ -309,7 +327,11 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                         Expanded(child: Divider()),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12),
-                          child: Icon(Icons.arrow_downward_rounded, size: 18, color: Colors.grey),
+                          child: Icon(
+                            Icons.arrow_downward_rounded,
+                            size: 18,
+                            color: Colors.grey,
+                          ),
                         ),
                         Expanded(child: Divider()),
                       ],
@@ -326,7 +348,10 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                     isDark: isDark,
                     isConclusion: true,
                     onTap: () {
-                      setState(() { _activeIndex = -1; _keypadVisible = true; });
+                      setState(() {
+                        _activeIndex = -1;
+                        _keypadVisible = true;
+                      });
                       _conclusionFocusNode.requestFocus();
                     },
                   ),
@@ -336,17 +361,27 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
                   // ── Validate button ────────────────────────
                   FilledButton.icon(
                     onPressed: _canValidate ? _runValidation : null,
-                    icon: _isComputing
-                        ? const SizedBox(
-                            width: 18, height: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                          )
-                        : const Icon(Icons.rule_rounded),
+                    icon:
+                        _isComputing
+                            ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                            : const Icon(Icons.rule_rounded),
                     label: Text(t.validateArgument),
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
                     ),
                   ),
 
@@ -366,25 +401,26 @@ class _ArgumentValidatorScreenState extends State<ArgumentValidatorScreen> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 280),
             curve: Curves.easeInOut,
-            height: _keypadVisible
-                ? MediaQuery.of(context).size.height * 0.42
-                : 0,
+            height:
+                _keypadVisible ? MediaQuery.of(context).size.height * 0.42 : 0,
             child: ClipRect(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.42,
                 child: TruthKeypad(
                   onTap: (key) {
-                    final piece = _case == Case.lower
-                        ? key.toLowerCase()
-                        : key.toUpperCase();
+                    final piece =
+                        _case == Case.lower
+                            ? key.toLowerCase()
+                            : key.toUpperCase();
                     _insertText(piece);
                   },
                   onBackspace: _backspace,
                   onClear: _clearActive,
                   onEvaluate: _canValidate ? _runValidation : () {},
-                  onToggleAa: () => setState(() {
-                    _case = _case == Case.lower ? Case.upper : Case.lower;
-                  }),
+                  onToggleAa:
+                      () => setState(() {
+                        _case = _case == Case.lower ? Case.upper : Case.lower;
+                      }),
                   calculatorCase: _case,
                   hideActionButtons: true,
                 ),
@@ -452,17 +488,21 @@ class _ExpressionField extends StatelessWidget {
               child: Row(
                 children: [
                   if (isConclusion)
-                    Icon(Icons.arrow_downward_rounded, size: 14,
-                        color: isDark ? Colors.white54 : Colors.black45),
+                    Icon(
+                      Icons.arrow_downward_rounded,
+                      size: 14,
+                      color: isDark ? Colors.white54 : Colors.black45,
+                    ),
                   if (isConclusion) const SizedBox(width: 4),
                   Text(
                     label,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
-                      color: isConclusion
-                          ? kSeedColor
-                          : (isDark ? Colors.white54 : Colors.black45),
+                      color:
+                          isConclusion
+                              ? kSeedColor
+                              : (isDark ? Colors.white54 : Colors.black45),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -472,11 +512,17 @@ class _ExpressionField extends StatelessWidget {
                       onPressed: onRemove,
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.redAccent,
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      child: Text(removeLabel ?? '', style: const TextStyle(fontSize: 12)),
+                      child: Text(
+                        removeLabel ?? '',
+                        style: const TextStyle(fontSize: 12),
+                      ),
                     ),
                 ],
               ),
@@ -598,7 +644,10 @@ class _ResultCard extends StatelessWidget {
           const SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
-              color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.grey[50],
+              color:
+                  isDark
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.grey[50],
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark ? Colors.white12 : Colors.black12,
@@ -622,18 +671,21 @@ class _ResultCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: Colors.redAccent,
                 ),
-                columns: result.variables
-                    .map((v) => DataColumn(label: Text(v)))
-                    .toList(),
-                rows: result.counterexamples
-                    .map(
-                      (row) => DataRow(
-                        cells: row
-                            .map((cell) => DataCell(Text(cell)))
-                            .toList(),
-                      ),
-                    )
-                    .toList(),
+                columns:
+                    result.variables
+                        .map((v) => DataColumn(label: Text(v)))
+                        .toList(),
+                rows:
+                    result.counterexamples
+                        .map(
+                          (row) => DataRow(
+                            cells:
+                                row
+                                    .map((cell) => DataCell(Text(cell)))
+                                    .toList(),
+                          ),
+                        )
+                        .toList(),
               ),
             ),
           ),

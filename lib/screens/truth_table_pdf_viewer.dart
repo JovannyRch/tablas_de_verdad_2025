@@ -40,8 +40,13 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     });
 
     final t = AppLocalizations.of(context)!;
-    final isPro = context.read<Settings>().isProVersion;
-    doc = await generatePdfWithTable(widget.truthTable, t, isPro: isPro);
+    final settings = context.read<Settings>();
+    doc = await generatePdfWithTable(
+      widget.truthTable,
+      t,
+      isPro: settings.isProVersion,
+      format: settings.truthFormat,
+    );
 
     if (!mounted) return;
 

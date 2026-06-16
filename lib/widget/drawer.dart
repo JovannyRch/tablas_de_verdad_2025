@@ -376,7 +376,8 @@ class _DrawerTile extends StatelessWidget {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
             letterSpacing: -0.2,
           ),
         ),

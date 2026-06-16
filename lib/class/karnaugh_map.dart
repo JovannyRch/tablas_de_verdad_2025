@@ -222,7 +222,11 @@ class KarnaughSolver {
         .map((g) => g.term)
         .join(form == KarnaughForm.sop ? ' ∨ ' : ' ∧ ');
 
-    return buildResult(groups: groups, expression: expression, isConstant: false);
+    return buildResult(
+      groups: groups,
+      expression: expression,
+      isConstant: false,
+    );
   }
 
   // ── Quine–McCluskey ────────────────────────────────────────────────────
@@ -311,11 +315,14 @@ class KarnaughSolver {
       if (owners.length == 1) essential.add(owners.first);
     }
 
-    final essentialPatterns = [for (final i in essential) implicants[i].pattern];
-    final covered = <int>{
-      for (final i in essential) ...implicants[i].covers,
-    };
-    final uncovered = [for (final t in targets) if (!covered.contains(t)) t];
+    final essentialPatterns = [
+      for (final i in essential) implicants[i].pattern,
+    ];
+    final covered = <int>{for (final i in essential) ...implicants[i].covers};
+    final uncovered = [
+      for (final t in targets)
+        if (!covered.contains(t)) t,
+    ];
 
     if (uncovered.isEmpty) return [essentialPatterns];
 

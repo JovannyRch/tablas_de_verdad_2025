@@ -165,8 +165,7 @@ class LogicSimplifier {
   };
 
   /// Simplify an infix expression (app syntax).
-  static SimplificationResult simplify(String infix) =>
-      _run(parse(infix));
+  static SimplificationResult simplify(String infix) => _run(parse(infix));
 
   /// Simplify from an already-validated postfix string (single-character
   /// tokens, as produced by `TruthTable.infixToPostfix`).
@@ -556,10 +555,9 @@ class LogicSimplifier {
     }
 
     if (child is NaryNode) {
-      final replacement = NaryNode(
-        !child.isAnd,
-        [for (final c in child.children) NotNode(c)],
-      );
+      final replacement = NaryNode(!child.isAnd, [
+        for (final c in child.children) NotNode(c),
+      ]);
       return _Rewrite(
         node: replacement,
         law: SimplificationLaw.deMorgan,
@@ -676,8 +674,7 @@ class LogicSimplifier {
   static _Rewrite? _absorptionRule(NaryNode node) {
     final children = node.children;
     for (int i = 0; i < children.length; i++) {
-      final small =
-          _factors(children[i], node.isAnd).map(_ckey).toSet();
+      final small = _factors(children[i], node.isAnd).map(_ckey).toSet();
       for (int j = 0; j < children.length; j++) {
         if (i == j) continue;
         final big = _factors(children[j], node.isAnd).map(_ckey).toSet();

@@ -71,7 +71,9 @@ Future<void> showFileOptionsDialog(
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00BCD4).withValues(alpha: 0.3),
+                                color: const Color(
+                                  0xFF00BCD4,
+                                ).withValues(alpha: 0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -186,10 +188,13 @@ class _FileOptionItem extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color:
-              isDark ? Colors.white.withValues(alpha: 0.05) : const Color(0xFFF8F9FA),
+              isDark
+                  ? Colors.white.withValues(alpha: 0.05)
+                  : const Color(0xFFF8F9FA),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black12,
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black12,
           ),
         ),
         child: Row(

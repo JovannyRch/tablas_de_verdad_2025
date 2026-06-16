@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/equivalence_checker.dart';
 import 'package:tablas_de_verdad_2025/utils/expression_validator.dart';
 
@@ -9,7 +8,7 @@ import 'package:tablas_de_verdad_2025/utils/expression_validator.dart';
 // ──────────────────────────────────────────────────────────────────────────────
 
 TruthTable build(String expr) {
-  final tt = TruthTable(expr, 'en', TruthFormat.vf);
+  final tt = TruthTable(expr, 'en');
   tt.makeAll();
   return tt;
 }
@@ -183,25 +182,25 @@ void main() {
 
   group('TruthTable syntax errors', () {
     test('unclosed parenthesis → errorMessage nonempty', () {
-      final tt = TruthTable('(p∧q', 'en', TruthFormat.vf);
+      final tt = TruthTable('(p∧q', 'en');
       tt.makeAll();
       expect(tt.errorMessage, isNotEmpty);
     });
 
     test('extra close parenthesis → errorMessage nonempty', () {
-      final tt = TruthTable('p∧q)', 'en', TruthFormat.vf);
+      final tt = TruthTable('p∧q)', 'en');
       tt.makeAll();
       expect(tt.errorMessage, isNotEmpty);
     });
 
     test('trailing operator → errorMessage nonempty', () {
-      final tt = TruthTable('p∧', 'en', TruthFormat.vf);
+      final tt = TruthTable('p∧', 'en');
       tt.makeAll();
       expect(tt.errorMessage, isNotEmpty);
     });
 
     test('two variables without operator → errorMessage nonempty', () {
-      final tt = TruthTable('pq', 'en', TruthFormat.vf);
+      final tt = TruthTable('pq', 'en');
       tt.makeAll();
       expect(tt.errorMessage, isNotEmpty);
     });
@@ -212,7 +211,7 @@ void main() {
     });
 
     test('error expressions do not call calculate() → finalTable is empty', () {
-      final tt = TruthTable('p∧', 'en', TruthFormat.vf);
+      final tt = TruthTable('p∧', 'en');
       tt.makeAll();
       expect(tt.finalTable, isEmpty);
     });
@@ -294,6 +293,16 @@ void main() {
       }
     });
 
+    test('repeated subexpression shares one fully-populated column', () {
+      // 'p∧q' appears twice; it must be a single column with exactly
+      // totalRows values (the old per-occurrence write doubled it).
+      final tt = build('(p∧q)∨(p∧q)');
+      final col = tt.columns['p∧q'];
+      expect(col, isNotNull);
+      expect(col!.length, tt.totalRows);
+      expect(tt.counter1s, 1); // (p∧q)∨(p∧q) ≡ p∧q → true only when p=q=1
+    });
+
     test('hypothetical syllogism (p⇒q)∧(q⇒r)⇒(p⇒r) is a tautology', () {
       final tt = build('(p⇒q)∧(q⇒r)⇒(p⇒r)');
       expect(tt.tipo, TruthTableType.tautology);
@@ -353,7 +362,7 @@ void main() {
 
   group('EquivalenceChecker', () {
     test('p∧q ≡ q∧p (commutativity)', () {
-      final r = EquivalenceChecker.check('p∧q', 'q∧p', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p∧q', 'q∧p', 'en');
       expect(r.hasError, isFalse);
       expect(r.isEquivalent, isTrue);
       expect(r.differingRows, isEmpty);
@@ -361,39 +370,34 @@ void main() {
     });
 
     test('p⇒q ≡ ¬p∨q (conditional definition)', () {
-      final r = EquivalenceChecker.check('p⇒q', '¬p∨q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p⇒q', '¬p∨q', 'en');
       expect(r.isEquivalent, isTrue);
     });
 
     test('¬(p∧q) ≡ ¬p∨¬q (De Morgan)', () {
-      final r = EquivalenceChecker.check(
-        '¬(p∧q)',
-        '¬p∨¬q',
-        'en',
-        TruthFormat.vf,
-      );
+      final r = EquivalenceChecker.check('¬(p∧q)', '¬p∨¬q', 'en');
       expect(r.isEquivalent, isTrue);
     });
 
     test('p∧q is NOT equivalent to p∨q', () {
-      final r = EquivalenceChecker.check('p∧q', 'p∨q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p∧q', 'p∨q', 'en');
       expect(r.isEquivalent, isFalse);
       expect(r.differingRows.length, 2);
     });
 
     test('matchPercentage = 0.5 when 2 of 4 rows differ', () {
-      final r = EquivalenceChecker.check('p∧q', 'p∨q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p∧q', 'p∨q', 'en');
       expect(r.matchPercentage, 0.5);
       expect(r.matchingRows, 2);
     });
 
     test('cross-variable: p ≡ p∧(q∨¬q) (padding)', () {
-      final r = EquivalenceChecker.check('p', 'p∧(q∨¬q)', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p', 'p∧(q∨¬q)', 'en');
       expect(r.isEquivalent, isTrue);
     });
 
     test('parse error is reported in result', () {
-      final r = EquivalenceChecker.check('p∧', 'p∧q', 'en', TruthFormat.vf);
+      final r = EquivalenceChecker.check('p∧', 'p∧q', 'en');
       expect(r.hasError, isTrue);
       expect(r.isEquivalent, isFalse);
     });

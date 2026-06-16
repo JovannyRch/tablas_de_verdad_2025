@@ -12,7 +12,11 @@ class ExpressionCard extends StatelessWidget {
   final Expression expression;
   final bool showAds;
 
-  const ExpressionCard({super.key, required this.expression, required this.showAds});
+  const ExpressionCard({
+    super.key,
+    required this.expression,
+    required this.showAds,
+  });
 
   void _handleTap(BuildContext context) {
     Navigator.pushReplacementNamed(
@@ -38,7 +42,8 @@ class ExpressionCard extends StatelessWidget {
           color: isDark ? Colors.grey[900] : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
+            color:
+                isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.05),
           ),
           boxShadow: [
             BoxShadow(
@@ -119,7 +124,9 @@ class ExpressionCard extends StatelessWidget {
                                     color:
                                         isDark
                                             ? Colors.white10
-                                            : Colors.black.withValues(alpha: 0.1),
+                                            : Colors.black.withValues(
+                                              alpha: 0.1,
+                                            ),
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),

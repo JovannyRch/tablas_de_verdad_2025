@@ -86,8 +86,7 @@ class Analytics {
   }
 
   /// Truncate string parameter values to Firebase's 100-char limit.
-  static String _cap(String s) =>
-      s.length > 100 ? s.substring(0, 100) : s;
+  static String _cap(String s) => s.length > 100 ? s.substring(0, 100) : s;
 
   /// Sanitize event names: letters/digits/underscores, max 40 chars.
   static String _safeName(String name) {

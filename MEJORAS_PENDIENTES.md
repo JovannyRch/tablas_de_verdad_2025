@@ -159,12 +159,12 @@
   - **Tope de variables** `kMaxTruthTableVariables = 10` (≤1024 filas) → error `_kTooManyVariables` en vez de congelar/OOM con 2^n.
   - `convertInfixToPostix()` devuelve `errorMessage.isEmpty` → los errores específicos de parseo ya **no los pisa** el chequeo estructural genérico.
   - +7 tests de robustez (75 en `truth_table_test.dart`). 2 claves de error nuevas ×10 (privadas en el motor).
-- ⏳ **P1 — Deuda técnica (pendiente, requiere visto bueno):**
-  - **Estado estático mutable** en `StepProcess` (`currentIndex`/`labelIndex`) compartido entre instancias → pasarlo a estado de instancia.
-  - Acoplamiento de dos pasadas vía `statesSteps` (índices posicionales en `evaluation()`) → simplificar a una sola pasada.
-  - Código muerto: `tautologia()`, `contradiccion()`, `xnor()`; campo `format` sin uso en el motor.
-  - `makeAll()` `void` → considerar `bool`/getter `hasError` para API más limpia de cara a web.
-- 🟡 **P2 — Rendimiento (menor):** hoistear `columns.keys.toList().sublist(...)` fuera del bucle por fila; evitar `replaceAll` + re-split por fila (precompilar postfix a tokens).
+- ✅ **P1 — Deuda técnica:**
+  - **Estado estático eliminado**: `StepProcess` ya no tiene `currentIndex`/`labelIndex`/`backStep`/`index` — es un objeto de valor inmutable de comportamiento. Sin estado compartido entre instancias.
+  - **Evaluación de una sola pasada**: se eliminó el acoplamiento por `statesSteps`/`varSubstitutions`. `_evaluateRow` evalúa los `steps` (ya deduplicados, en orden de dependencia) sobre un mapa `clave→valor`; cada subexpresión escribe su columna una vez. **Bonus**: corrige un bug latente de **doble escritura** cuando una subexpresión idéntica se repetía (`(p∧q)∨(p∧q)`) — test nuevo que lo fija. También elimina el `replaceAll`+re-split del postfix por fila (P2 resuelto de paso).
+  - **Código muerto** eliminado: `tautologia()`, `contradiccion()`, `xnor()`, y el campo `format` (quitado del constructor; cascada limpiada en equivalence_checker, go_to_solution, argument_validator, quiz, fill_table, generate_pdf —que ahora recibe `format` del viewer—).
+  - **API**: `makeAll()` ahora devuelve `bool` + getters `hasError`/`isValid`. `goToResult` se enrutó por `makeAll()`, así que **la ruta principal del calculador ya respeta el tope de variables** (antes lo saltaba con la secuencia manual).
+- 🟡 **P2 — Rendimiento:** el `replaceAll`/re-split por fila ya se eliminó con el refactor de una pasada. Queda menor: el motor reconstruía `columns.keys.toList().sublist(...)` por fila — ya no aplica (se eliminó esa ruta).
 
 ---
 

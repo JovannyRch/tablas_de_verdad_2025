@@ -99,7 +99,10 @@ class _InstagramPromoSheet extends StatelessWidget {
               icon: const FaIcon(FontAwesomeIcons.instagram, size: 18),
               label: Text(
                 t.instagramPromoButton,
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                ),
               ),
               style: FilledButton.styleFrom(
                 backgroundColor: _igColor,

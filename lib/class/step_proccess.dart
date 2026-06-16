@@ -5,19 +5,13 @@ class StepProcess {
   String variable2 = "";
   Operator operator;
   bool isSingleVariable;
-  int index = 0;
-  static int currentIndex = 0;
-  static int labelIndex = 0;
 
   StepProcess({
     required this.variable1,
     required this.variable2,
     required this.operator,
     this.isSingleVariable = false,
-  }) {
-    index = ++labelIndex;
-    currentIndex++;
-  }
+  });
 
   /// Binary operator characters. An operand containing one of these at
   /// parenthesis depth 0 is compound and must be wrapped in parentheses
@@ -60,9 +54,5 @@ class StepProcess {
       return "${operator.value}${wrapOperand(variable1)}";
     }
     return "${wrapOperand(variable1)}${operator.value}${wrapOperand(variable2)}";
-  }
-
-  static void backStep() {
-    labelIndex--;
   }
 }

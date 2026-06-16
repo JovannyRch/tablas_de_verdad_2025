@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
 import 'package:tablas_de_verdad_2025/utils/show_snackbar.dart';
 import 'package:tablas_de_verdad_2025/utils/utils.dart';
@@ -11,25 +10,15 @@ Future<void> goToResult(
   BuildContext context,
   String expression,
   AppLocalizations t,
-  TruthFormat format,
 ) async {
-  TruthTable truthTable = TruthTable(expression, t.localeName, format);
+  final truthTable = TruthTable(expression, t.localeName);
 
-  bool isValid = truthTable.convertInfixToPostix();
-
-  if (!isValid) {
+  // makeAll() runs the full pipeline (parse → validate → build) and enforces
+  // the variable cap, so this path can't freeze on pathological input.
+  if (!truthTable.makeAll()) {
     showSnackBarMessage(context, truthTable.errorMessage);
     return;
   }
-
-  isValid = truthTable.checkIfIsCorrectlyFormed();
-
-  if (!isValid) {
-    showSnackBarMessage(context, truthTable.errorMessage);
-    return;
-  }
-
-  truthTable.calculate();
 
   List<TruthTableStep> steps =
       truthTable.steps.map((step) {

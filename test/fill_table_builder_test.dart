@@ -1,13 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
-import 'package:tablas_de_verdad_2025/model/settings_model.dart';
 import 'package:tablas_de_verdad_2025/utils/fill_table_builder.dart';
 
 void main() {
   FillTablePuzzle build(String expr) {
     // The engine expects space-free input (the calculator strips spaces before
     // evaluating); do the same here.
-    final tt = TruthTable(expr.replaceAll(' ', ''), 'en', TruthFormat.binary);
+    final tt = TruthTable(expr.replaceAll(' ', ''), 'en');
     tt.makeAll();
     final puzzle = FillTableBuilder.fromTruthTable(tt);
     expect(puzzle, isNotNull, reason: 'puzzle should build for "$expr"');
