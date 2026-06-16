@@ -44,30 +44,33 @@ def round_poly(draw, pts, width, color):
         draw.ellipse([x - rad, y - rad, x + rad, y + rad], fill=color)
 
 
-def draw_op(draw, kind, cx, cy, box, w):
+def draw_op(draw, kind, cx, cy, box, w, color=OP):
     """Draw a logic operator centered at (cx, cy) within a `box`-sized area."""
     h = box / 2
     if kind == "or":      # ∨
-        round_poly(draw, [(cx - h, cy - h), (cx, cy + h), (cx + h, cy - h)], w, OP)
+        round_poly(draw, [(cx - h, cy - h), (cx, cy + h), (cx + h, cy - h)], w, color)
     elif kind == "and":   # ∧
-        round_poly(draw, [(cx - h, cy + h), (cx, cy - h), (cx + h, cy + h)], w, OP)
+        round_poly(draw, [(cx - h, cy + h), (cx, cy - h), (cx + h, cy + h)], w, color)
     elif kind == "not":   # ¬
         round_poly(
             draw,
             [(cx - h, cy - 0.18 * box), (cx + h, cy - 0.18 * box),
              (cx + h, cy + 0.30 * box)],
-            w, OP,
+            w, color,
         )
     elif kind == "imp":   # →
         tip = cx + h
-        round_poly(draw, [(cx - h, cy), (tip, cy)], w, OP)                  # shaft
-        round_poly(draw, [(tip - 0.42 * box, cy - 0.34 * box), (tip, cy)], w, OP)  # head up
-        round_poly(draw, [(tip - 0.42 * box, cy + 0.34 * box), (tip, cy)], w, OP)  # head down
+        round_poly(draw, [(cx - h, cy), (tip, cy)], w, color)                  # shaft
+        round_poly(draw, [(tip - 0.42 * box, cy - 0.34 * box), (tip, cy)], w, color)  # head up
+        round_poly(draw, [(tip - 0.42 * box, cy + 0.34 * box), (tip, cy)], w, color)  # head down
 
 
-def draw_grid(img, motif):
-    """Draw the 2x2 tile grid spanning `motif` px, centered, with soft shadow."""
-    cx = cy = N / 2
+def draw_grid(img, motif, center=None):
+    """Draw the 2x2 tile grid spanning `motif` px, with soft shadow.
+
+    Centered on `img` unless `center` (cx, cy) is given. Works on any canvas
+    size (uses img dimensions, not the global N)."""
+    cx, cy = center if center else (img.width / 2, img.height / 2)
     gap = motif * 0.07
     ts = (motif - gap) / 2          # tile side
     rad = int(ts * 0.24)            # corner radius
@@ -85,7 +88,7 @@ def draw_grid(img, motif):
     ]
 
     # soft drop shadow
-    shadow = Image.new("RGBA", (N, N), (0, 0, 0, 0))
+    shadow = Image.new("RGBA", img.size, (0, 0, 0, 0))
     sdraw = ImageDraw.Draw(shadow)
     for (x, y, _) in cells:
         sdraw.rounded_rectangle([x, y, x + ts, y + ts], radius=rad,
@@ -99,6 +102,28 @@ def draw_grid(img, motif):
     for (x, y, kind) in cells:
         draw.rounded_rectangle([x, y, x + ts, y + ts], radius=rad, fill=TILE)
         draw_op(draw, kind, x + ts / 2, y + ts / 2, op_box, op_w)
+
+
+def draw_mark(img, cx, cy, mark):
+    """Draw the rounded-square logo mark (gradient square + tile grid) centered
+    at (cx, cy) with side `mark`, including a soft drop shadow."""
+    rad = int(mark * 0.22)
+    x0, y0 = int(cx - mark / 2), int(cy - mark / 2)
+    x1, y1 = x0 + mark, y0 + mark
+
+    shadow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle(
+        [x0, y0, x1, y1], radius=rad, fill=(60, 28, 0, 70)
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(mark * 0.03))
+    img.alpha_composite(shadow, (0, int(mark * 0.02)))
+
+    grad = vgradient(img.width, img.height, BG_TOP, BG_BOT).convert("RGBA")
+    mask = Image.new("L", img.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle([x0, y0, x1, y1], radius=rad, fill=255)
+    img.paste(grad, (0, 0), mask)
+
+    draw_grid(img, motif=mark * 0.66, center=(cx, cy))
 
 
 def build_full():
@@ -124,29 +149,7 @@ def build_splash():
     native splash works on both light and dark backgrounds and in any
     language."""
     img = Image.new("RGBA", (N, N), (0, 0, 0, 0))
-    mark = int(N * 0.52)
-    rad = int(mark * 0.22)
-    x0 = (N - mark) // 2
-    y0 = (N - mark) // 2
-
-    # soft shadow under the mark
-    shadow = Image.new("RGBA", (N, N), (0, 0, 0, 0))
-    ImageDraw.Draw(shadow).rounded_rectangle(
-        [x0, y0, x0 + mark, y0 + mark], radius=rad, fill=(60, 28, 0, 70)
-    )
-    shadow = shadow.filter(ImageFilter.GaussianBlur(mark * 0.03))
-    img.alpha_composite(shadow, (0, int(mark * 0.02)))
-
-    # gradient-filled rounded square
-    grad = vgradient(N, N, BG_TOP, BG_BOT).convert("RGBA")
-    mask = Image.new("L", (N, N), 0)
-    ImageDraw.Draw(mask).rounded_rectangle(
-        [x0, y0, x0 + mark, y0 + mark], radius=rad, fill=255
-    )
-    img.paste(grad, (0, 0), mask)
-
-    # the operator grid, sized to sit inside the mark
-    draw_grid(img, motif=mark * 0.66)
+    draw_mark(img, N / 2, N / 2, int(N * 0.52))
     return img
 
 
