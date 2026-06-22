@@ -149,11 +149,9 @@ lib/
 - Acceso libre a simplificación, formas normales y Karnaugh sin ad gate
 - Activación: compra única (`pro_version`) vía `in_app_purchase`
 
-### Flavors Android
-| Flavor | Package | AdMob App ID |
-|--------|---------|--------------|
-| `es` | `com.jovannyrch.tablasdeverdad` | `ca-app-pub-4665787383933447~4689744776` |
-| `en` | `com.jovannyrch.tablasdeverdad.en` | `ca-app-pub-4665787383933447~1652617896` |
+### Build Android
+- Build único, sin flavors. Package: `com.jovannyrch.tablasdeverdad`
+- AdMob App ID: `ca-app-pub-4665787383933447~4689744776` (en `android/app/build.gradle.kts` y `lib/const/const.dart`)
 
 ### IDs AdMob activos (`lib/const/const.dart`)
 ```dart
@@ -229,13 +227,12 @@ CREATE TABLE favorites (id INTEGER PRIMARY KEY, expression TEXT);
 ## 🛠️ Comandos
 
 ```bash
-flutter run --flavor es          # Ejecutar flavor español
-flutter run --flavor en          # Ejecutar flavor inglés
-flutter test                     # Suite completa (121 tests)
+flutter run                      # Ejecutar la app
+flutter test                     # Suite completa
 flutter analyze                  # 0 warnings, 0 errors
 ./regenerate_l10n.sh             # Regenerar localizaciones ARB
-flutter build apk --release --flavor es
-flutter build appbundle --release --flavor es
+flutter build apk --release
+flutter build appbundle --release
 ```
 
 ---

@@ -16,11 +16,11 @@
 
 ### 1. IDs de AdMob con TODO en producción
 - `lib/const/const.dart:21,23` y `lib/const/translations.dart:144,146`: `"STEP_BY_STEP"` reutiliza el ID de `VIDEO_ID` con `//TODO: Set a new id`.
-- **Acción**: crear los ad units en AdMob console (uno por flavor es/en) y reemplazar. Reutilizar el mismo ID en dos placements distorsiona las métricas de eCPM por placement.
+- **Acción**: crear los ad units en AdMob console y reemplazar. Reutilizar el mismo ID en dos placements distorsiona las métricas de eCPM por placement.
 
 ### 2. Verificación visual de las pestañas nuevas en dispositivo
 - Karnaugh y Simplificación están cubiertas por tests, pero falta validación visual en emulador/dispositivo real (grupos con wrap, dark mode, expresiones de 4 variables, pantallas pequeñas).
-- **Acción**: `flutter run --flavor es`, probar `(p⇒q)∧(q⇒p)`, `(A∧B)∨(A∧¬B)∨(¬A∧C)`, una tautología y una contradicción, en claro y oscuro.
+- **Acción**: `flutter run`, probar `(p⇒q)∧(q⇒p)`, `(A∧B)∨(A∧¬B)∨(¬A∧C)`, una tautología y una contradicción, en claro y oscuro.
 
 ### 3. ✅ Actualizar el PDF con las features nuevas
 - El PDF (`lib/utils/generate_pdf.dart`) solo exporta la tabla. El estudiante quiere entregar la tarea completa.
@@ -121,7 +121,7 @@
 - Cuidado: `google_mobile_ads`, `in_app_purchase` y `sqflite` no compilan a web → aislar tras interfaces o `kIsWeb`.
 
 ### 22. iOS
-- `flutter_launcher_icons` tiene `ios: false` y no hay flavor configurado en Xcode. Es el mercado obvio sin atender; el código es portable salvo configuración de AdMob/IAP.
+- `flutter_launcher_icons` tiene `ios: false` y falta configuración en Xcode. Es el mercado obvio sin atender; el código es portable salvo configuración de AdMob/IAP.
 
 ### 23. Nuevas secciones dentro de la app (misma audiencia)
 - **Conversor de bases numéricas** (binario/octal/hex, complemento a 2): esfuerzo bajísimo, búsqueda alta, mismo usuario de primer semestre.
@@ -136,7 +136,7 @@
 ## 💰 Monetización y growth
 
 ### 25. Actualizar el listing de Play Store
-- "Mapa de Karnaugh" y "simplificación con leyes lógicas" son **keywords de búsqueda** que ahora la app realmente tiene. Actualizar título corto/descripción/screenshots en ambos flavors (`PLAY_STORE_DESCRIPTIONS.md`).
+- "Mapa de Karnaugh" y "simplificación con leyes lógicas" son **keywords de búsqueda** que ahora la app realmente tiene. Actualizar título corto/descripción/screenshots (`PLAY_STORE_DESCRIPTIONS.md`).
 
 ### 26. Revisar la propuesta Pro
 - ✅ **Paywall actualizado** (`show_pro_version_dialog.dart`): ahora lidera con los 3 diferenciadores reales —Mapas de Karnaugh, Simplificación paso a paso y Formas normales sin anuncios/al instante— resaltados (naranja de marca, negrita) vía `BenefitItem(highlight: true)`, seguidos de operadores premium ilimitados, sin anuncios, biblioteca completa y apoyo al desarrollador. Se quitó "Soporte Premium" del paywall (claim vago; la clave sigue en el drawer). 3 claves l10n nuevas ×10.

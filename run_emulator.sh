@@ -72,23 +72,8 @@ SELECTED=$(printf '%s\n' "${OPTIONS[@]}" | gum choose --header "Selecciona el di
 
 [[ -z "$SELECTED" ]] && exit 0
 
-# Seleccionar flavor
-LANGUAGE=$(gum choose \
-  "🇲🇽 Español (es)" \
-  "🇺🇸 English (en)" \
-  --header "Selecciona el idioma:")
-
-[[ -z "$LANGUAGE" ]] && exit 0
-
-if [[ "$LANGUAGE" == *"es"* ]]; then
-  FLAVOR="es"
-else
-  FLAVOR="en"
-fi
-
 echo ""
 gum style --foreground 10 "✔ Dispositivo: $SELECTED"
-gum style --foreground 10 "✔ Flavor:      $FLAVOR"
 echo ""
 
 # Determinar si es emulador o físico y actuar en consecuencia
@@ -136,7 +121,7 @@ fi
 
 echo ""
 
-CMD="flutter run $DEVICE_FLAG --flavor $FLAVOR --dart-define=FLAVOR=$FLAVOR"
+CMD="flutter run $DEVICE_FLAG"
 gum style --foreground 14 "🧾 Ejecutando:"
 gum style --foreground 250 "$CMD"
 gum style --foreground 250 "Hot reload: presiona 'r' | Hot restart: presiona 'R' | Salir: presiona 'q'"
