@@ -600,6 +600,18 @@ abstract class AppLocalizations {
   /// **'Cantidad de filas'**
   String get numberOfRows;
 
+  /// No description provided for @rowCountTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Por qué hay {rows} filas?'**
+  String rowCountTitle(int rows);
+
+  /// No description provided for @rowCountExplanation.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada proposición tiene 2 valores posibles (V o F). Con {vars} proposiciones hay 2 elevado a {vars} combinaciones: una por cada fila.'**
+  String rowCountExplanation(int vars);
+
   /// No description provided for @ok.
   ///
   /// In es, this message translates to:

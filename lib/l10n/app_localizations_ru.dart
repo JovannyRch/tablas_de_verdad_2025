@@ -271,6 +271,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get numberOfRows => 'Количество строк';
 
   @override
+  String rowCountTitle(int rows) {
+    return 'Почему $rows строк?';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return 'Каждое высказывание имеет 2 возможных значения (И или Л). При $vars высказываниях получается 2 в степени $vars комбинаций: по одной на каждую строку.';
+  }
+
+  @override
   String get ok => 'ОК';
 
   @override

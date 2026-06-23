@@ -235,7 +235,14 @@ class _TruthTableResultScreenState extends State<TruthTableResultScreen>
                 // Tab 2: Final Table
                 SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                  child: _FinalTableWidget(truthTable: widget.truthTable),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _RowCountCard(truthTable: widget.truthTable),
+                      const SizedBox(height: 16),
+                      _FinalTableWidget(truthTable: widget.truthTable),
+                    ],
+                  ),
                 ),
                 // Tab 3: Step-by-step simplification with laws
                 SingleChildScrollView(
@@ -807,6 +814,100 @@ class _FinalResultBanner extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Explains why the table has the number of rows it does: with `n`
+/// propositions, each independently true or false, there are 2ⁿ combinations —
+/// one per row. Many users don't know where the row count comes from.
+class _RowCountCard extends StatelessWidget {
+  final TruthTable truthTable;
+
+  const _RowCountCard({required this.truthTable});
+
+  /// Renders [n] as Unicode superscript digits (e.g. 12 → "¹²").
+  static String _superscript(int n) {
+    const sup = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
+    return n
+        .toString()
+        .split('')
+        .map((d) => sup[int.parse(d)])
+        .join();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final vars = truthTable.variables.length;
+    final rows = truthTable.totalRows;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: kSeedColor.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: kSeedColor.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.calculate_outlined, color: kSeedColor, size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  t.rowCountTitle(rows),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  t.rowCountExplanation(vars),
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.5,
+                    color: isDark ? Colors.white54 : Colors.black45,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Formula chip: 2ⁿ = rows
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        isDark
+                            ? Colors.white.withValues(alpha: 0.06)
+                            : Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: kSeedColor.withValues(alpha: 0.25),
+                    ),
+                  ),
+                  child: Text(
+                    '2${_superscript(vars)} = $rows',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: 'Courier',
+                      color: kSeedColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

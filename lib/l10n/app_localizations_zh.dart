@@ -260,6 +260,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get numberOfRows => '行数';
 
   @override
+  String rowCountTitle(int rows) {
+    return '为什么有 $rows 行？';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return '每个命题有 2 个可能的取值（真或假）。有 $vars 个命题时，共有 2 的 $vars 次方种组合：每行对应一种。';
+  }
+
+  @override
   String get ok => '确定';
 
   @override

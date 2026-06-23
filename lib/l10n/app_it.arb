@@ -88,6 +88,8 @@
   "notEquivalentDescription": "Differiscono in {differing} su {total} righe ({pct}% corrispondono).",
   "numberOfPropositions": "Numero di proposizioni",
   "numberOfRows": "Numero di righe",
+  "rowCountTitle": "Perché ci sono {rows} righe?",
+  "rowCountExplanation": "Ogni proposizione ha 2 valori possibili (V o F). Con {vars} proposizioni ci sono 2 elevato alla {vars} combinazioni: una per ogni riga.",
   "ok": "OK",
   "onboardingDesc1": "Usa la tastiera per inserire qualsiasi espressione logica con variabili e operatori",
   "onboardingDesc2": "Visualizza ogni passag della risoluzione e la tabella di verità completa",

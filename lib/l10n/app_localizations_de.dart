@@ -271,6 +271,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get numberOfRows => 'Anzahl der Zeilen';
 
   @override
+  String rowCountTitle(int rows) {
+    return 'Warum gibt es $rows Zeilen?';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return 'Jede Aussage hat 2 mögliche Werte (W oder F). Bei $vars Aussagen gibt es 2 hoch $vars Kombinationen: eine für jede Zeile.';
+  }
+
+  @override
   String get ok => 'OK';
 
   @override

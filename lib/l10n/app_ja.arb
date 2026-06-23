@@ -88,6 +88,8 @@
   "notEquivalentDescription": "{total} 行中 {differing} 行が異なります（{pct}% 一致）。",
   "numberOfPropositions": "命題の数",
   "numberOfRows": "行数",
+  "rowCountTitle": "なぜ {rows} 行あるのですか？",
+  "rowCountExplanation": "各命題には2つの値（真または偽）があります。{vars} 個の命題では 2 の {vars} 乗通りの組み合わせがあり、各行に1つずつ対応します。",
   "ok": "OK",
   "onboardingDesc1": "キーパッドを使って変数と演算子で論理式を入力",
   "onboardingDesc2": "解法の各ステップと完全な真理値表を表示",

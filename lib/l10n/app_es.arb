@@ -88,6 +88,22 @@
   "notEquivalentDescription": "Difieren en {differing} de {total} filas ({pct}% coinciden).",
   "numberOfPropositions": "Cantidad de proposiciones",
   "numberOfRows": "Cantidad de filas",
+  "rowCountTitle": "¿Por qué hay {rows} filas?",
+  "@rowCountTitle": {
+    "placeholders": {
+      "rows": {
+        "type": "int"
+      }
+    }
+  },
+  "rowCountExplanation": "Cada proposición tiene 2 valores posibles (V o F). Con {vars} proposiciones hay 2 elevado a {vars} combinaciones: una por cada fila.",
+  "@rowCountExplanation": {
+    "placeholders": {
+      "vars": {
+        "type": "int"
+      }
+    }
+  },
   "ok": "Aceptar",
   "onboardingDesc1": "Usa el teclado para ingresar cualquier expresión lógica con variables y operadores",
   "onboardingDesc2": "Visualiza cada paso de la resolución y la tabla de verdad completa",

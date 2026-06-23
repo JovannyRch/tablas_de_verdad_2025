@@ -246,7 +246,9 @@ Future<PDFDocument> generatePdfWithTable(
                 ],
               ),
             ),
-            pw.SizedBox(height: 25),
+            pw.SizedBox(height: 12),
+            _buildRowCountNote(t, translations, ttf),
+            pw.SizedBox(height: 20),
             _buildPdfTable(context, finalTable, ttf),
 
             // ── Pro sections ──────────────────────────────────────
@@ -514,6 +516,57 @@ List<pw.Widget> _buildSimplificationSection(
 }
 
 // ── Shared helpers ───────────────────────────────────────────────────────────
+
+/// Renders [n] as Unicode superscript digits (e.g. 12 → "¹²").
+String _superscript(int n) {
+  const sup = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
+  return n.toString().split('').map((d) => sup[int.parse(d)]).join();
+}
+
+/// Explains the row count: with `n` propositions there are 2ⁿ combinations,
+/// one per row. Mirrors the in‑app card on the "Full table" tab.
+pw.Widget _buildRowCountNote(TruthTable t, AppLocalizations tr, pw.Font ttf) {
+  final vars = t.variables.length;
+  final rows = t.totalRows;
+  return pw.Container(
+    width: double.infinity,
+    padding: const pw.EdgeInsets.all(10),
+    decoration: pw.BoxDecoration(
+      color: PdfColors.blue50,
+      border: pw.Border.all(color: PdfColors.blue200),
+      borderRadius: const pw.BorderRadius.all(pw.Radius.circular(8)),
+    ),
+    child: pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          tr.rowCountTitle(rows),
+          style: pw.TextStyle(
+            font: ttf,
+            fontSize: 11,
+            fontWeight: pw.FontWeight.bold,
+            color: PdfColors.blueGrey800,
+          ),
+        ),
+        pw.SizedBox(height: 4),
+        pw.Text(
+          tr.rowCountExplanation(vars),
+          style: pw.TextStyle(font: ttf, fontSize: 10, color: PdfColors.grey700),
+        ),
+        pw.SizedBox(height: 6),
+        pw.Text(
+          '2${_superscript(vars)} = $rows',
+          style: pw.TextStyle(
+            font: ttf,
+            fontSize: 12,
+            fontWeight: pw.FontWeight.bold,
+            color: PdfColors.blue900,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
 pw.Widget _sectionHeader(String title, pw.Font ttf) {
   return pw.Container(

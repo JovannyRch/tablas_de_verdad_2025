@@ -88,6 +88,8 @@
   "notEquivalentDescription": "Sie unterscheiden sich in {differing} von {total} Zeilen ({pct}% stimmen überein).",
   "numberOfPropositions": "Anzahl der Propositionen",
   "numberOfRows": "Anzahl der Zeilen",
+  "rowCountTitle": "Warum gibt es {rows} Zeilen?",
+  "rowCountExplanation": "Jede Aussage hat 2 mögliche Werte (W oder F). Bei {vars} Aussagen gibt es 2 hoch {vars} Kombinationen: eine für jede Zeile.",
   "ok": "OK",
   "onboardingDesc1": "Verwende die Tastatur, um beliebige logische Ausdrücke mit Variablen und Operatoren einzugeben",
   "onboardingDesc2": "Sieh jeden Schritt der Lösung und die vollständige Wahrheitstabelle",

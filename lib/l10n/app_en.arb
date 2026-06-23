@@ -108,6 +108,8 @@
   "notEquivalentDescription": "They differ in {differing} of {total} rows ({pct}% match).",
   "numberOfPropositions": "Number of propositions",
   "numberOfRows": "Number of rows",
+  "rowCountTitle": "Why are there {rows} rows?",
+  "rowCountExplanation": "Each proposition has 2 possible values (T or F). With {vars} propositions there are 2 to the power of {vars} combinations: one for each row.",
   "ok": "OK",
   "onboardingDesc1": "Use the keypad to enter any logical expression with variables and operators",
   "onboardingDesc2": "See each step of the resolution and the complete truth table",

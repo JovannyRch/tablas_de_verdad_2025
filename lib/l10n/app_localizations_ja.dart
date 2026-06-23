@@ -262,6 +262,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get numberOfRows => '行数';
 
   @override
+  String rowCountTitle(int rows) {
+    return 'なぜ $rows 行あるのですか？';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return '各命題には2つの値（真または偽）があります。$vars 個の命題では 2 の $vars 乗通りの組み合わせがあり、各行に1つずつ対応します。';
+  }
+
+  @override
   String get ok => 'OK';
 
   @override

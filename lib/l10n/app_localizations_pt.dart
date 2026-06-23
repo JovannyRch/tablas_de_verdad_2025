@@ -271,6 +271,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get numberOfRows => 'Número de linhas';
 
   @override
+  String rowCountTitle(int rows) {
+    return 'Por que há $rows linhas?';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return 'Cada proposição tem 2 valores possíveis (V ou F). Com $vars proposições há 2 elevado a $vars combinações: uma para cada linha.';
+  }
+
+  @override
   String get ok => 'OK';
 
   @override

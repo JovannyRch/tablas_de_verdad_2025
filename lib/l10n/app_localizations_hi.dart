@@ -271,6 +271,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get numberOfRows => 'पंक्तियों की संख्या';
 
   @override
+  String rowCountTitle(int rows) {
+    return '$rows पंक्तियाँ क्यों हैं?';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return 'प्रत्येक कथन के 2 संभावित मान होते हैं (सत्य या असत्य)। $vars कथनों के साथ 2 की घात $vars संयोजन होते हैं: प्रत्येक पंक्ति के लिए एक।';
+  }
+
+  @override
   String get ok => 'ठीक है';
 
   @override

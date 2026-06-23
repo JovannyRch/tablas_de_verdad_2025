@@ -88,6 +88,8 @@
   "notEquivalentDescription": "在 {total} 行中有 {differing} 行不同（{pct}% 匹配）。",
   "numberOfPropositions": "命题数量",
   "numberOfRows": "行数",
+  "rowCountTitle": "为什么有 {rows} 行？",
+  "rowCountExplanation": "每个命题有 2 个可能的取值（真或假）。有 {vars} 个命题时，共有 2 的 {vars} 次方种组合：每行对应一种。",
   "ok": "确定",
   "onboardingDesc1": "使用键盘输入任何包含变量和运算符的逻辑表达式",
   "onboardingDesc2": "查看解题的每一步和完整的真值表",

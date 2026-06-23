@@ -271,6 +271,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get numberOfRows => 'Number of rows';
 
   @override
+  String rowCountTitle(int rows) {
+    return 'Why are there $rows rows?';
+  }
+
+  @override
+  String rowCountExplanation(int vars) {
+    return 'Each proposition has 2 possible values (T or F). With $vars propositions there are 2 to the power of $vars combinations: one for each row.';
+  }
+
+  @override
   String get ok => 'OK';
 
   @override
