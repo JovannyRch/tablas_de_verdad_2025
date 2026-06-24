@@ -15,7 +15,7 @@ class Settings extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
   TruthFormat truthFormat = TruthFormat.vf;
   MintermOrder mintermOrder = MintermOrder.asc;
-  KeypadMode keypadMode = KeypadMode.advanced;
+  KeypadMode keypadMode = KeypadMode.simple;
   bool hapticsEnabled = true;
   bool isProVersion = false;
   int operationsCount = 0;

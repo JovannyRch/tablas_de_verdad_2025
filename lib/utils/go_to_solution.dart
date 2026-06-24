@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad_2025/api/supabase_expressions.dart';
 import 'package:tablas_de_verdad_2025/class/step_proccess.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/screens/truth_table_result_screen.dart';
@@ -19,6 +20,10 @@ Future<void> goToResult(
     showSnackBarMessage(context, truthTable.errorMessage);
     return;
   }
+
+  // Registra la expresión válida en la librería de Supabase (contador +
+  // tipo). Fire-and-forget: si Supabase no responde, no afecta el flujo.
+  SupabaseExpressions.register(truthTable.initialInfix, truthTable.tipo);
 
   List<TruthTableStep> steps =
       truthTable.steps.map((step) {

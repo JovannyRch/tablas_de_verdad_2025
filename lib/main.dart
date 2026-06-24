@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tablas_de_verdad_2025/service/supabase_service.dart';
 import 'package:tablas_de_verdad_2025/utils/analytics.dart';
 import 'package:tablas_de_verdad_2025/const/colors.dart';
 import 'package:tablas_de_verdad_2025/const/const.dart';
@@ -29,6 +31,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await _initFirebase();
+  await _initSupabase();
 
   final settings = Settings();
   await settings.load();
@@ -72,6 +75,22 @@ Future<void> _initFirebase() async {
     // Firebase not configured or google-services.json missing — app still works,
     // just without remote analytics/crash reporting.
     debugPrint('Firebase init skipped: $e\n$stack');
+  }
+}
+
+/// Initializes Supabase for anonymous reporting + the expression catalog.
+/// Optional at runtime: if init fails (no network, bad config) the app keeps
+/// working without remote reporting — mirrors [_initFirebase]'s philosophy.
+Future<void> _initSupabase() async {
+  try {
+    await Supabase.initialize(
+      url: SUPABASE_URL,
+      publishableKey: SUPABASE_ANON_KEY,
+    );
+    SupabaseService.ready = true;
+    await Analytics.instance.markSupabaseReady();
+  } catch (e, stack) {
+    debugPrint('Supabase init skipped: $e\n$stack');
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad_2025/api/api.dart';
+import 'package:tablas_de_verdad_2025/api/supabase_expressions.dart';
 import 'package:tablas_de_verdad_2025/class/truth_table.dart';
 import 'package:tablas_de_verdad_2025/model/list_response.dart';
 import 'package:tablas_de_verdad_2025/model/settings_model.dart';
@@ -32,12 +33,23 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   final List<Expression> _allExpressions = []; // Todas las expresiones del JSON
   final List<Expression> _filteredExpressions = []; // Expresiones filtradas
   bool _isLoading = false;
+  bool _isLoadingMore = false;
   TruthTableType? _selectedType;
   bool _onlyVideos = false;
   bool _hasUnlockedFullList = false; // Si el usuario desbloqueó viendo un ad
   late AppLocalizations t;
   late Settings _settings;
   late RewardedAdHelper _rewardedAdHelper;
+
+  // Paginación contra Supabase (con fallback al JSON estático).
+  static const int _perPage = 30;
+  int _page = 1;
+  bool _hasMore = true;
+  // true mientras la fuente sea Supabase; pasa a false si hace fallback al JSON.
+  bool _useSupabase = true;
+  // Evita cascadas de carga: sólo se dispara una vez por "llegada al fondo";
+  // se re-arma cuando el usuario se aleja del borde inferior.
+  bool _canLoadMore = true;
 
   static const int FREE_EXPRESSIONS_LIMIT =
       10; // Límite para usuarios gratuitos
@@ -46,41 +58,122 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
   void initState() {
     super.initState();
     _rewardedAdHelper = RewardedAdHelper();
-    _fetchExpressions();
+    _scrollController.addListener(_onScroll);
+    _loadInitial();
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     _rewardedAdHelper.dispose();
     super.dispose();
   }
 
-  Future<void> _fetchExpressions() async {
-    if (_isLoading) return;
+  bool get _isGated => !_settings.isProVersion && !_hasUnlockedFullList;
 
+  void _onScroll() {
+    final pos = _scrollController.position;
+    final atBottom = pos.pixels >= pos.maxScrollExtent - 400;
+    // Re-armar cuando el usuario se aleja del borde inferior.
+    if (!atBottom) {
+      _canLoadMore = true;
+      return;
+    }
+    // Sólo paginamos contra Supabase, desbloqueado, y una vez por llegada.
+    if (!_useSupabase || _isGated || !_hasMore || _isLoadingMore || !_canLoadMore) {
+      return;
+    }
+    _canLoadMore = false; // se rearmará al alejarse del fondo
+    _loadMore();
+  }
+
+  /// Carga inicial (o recarga tras cambiar filtros). Intenta Supabase y, si no
+  /// responde en la primera página, cae al JSON estático actual.
+  Future<void> _loadInitial() async {
+    if (_isLoading) return;
     setState(() {
       _isLoading = true;
+      _page = 1;
+      _hasMore = true;
+      _allExpressions.clear();
+      _filteredExpressions.clear();
     });
 
-    try {
-      // Obtener todas las expresiones del JSON estático
-      final ListResponse response = await Api.getListExpressions(1, '');
+    if (_useSupabase) {
+      final ListResponse? response = await SupabaseExpressions.getPopular(
+        page: 1,
+        perPage: _perPage,
+        type: type,
+        videos: _onlyVideos,
+      );
 
+      final data = response?.data;
+      // Un resultado vacío SIN filtros casi seguro es un fallo transitorio
+      // (la librería nunca está vacía): mejor caer al JSON estático que mostrar
+      // "No expressions found". Con filtros, un vacío sí puede ser legítimo.
+      final noFilters = type.isEmpty && !_onlyVideos;
+      final usable = data != null && !(data.isEmpty && noFilters);
+
+      if (usable) {
+        if (!mounted) return;
+        setState(() {
+          _filteredExpressions.addAll(data);
+          _hasMore = data.length >= _perPage;
+          _page = 2;
+          _isLoading = false;
+        });
+        return;
+      }
+      // Supabase no respondió (o vacío sospechoso): usar el comportamiento actual.
+      _useSupabase = false;
+    }
+
+    await _loadStaticFallback();
+  }
+
+  /// Comportamiento original: traer todo el JSON estático y filtrar en cliente.
+  Future<void> _loadStaticFallback() async {
+    try {
+      final ListResponse response = await Api.getListExpressions(1, '');
+      if (!mounted) return;
       setState(() {
         if (response.data != null) {
-          _allExpressions.clear();
-          _allExpressions.addAll(response.data!);
+          _allExpressions
+            ..clear()
+            ..addAll(response.data!);
           _applyFilters();
         }
+        _hasMore = false; // el JSON estático se carga completo de una vez
         _isLoading = false;
       });
     } catch (e) {
       print('Error fetching expressions: $e');
-      setState(() {
-        _isLoading = false;
-      });
+      if (!mounted) return;
+      setState(() => _isLoading = false);
     }
+  }
+
+  /// Siguiente página de populares desde Supabase (scroll infinito).
+  Future<void> _loadMore() async {
+    setState(() => _isLoadingMore = true);
+    final ListResponse? response = await SupabaseExpressions.getPopular(
+      page: _page,
+      perPage: _perPage,
+      type: type,
+      videos: _onlyVideos,
+    );
+    if (!mounted) return;
+    setState(() {
+      if (response?.data != null && response!.data!.isNotEmpty) {
+        _filteredExpressions.addAll(response.data!);
+        _hasMore = response.data!.length >= _perPage;
+        _page++;
+      } else {
+        _hasMore = false;
+      }
+      _isLoadingMore = false;
+    });
   }
 
   void _applyFilters() {
@@ -110,20 +203,22 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
 
   void _onFilterSelected(TruthTableType selectedType) {
     setState(() {
-      if (_selectedType == selectedType) {
-        _selectedType = null;
-      } else {
-        _selectedType = selectedType;
-      }
-      _applyFilters();
+      _selectedType = (_selectedType == selectedType) ? null : selectedType;
     });
+    if (_useSupabase) {
+      _loadInitial(); // refiltra en servidor por popularidad
+    } else {
+      setState(_applyFilters);
+    }
   }
 
   void _onVideosToggled() {
-    setState(() {
-      _onlyVideos = !_onlyVideos;
-      _applyFilters();
-    });
+    setState(() => _onlyVideos = !_onlyVideos);
+    if (_useSupabase) {
+      _loadInitial();
+    } else {
+      setState(_applyFilters);
+    }
   }
 
   @override
@@ -275,7 +370,7 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
       );
     }
 
-    final bool shouldLimit = !_settings.isProVersion && !_hasUnlockedFullList;
+    final bool shouldLimit = _isGated;
     final int itemCount =
         shouldLimit
             ? FREE_EXPRESSIONS_LIMIT.clamp(0, _filteredExpressions.length)
@@ -284,14 +379,24 @@ class _ExpressionLibraryScreenState extends State<ExpressionLibraryScreen> {
     final bool hasMoreExpressions =
         _filteredExpressions.length > FREE_EXPRESSIONS_LIMIT;
     final bool showUnlockButton = shouldLimit && hasMoreExpressions;
+    // Loader de scroll infinito (sólo desbloqueado y paginando contra Supabase).
+    final bool showLoader =
+        !shouldLimit && _useSupabase && (_hasMore || _isLoadingMore);
+    final int trailing = (showUnlockButton ? 1 : 0) + (showLoader ? 1 : 0);
 
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: itemCount + (showUnlockButton ? 1 : 0),
+      itemCount: itemCount + trailing,
       itemBuilder: (context, index) {
         if (showUnlockButton && index == itemCount) {
           return _buildUnlockCard();
+        }
+        if (showLoader && index == itemCount) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 24),
+            child: Center(child: CircularProgressIndicator()),
+          );
         }
 
         final expression = _filteredExpressions[index];
